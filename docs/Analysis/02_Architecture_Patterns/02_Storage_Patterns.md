@@ -41,6 +41,7 @@ $$P_{available} = \sum_{i=0}^{f} \binom{r}{i} p^i (1-p)^{r-i}$$
 其中 $p$ 是单个节点的可用性概率。
 
 **证明**：
+
 1. 系统可用当且仅当至少有一个副本可用
 2. 可用副本数量 $X$ 服从二项分布 $B(r, p)$
 3. 系统可用性 $P_{available} = P(X > f) = 1 - P(X \leq f)$
@@ -60,6 +61,7 @@ $$P_{available} = \sum_{i=0}^{f} \binom{r}{i} p^i (1-p)^{r-i}$$
 **定理 3.1**（Merkle树验证复杂度）：对于包含 $n$ 个叶子节点的Merkle树，验证路径的长度为 $O(\log n)$，验证时间为 $O(\log n)$。
 
 **证明**：
+
 1. 平衡二叉树的深度为 $\log_2 n$
 2. 验证路径包含从根到叶子的所有节点
 3. 每个节点需要一次哈希计算
@@ -76,6 +78,7 @@ $$\forall s_1, s_2: \text{Verify}(s_1, s_2) \Rightarrow \text{Verify}(C(s_1), C(
 $$T_{verify} \geq \Omega\left(\frac{1}{r} \log |s|\right)$$
 
 **证明**：
+
 1. 信息论下界：压缩后的数据必须包含足够信息以验证原始状态
 2. 最小验证复杂度与压缩率成反比
 3. 对数项来自树结构验证的必要性 ■
@@ -102,6 +105,7 @@ $$M(k) = \arg\min_{p \in P} \{H(p) - H(k) \pmod{2^m}\}$$
 $$\text{Var}(L) = O\left(\frac{m \log n}{n^2}\right)$$
 
 **证明**：
+
 1. 每个数据项以概率 $\frac{1}{n}$ 映射到每个节点
 2. 节点负载服从二项分布 $B(m, \frac{1}{n})$
 3. 二项分布的方差为 $m \cdot \frac{1}{n} \cdot (1-\frac{1}{n})$
@@ -114,6 +118,7 @@ $$\text{Var}(L) = O\left(\frac{m \log n}{n^2}\right)$$
 **定理 5.1**（Web3存储的CAP权衡）：在Web3存储系统中，对于任意三个属性：一致性(Consistency)、可用性(Availability)、分区容错性(Partition tolerance)，最多只能同时满足其中两个。
 
 **证明**：
+
 1. 网络分区是Web3系统的固有特性
 2. 在分区期间，系统必须在一致性和可用性之间选择
 3. 选择一致性：拒绝部分请求，牺牲可用性
@@ -544,4 +549,4 @@ $$\text{Security}(P, U) = \min_{p \in P} \text{Pr}[\text{UnauthorizedAccess}(p, 
 
 ---
 
-*本文档提供了Web3存储架构模式的全面分析，从理论基础到工程实践，为构建高性能、高可用的分布式存储系统提供了指导。* 
+*本文档提供了Web3存储架构模式的全面分析，从理论基础到工程实践，为构建高性能、高可用的分布式存储系统提供了指导。*

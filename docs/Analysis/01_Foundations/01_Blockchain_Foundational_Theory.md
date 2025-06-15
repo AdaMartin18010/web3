@@ -19,6 +19,7 @@
 ### 1.1 研究动机
 
 区块链技术面临以下核心挑战：
+
 - **一致性保证**: 在分布式环境中达成状态一致
 - **安全性保障**: 抵抗各种攻击和恶意行为
 - **可扩展性**: 支持大规模交易处理
@@ -27,6 +28,7 @@
 ### 1.2 形式化方法
 
 本文采用以下形式化方法：
+
 - **集合论**: 定义系统组件和关系
 - **图论**: 建模网络拓扑和依赖关系
 - **密码学**: 提供安全基础
@@ -217,15 +219,15 @@ impl BlockchainSystem {
         loop {
             // 1. 接收网络消息
             let messages = self.network_layer.receive_messages().await?;
-            
+
             // 2. 处理共识
             let consensus_result = self.consensus_engine.process_messages(messages).await?;
-            
+
             // 3. 执行交易
             if let Some(block) = consensus_result.block {
                 self.execute_block(block).await?;
             }
-            
+
             // 4. 同步状态
             self.state_manager.sync().await?;
         }

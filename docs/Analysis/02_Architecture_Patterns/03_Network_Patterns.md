@@ -40,6 +40,7 @@ Web3网络架构是实现去中心化通信的基础设施，需要解决节点�
 $$m \geq \frac{n \cdot \log n}{2}$$
 
 **证明**：
+
 1. 随机图理论：Erdős-Rényi模型
 2. 连通性阈值：$p = \frac{\log n}{n}$
 3. 期望边数：$E[|E|] = \binom{n}{2} \cdot p = \frac{n(n-1)}{2} \cdot \frac{\log n}{n}$
@@ -69,6 +70,7 @@ $$m \geq \frac{n \cdot \log n}{2}$$
 **定理 3.1**（Kademlia查找复杂度）：Kademlia DHT的查找复杂度为 $O(\log n)$，其中 $n$ 是网络节点数。
 
 **证明**：
+
 1. 每次查询将搜索空间减半
 2. ID空间大小为 $2^{160}$（假设使用160位ID）
 3. 查找步数：$\log_2(2^{160}) = 160$
@@ -297,6 +299,7 @@ impl KademliaDHT {
 $$E[T_{spread}] = O(\log n)$$
 
 **证明**：
+
 1. 每轮传播中，消息持有者数量近似翻倍
 2. 从1个节点传播到 $n$ 个节点需要 $\log_2 n$ 轮
 3. 考虑网络拓扑和传播概率的影响
@@ -493,6 +496,7 @@ $$\forall m \in \text{Message}, n \in N: R(m, n) \subseteq N$$
 $$E_{routing} \leq \frac{D \cdot \log \bar{d}}{\log n}$$
 
 **证明**：
+
 1. 最短路径长度不超过网络直径 $D$
 2. 每步选择最优邻居的概率为 $\frac{1}{\bar{d}}$
 3. 找到最优路径需要 $\log_{\bar{d}} n$ 步
@@ -640,6 +644,7 @@ $$\forall n_i, n_j \in N: |LB(n_i) - LB(n_j)| \leq \epsilon$$
 $$T_{lb} = O(n \log n)$$
 
 **证明**：
+
 1. 需要计算所有节点的负载
 2. 排序节点以确定负载分布
 3. 调整连接以平衡负载
@@ -654,6 +659,7 @@ $$\text{Cost}(G') \leq \text{Cost}(G) \land \text{Performance}(G') \geq \text{Pe
 **定理 5.2**（拓扑优化复杂度）：拓扑优化问题是NP难问题。
 
 **证明**：
+
 1. 可以规约到最小生成树问题
 2. 最小生成树问题是NP难问题
 3. 因此拓扑优化问题也是NP难问题 ■
@@ -675,6 +681,7 @@ $$\text{Cost}(G') \leq \text{Cost}(G) \land \text{Performance}(G') \geq \text{Pe
 $$P_{integrity} = 1 - 2^{-|H(m)|}$$
 
 **证明**：
+
 1. 哈希函数抗碰撞性
 2. 碰撞概率为 $2^{-|H(m)|}$
 3. 完整性概率为 $1 - 2^{-|H(m)|}$ ■
@@ -688,6 +695,7 @@ $$P_{integrity} = 1 - 2^{-|H(m)|}$$
 $$T_{delay} \leq D \cdot L$$
 
 **证明**：
+
 1. 消息需要经过最多 $D$ 跳
 2. 每跳延迟不超过 $L$
 3. 总延迟不超过 $D \cdot L$ ■
@@ -816,4 +824,4 @@ impl CrossChainRouter {
 
 ---
 
-*本文档提供了Web3网络架构模式的全面分析，从理论基础到工程实践，为构建高性能、高可用的P2P网络系统提供了指导。* 
+*本文档提供了Web3网络架构模式的全面分析，从理论基础到工程实践，为构建高性能、高可用的P2P网络系统提供了指导。*

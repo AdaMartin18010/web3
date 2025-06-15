@@ -44,6 +44,7 @@
 $$D(DS) = \alpha \cdot D_{power} + \beta \cdot D_{control} + \gamma \cdot D_{data} + \delta \cdot D_{governance}$$
 
 其中：
+
 - $D_{power}$ 是权力分散度
 - $D_{control}$ 是控制分散度
 - $D_{data}$ 是数据分散度
@@ -59,6 +60,7 @@ $$D(DS) = \alpha \cdot D_{power} + \beta \cdot D_{control} + \gamma \cdot D_{dat
 
 **证明**：
 设系统总资源为 $R$，节点数为 $n$，则：
+
 - 完全去中心化时，每个节点平均资源为 $R/n$
 - 协调开销为 $O(n^2)$
 - 因此效率 $E(DS) = \frac{R}{n \cdot O(n^2)} = O(\frac{1}{n^3})$
@@ -76,6 +78,7 @@ $$T_{ij} \in [0,1], \quad T_{ii} = 1, \quad T_{ij} \neq T_{ji}$$
 ### 定义 2.2 (信任网络)
 
 信任网络 $TN = (N, T, W)$ 是一个加权有向图，其中：
+
 - $N$ 是节点集合
 - $T$ 是信任关系集合
 - $W: T \to [0,1]$ 是权重函数
@@ -131,6 +134,7 @@ $$I(a_h, a_h) > I(a_m, a_h)$$
 ### 定义 4.1 (治理规则)
 
 治理规则 $G = (P, V, D, E)$ 包含：
+
 - $P$ 是提案集合
 - $V$ 是投票规则
 - $D$ 是决策规则
@@ -205,7 +209,7 @@ use std::sync::{Arc, RwLock};
 use serde::{Deserialize, Serialize};
 
 /// 去中心化系统节点
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DecentralizedNode {
     pub id: String,
     pub role: NodeRole,
@@ -215,7 +219,7 @@ pub struct DecentralizedNode {
     pub data_amount: f64,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum NodeRole {
     Validator,
     FullNode,
@@ -240,69 +244,69 @@ impl DecentralizedSystem {
             incentives: Arc::new(RwLock::new(IncentiveSystem::new())),
         }
     }
-    
+
     /// 计算去中心化程度
     pub fn decentralization_degree(&self) -> f64 {
         let nodes = self.nodes.read().unwrap();
         let n = nodes.len() as f64;
-        
+
         if n == 0.0 {
             return 0.0;
         }
-        
+
         // 计算权力集中度
         let powers: Vec<f64> = nodes.values().map(|n| n.power).collect();
         let power_centralization = self.calculate_centralization(&powers);
-        
+
         // 计算控制集中度
         let controls: Vec<f64> = nodes.values().map(|n| n.control).collect();
         let control_centralization = self.calculate_centralization(&controls);
-        
+
         // 计算数据集中度
         let data_amounts: Vec<f64> = nodes.values().map(|n| n.data_amount).collect();
         let data_centralization = self.calculate_centralization(&data_amounts);
-        
+
         // 综合去中心化程度
         1.0 - (0.4 * power_centralization + 0.3 * control_centralization + 0.3 * data_centralization)
     }
-    
+
     /// 计算集中度
     fn calculate_centralization(&self, values: &[f64]) -> f64 {
         let n = values.len() as f64;
         if n == 0.0 {
             return 0.0;
         }
-        
+
         let mean = values.iter().sum::<f64>() / n;
         if mean == 0.0 {
             return 0.0;
         }
-        
+
         let variance = values.iter()
             .map(|&x| (x - mean).powi(2))
             .sum::<f64>() / n;
-        
+
         variance / (mean * mean)
     }
-    
+
     /// 添加节点
     pub fn add_node(&self, node: DecentralizedNode) {
         let mut nodes = self.nodes.write().unwrap();
         nodes.insert(node.id.clone(), node);
     }
-    
+
     /// 更新信任关系
     pub fn update_trust(&self, from: &str, to: &str, trust: f64) {
         let mut trust_net = self.trust_network.write().unwrap();
         trust_net.update_trust(from, to, trust);
     }
-    
+
     /// 执行治理投票
     pub fn vote(&self, proposal_id: &str, voter: &str, vote: bool) -> bool {
         let mut governance = self.governance.write().unwrap();
         governance.vote(proposal_id, voter, vote)
     }
-    
+
     /// 计算激励奖励
     pub fn calculate_incentive(&self, node_id: &str, action: &str) -> f64 {
         let incentives = self.incentives.read().unwrap();
@@ -321,31 +325,31 @@ impl TrustNetwork {
             trust_matrix: HashMap::new(),
         }
     }
-    
+
     pub fn update_trust(&mut self, from: &str, to: &str, trust: f64) {
         self.trust_matrix.insert((from.to_string(), to.to_string()), trust);
     }
-    
+
     pub fn get_trust(&self, from: &str, to: &str) -> f64 {
         self.trust_matrix.get(&(from.to_string(), to.to_string()))
             .copied()
             .unwrap_or(0.0)
     }
-    
+
     /// 计算信任传递
     pub fn trust_propagation(&self, from: &str, to: &str, path: &[String]) -> f64 {
         if path.len() < 2 {
             return self.get_trust(from, to);
         }
-        
+
         let mut trust = 1.0;
         let lambda = 0.1; // 衰减系数
-        
+
         for i in 0..path.len()-1 {
             let current_trust = self.get_trust(&path[i], &path[i+1]);
             trust *= current_trust;
         }
-        
+
         trust * (-lambda * (path.len() as f64 - 1.0)).exp()
     }
 }
@@ -356,7 +360,7 @@ pub struct GovernanceSystem {
     votes: HashMap<String, HashMap<String, bool>>,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Proposal {
     pub id: String,
     pub description: String,
@@ -364,7 +368,7 @@ pub struct Proposal {
     pub status: ProposalStatus,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum ProposalStatus {
     Active,
     Passed,
@@ -378,7 +382,7 @@ impl GovernanceSystem {
             votes: HashMap::new(),
         }
     }
-    
+
     pub fn create_proposal(&mut self, id: String, description: String, proposer: String) {
         let proposal = Proposal {
             id: id.clone(),
@@ -389,15 +393,15 @@ impl GovernanceSystem {
         self.proposals.insert(id.clone(), proposal);
         self.votes.insert(id, HashMap::new());
     }
-    
+
     pub fn vote(&mut self, proposal_id: &str, voter: &str, vote: bool) -> bool {
         if let Some(vote_map) = self.votes.get_mut(proposal_id) {
             vote_map.insert(voter.to_string(), vote);
-            
+
             // 检查是否达到多数
             let total_votes = vote_map.len();
             let positive_votes = vote_map.values().filter(|&&v| v).count();
-            
+
             if positive_votes as f64 / total_votes as f64 > 0.5 {
                 if let Some(proposal) = self.proposals.get_mut(proposal_id) {
                     proposal.status = ProposalStatus::Passed;
@@ -419,7 +423,7 @@ impl IncentiveSystem {
         let mut system = Self {
             reward_functions: HashMap::new(),
         };
-        
+
         // 注册默认激励函数
         system.register_reward_function("validation", |node_id, action| {
             match action {
@@ -428,7 +432,7 @@ impl IncentiveSystem {
                 _ => 0.0,
             }
         });
-        
+
         system.register_reward_function("mining", |node_id, action| {
             match action {
                 "block_mined" => 50.0,
@@ -436,20 +440,20 @@ impl IncentiveSystem {
                 _ => 0.0,
             }
         });
-        
+
         system
     }
-    
+
     pub fn register_reward_function<F>(&mut self, action_type: &str, func: F)
     where
         F: Fn(&str, &str) -> f64 + 'static,
     {
         self.reward_functions.insert(action_type.to_string(), Box::new(func));
     }
-    
+
     pub fn calculate_reward(&self, node_id: &str, action: &str) -> f64 {
         let action_type = action.split('_').next().unwrap_or("unknown");
-        
+
         if let Some(reward_func) = self.reward_functions.get(action_type) {
             reward_func(node_id, action)
         } else {
@@ -458,14 +462,14 @@ impl IncentiveSystem {
     }
 }
 
-#[cfg(test)]
+# [cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_decentralization_degree() {
         let system = DecentralizedSystem::new();
-        
+
         // 添加测试节点
         let node1 = DecentralizedNode {
             id: "node1".to_string(),
@@ -475,7 +479,7 @@ mod tests {
             control: 0.3,
             data_amount: 0.3,
         };
-        
+
         let node2 = DecentralizedNode {
             id: "node2".to_string(),
             role: NodeRole::Validator,
@@ -484,7 +488,7 @@ mod tests {
             control: 0.3,
             data_amount: 0.3,
         };
-        
+
         let node3 = DecentralizedNode {
             id: "node3".to_string(),
             role: NodeRole::Validator,
@@ -493,36 +497,36 @@ mod tests {
             control: 0.4,
             data_amount: 0.4,
         };
-        
+
         system.add_node(node1);
         system.add_node(node2);
         system.add_node(node3);
-        
+
         let degree = system.decentralization_degree();
         assert!(degree > 0.0 && degree <= 1.0);
     }
-    
+
     #[test]
     fn test_trust_propagation() {
         let system = DecentralizedSystem::new();
-        
+
         system.update_trust("A", "B", 0.8);
         system.update_trust("B", "C", 0.7);
-        
+
         let trust_net = system.trust_network.read().unwrap();
         let propagated_trust = trust_net.trust_propagation(
-            "A", 
-            "C", 
+            "A",
+            "C",
             &["A".to_string(), "B".to_string(), "C".to_string()]
         );
-        
+
         assert!(propagated_trust > 0.0 && propagated_trust < 0.8);
     }
-    
+
     #[test]
     fn test_governance_voting() {
         let system = DecentralizedSystem::new();
-        
+
         {
             let mut governance = system.governance.write().unwrap();
             governance.create_proposal(
@@ -531,26 +535,26 @@ mod tests {
                 "alice".to_string(),
             );
         }
-        
+
         // 投票
         system.vote("prop1", "alice", true);
         system.vote("prop1", "bob", true);
         system.vote("prop1", "charlie", false);
-        
+
         // 检查提案状态
         let governance = system.governance.read().unwrap();
         if let Some(proposal) = governance.proposals.get("prop1") {
             assert!(matches!(proposal.status, ProposalStatus::Passed));
         }
     }
-    
+
     #[test]
     fn test_incentive_calculation() {
         let system = DecentralizedSystem::new();
-        
+
         let reward = system.calculate_incentive("node1", "block_validation");
         assert_eq!(reward, 10.0);
-        
+
         let reward = system.calculate_incentive("node1", "block_mined");
         assert_eq!(reward, 50.0);
     }
@@ -590,4 +594,4 @@ mod tests {
 3. **激励机制优化**：优化激励机制的数学模型
 4. **治理机制创新**：探索新的治理机制设计
 
-去中心化理念作为Web3技术的核心，其形式化分析为构建更加安全、高效、公平的去中心化系统提供了重要的理论基础和实践指导。 
+去中心化理念作为Web3技术的核心，其形式化分析为构建更加安全、高效、公平的去中心化系统提供了重要的理论基础和实践指导。

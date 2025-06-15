@@ -93,28 +93,6 @@ impl BlockchainService for BlockchainServiceImpl {
 }
 ```
 
-**定义 2.1.2** (服务发现) 服务发现机制：
-
-```rust
-pub trait ServiceRegistry {
-    async fn register(&self, service: ServiceInfo) -> Result<(), RegistryError>;
-    async fn discover(&self, service_name: &str) -> Result<Vec<ServiceInfo>, RegistryError>;
-    async fn deregister(&self, service_id: &str) -> Result<(), RegistryError>;
-}
-
-pub struct ConsulRegistry {
-    client: ConsulClient,
-}
-
-#[async_trait]
-impl ServiceRegistry for ConsulRegistry {
-    async fn register(&self, service: ServiceInfo) -> Result<(), RegistryError> {
-        self.client.register_service(&service).await?;
-        Ok(())
-    }
-}
-```
-
 **定理 2.1.1** (微服务优势) 微服务架构提高系统可维护性。
 
 **证明** 通过模块化分析：
@@ -639,24 +617,7 @@ pub struct LayeredStorage {
 }
 
 impl LayeredStorage {
-    pub async fn store(&self, key: &[u8], value: &[u8]) -> Result<(), StorageError> {
-        // 1. 存储到内存层（最快）
-        self.memory_layer.store(key, value).await?;
-        
-        // 2. 异步存储到磁盘层
-        let disk_layer = self.disk_layer.clone();
-        let key = key.to_vec();
-        let value = value.to_vec();
-        tokio::spawn(async move {
-            if let Err(e) = disk_layer.store(&key, &value).await {
-                log::error!("Failed to store to disk: {}", e);
-            }
-        });
-        
-        Ok(())
-    }
-    
-    pub async fn load(&self, key: &[u8]) -> Result<Option<Vec<u8>>, StorageError> {
+    pub async fn get(&self, key: &[u8]) -> Result<Option<Vec<u8>>, StorageError> {
         // 1. 从内存层查找
         if let Some(value) = self.memory_layer.load(key).await? {
             return Ok(Some(value));
@@ -665,14 +626,7 @@ impl LayeredStorage {
         // 2. 从磁盘层查找
         if let Some(value) = self.disk_layer.load(key).await? {
             // 缓存到内存层
-            let memory_layer = self.memory_layer.clone();
-            let key = key.to_vec();
-            let value_clone = value.clone();
-            tokio::spawn(async move {
-                if let Err(e) = memory_layer.store(&key, &value_clone).await {
-                    log::error!("Failed to cache to memory: {}", e);
-                }
-            });
+            self.memory_layer.store(key, &value).await?;
             return Ok(Some(value));
         }
         

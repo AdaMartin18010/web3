@@ -31,6 +31,7 @@
 **定理 1.1.1** (合约不可变性) 智能合约一旦部署，其代码不可修改，但状态可以改变。
 
 **证明** 通过区块链特性：
+
 1. 区块链的不可变性保证代码不可修改
 2. 状态转移函数 $\delta$ 允许状态变化
 3. 因此合约代码固定，状态可变 ■
@@ -50,6 +51,7 @@ $$\text{Vulnerability}(\mathcal{SC}) = \{\pi \mid \pi \models \neg \phi_{\text{s
 **定理 1.2.1** (漏洞检测的不可判定性) 在一般情况下，智能合约漏洞检测是不可判定的。
 
 **证明** 通过归约到停机问题：
+
 1. 构造合约 $C$ 模拟图灵机 $M$
 2. 漏洞检测等价于判断 $M$ 是否停机
 3. 由于停机问题不可判定，漏洞检测也不可判定 ■
@@ -109,6 +111,7 @@ $$\text{Vulnerability}(\mathcal{SC}) = \{\pi \mid \pi \models \neg \phi_{\text{s
 **定理 2.2.1** (语义等价性) 操作语义和指称语义对于确定性程序是等价的。
 
 **证明** 通过结构归纳：
+
 1. 基础情况：数字和变量的语义等价
 2. 归纳步骤：复合表达式的语义等价
 3. 因此两种语义等价 ■
@@ -154,6 +157,7 @@ $$\text{Vulnerability}(\mathcal{SC}) = \{\pi \mid \pi \models \neg \phi_{\text{s
 **定理 3.2.1** (状态空间爆炸) 对于 $n$ 个状态机，每个有 $m$ 个状态，全局状态空间大小为 $O(m^n)$。
 
 **证明** 通过组合分析：
+
 1. 每个状态机有 $m$ 个可能状态
 2. $n$ 个状态机的组合有 $m^n$ 种可能
 3. 因此状态空间为 $O(m^n)$ ■
@@ -170,6 +174,7 @@ $$\text{Vulnerability}(\mathcal{SC}) = \{\pi \mid \pi \models \neg \phi_{\text{s
 ```
 
 其中：
+
 - $p$ 是原子命题
 - $\mathbf{X}$ 是下一个时间点
 - $\mathbf{F}$ 是将来某个时间点
@@ -237,6 +242,7 @@ $$\text{Vulnerability}(\mathcal{SC}) = \{\pi \mid \pi \models \neg \phi_{\text{s
 **定理 4.3.1** (安全性质的可组合性) 如果 $\phi_1$ 和 $\phi_2$ 都是安全性质，则 $\phi_1 \land \phi_2$ 也是安全性质。
 
 **证明** 通过安全性定义：
+
 1. $\phi_1 = \mathbf{G} \neg \text{bad}_1$
 2. $\phi_2 = \mathbf{G} \neg \text{bad}_2$
 3. $\phi_1 \land \phi_2 = \mathbf{G} \neg \text{bad}_1 \land \mathbf{G} \neg \text{bad}_2 = \mathbf{G}(\neg \text{bad}_1 \land \neg \text{bad}_2)$
@@ -314,6 +320,7 @@ impl ModelChecker {
 **定理 5.1.1** (模型检查复杂度) LTL模型检查的时间复杂度为 $O(|S| \cdot 2^{|\phi|})$，其中 $|S|$ 是状态空间大小，$|\phi|$ 是公式长度。
 
 **证明** 通过算法分析：
+
 1. LTL到Büchi自动机转换：$O(2^{|\phi|})$
 2. 乘积自动机构造：$O(|S| \cdot 2^{|\phi|})$
 3. 空性检查：$O(|S| \cdot 2^{|\phi|})$
@@ -405,6 +412,7 @@ func (ai *AbstractInterpreter) handleAssignment(point ProgramPoint, state Abstra
 **定理 5.2.1** (抽象解释的正确性) 如果抽象解释返回 $\top$，则程序可能不安全；如果返回 $\bot$，则程序一定安全。
 
 **证明** 通过抽象解释理论：
+
 1. 抽象函数保持包含关系：$\alpha(S) \sqsubseteq \alpha(S')$ 当 $S \subseteq S'$
 2. 具体化函数保持包含关系：$\gamma(d) \subseteq \gamma(d')$ 当 $d \sqsubseteq d'$
 3. 因此抽象解释的结果是保守的 ■
@@ -416,6 +424,7 @@ func (ai *AbstractInterpreter) handleAssignment(point ProgramPoint, state Abstra
 **定义 6.1.1** (SMT问题) 可满足性模理论(SMT)问题是判断一阶逻辑公式在特定理论下是否可满足。
 
 **定义 6.1.2** (SMT求解) SMT求解器接受公式 $\phi$ 和理论 $T$，返回：
+
 - $\text{SAT}$：如果 $\phi$ 在 $T$ 下可满足
 - $\text{UNSAT}$：如果 $\phi$ 在 $T$ 下不可满足
 - $\text{UNKNOWN}$：如果无法确定
@@ -574,6 +583,7 @@ func (mp *MLPredictor) extractFeatures(contract *SmartContract) map[string]float
 **定理 6.2.1** (混合验证的效率) 混合验证框架的平均验证时间比纯SMT验证减少 $O(\log n)$ 倍，其中 $n$ 是合约复杂度。
 
 **证明** 通过概率分析：
+
 1. 机器学习预测正确率 $p > 0.9$
 2. 预测时间 $O(1)$，SMT验证时间 $O(n^k)$
 3. 平均时间：$p \cdot O(1) + (1-p) \cdot O(n^k) = O(n^{k-1})$
@@ -794,6 +804,7 @@ func (ov *OptimizedVerifier) garbageCollect() {
 **定理 7.2.1** (内存优化效果) 使用对象池和缓存可以将内存使用减少 $O(\sqrt{n})$ 倍，其中 $n$ 是并发验证任务数。
 
 **证明** 通过内存分析：
+
 1. 不使用优化：每个任务创建新验证器，内存使用 $O(n)$
 2. 使用对象池：验证器重用，内存使用 $O(\sqrt{n})$
 3. 使用缓存：避免重复验证，进一步减少内存使用
@@ -920,6 +931,7 @@ contract ERC721 {
 **定理 9.1.1** (形式化验证的完备性) 对于有限状态智能合约，形式化验证可以检测所有可表达的安全漏洞。
 
 **证明** 通过模型检查理论：
+
 1. 有限状态系统的状态空间是有限的
 2. 模型检查可以枚举所有可能状态
 3. 因此可以检测所有可表达的性质 ■
@@ -927,6 +939,7 @@ contract ERC721 {
 **定理 9.1.2** (验证效率的权衡) 验证精度与效率之间存在根本性权衡：高精度验证需要指数级时间，而高效验证可能产生误报。
 
 **证明** 通过复杂度理论：
+
 1. 精确验证需要枚举状态空间：$O(2^n)$
 2. 近似验证使用启发式：$O(n^k)$
 3. 因此存在精度-效率权衡 ■
@@ -942,6 +955,7 @@ ROI = \frac{\text{避免的损失} - \text{验证成本}}{\text{验证成本}}
 **定理 9.2.1** (验证的经济效益) 对于高价值智能合约，形式化验证的投资回报率随合约复杂度指数增长。
 
 **证明** 通过经济分析：
+
 1. 验证成本：$C_v = O(n \log n)$
 2. 避免的损失：$L = O(2^n)$（随复杂度指数增长）
 3. ROI = $\frac{O(2^n) - O(n \log n)}{O(n \log n)} = O(2^n/n)$
@@ -958,6 +972,7 @@ ROI = \frac{\text{避免的损失} - \text{验证成本}}{\text{验证成本}}
 **定理 9.3.1** (验证技术的演进) 智能合约验证技术将朝着自动化、智能化、集成化方向发展。
 
 **证明** 通过技术发展趋势：
+
 1. 自动化：减少人工干预，提高效率
 2. 智能化：使用AI技术，提高准确性
 3. 集成化：与开发工具链集成，提高可用性 ■
@@ -973,4 +988,4 @@ ROI = \frac{\text{避免的损失} - \text{验证成本}}{\text{验证成本}}
 7. Luu, L., Chu, D. H., Olickel, H., Saxena, P., & Hobor, A. (2016). Making smart contracts smarter. In Proceedings of the 2016 ACM SIGSAC conference on computer and communications security (pp. 254-269).
 8. Hirai, Y. (2017). Defining the Ethereum virtual machine for interactive theorem provers. In International conference on financial cryptography and data security (pp. 520-535).
 9. Grishchenko, I., Maffei, M., & Schneidewind, C. (2018). A semantic framework for the security analysis of Ethereum smart contracts. In International conference on principles of security and trust (pp. 243-269).
-10. Kalra, S., Goel, S., Dhawan, M., & Sharma, S. (2018). ZEUS: Analyzing safety of smart contracts. In NDSS (pp. 1-12). 
+10. Kalra, S., Goel, S., Dhawan, M., & Sharma, S. (2018). ZEUS: Analyzing safety of smart contracts. In NDSS (pp. 1-12).

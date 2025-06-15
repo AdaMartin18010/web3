@@ -35,6 +35,7 @@
 $$\tau ::= \text{Unit} \mid \text{Bool} \mid \text{Int} \mid \text{String} \mid \tau_1 \multimap \tau_2 \mid \tau_1 \otimes \tau_2 \mid !\tau \mid \text{Ref}~\tau$$
 
 其中：
+
 - $\multimap$ 表示线性函数类型
 - $\otimes$ 表示张量积类型
 - $!$ 表示指数类型（可重复使用）
@@ -82,6 +83,7 @@ $$\frac{!\Gamma \vdash e : \tau}{!\Gamma \vdash !e : !\tau}$$
 **证明：** 通过结构归纳法证明。
 
 **基础情况：** 变量 $x$
+
 - 如果 $x : \tau \in \Gamma$，则 $\Gamma \vdash x : \tau$
 - $x$ 在 $x$ 中恰好出现一次
 
@@ -121,6 +123,7 @@ $$\frac{!\Gamma \vdash e : \tau}{!\Gamma \vdash !e : !\tau}$$
 
 **定理 3.3 (内存安全)**
 线性引用系统保证：
+
 1. 不会出现悬空指针
 2. 不会重复释放内存
 3. 不会出现数据竞争
@@ -128,16 +131,19 @@ $$\frac{!\Gamma \vdash e : \tau}{!\Gamma \vdash !e : !\tau}$$
 **证明：** 通过线性类型系统的性质。
 
 **悬空指针防护：**
+
 - 每个引用最多使用一次
 - 释放操作消耗引用
 - 无法访问已释放的引用
 
 **重复释放防护：**
+
 - 线性性确保引用恰好使用一次
 - 释放操作消耗引用
 - 无法重复释放同一引用
 
 **数据竞争防护：**
+
 - 线性性确保引用独占访问
 - 无法同时访问同一引用
 - 防止并发修改
@@ -151,6 +157,7 @@ $$\frac{!\Gamma \vdash e : \tau}{!\Gamma \vdash !e : !\tau}$$
 $$\text{Coin} = \text{Ref}~(\text{Amount} \times \text{Address})$$
 
 **转账操作：**
+
 ```rust
 // 线性转账函数
 fn transfer(
@@ -176,6 +183,7 @@ fn transfer(
 
 **定理 4.1 (转账安全性)**
 线性转账系统保证：
+
 1. 防止双重支付
 2. 保证转账原子性
 3. 维护余额一致性
@@ -187,6 +195,7 @@ fn transfer(
 $$\text{ContractState} = \text{Ref}~(\text{Storage} \times \text{Balance} \times \text{Code})$$
 
 **状态更新操作：**
+
 ```rust
 // 线性状态更新
 fn update_state(
@@ -200,6 +209,7 @@ fn update_state(
 
 **定理 4.2 (状态一致性)**
 线性状态管理保证：
+
 1. 状态更新原子性
 2. 防止状态冲突
 3. 维护状态完整性
@@ -211,6 +221,7 @@ NFT类型定义为线性资源：
 $$\text{NFT} = \text{Ref}~(\text{TokenId} \times \text{Metadata} \times \text{Owner})$$
 
 **所有权转移：**
+
 ```rust
 // 线性NFT转移
 fn transfer_nft(
@@ -224,6 +235,7 @@ fn transfer_nft(
 
 **定理 4.3 (NFT唯一性)**
 线性NFT系统保证：
+
 1. NFT唯一性
 2. 所有权排他性
 3. 转移原子性
@@ -418,6 +430,7 @@ impl<T> LinearTransaction<T> {
 线性类型系统保证内存安全，防止所有常见的内存错误。
 
 **证明：** 通过线性性约束：
+
 1. 每个资源恰好使用一次
 2. 无法访问已释放的资源
 3. 无法重复释放资源
@@ -426,6 +439,7 @@ impl<T> LinearTransaction<T> {
 线性类型系统保证并发安全，防止数据竞争。
 
 **证明：** 通过线性性约束：
+
 1. 每个资源独占访问
 2. 无法同时访问同一资源
 3. 防止并发修改
@@ -510,6 +524,6 @@ graph TD
 
 1. Girard, J. Y. (1987). Linear logic. Theoretical computer science, 50(1), 1-101.
 2. Wadler, P. (1990). Linear types can change the world! Programming concepts and methods, 546-566.
-3. Rust Programming Language. (2021). The Rust Programming Language. https://doc.rust-lang.org/book/
+3. Rust Programming Language. (2021). The Rust Programming Language. <https://doc.rust-lang.org/book/>
 4. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system. Decentralized Business Review, 21260.
-5. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger. Ethereum project yellow paper, 151(2014), 1-32. 
+5. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger. Ethereum project yellow paper, 151(2014), 1-32.

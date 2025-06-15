@@ -701,6 +701,7 @@ $$\text{AlgorithmComplexity} = O(f(n))$$
 $$\text{FrameworkEvaluation} = (P, S, E, C, M)$$
 
 其中：
+
 - $P$ 是性能 (Performance)
 - $S$ 是安全性 (Security)
 - $E$ 是易用性 (Ease of Use)
@@ -733,6 +734,7 @@ $$\text{FrameworkEvaluation} = (P, S, E, C, M)$$
 $$\text{LanguageEvaluation} = (S, P, T, E, C)$$
 
 其中：
+
 - $S$ 是安全性 (Safety)
 - $P$ 是性能 (Performance)
 - $T$ 是工具链 (Toolchain)
@@ -808,6 +810,7 @@ impl SafeTransaction {
 $$\text{ToolchainEvaluation} = (C, T, D, I, M)$$
 
 其中：
+
 - $C$ 是完整性 (Completeness)
 - $T$ 是工具质量 (Tool Quality)
 - $D$ 是文档 (Documentation)

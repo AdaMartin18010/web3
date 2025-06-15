@@ -73,6 +73,7 @@ $$\text{Message} ::= \text{Propose}(v) \mid \text{Accept}(v) \mid \text{Commit}(
 在故障节点数 $f < n/3$ 的情况下，消息传递系统保证可靠性。
 
 **证明：** 通过多数投票机制：
+
 1. 每个消息需要多数节点确认
 2. 故障节点无法阻止消息传递
 3. 正确节点保证消息可靠性
@@ -113,7 +114,8 @@ Web3系统中的故障类型：
 3. **终止性**：所有正确节点最终做出决定
 4. **拜占庭容错**：在 $f < n/3$ 拜占庭故障下仍能工作
 
-**算法 3.1 (PBFT共识)**
+**算法 3.1 (PBFT共识)**:
+
 ```rust
 // PBFT状态
 #[derive(Debug, Clone)]
@@ -199,7 +201,8 @@ $$\text{Stake}(n_i) = \sum_{t \in T} \text{balance}(n_i, t) \times \text{weight}
 验证者选择函数：
 $$\text{SelectValidator}(S, t) = \arg\max_{n_i \in N} \text{Stake}(n_i) \times \text{random}(t)$$
 
-**算法 3.2 (PoS共识)**
+**算法 3.2 (PoS共识)**:
+
 ```rust
 // 权益证明状态
 #[derive(Debug, Clone)]
@@ -296,7 +299,8 @@ $$\text{Shard}_i = (N_i, C_i, S_i)$$
 跨分片通信协议：
 $$\text{CrossShard}(s_1, s_2, m) = \text{Commit}(s_1) \rightarrow \text{Execute}(s_2, m)$$
 
-**算法 3.3 (分片共识)**
+**算法 3.3 (分片共识)**:
+
 ```rust
 // 分片状态
 #[derive(Debug, Clone)]
@@ -362,7 +366,8 @@ impl ShardState {
 
 $$\text{Consensus}(B) = \forall i, j \in N, \text{Blockchain}_i = \text{Blockchain}_j$$
 
-**实现 4.1 (区块链节点)**
+**实现 4.1 (区块链节点)**:
+
 ```rust
 // 区块链节点
 pub struct BlockchainNode {
@@ -417,7 +422,8 @@ impl BlockchainNode {
 去中心化存储系统：
 $$\text{Storage}(k, v) = \text{Replicate}(v, \text{Shard}(k))$$
 
-**实现 4.2 (存储节点)**
+**实现 4.2 (存储节点)**:
+
 ```rust
 // 存储节点
 pub struct StorageNode {
@@ -470,7 +476,8 @@ impl StorageNode {
 
 $$\text{ContractConsensus}(C, S) = \forall i, j \in N, \text{Execute}(C, S_i) = \text{Execute}(C, S_j)$$
 
-**实现 4.3 (合约执行引擎)**
+**实现 4.3 (合约执行引擎)**:
+
 ```rust
 // 智能合约执行引擎
 pub struct ContractExecutionEngine {
@@ -785,7 +792,8 @@ pub trait MessageHandler: Send + Sync {
 **定理 6.1 (共识复杂度)**
 PBFT共识的消息复杂度为 $O(n^2)$，时间复杂度为 $O(1)$。
 
-**证明：** 
+**证明：**
+
 1. 每个阶段需要广播到所有节点：$O(n)$
 2. 三个阶段总共：$O(3n) = O(n)$
 3. 每个节点处理所有消息：$O(n^2)$
@@ -793,7 +801,8 @@ PBFT共识的消息复杂度为 $O(n^2)$，时间复杂度为 $O(1)$。
 **定理 6.2 (分片性能)**
 分片系统可以将吞吐量提高 $k$ 倍，其中 $k$ 是分片数量。
 
-**证明：** 
+**证明：**
+
 1. 每个分片独立处理交易
 2. 总吞吐量 = 分片数 × 单分片吞吐量
 3. 跨分片交易开销可忽略
@@ -803,7 +812,8 @@ PBFT共识的消息复杂度为 $O(n^2)$，时间复杂度为 $O(1)$。
 **定理 6.3 (拜占庭容错)**
 在 $f < n/3$ 拜占庭故障下，系统保证安全性。
 
-**证明：** 
+**证明：**
+
 1. 每个阶段需要 $2f + 1$ 个节点确认
 2. 恶意节点最多 $f$ 个
 3. 诚实节点至少 $2f + 1$ 个
@@ -812,7 +822,8 @@ PBFT共识的消息复杂度为 $O(n^2)$，时间复杂度为 $O(1)$。
 **定理 6.4 (活性保证)**
 在同步网络假设下，系统保证活性。
 
-**证明：** 
+**证明：**
+
 1. 消息传递有界延迟
 2. 节点处理有界时间
 3. 超时机制确保进展
@@ -945,4 +956,4 @@ graph TD
 2. Castro, M., & Liskov, B. (1999). Practical Byzantine fault tolerance. OSDI, 99, 173-186.
 3. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system. Decentralized Business Review, 21260.
 4. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger. Ethereum project yellow paper, 151(2014), 1-32.
-5. Buterin, V. (2015). Ethereum 2.0 specifications. https://github.com/ethereum/eth2.0-specs 
+5. Buterin, V. (2015). Ethereum 2.0 specifications. <https://github.com/ethereum/eth2.0-specs>

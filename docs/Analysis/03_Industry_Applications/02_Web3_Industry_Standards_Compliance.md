@@ -985,4 +985,4 @@ Web3标准与合规的未来发展方向：
 5. National Institute of Standards and Technology. (2018). Cybersecurity Framework.
 6. World Wide Web Consortium. (2022). Web3 Standards and Specifications.
 7. International Telecommunication Union. (2021). Blockchain and Distributed Ledger Technologies.
-8. Institute of Electrical and Electronics Engineers. (2023). Blockchain Standards. 
+8. Institute of Electrical and Electronics Engineers. (2023). Blockchain Standards.

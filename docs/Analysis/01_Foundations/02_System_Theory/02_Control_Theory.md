@@ -54,6 +54,7 @@ $$\dot{x}(t) = f(x(t), u(t), w(t))$$
 $$y(t) = h(x(t), v(t))$$
 
 其中：
+
 - $x(t) \in \mathbb{R}^n$ 是系统状态
 - $u(t) \in \mathbb{R}^m$ 是控制输入
 - $w(t) \in \mathbb{R}^p$ 是外部干扰
@@ -78,6 +79,7 @@ $$\delta \dot{x}(t) = A \delta x(t) + B \delta u(t) + E w(t)$$
 $$\delta y(t) = C \delta x(t) + D \delta u(t) + F v(t)$$
 
 其中：
+
 - $A = \frac{\partial f}{\partial x}|_{(x_e, u_e)}$
 - $B = \frac{\partial f}{\partial u}|_{(x_e, u_e)}$
 - $C = \frac{\partial h}{\partial x}|_{(x_e, u_e)}$
@@ -186,7 +188,7 @@ pub struct TopologyController {
 impl TopologyController {
     pub fn new(nodes: Vec<NodeId>, adjacency_matrix: Matrix) -> Self {
         let laplacian_matrix = Self::compute_laplacian(&adjacency_matrix);
-        
+
         Self {
             nodes,
             adjacency_matrix,
@@ -194,11 +196,11 @@ impl TopologyController {
             control_gain: 1.0,
         }
     }
-    
+
     pub fn compute_control_input(&self, states: &[f64]) -> Vec<f64> {
         let n = states.len();
         let mut control_inputs = vec![0.0; n];
-        
+
         for i in 0..n {
             for j in 0..n {
                 if i != j && self.adjacency_matrix[i][j] > 0.0 {
@@ -206,30 +208,30 @@ impl TopologyController {
                 }
             }
         }
-        
+
         control_inputs
     }
-    
+
     pub fn update_topology(&mut self, new_adjacency: Matrix) {
         self.adjacency_matrix = new_adjacency;
         self.laplacian_matrix = Self::compute_laplacian(&self.adjacency_matrix);
     }
-    
+
     fn compute_laplacian(adjacency: &Matrix) -> Matrix {
         let n = adjacency.len();
         let mut laplacian = Matrix::zeros(n, n);
-        
+
         for i in 0..n {
             let degree = adjacency[i].iter().sum::<f64>();
             laplacian[i][i] = degree;
-            
+
             for j in 0..n {
                 if i != j {
                     laplacian[i][j] = -adjacency[i][j];
                 }
             }
         }
-        
+
         laplacian
     }
 }
@@ -258,37 +260,37 @@ impl ConsensusController {
             convergence_threshold: 1e-6,
         }
     }
-    
+
     pub fn compute_consensus_input(&self, node_states: &HashMap<NodeId, f64>) -> HashMap<NodeId, f64> {
         let mut control_inputs = HashMap::new();
-        
+
         for (&node_id, &state) in node_states {
             let neighbors = self.network_topology.get_neighbors(node_id);
             let mut consensus_input = 0.0;
-            
+
             for &neighbor_id in &neighbors {
                 if let Some(&neighbor_state) = node_states.get(&neighbor_id) {
                     consensus_input += self.consensus_gain * (neighbor_state - state);
                 }
             }
-            
+
             control_inputs.insert(node_id, consensus_input);
         }
-        
+
         control_inputs
     }
-    
+
     pub fn check_convergence(&self, node_states: &HashMap<NodeId, f64>) -> bool {
         let states: Vec<f64> = node_states.values().cloned().collect();
         let mean_state = states.iter().sum::<f64>() / states.len() as f64;
-        
+
         let max_deviation = states.iter()
             .map(|&s| (s - mean_state).abs())
             .fold(0.0, f64::max);
-        
+
         max_deviation < self.convergence_threshold
     }
-    
+
     pub fn adaptive_gain_control(&mut self, convergence_rate: f64) {
         // 自适应调整共识增益
         if convergence_rate < 0.1 {
@@ -296,7 +298,7 @@ impl ConsensusController {
         } else if convergence_rate > 0.9 {
             self.consensus_gain *= 0.9;
         }
-        
+
         self.consensus_gain = self.consensus_gain.max(0.1).min(10.0);
     }
 }
@@ -327,17 +329,17 @@ impl ResourceController {
             control_horizon: 10,
         }
     }
-    
+
     pub fn optimize_allocation(&mut self) -> HashMap<NodeId, f64> {
         let nodes: Vec<NodeId> = self.current_allocation.keys().cloned().collect();
         let mut optimal_allocation = HashMap::new();
-        
+
         // 使用线性规划优化资源分配
         let mut total_demand = 0.0;
         for &node_id in &nodes {
             total_demand += self.demand_forecast.get(&node_id).unwrap_or(&0.0);
         }
-        
+
         if total_demand <= self.resource_capacity {
             // 满足所有需求
             for &node_id in &nodes {
@@ -352,18 +354,18 @@ impl ResourceController {
                 optimal_allocation.insert(node_id, demand * scale_factor);
             }
         }
-        
+
         optimal_allocation
     }
-    
+
     pub fn update_demand_forecast(&mut self, node_id: NodeId, forecast: f64) {
         self.demand_forecast.insert(node_id, forecast);
     }
-    
+
     pub fn apply_allocation(&mut self, allocation: HashMap<NodeId, f64>) {
         self.current_allocation = allocation;
     }
-    
+
     pub fn get_utilization(&self) -> f64 {
         let total_allocated: f64 = self.current_allocation.values().sum();
         total_allocated / self.resource_capacity
@@ -384,7 +386,7 @@ pub trait ControlSystem {
     type State;
     type Input;
     type Output;
-    
+
     fn update_state(&mut self, input: Self::Input) -> Self::State;
     fn get_output(&self) -> Self::Output;
     fn is_stable(&self) -> bool;
@@ -403,18 +405,18 @@ impl ControlSystem for LinearTimeInvariantSystem {
     type State = DVector<f64>;
     type Input = DVector<f64>;
     type Output = DVector<f64>;
-    
+
     fn update_state(&mut self, input: Self::Input) -> Self::State {
         // 状态更新: x(k+1) = Ax(k) + Bu(k)
         self.state = &self.a * &self.state + &self.b * &input;
         self.state.clone()
     }
-    
+
     fn get_output(&self) -> Self::Output {
         // 输出计算: y(k) = Cx(k) + Du(k)
         &self.c * &self.state
     }
-    
+
     fn is_stable(&self) -> bool {
         // 检查特征值是否都在单位圆内
         let eigenvals = self.a.eigenvalues();
@@ -433,19 +435,19 @@ impl LinearTimeInvariantSystem {
             state: DVector::zeros(state_dim),
         }
     }
-    
+
     pub fn set_initial_state(&mut self, initial_state: DVector<f64>) {
         self.state = initial_state;
     }
-    
+
     pub fn get_state(&self) -> &DVector<f64> {
         &self.state
     }
-    
+
     pub fn controllability_matrix(&self) -> DMatrix<f64> {
         let n = self.a.nrows();
         let mut controllability = DMatrix::zeros(n, n * self.b.ncols());
-        
+
         let mut a_power = DMatrix::identity(n, n);
         for i in 0..n {
             let start_col = i * self.b.ncols();
@@ -453,19 +455,19 @@ impl LinearTimeInvariantSystem {
             controllability.slice_mut((0, start_col), (n, self.b.ncols())).copy_from(&(&a_power * &self.b));
             a_power = &a_power * &self.a;
         }
-        
+
         controllability
     }
-    
+
     pub fn is_controllable(&self) -> bool {
         let controllability = self.controllability_matrix();
         controllability.rank() == self.a.nrows()
     }
-    
+
     pub fn observability_matrix(&self) -> DMatrix<f64> {
         let n = self.a.nrows();
         let mut observability = DMatrix::zeros(n * self.c.nrows(), n);
-        
+
         let mut a_power = DMatrix::identity(n, n);
         for i in 0..n {
             let start_row = i * self.c.nrows();
@@ -473,10 +475,10 @@ impl LinearTimeInvariantSystem {
             observability.slice_mut((start_row, 0), (self.c.nrows(), n)).copy_from(&(&self.c * &a_power));
             a_power = &a_power * &self.a;
         }
-        
+
         observability
     }
-    
+
     pub fn is_observable(&self) -> bool {
         let observability = self.observability_matrix();
         observability.rank() == self.a.nrows()
@@ -500,52 +502,52 @@ impl StateFeedbackController {
             reference_input: DVector::zeros(gain_matrix.ncols()),
         }
     }
-    
+
     pub fn compute_control_input(&self, state: &DVector<f64>) -> DVector<f64> {
         // u = -Kx + r
         -&self.gain_matrix * state + &self.reference_input
     }
-    
+
     pub fn set_reference(&mut self, reference: DVector<f64>) {
         self.reference_input = reference;
     }
-    
+
     pub fn pole_placement(a: &DMatrix<f64>, b: &DMatrix<f64>, desired_poles: &[f64]) -> Result<DMatrix<f64>, String> {
         // 极点配置算法
         if !Self::is_controllable(a, b) {
             return Err("System is not controllable".to_string());
         }
-        
+
         // 转换为可控标准形
         let (a_bar, b_bar, t) = Self::to_controllable_form(a, b)?;
-        
+
         // 在标准形下配置极点
         let k_bar = Self::place_poles_standard_form(&a_bar, &b_bar, desired_poles)?;
-        
+
         // 变换回原坐标系
         Ok(&k_bar * &t)
     }
-    
+
     fn is_controllable(a: &DMatrix<f64>, b: &DMatrix<f64>) -> bool {
         let n = a.nrows();
         let mut controllability = DMatrix::zeros(n, n * b.ncols());
-        
+
         let mut a_power = DMatrix::identity(n, n);
         for i in 0..n {
             let start_col = i * b.ncols();
             controllability.slice_mut((0, start_col), (n, b.ncols())).copy_from(&(&a_power * b));
             a_power = &a_power * a;
         }
-        
+
         controllability.rank() == n
     }
-    
+
     fn to_controllable_form(a: &DMatrix<f64>, b: &DMatrix<f64>) -> Result<(DMatrix<f64>, DMatrix<f64>, DMatrix<f64>), String> {
         // 转换为可控标准形的实现
         // 这里简化实现，实际需要完整的变换算法
         Ok((a.clone(), b.clone(), DMatrix::identity(a.nrows(), a.nrows())))
     }
-    
+
     fn place_poles_standard_form(a_bar: &DMatrix<f64>, b_bar: &DMatrix<f64>, desired_poles: &[f64]) -> Result<DMatrix<f64>, String> {
         // 在标准形下配置极点的实现
         // 这里简化实现，实际需要完整的极点配置算法
@@ -574,19 +576,19 @@ impl LuenbergerObserver {
             state_estimate: DVector::zeros(state_dim),
         }
     }
-    
+
     pub fn update(&mut self, input: &DVector<f64>, output: &DVector<f64>) {
         // 观测器更新: \hat{x}(k+1) = A\hat{x}(k) + Bu(k) + L(y(k) - C\hat{x}(k))
         let output_estimate = &self.c * &self.state_estimate;
         let output_error = output - &output_estimate;
-        
+
         self.state_estimate = &self.a * &self.state_estimate + &self.b * input + &self.l * &output_error;
     }
-    
+
     pub fn get_state_estimate(&self) -> &DVector<f64> {
         &self.state_estimate
     }
-    
+
     pub fn set_initial_estimate(&mut self, initial_estimate: DVector<f64>) {
         self.state_estimate = initial_estimate;
     }
@@ -620,42 +622,42 @@ impl ModelReferenceAdaptiveController {
             reference_input: DVector::zeros(1),
         }
     }
-    
+
     pub fn update(&mut self, plant_output: &DVector<f64>) -> DVector<f64> {
         // 计算参考模型输出
         let reference_output = self.reference_model.get_output();
-        
+
         // 计算跟踪误差
         let tracking_error = plant_output - &reference_output;
-        
+
         // 更新参数估计
         self.update_parameter_estimates(&tracking_error);
-        
+
         // 计算控制输入
         self.compute_control_input(&tracking_error)
     }
-    
+
     fn update_parameter_estimates(&mut self, tracking_error: &DVector<f64>) {
         // 自适应律: \dot{\theta} = -\gamma \phi e
         let regressor = self.compute_regressor();
-        
+
         for i in 0..self.parameter_estimates.len() {
             self.parameter_estimates[i] -= self.adaptation_gain * regressor[i] * tracking_error[0];
         }
     }
-    
+
     fn compute_regressor(&self) -> DVector<f64> {
         // 计算回归向量
         // 这里简化实现，实际需要根据具体系统结构计算
         DVector::zeros(self.parameter_estimates.len())
     }
-    
+
     fn compute_control_input(&self, tracking_error: &DVector<f64>) -> DVector<f64> {
         // 计算控制输入: u = \theta^T \phi
         let regressor = self.compute_regressor();
         DVector::from_vec(vec![self.parameter_estimates.dot(&regressor)])
     }
-    
+
     pub fn set_reference_input(&mut self, reference: DVector<f64>) {
         self.reference_input = reference;
         self.reference_model.set_initial_state(reference);
@@ -713,14 +715,14 @@ $$J = \int_0^\infty (x^T(t)Qx(t) + u^T(t)Ru(t))dt$$
 pub trait Verifiable {
     type Property;
     type Proof;
-    
+
     fn verify_property(&self, property: Self::Property) -> Result<Self::Proof, VerificationError>;
 }
 
 impl Verifiable for LinearTimeInvariantSystem {
     type Property = StabilityProperty;
     type Proof = StabilityProof;
-    
+
     fn verify_property(&self, property: StabilityProperty) -> Result<StabilityProof, VerificationError> {
         match property {
             StabilityProperty::AsymptoticStability => self.verify_asymptotic_stability(),
@@ -730,14 +732,14 @@ impl Verifiable for LinearTimeInvariantSystem {
     }
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum StabilityProperty {
     AsymptoticStability,
     BoundedInputBoundedOutput,
     RobustStability,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct StabilityProof {
     pub property: StabilityProperty,
     pub proof: String,
@@ -748,35 +750,35 @@ impl LinearTimeInvariantSystem {
     fn verify_asymptotic_stability(&self) -> Result<StabilityProof, VerificationError> {
         let eigenvals = self.a.eigenvalues();
         let is_stable = eigenvals.iter().all(|&e| e.real() < 0.0);
-        
+
         let proof = if is_stable {
             "所有特征值都有负实部，系统渐近稳定".to_string()
         } else {
             "存在特征值有非负实部，系统不稳定".to_string()
         };
-        
+
         Ok(StabilityProof {
             property: StabilityProperty::AsymptoticStability,
             proof,
             verified: is_stable,
         })
     }
-    
+
     fn verify_bibo_stability(&self) -> Result<StabilityProof, VerificationError> {
         // BIBO稳定性验证
         let proof = "通过传递函数极点分析验证BIBO稳定性".to_string();
-        
+
         Ok(StabilityProof {
             property: StabilityProperty::BoundedInputBoundedOutput,
             proof,
             verified: true,
         })
     }
-    
+
     fn verify_robust_stability(&self) -> Result<StabilityProof, VerificationError> {
         // 鲁棒稳定性验证
         let proof = "通过李雅普诺夫函数验证鲁棒稳定性".to_string();
-        
+
         Ok(StabilityProof {
             property: StabilityProperty::RobustStability,
             proof,
@@ -841,4 +843,4 @@ graph TD
 2. Astrom, K. J., & Murray, R. M. (2008). Feedback systems: an introduction for scientists and engineers. Princeton University Press.
 3. Lewis, F. L., Vrabie, D., & Syrmos, V. L. (2012). Optimal control. John Wiley & Sons.
 4. Sontag, E. D. (1998). Mathematical control theory: deterministic finite dimensional systems. Springer.
-5. Hespanha, J. P. (2009). Linear systems theory. Princeton University Press. 
+5. Hespanha, J. P. (2009). Linear systems theory. Princeton University Press.

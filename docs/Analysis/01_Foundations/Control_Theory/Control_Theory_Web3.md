@@ -423,7 +423,7 @@ impl NetworkFlowController {
 - $u(t)$ 是控制输入（资源分配决策）
 - $Q$ 和 $R$ 是权重矩阵
 
-**算法 3.1 (LQR 资源分配)**
+**算法 3.1 (LQR 资源分配)**:
 
 ```rust
 pub struct ResourceAllocator {
@@ -729,7 +729,7 @@ impl AdaptiveConsensusController {
 
 ### 5.2 优化策略
 
-**算法 5.1 (性能优化)**
+**算法 5.1 (性能优化)**:
 
 ```rust
 pub struct PerformanceOptimizer {

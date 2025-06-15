@@ -55,6 +55,7 @@ $$\text{Security} = \text{Confidentiality} \land \text{Integrity} \land \text{Av
 $$\mathcal{L} = \{L_1, L_2, L_3, L_4, L_5\}$$
 
 其中：
+
 - $L_1$：数据层 (Data Layer)
 - $L_2$：网络层 (Network Layer)
 - $L_3$：共识层 (Consensus Layer)
@@ -843,4 +844,4 @@ pub struct ConsensusConfig {
 2. Buterin, V. (2014). Ethereum: A next-generation smart contract platform.
 3. Wood, G. (2016). Polkadot: Vision for a heterogeneous multi-chain framework.
 4. Jung, R., et al. (2021). RustBelt: Securing the foundations of the Rust programming language.
-5. Lamport, L. (2001). Paxos made simple. ACM SIGACT News, 32(4), 18-25. 
+5. Lamport, L. (2001). Paxos made simple. ACM SIGACT News, 32(4), 18-25.

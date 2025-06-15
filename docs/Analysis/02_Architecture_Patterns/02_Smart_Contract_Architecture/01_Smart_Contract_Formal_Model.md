@@ -995,4 +995,4 @@ impl ERC20Token {
 2. Wood, G. (2016). Ethereum: A secure decentralised generalised transaction ledger.
 3. Jung, R., et al. (2021). RustBelt: Securing the foundations of the Rust programming language.
 4. Lamport, L. (2001). Paxos made simple. ACM SIGACT News, 32(4), 18-25.
-5. Clarke, E. M., et al. (1999). Model checking. MIT press. 
+5. Clarke, E. M., et al. (1999). Model checking. MIT press.

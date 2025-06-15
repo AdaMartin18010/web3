@@ -340,6 +340,7 @@ C = S_0 N(d_1) - Ke^{-rT} N(d_2)
 ```
 
 其中：
+
 ```latex
 \begin{align}
 d_1 &= \frac{\ln(S_0/K) + (r + \sigma^2/2)T}{\sigma\sqrt{T}} \\
@@ -679,10 +680,10 @@ impl Governance {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Buterin, V. (2014). Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform.
 2. Adams, H., et al. (2021). Uniswap V3 Core.
 3. Leshner, R., & Hayes, G. (2019). Compound: The Money Market Protocol.
 4. Kao, T., et al. (2020). DeFi: The Future of Finance?
-5. Schär, F. (2021). Decentralized Finance: On Blockchain- and Smart Contract-Based Financial Markets. 
+5. Schär, F. (2021). Decentralized Finance: On Blockchain- and Smart Contract-Based Financial Markets.

@@ -731,10 +731,10 @@ impl DHT {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Stoica, I., et al. (2001). Chord: A Scalable Peer-to-peer Lookup Service for Internet Applications.
 2. Maymounkov, P., & Mazières, D. (2002). Kademlia: A Peer-to-peer Information System Based on the XOR Metric.
 3. Rowstron, A., & Druschel, P. (2001). Pastry: Scalable, Decentralized Object Location, and Routing for Large-Scale Peer-to-peer Systems.
 4. Benet, J. (2014). IPFS - Content Addressed, Versioned, P2P File System.
-5. Cohen, B. (2003). Incentives Build Robustness in BitTorrent. 
+5. Cohen, B. (2003). Incentives Build Robustness in BitTorrent.

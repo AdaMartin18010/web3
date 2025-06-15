@@ -636,10 +636,10 @@ impl<T: Verifiable> ModelChecker<T> {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Wood, G. (2014). Ethereum: A Secure Decentralised Generalised Transaction Ledger.
 2. Sergey, I., & Hobor, A. (2017). A Concurrent Perspective on Smart Contracts.
 3. Hildenbrandt, E., et al. (2018). KEVM: A Complete Formal Semantics of the Ethereum Virtual Machine.
 4. Luu, L., et al. (2016). Making Smart Contracts Smarter.
-5. Atzei, N., Bartoletti, M., & Cimoli, T. (2017). A Survey of Attacks on Ethereum Smart Contracts. 
+5. Atzei, N., Bartoletti, M., & Cimoli, T. (2017). A Survey of Attacks on Ethereum Smart Contracts.

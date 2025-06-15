@@ -448,7 +448,7 @@ impl ConsensusNode {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Lamport, L. (2001). Paxos made simple. ACM SIGACT News, 32(4), 18-25.
 2. Ongaro, D., & Ousterhout, J. (2014). In search of an understandable consensus algorithm. USENIX ATC, 305-319.

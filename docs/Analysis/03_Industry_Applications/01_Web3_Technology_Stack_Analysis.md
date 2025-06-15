@@ -730,7 +730,7 @@ Web3技术栈的未来发展方向：
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
 2. Benet, J. (2014). IPFS - Content Addressed, Versioned, P2P File System.

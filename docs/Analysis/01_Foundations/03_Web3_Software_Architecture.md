@@ -1025,4 +1025,4 @@ impl ParallelProcessor {
 5. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
 6. Lamport, L. (1998). The part-time parliament.
 7. Castro, M., & Liskov, B. (1999). Practical Byzantine fault tolerance.
-8. Ongaro, D., & Ousterhout, J. (2014). In search of an understandable consensus algorithm. 
+8. Ongaro, D., & Ousterhout, J. (2014). In search of an understandable consensus algorithm.

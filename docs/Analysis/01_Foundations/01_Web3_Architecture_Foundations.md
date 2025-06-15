@@ -345,6 +345,7 @@ Contract = (S, \Sigma, \delta, s_0, F)
 ```
 
 其中：
+
 - $S$ 是状态集合
 - $\Sigma$ 是输入字母表
 - $\delta: S \times \Sigma \rightarrow S$ 是状态转移函数
@@ -538,4 +539,4 @@ S_{abstract} \models \varphi \Rightarrow S_{concrete} \models \varphi
 
 ---
 
-*本文建立了Web3架构的完整理论框架，为Web3系统的设计、实现和验证提供了坚实的理论基础。* 
+*本文建立了Web3架构的完整理论框架，为Web3系统的设计、实现和验证提供了坚实的理论基础。*

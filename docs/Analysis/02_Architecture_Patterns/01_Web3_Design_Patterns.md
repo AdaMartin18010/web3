@@ -102,6 +102,7 @@ P_{performance} &= \text{性能优化模式}
 ```
 
 其中：
+
 - $S = \{\text{CLOSED}, \text{OPEN}, \text{HALF\_OPEN}\}$
 - $\Sigma = \{\text{success}, \text{failure}, \text{timeout}\}$
 - $\delta$ 是状态转移函数
@@ -136,6 +137,7 @@ P_{performance} &= \text{性能优化模式}
 ```
 
 其中：
+
 - $N$ 是节点集合
 - $T$ 是任期
 - $V$ 是投票机制
@@ -231,6 +233,7 @@ P(\text{selected}) = \frac{stake_i}{\sum_{j=1}^n stake_j}
 ```
 
 其中：
+
 - $S$ 是状态
 - $D$ 是数据
 - $V$ 是验证
@@ -625,4 +628,4 @@ P(\text{selected}) = \frac{stake_i}{\sum_{j=1}^n stake_j}
 
 ---
 
-*本文分析了Web3设计模式的理论基础、实现机制和最佳实践，为Web3系统的设计提供了全面的模式指导。* 
+*本文分析了Web3设计模式的理论基础、实现机制和最佳实践，为Web3系统的设计提供了全面的模式指导。*

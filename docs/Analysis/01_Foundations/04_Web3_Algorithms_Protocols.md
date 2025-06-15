@@ -1002,4 +1002,4 @@ impl AtomicSwap {
 5. Maymounkov, P., & Mazières, D. (2002). Kademlia: A peer-to-peer information system.
 6. Schnorr, C. P. (1991). Efficient signature generation by smart cards.
 7. Goldwasser, S., Micali, S., & Rackoff, C. (1989). The knowledge complexity of interactive proof systems.
-8. Herlihy, M. (1991). Wait-free synchronization. 
+8. Herlihy, M. (1991). Wait-free synchronization.

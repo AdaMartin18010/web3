@@ -334,21 +334,21 @@ impl VirtualMachine {
 
 1. **算术运算规则**：
 
-   ```
+   ```latex
    ⟨n₁, n₂, ADD⟩ → ⟨n₁ + n₂⟩
    ⟨n₁, n₂, MUL⟩ → ⟨n₁ × n₂⟩
    ```
 
 2. **存储操作规则**：
 
-   ```
+   ```latex
    ⟨addr, value, SSTORE⟩ → ⟨⟩ (更新存储)
    ⟨addr, SLOAD⟩ → ⟨value⟩ (读取存储)
    ```
 
 3. **控制流规则**：
 
-   ```
+   ```latex
    ⟨condition, JUMPI⟩ → ⟨⟩ (条件跳转)
    ⟨address, JUMP⟩ → ⟨⟩ (无条件跳转)
    ```

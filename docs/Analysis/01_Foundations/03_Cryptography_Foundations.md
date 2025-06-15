@@ -270,6 +270,7 @@ impl SchnorrSignature {
 **定理 4.1**（Schnorr协议的安全性）：Schnorr识别协议在离散对数假设下是安全的零知识证明系统。
 
 **证明**：
+
 1. **完备性**：如果证明者知道离散对数，则能够正确响应验证者的挑战
 2. **可靠性**：如果证明者不知道离散对数，则无法以不可忽略的概率通过验证
 3. **零知识性**：存在模拟器能够生成与真实交互不可区分的模拟交互
@@ -584,4 +585,4 @@ impl KeyPair {
 1. Menezes, A. J., Van Oorschot, P. C., & Vanstone, S. A. (1996). Handbook of applied cryptography.
 2. Schnorr, C. P. (1991). Efficient signature generation by smart cards.
 3. Goldwasser, S., Micali, S., & Rackoff, C. (1989). The knowledge complexity of interactive proof systems.
-4. Paillier, P. (1999). Public-key cryptosystems based on composite degree residuosity classes. 
+4. Paillier, P. (1999). Public-key cryptosystems based on composite degree residuosity classes.

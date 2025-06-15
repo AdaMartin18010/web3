@@ -667,4 +667,4 @@ impl EconomicMetrics {
 2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
 3. Wood, G. (2016). Polkadot: Vision for a heterogeneous multi-chain framework.
 4. EIP-1559: Fee market change for ETH 1.0 chain.
-5. DeFi Pulse Index: A digital asset index designed to track DeFi protocols. 
+5. DeFi Pulse Index: A digital asset index designed to track DeFi protocols.

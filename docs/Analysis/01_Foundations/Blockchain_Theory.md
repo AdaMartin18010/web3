@@ -261,15 +261,15 @@ impl BlockchainNode {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
 2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
 3. Back, A., et al. (2014). Enabling blockchain innovations with pegged sidechains.
 4. Poon, J., & Dryja, T. (2016). The bitcoin lightning network: Scalable off-chain instant payments.
 
-**相关文档**
+**相关文档**:
 
 - [共识机制形式化分析](./Consensus_Mechanisms.md)
 - [密码学基础与应用](./Cryptography_Foundations.md)
-- [分布式系统理论](./Distributed_Systems.md) 
+- [分布式系统理论](./Distributed_Systems.md)

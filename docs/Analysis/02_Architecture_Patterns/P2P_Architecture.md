@@ -84,11 +84,13 @@ $$\forall t \in [t_1, t_2], \frac{|V_t \cap V_{t-1}|}{|V_{t-1}|} \geq \alpha$$
 **定义 3.1**（非结构化P2P）：非结构化P2P网络的拓扑结构是随机的，节点连接没有特定的模式。
 
 **特点**：
+
 - 节点度分布近似泊松分布
 - 网络直径较大，通常 $O(\log n)$
 - 查找效率较低，需要泛洪或随机游走
 
 **泛洪算法**：
+
 ```rust
 pub struct FloodingSearch {
     max_hops: u32,
@@ -131,6 +133,7 @@ impl FloodingSearch {
 - 路由算法保证在 $O(\log n)$ 跳内找到目标
 
 **Kademlia DHT**：
+
 ```rust
 pub struct KademliaNode {
     node_id: NodeId,
@@ -190,6 +193,7 @@ impl KademliaNode {
 - 中心化组件：用于协调和索引
 
 **架构设计**：
+
 ```rust
 pub struct HybridP2PNetwork {
     supernodes: Vec<SuperNode>,
@@ -237,6 +241,7 @@ impl HybridP2PNetwork {
 $$R: N \times N \times M \to P$$
 
 其中：
+
 - $N$ 是节点集合
 - $M$ 是消息集合
 - $P$ 是路径集合
@@ -348,6 +353,7 @@ impl PastryNode {
 **定义 5.1**（节点发现）：节点发现是确定网络中其他节点位置的过程。
 
 **Bootstrap协议**：
+
 ```rust
 pub struct BootstrapProtocol {
     bootstrap_nodes: Vec<SocketAddr>,
@@ -393,6 +399,7 @@ impl BootstrapProtocol {
 ### 5.2 连接管理
 
 **连接池管理**：
+
 ```rust
 pub struct ConnectionPool {
     connections: HashMap<NodeId, Connection>,
@@ -446,6 +453,7 @@ impl ConnectionPool {
 **定义 6.1**（内容寻址）：内容寻址使用内容的哈希值作为标识符，而不是位置。
 
 **IPFS风格的内容寻址**：
+
 ```rust
 pub struct ContentAddressableStorage {
     block_store: BlockStore,
@@ -496,6 +504,7 @@ impl ContentAddressableStorage {
 ### 6.2 分布式哈希表存储
 
 **DHT存储实现**：
+
 ```rust
 pub struct DHTStorage {
     dht: KademliaDHT,
@@ -554,6 +563,7 @@ impl DHTStorage {
 4. **存储攻击**：恶意节点拒绝存储或篡改数据
 
 **Sybil攻击防护**：
+
 ```rust
 pub struct SybilProtection {
     proof_of_work: ProofOfWork,
@@ -587,6 +597,7 @@ impl SybilProtection {
 ### 7.2 隐私保护技术
 
 **匿名路由**：
+
 ```rust
 pub struct AnonymousRouting {
     onion_routing: OnionRouting,
@@ -634,6 +645,7 @@ impl AnonymousRouting {
 - **可扩展性**：网络规模增长时的性能变化
 
 **性能优化策略**：
+
 ```rust
 pub struct PerformanceOptimizer {
     caching: CacheManager,
@@ -662,6 +674,7 @@ impl PerformanceOptimizer {
 ### 8.2 可扩展性设计
 
 **分层架构**：
+
 ```rust
 pub struct LayeredP2PNetwork {
     layers: Vec<NetworkLayer>,
@@ -845,4 +858,4 @@ impl MessageHandler {
 
 **最后更新**: 2024-12-19
 **版本**: 1.0
-**作者**: AI Assistant 
+**作者**: AI Assistant

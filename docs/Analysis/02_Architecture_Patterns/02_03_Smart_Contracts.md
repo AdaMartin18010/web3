@@ -96,7 +96,7 @@ $$s_n = \delta(s_{n-1}, \sigma_n) \text{ 是安全的}$$
 
 智能合约采用分层架构：
 
-```
+```text
 应用层 (Application Layer)
     ↓
 业务逻辑层 (Business Logic Layer)

@@ -70,6 +70,7 @@
 ### 2.2 PBFT算法
 
 **算法 2.1** (PBFT算法)
+
 ```rust
 pub struct PBFT {
     view_number: u64,

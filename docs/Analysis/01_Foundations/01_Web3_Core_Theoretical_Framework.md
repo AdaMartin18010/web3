@@ -454,7 +454,7 @@ use std::collections::HashMap;
 use sha2::{Sha256, Digest};
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Web3System {
     nodes: HashMap<String, Node>,
     protocols: Vec<Protocol>,
@@ -475,11 +475,11 @@ impl Web3System {
             economy: EconomicModel::new(),
         }
     }
-    
+
     pub fn add_node(&mut self, node: Node) {
         self.nodes.insert(node.id.clone(), node);
     }
-    
+
     pub fn process_transaction(&mut self, tx: Transaction) -> Result<(), Error> {
         if self.validate_transaction(&tx)? {
             self.consensus.process_transaction(&tx)?;
@@ -490,32 +490,32 @@ impl Web3System {
             Err(Error::InvalidTransaction)
         }
     }
-    
+
     pub fn validate_transaction(&self, tx: &Transaction) -> Result<bool, Error> {
         // 实现交易验证逻辑
         Ok(true)
     }
-    
+
     pub fn get_decentralization_degree(&self) -> f64 {
         let weights: Vec<f64> = self.nodes.values()
             .map(|node| node.weight)
             .collect();
-        
+
         let sum_squares: f64 = weights.iter().map(|w| w * w).sum();
         let sum: f64 = weights.iter().sum();
-        
+
         1.0 - (sum_squares / (sum * sum))
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Node {
     pub id: String,
     pub weight: f64,
     pub state: NodeState,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Transaction {
     pub id: String,
     pub from: String,
@@ -524,7 +524,7 @@ pub struct Transaction {
     pub signature: String,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GlobalState {
     pub balances: HashMap<String, u64>,
     pub contracts: HashMap<String, SmartContract>,
@@ -537,21 +537,21 @@ impl GlobalState {
             contracts: HashMap::new(),
         }
     }
-    
+
     pub fn apply_transaction(&mut self, tx: &Transaction) -> Result<(), Error> {
         // 实现状态转换逻辑
         Ok(())
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SmartContract {
     pub address: String,
     pub code: Vec<u8>,
     pub state: HashMap<String, Vec<u8>>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ConsensusMechanism {
     PoW,
     PoS,
@@ -566,24 +566,24 @@ impl ConsensusMechanism {
             ConsensusMechanism::PBFT => self.process_pbft(tx),
         }
     }
-    
+
     fn process_pow(&self, tx: &Transaction) -> Result<(), Error> {
         // 实现PoW共识逻辑
         Ok(())
     }
-    
+
     fn process_pos(&self, tx: &Transaction) -> Result<(), Error> {
         // 实现PoS共识逻辑
         Ok(())
     }
-    
+
     fn process_pbft(&self, tx: &Transaction) -> Result<(), Error> {
         // 实现PBFT共识逻辑
         Ok(())
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EconomicModel {
     pub total_supply: u64,
     pub inflation_rate: f64,
@@ -600,28 +600,28 @@ impl EconomicModel {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum RewardFunction {
     Linear,
     Exponential,
     Logarithmic,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Error {
     InvalidTransaction,
     ConsensusFailure,
     StateError,
 }
 
-#[cfg(test)]
+# [cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_decentralization_degree() {
         let mut system = Web3System::new();
-        
+
         // 添加节点
         for i in 0..10 {
             let node = Node {
@@ -631,15 +631,15 @@ mod tests {
             };
             system.add_node(node);
         }
-        
+
         let degree = system.get_decentralization_degree();
         assert!(degree > 0.8); // 应该接近1.0
     }
-    
+
     #[test]
     fn test_transaction_processing() {
         let mut system = Web3System::new();
-        
+
         let tx = Transaction {
             id: "tx_1".to_string(),
             from: "alice".to_string(),
@@ -647,20 +647,20 @@ mod tests {
             value: 100,
             signature: "sig".to_string(),
         };
-        
+
         let result = system.process_transaction(tx);
         assert!(result.is_ok());
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum NodeState {
     Active,
     Inactive,
     Syncing,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Protocol {
     pub name: String,
     pub version: String,
@@ -698,4 +698,3 @@ pub struct Protocol {
 7. Ben-Sasson, E., et al. (2014). Zerocash: Decentralized anonymous payments from Bitcoin.
 8. Wood, G. (2016). Ethereum: A secure decentralised generalised transaction ledger.
 </rewritten_file>
-

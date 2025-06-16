@@ -1,9 +1,9 @@
-# Web3分布式系统架构：形式化分析与设计模式
+# Web3分布式系统架构：形式化分析与设计
 
 ## 目录
 
-1. [理论基础](#1-理论基础)
-2. [分布式系统形式化模型](#2-分布式系统形式化模型)
+1. [分布式系统基础](#1-分布式系统基础)
+2. [拜占庭容错理论](#2-拜占庭容错理论)
 3. [共识机制架构](#3-共识机制架构)
 4. [P2P网络架构](#4-p2p网络架构)
 5. [区块链存储架构](#5-区块链存储架构)
@@ -11,203 +11,304 @@
 7. [安全性分析](#7-安全性分析)
 8. [性能优化](#8-性能优化)
 9. [实现示例](#9-实现示例)
-10. [总结与展望](#10-总结与展望)
 
-## 1. 理论基础
+## 1. 分布式系统基础
 
-### 1.1 分布式系统定义
+### 1.1 系统模型
 
-**定义 1.1**（分布式系统）：一个分布式系统 $DS = (N, S, T, C)$ 由以下组件构成：
+**定义 1.1** (分布式系统)
+分布式系统是一个三元组 $\mathcal{DS} = (N, C, M)$，其中：
 
-- $N = \{n_1, n_2, \ldots, n_m\}$ 是节点集合
-- $S$ 是系统状态空间
-- $T: S \times E \rightarrow S$ 是状态转换函数
-- $C$ 是通信协议集合
+- $N = \{p_1, p_2, \ldots, p_n\}$ 是节点集合
+- $C \subseteq N \times N$ 是通信关系
+- $M$ 是消息传递机制
 
-**定义 1.2**（Web3分布式系统）：Web3分布式系统是满足以下性质的分布式系统：
+**定义 1.2** (异步系统)
+异步分布式系统中：
 
-1. **去中心化**：$\forall n \in N, \nexists n' \in N$ 使得 $n'$ 控制 $n$
-2. **不可篡改性**：一旦状态 $s \in S$ 被确认，则 $\forall t > t_{confirm}, s$ 保持不变
-3. **透明性**：$\forall s \in S, \forall n \in N$，节点 $n$ 可以验证状态 $s$ 的有效性
-4. **容错性**：系统在最多 $f$ 个拜占庭节点存在时仍能正常工作
+- 消息传递延迟无界但有限
+- 节点处理时间无界但有限
+- 不存在全局时钟
 
-### 1.2 拜占庭容错理论
+**定理 1.1** (FLP不可能性)
+在异步系统中，即使只有一个节点崩溃，也无法实现确定性共识。
 
-**定义 1.3**（拜占庭节点）：节点 $n \in N$ 是拜占庭节点，当且仅当：
+**证明**：通过构造性证明，假设存在确定性共识算法，可以构造执行序列导致无限延迟，违反终止性。■
 
-- $n$ 可能发送矛盾消息
-- $n$ 可能不按协议执行
-- $n$ 可能与其他拜占庭节点合谋
+### 1.2 故障模型
 
-**定理 1.1**（拜占庭容错下限）：在同步网络中，要达成拜占庭共识，至少需要 $3f + 1$ 个节点，其中 $f$ 是拜占庭节点数量。
+**定义 1.3** (故障类型)
+节点故障类型：
 
-**证明**：假设只有 $3f$ 个节点，其中 $f$ 个是拜占庭节点。当所有拜占庭节点发送消息 $A$，而诚实节点发送消息 $B$ 时：
+- **崩溃故障**：节点停止工作
+- **拜占庭故障**：节点任意行为
+- **遗漏故障**：节点遗漏某些操作
 
-- 每个诚实节点收到 $f$ 个 $A$ 消息和 $2f-1$ 个 $B$ 消息
-- 由于 $f > 2f-1$，诚实节点无法区分哪个是正确消息
-- 因此无法达成共识
+**定理 1.2** (故障边界)
+在 $n$ 个节点的系统中，最多可以容忍 $f$ 个故障节点：
 
-## 2. 分布式系统形式化模型
+- 崩溃故障：$f < n$
+- 拜占庭故障：$f < n/3$
+- 遗漏故障：$f < n/2$
 
-### 2.1 状态机复制
+## 2. 拜占庭容错理论
 
-**定义 2.1**（状态机复制）：给定确定性状态机 $M = (S, \Sigma, \delta, s_0)$，状态机复制系统 $SMR = (N, M, C)$ 满足：
+### 2.1 拜占庭共识
 
-$$\forall n_i, n_j \in N, \forall \sigma \in \Sigma^*: \delta^*(s_0, \sigma) = \delta^*(s_0, \sigma)$$
+**定义 2.1** (拜占庭共识)
+拜占庭共识问题要求所有正确节点就某个值达成一致，满足：
 
-其中 $\delta^*$ 是状态转换函数的扩展。
+- **一致性**：所有正确节点决定相同值
+- **有效性**：如果所有正确节点提议相同值，则决定该值
+- **终止性**：所有正确节点最终做出决定
 
-**定理 2.1**（状态机复制正确性）：如果所有节点以相同顺序执行相同输入序列，则所有节点最终达到相同状态。
+**定理 2.1** (拜占庭容错下限)
+在同步网络中，要容忍 $f$ 个拜占庭故障，系统至少需要 $3f + 1$ 个节点。
 
-### 2.2 事件排序
+**证明**：如果 $n \leq 3f$，拜占庭节点可能通过发送矛盾消息，使得诚实节点无法达成一致。■
 
-**定义 2.2**（因果序）：事件 $e_1$ 因果先于事件 $e_2$（记作 $e_1 \rightarrow e_2$），当且仅当：
+### 2.2 PBFT算法
 
-1. $e_1$ 和 $e_2$ 在同一节点，且 $e_1$ 在 $e_2$ 之前发生
-2. $e_1$ 是发送事件，$e_2$ 是对应的接收事件
-3. 存在事件 $e_3$ 使得 $e_1 \rightarrow e_3$ 且 $e_3 \rightarrow e_2$
+**算法 2.1** (PBFT算法)
+```rust
+pub struct PBFT {
+    view_number: u64,
+    sequence_number: u64,
+    primary: NodeId,
+    replicas: Vec<NodeId>,
+    state: ReplicaState,
+}
 
-**定义 2.3**（全序广播）：全序广播协议确保所有节点以相同顺序传递所有消息。
+impl PBFT {
+    pub async fn propose(&mut self, request: Request) -> Result<(), ConsensusError> {
+        if self.is_primary() {
+            self.broadcast_pre_prepare(request).await?;
+        }
+        Ok(())
+    }
+    
+    async fn broadcast_pre_prepare(&self, request: Request) -> Result<(), ConsensusError> {
+        let message = PrePrepareMessage {
+            view: self.view_number,
+            sequence: self.sequence_number,
+            request,
+            digest: self.compute_digest(&request),
+        };
+        
+        self.broadcast_to_replicas(message).await
+    }
+    
+    pub async fn handle_pre_prepare(&mut self, msg: PrePrepareMessage) -> Result<(), ConsensusError> {
+        if self.verify_pre_prepare(&msg) {
+            self.broadcast_prepare(msg).await?;
+        }
+        Ok(())
+    }
+    
+    pub async fn handle_prepare(&mut self, msg: PrepareMessage) -> Result<(), ConsensusError> {
+        if self.collected_prepare_quorum(&msg) {
+            self.broadcast_commit(msg).await?;
+        }
+        Ok(())
+    }
+    
+    pub async fn handle_commit(&mut self, msg: CommitMessage) -> Result<(), ConsensusError> {
+        if self.collected_commit_quorum(&msg) {
+            self.execute_request(&msg.request).await?;
+        }
+        Ok(())
+    }
+}
+```
 
 ## 3. 共识机制架构
 
-### 3.1 工作量证明（PoW）
+### 3.1 共识层次结构
 
-**定义 3.1**（工作量证明）：给定数据 $D$ 和目标难度 $T$，工作量证明是找到一个随机数 $nonce$ 使得：
+**定义 3.1** (共识层次)
+共识机制分为三个层次：
 
-$$H(D \| nonce) < T$$
-
-其中 $H$ 是密码学哈希函数。
-
-**定理 3.1**（PoW安全性）：假设哈希函数 $H$ 是随机预言机，则攻击者成功执行双花攻击的概率为：
-
-$$P(\text{double-spend}) \leq \left(\frac{q}{p}\right)^k$$
-
-其中 $p$ 是诚实节点算力比例，$q = 1-p$，$k$ 是确认区块数。
-
-**证明**：这可以建模为随机游走过程。设 $Z_t$ 为攻击者链与诚实链的长度差，则：
-
-$$E[Z_{t+1} - Z_t] = q - p < 0$$
-
-应用随机游走理论，攻击者赶上诚实链的概率为 $\left(\frac{q}{p}\right)^k$。
-
-### 3.2 权益证明（PoS）
-
-**定义 3.2**（权益证明）：权益证明系统 $PoS = (V, S, \pi)$ 其中：
-
-- $V$ 是验证者集合
-- $S: V \rightarrow \mathbb{R}^+$ 是质押函数
-- $\pi: V \times \mathbb{N} \rightarrow [0,1]$ 是选择概率函数
-
-**定理 3.2**（PoS经济安全性）：如果攻击者控制的质押比例小于 $\frac{1}{3}$，则系统在经济上安全。
-
-### 3.3 实用拜占庭容错（PBFT）
-
-**定义 3.3**（PBFT系统）：PBFT系统 $PBFT = (N, f, \text{view}, \text{sequence})$ 其中：
-
-- $|N| = 3f + 1$
-- 最多 $f$ 个拜占庭节点
-- $\text{view}$ 是当前视图编号
-- $\text{sequence}$ 是序列号
-
-**算法 3.1**（PBFT共识）：
+1. **网络层**：消息传递和节点发现
+2. **共识层**：状态机复制和一致性保证
+3. **应用层**：业务逻辑和状态管理
 
 ```rust
-pub struct PBFTNode {
-    node_id: NodeId,
-    view_number: u64,
-    sequence_number: u64,
-    prepared: HashMap<u64, PreparedCertificate>,
-    committed: HashMap<u64, CommittedCertificate>,
-    checkpoint_sequence: u64,
-    stable_checkpoint: u64,
+pub trait ConsensusLayer {
+    async fn propose(&mut self, value: Vec<u8>) -> Result<(), ConsensusError>;
+    async fn decide(&mut self) -> Result<Vec<u8>, ConsensusError>;
+    async fn view_change(&mut self) -> Result<(), ConsensusError>;
 }
 
-impl PBFTNode {
-    pub async fn propose(&mut self, request: Request) -> Result<(), PBFTError> {
-        self.sequence_number += 1;
+pub struct ConsensusEngine {
+    network: NetworkLayer,
+    consensus: Box<dyn ConsensusLayer>,
+    application: ApplicationLayer,
+}
+
+impl ConsensusEngine {
+    pub async fn run(&mut self) -> Result<(), ConsensusError> {
+        loop {
+            let message = self.network.receive().await?;
+            
+            match message {
+                Message::Propose(value) => {
+                    self.consensus.propose(value).await?;
+                }
+                Message::Decide(value) => {
+                    self.application.apply(value).await?;
+                }
+                Message::ViewChange => {
+                    self.consensus.view_change().await?;
+                }
+            }
+        }
+    }
+}
+```
+
+### 3.2 混合共识
+
+**定义 3.2** (混合共识)
+混合共识结合多种共识机制的优势：
+
+$$\text{Hybrid} = \alpha \cdot \text{PoW} + \beta \cdot \text{PoS} + \gamma \cdot \text{BFT}$$
+
+其中 $\alpha + \beta + \gamma = 1$。
+
+```rust
+pub struct HybridConsensus {
+    pow_weight: f64,
+    pos_weight: f64,
+    bft_weight: f64,
+    pow_engine: ProofOfWork,
+    pos_engine: ProofOfStake,
+    bft_engine: PBFT,
+}
+
+impl HybridConsensus {
+    pub async fn propose_block(&mut self, transactions: Vec<Transaction>) -> Result<Block, ConsensusError> {
+        let mut block = Block::new(transactions);
         
-        // 1. Pre-prepare阶段
-        let pre_prepare = PrePrepare {
-            view: self.view_number,
-            sequence: self.sequence_number,
-            request: request.clone(),
-        };
+        // PoW阶段
+        if self.pow_weight > 0.0 {
+            block = self.pow_engine.mine(block).await?;
+        }
         
-        self.broadcast(Message::PrePrepare(pre_prepare)).await?;
+        // PoS阶段
+        if self.pos_weight > 0.0 {
+            block = self.pos_engine.validate(block).await?;
+        }
         
-        // 2. Prepare阶段
-        self.collect_prepare_messages(request).await?;
+        // BFT阶段
+        if self.bft_weight > 0.0 {
+            block = self.bft_engine.finalize(block).await?;
+        }
         
-        // 3. Commit阶段
-        self.collect_commit_messages(request).await?;
-        
-        // 4. Reply阶段
-        self.execute_and_reply(request).await?;
-        
-        Ok(())
+        Ok(block)
     }
 }
 ```
 
 ## 4. P2P网络架构
 
-### 4.1 网络拓扑
+### 4.1 Kademlia DHT
 
-**定义 4.1**（P2P网络）：P2P网络 $P2P = (N, E, \text{protocol})$ 其中：
+**定义 4.1** (Kademlia DHT)
+Kademlia DHT是一个分布式哈希表，使用XOR距离度量：
 
-- $N$ 是节点集合
-- $E \subseteq N \times N$ 是连接关系
-- $\text{protocol}$ 是通信协议
+$$d(x, y) = x \oplus y$$
 
-**定义 4.2**（DHT网络）：分布式哈希表 $DHT = (N, K, \text{hash}, \text{routing})$ 其中：
+**定理 4.1** (Kademlia路由复杂度)
+Kademlia DHT的查找复杂度为 $O(\log n)$。
 
-- $K$ 是键空间
-- $\text{hash}: K \rightarrow N$ 是哈希函数
-- $\text{routing}$ 是路由算法
-
-### 4.2 Kademlia DHT
-
-**算法 4.1**（Kademlia路由）：
+**证明**：每次路由步骤都能将搜索空间减少一半，因此查找复杂度为 $O(\log n)$。■
 
 ```rust
 pub struct KademliaNode {
     node_id: NodeId,
     k_buckets: Vec<KBucket>,
-    routing_table: RoutingTable,
+    routing_table: HashMap<NodeId, NodeInfo>,
 }
 
 impl KademliaNode {
-    pub async fn find_node(&self, target: NodeId) -> Result<Vec<NodeInfo>, DHTError> {
-        let mut closest_nodes = self.routing_table.find_closest(target, 20);
+    pub async fn find_node(&self, target: NodeId) -> Result<Vec<NodeInfo>, NetworkError> {
+        let mut closest_nodes = self.get_closest_nodes(target, 20);
         let mut queried = HashSet::new();
         let mut found = HashSet::new();
         
-        while !closest_nodes.is_empty() && found.len() < 20 {
-            let batch = closest_nodes.iter()
-                .take(8)
-                .filter(|n| !queried.contains(&n.node_id))
-                .cloned()
-                .collect::<Vec<_>>();
+        while !closest_nodes.is_empty() {
+            let node = closest_nodes.pop().unwrap();
             
-            for node in &batch {
-                queried.insert(node.node_id);
-                
-                match self.send_find_node(*node, target).await {
-                    Ok(nodes) => {
-                        found.extend(nodes);
-                        closest_nodes.extend(nodes);
-                    }
-                    Err(_) => continue,
+            if queried.contains(&node.id) {
+                continue;
+            }
+            
+            queried.insert(node.id);
+            
+            // 发送FIND_NODE请求
+            let response = self.send_find_node(node.id, target).await?;
+            
+            for new_node in response.nodes {
+                if !found.contains(&new_node.id) {
+                    found.insert(new_node.id);
+                    closest_nodes.push(new_node);
                 }
             }
             
+            // 保持k个最接近的节点
             closest_nodes.sort_by(|a, b| {
-                (a.node_id ^ target).cmp(&(b.node_id ^ target))
+                (a.id ^ target).cmp(&(b.id ^ target))
             });
+            closest_nodes.truncate(20);
         }
         
-        Ok(found.into_iter().take(20).collect())
+        Ok(closest_nodes.into_iter().collect())
+    }
+}
+```
+
+### 4.2 网络拓扑
+
+**定义 4.3** (网络拓扑)
+P2P网络拓扑结构：
+
+1. **随机图**：节点随机连接
+2. **小世界网络**：高聚类系数，低平均路径长度
+3. **无标度网络**：节点度数分布遵循幂律
+
+```rust
+pub struct NetworkTopology {
+    nodes: HashMap<NodeId, NodeInfo>,
+    connections: HashMap<NodeId, Vec<NodeId>>,
+    topology_type: TopologyType,
+}
+
+impl NetworkTopology {
+    pub fn build_small_world(&mut self, k: usize, p: f64) {
+        // 构建环形网络
+        self.build_ring(k);
+        
+        // 随机重连
+        for node_id in self.nodes.keys() {
+            for neighbor in &self.connections[node_id] {
+                if rand::random::<f64>() < p {
+                    let new_neighbor = self.select_random_node();
+                    self.rewire_connection(*node_id, *neighbor, new_neighbor);
+                }
+            }
+        }
+    }
+    
+    pub fn build_scale_free(&mut self, m: usize) {
+        // 优先连接模型
+        for i in 0..self.nodes.len() {
+            let node_id = NodeId::new(i as u64);
+            let connections = self.select_nodes_by_degree(m);
+            
+            for target in connections {
+                self.add_connection(node_id, target);
+            }
+        }
     }
 }
 ```
@@ -216,174 +317,291 @@ impl KademliaNode {
 
 ### 5.1 默克尔树
 
-**定义 5.1**（默克尔树）：给定数据块 $D = \{d_1, d_2, \ldots, d_n\}$，默克尔树 $MT = (V, E, h)$ 其中：
+**定义 5.1** (默克尔树)
+默克尔树是一个二叉树，每个内部节点的值是其子节点值的哈希：
 
-- $V$ 是节点集合
-- $E$ 是边集合
-- $h$ 是哈希函数
+$$H(v) = H(H(v_{left}) \| H(v_{right}))$$
 
-**定理 5.1**（默克尔树包含证明）：对于任意数据块 $d_i$，存在大小为 $O(\log n)$ 的包含证明。
+**定理 5.1** (默克尔树包含证明)
+对于默克尔树中的任意叶子节点，存在大小为 $O(\log n)$ 的包含证明。
+
+```rust
+pub struct MerkleTree {
+    root: Hash,
+    leaves: Vec<Hash>,
+    tree: Vec<Vec<Hash>>,
+}
+
+impl MerkleTree {
+    pub fn new(leaves: Vec<Hash>) -> Self {
+        let mut tree = vec![leaves.clone()];
+        
+        while tree.last().unwrap().len() > 1 {
+            let level = tree.last().unwrap();
+            let mut next_level = Vec::new();
+            
+            for chunk in level.chunks(2) {
+                let hash = if chunk.len() == 2 {
+                    Self::hash_pair(&chunk[0], &chunk[1])
+                } else {
+                    chunk[0]
+                };
+                next_level.push(hash);
+            }
+            
+            tree.push(next_level);
+        }
+        
+        let root = tree.last().unwrap()[0];
+        
+        Self { root, leaves, tree }
+    }
+    
+    pub fn generate_proof(&self, index: usize) -> MerkleProof {
+        let mut proof = Vec::new();
+        let mut current_index = index;
+        
+        for level in &self.tree[..self.tree.len()-1] {
+            let sibling_index = if current_index % 2 == 0 {
+                current_index + 1
+            } else {
+                current_index - 1
+            };
+            
+            if sibling_index < level.len() {
+                proof.push(level[sibling_index]);
+            }
+            
+            current_index /= 2;
+        }
+        
+        MerkleProof { proof, index }
+    }
+    
+    pub fn verify_proof(&self, leaf: Hash, proof: &MerkleProof) -> bool {
+        let mut current_hash = leaf;
+        let mut current_index = proof.index;
+        
+        for sibling in &proof.proof {
+            current_hash = if current_index % 2 == 0 {
+                Self::hash_pair(&current_hash, sibling)
+            } else {
+                Self::hash_pair(sibling, &current_hash)
+            };
+            current_index /= 2;
+        }
+        
+        current_hash == self.root
+    }
+}
+```
 
 ### 5.2 状态存储
 
-**定义 5.2**（状态树）：状态树 $ST = (S, \Delta, \text{root})$ 其中：
-
-- $S$ 是状态空间
-- $\Delta: S \times T \rightarrow S$ 是状态转换函数
-- $\text{root}$ 是当前状态根
+**定义 5.2** (状态树)
+状态树存储账户状态，使用Patricia Merkle树：
 
 ```rust
 pub struct StateTree {
-    root: Hash,
-    storage: Box<dyn StateStorage>,
+    root: Node,
+    db: Database,
 }
 
 impl StateTree {
-    pub fn update(&mut self, key: &[u8], value: &[u8]) -> Result<Hash, StorageError> {
-        let path = self.get_path(key);
-        let mut current = self.root;
-        
-        for (depth, direction) in path.iter().enumerate() {
-            let node = self.storage.get_node(current)?;
-            let new_node = match direction {
-                Direction::Left => {
-                    let left_child = self.create_or_update_node(
-                        depth + 1,
-                        key,
-                        value,
-                        &path[depth + 1..]
-                    )?;
-                    Node::new(left_child, node.right_child)
+    pub fn get(&self, key: &[u8]) -> Option<Vec<u8>> {
+        self.get_node(&self.root, key, 0)
+    }
+    
+    pub fn put(&mut self, key: &[u8], value: &[u8]) {
+        self.root = self.put_node(self.root.clone(), key, value, 0);
+    }
+    
+    fn get_node(&self, node: &Node, key: &[u8], depth: usize) -> Option<Vec<u8>> {
+        match node {
+            Node::Leaf(leaf_key, leaf_value) => {
+                if leaf_key == key {
+                    Some(leaf_value.clone())
+                } else {
+                    None
                 }
-                Direction::Right => {
-                    let right_child = self.create_or_update_node(
-                        depth + 1,
-                        key,
-                        value,
-                        &path[depth + 1..]
-                    )?;
-                    Node::new(node.left_child, right_child)
+            }
+            Node::Branch(children) => {
+                if depth >= key.len() * 8 {
+                    return None;
                 }
-            };
-            
-            current = self.storage.put_node(new_node)?;
+                
+                let nibble = (key[depth / 8] >> (4 - (depth % 8))) & 0xF;
+                if let Some(child) = &children[nibble as usize] {
+                    self.get_node(child, key, depth + 4)
+                } else {
+                    None
+                }
+            }
+            Node::Extension(prefix, child) => {
+                if key.starts_with(prefix) {
+                    self.get_node(child, &key[prefix.len()..], depth + prefix.len() * 8)
+                } else {
+                    None
+                }
+            }
         }
-        
-        self.root = current;
-        Ok(current)
     }
 }
 ```
 
 ## 6. 智能合约架构
 
-### 6.1 合约执行模型
+### 6.1 虚拟机架构
 
-**定义 6.1**（智能合约）：智能合约 $SC = (S, I, O, \delta)$ 其中：
+**定义 6.1** (智能合约虚拟机)
+智能合约虚拟机是一个四元组 $\mathcal{VM} = (S, I, O, \delta)$，其中：
 
-- $S$ 是合约状态空间
-- $I$ 是输入空间
-- $O$ 是输出空间
-- $\delta: S \times I \rightarrow S \times O$ 是执行函数
-
-**定理 6.1**（合约确定性）：如果所有节点以相同顺序执行相同交易，则合约状态转换是确定性的。
-
-### 6.2 虚拟机架构
+- $S$ 是状态空间
+- $I$ 是输入集合
+- $O$ 是输出集合
+- $\delta: S \times I \rightarrow S \times O$ 是状态转换函数
 
 ```rust
 pub struct WebAssemblyVM {
     memory: Memory,
     stack: Vec<Value>,
     locals: Vec<Value>,
-    globals: Vec<Value>,
-    functions: Vec<Function>,
-    current_function: Option<usize>,
-    program_counter: usize,
+    functions: HashMap<u32, Function>,
 }
 
 impl WebAssemblyVM {
-    pub fn execute(&mut self, function_index: usize, args: Vec<Value>) -> Result<Vec<Value>, VMError> {
-        self.current_function = Some(function_index);
-        self.stack.extend(args);
-        self.program_counter = 0;
+    pub fn execute(&mut self, function_index: u32, args: Vec<Value>) -> Result<Vec<Value>, VMError> {
+        let function = self.functions.get(&function_index)
+            .ok_or(VMError::FunctionNotFound)?;
         
-        while self.program_counter < self.functions[function_index].code.len() {
-            let instruction = &self.functions[function_index].code[self.program_counter];
+        // 设置参数
+        self.locals = args;
+        
+        // 执行指令
+        for instruction in &function.code {
             self.execute_instruction(instruction)?;
-            self.program_counter += 1;
         }
         
-        let result = self.stack.split_off(self.stack.len() - self.functions[function_index].return_count);
-        Ok(result)
+        // 返回结果
+        let result_count = function.result_types.len();
+        let results: Vec<Value> = self.stack.drain(self.stack.len() - result_count..).collect();
+        
+        Ok(results)
     }
     
     fn execute_instruction(&mut self, instruction: &Instruction) -> Result<(), VMError> {
         match instruction {
+            Instruction::I32Const(value) => {
+                self.stack.push(Value::I32(*value));
+            }
             Instruction::I32Add => {
                 let b = self.stack.pop().unwrap();
                 let a = self.stack.pop().unwrap();
-                self.stack.push(Value::I32(a.as_i32() + b.as_i32()));
+                let result = a.as_i32() + b.as_i32();
+                self.stack.push(Value::I32(result));
             }
-            Instruction::I32Store { offset } => {
-                let value = self.stack.pop().unwrap();
-                let address = self.stack.pop().unwrap();
-                self.memory.store_i32(address.as_i32() + offset, value.as_i32())?;
+            Instruction::Call(function_index) => {
+                let args = self.collect_args(*function_index)?;
+                let results = self.execute(*function_index, args)?;
+                self.stack.extend(results);
             }
-            // ... 其他指令
+            // 其他指令...
         }
         Ok(())
     }
 }
 ```
 
-## 7. 安全性分析
-
-### 7.1 密码学基础
-
-**定义 7.1**（数字签名）：数字签名方案 $DS = (\text{Gen}, \text{Sign}, \text{Verify})$ 满足：
-
-$$\forall m, \text{Verify}(\text{pk}, m, \text{Sign}(\text{sk}, m)) = \text{true}$$
-
-**定理 7.1**（ECDSA安全性）：在椭圆曲线离散对数假设下，ECDSA是存在性不可伪造的。
-
-### 7.2 零知识证明
-
-**定义 7.2**（零知识证明）：对于语言 $L$，零知识证明系统 $ZKP = (P, V)$ 满足：
-
-1. **完备性**：$\forall x \in L, \Pr[V(x, P(x)) = 1] = 1$
-2. **可靠性**：$\forall x \notin L, \forall P^*, \Pr[V(x, P^*(x)) = 1] \leq \text{neg}(|x|)$
-3. **零知识性**：$\forall V^*, \exists S^*$ 使得 $\text{View}_{V^*}(P(x)) \approx S^*(x)$
+### 6.2 合约执行引擎
 
 ```rust
-pub struct ZKProof {
-    commitment: Commitment,
-    challenge: Challenge,
-    response: Response,
+pub struct ContractEngine {
+    vm: WebAssemblyVM,
+    gas_meter: GasMeter,
+    storage: ContractStorage,
 }
 
-impl ZKProof {
-    pub fn prove(&self, witness: &Witness, statement: &Statement) -> Result<ZKProof, ZKError> {
-        // 1. 承诺阶段
-        let commitment = self.commit(witness)?;
+impl ContractEngine {
+    pub async fn execute_contract(
+        &mut self,
+        contract_address: Address,
+        method: String,
+        args: Vec<Value>,
+        gas_limit: u64,
+    ) -> Result<ExecutionResult, ContractError> {
+        self.gas_meter.set_limit(gas_limit);
         
-        // 2. 挑战阶段
-        let challenge = self.generate_challenge(&commitment)?;
+        // 加载合约代码
+        let code = self.storage.get_code(contract_address)?;
+        self.vm.load_module(&code)?;
         
-        // 3. 响应阶段
-        let response = self.respond(witness, &challenge)?;
+        // 查找方法
+        let function_index = self.vm.find_function(&method)?;
         
-        Ok(ZKProof {
-            commitment,
-            challenge,
-            response,
+        // 执行合约
+        let start_gas = self.gas_meter.remaining();
+        let result = self.vm.execute(function_index, args)?;
+        let gas_used = start_gas - self.gas_meter.remaining();
+        
+        Ok(ExecutionResult {
+            result,
+            gas_used,
+            logs: self.vm.get_logs(),
         })
     }
+}
+```
+
+## 7. 安全性分析
+
+### 7.1 攻击模型
+
+**定义 7.1** (攻击者模型)
+攻击者模型是一个三元组 $\mathcal{A} = (P, R, C)$，其中：
+
+- $P$ 是攻击者能力
+- $R$ 是攻击者资源
+- $C$ 是攻击者约束
+
+**定理 7.1** (51%攻击概率)
+在PoW系统中，攻击者控制算力比例 $q$ 时，攻击成功概率为：
+
+$$P_{success} = \left(\frac{q}{1-q}\right)^z$$
+
+其中 $z$ 是确认区块数。
+
+### 7.2 安全证明
+
+**定义 7.2** (安全证明)
+安全证明是形式化验证系统满足安全属性的过程。
+
+```rust
+pub struct SecurityVerifier {
+    invariants: Vec<Invariant>,
+    model_checker: ModelChecker,
+}
+
+impl SecurityVerifier {
+    pub fn verify_system(&self, system: &DistributedSystem) -> Result<(), SecurityError> {
+        for invariant in &self.invariants {
+            if !self.model_checker.check_invariant(system, invariant)? {
+                return Err(SecurityError::InvariantViolation);
+            }
+        }
+        Ok(())
+    }
     
-    pub fn verify(&self, statement: &Statement) -> Result<bool, ZKError> {
-        // 验证证明的有效性
-        self.verify_commitment(&self.commitment)?;
-        self.verify_response(&self.response, &self.challenge, statement)?;
-        Ok(true)
+    pub fn verify_consensus(&self, consensus: &ConsensusProtocol) -> Result<(), SecurityError> {
+        // 验证一致性
+        self.verify_consistency(consensus)?;
+        
+        // 验证有效性
+        self.verify_validity(consensus)?;
+        
+        // 验证终止性
+        self.verify_termination(consensus)?;
+        
+        Ok(())
     }
 }
 ```
@@ -392,40 +610,75 @@ impl ZKProof {
 
 ### 8.1 并行处理
 
-**定理 8.1**（并行处理加速比）：对于可并行化比例 $p$ 的任务，最大加速比为：
+```rust
+pub struct ParallelProcessor {
+    workers: Vec<JoinHandle<()>>,
+    task_queue: Arc<Mutex<VecDeque<Task>>>,
+    result_queue: Arc<Mutex<VecDeque<Result>>>,
+}
 
-$$S = \frac{1}{1-p + \frac{p}{n}}$$
-
-其中 $n$ 是处理器数量。
+impl ParallelProcessor {
+    pub fn new(worker_count: usize) -> Self {
+        let task_queue = Arc::new(Mutex::new(VecDeque::new()));
+        let result_queue = Arc::new(Mutex::new(VecDeque::new()));
+        let mut workers = Vec::new();
+        
+        for _ in 0..worker_count {
+            let task_queue = task_queue.clone();
+            let result_queue = result_queue.clone();
+            
+            let worker = tokio::spawn(async move {
+                loop {
+                    let task = {
+                        let mut queue = task_queue.lock().await;
+                        queue.pop_front()
+                    };
+                    
+                    if let Some(task) = task {
+                        let result = Self::process_task(task).await;
+                        
+                        let mut result_queue = result_queue.lock().await;
+                        result_queue.push_back(result);
+                    } else {
+                        tokio::time::sleep(Duration::from_millis(10)).await;
+                    }
+                }
+            });
+            
+            workers.push(worker);
+        }
+        
+        Self { workers, task_queue, result_queue }
+    }
+}
+```
 
 ### 8.2 缓存优化
 
 ```rust
-pub struct CacheOptimizedBlockchain {
-    hot_cache: LruCache<BlockHash, Block>,
-    warm_cache: LruCache<BlockHash, Block>,
-    cold_storage: Box<dyn Storage>,
+pub struct CacheManager {
+    l1_cache: LruCache<String, Vec<u8>>,
+    l2_cache: LruCache<String, Vec<u8>>,
+    storage: Database,
 }
 
-impl CacheOptimizedBlockchain {
-    pub fn get_block(&mut self, hash: &BlockHash) -> Result<Option<Block>, StorageError> {
-        // 1. 检查热缓存
-        if let Some(block) = self.hot_cache.get(hash) {
-            return Ok(Some(block.clone()));
+impl CacheManager {
+    pub async fn get(&mut self, key: &str) -> Result<Option<Vec<u8>>, StorageError> {
+        // 检查L1缓存
+        if let Some(value) = self.l1_cache.get(key) {
+            return Ok(Some(value.clone()));
         }
         
-        // 2. 检查温缓存
-        if let Some(block) = self.warm_cache.get(hash) {
-            // 提升到热缓存
-            self.hot_cache.put(*hash, block.clone());
-            return Ok(Some(block));
+        // 检查L2缓存
+        if let Some(value) = self.l2_cache.get(key) {
+            self.l1_cache.put(key.to_string(), value.clone());
+            return Ok(Some(value));
         }
         
-        // 3. 从冷存储加载
-        if let Some(block) = self.cold_storage.get_block(hash)? {
-            // 放入温缓存
-            self.warm_cache.put(*hash, block.clone());
-            return Ok(Some(block));
+        // 从存储加载
+        if let Some(value) = self.storage.get(key).await? {
+            self.l2_cache.put(key.to_string(), value.clone());
+            return Ok(Some(value));
         }
         
         Ok(None)
@@ -435,170 +688,64 @@ impl CacheOptimizedBlockchain {
 
 ## 9. 实现示例
 
-### 9.1 完整区块链节点
+### 9.1 完整系统架构
 
 ```rust
-pub struct BlockchainNode {
-    config: NodeConfig,
-    blockchain: Blockchain,
+pub struct Web3Node {
     network: P2PNetwork,
-    consensus: Box<dyn Consensus>,
-    mempool: TransactionPool,
-    wallet: Wallet,
-    api_server: ApiServer,
+    consensus: ConsensusEngine,
+    storage: BlockchainStorage,
+    contracts: ContractEngine,
+    metrics: MetricsCollector,
 }
 
-impl BlockchainNode {
-    pub async fn new(config: NodeConfig) -> Result<Self, NodeError> {
-        let blockchain = Blockchain::new(config.blockchain_path)?;
-        let network = P2PNetwork::new(config.network_config).await?;
-        let consensus = Self::create_consensus(&config)?;
-        let mempool = TransactionPool::new(config.mempool_config);
-        let wallet = Wallet::new(config.wallet_config)?;
-        let api_server = ApiServer::new(config.api_config);
-        
-        Ok(Self {
-            config,
-            blockchain,
-            network,
-            consensus,
-            mempool,
-            wallet,
-            api_server,
-        })
-    }
-    
-    pub async fn start(&mut self) -> Result<(), NodeError> {
+impl Web3Node {
+    pub async fn run(&mut self) -> Result<(), NodeError> {
         // 启动网络层
-        self.network.start().await?;
+        let network_handle = tokio::spawn(async move {
+            self.network.run().await
+        });
         
         // 启动共识层
-        self.consensus.start().await?;
+        let consensus_handle = tokio::spawn(async move {
+            self.consensus.run().await
+        });
         
-        // 启动API服务器
-        self.api_server.start().await?;
+        // 启动合约引擎
+        let contract_handle = tokio::spawn(async move {
+            self.contracts.run().await
+        });
         
-        // 主事件循环
-        self.event_loop().await?;
+        // 启动指标收集
+        let metrics_handle = tokio::spawn(async move {
+            self.metrics.run().await
+        });
         
-        Ok(())
-    }
-    
-    async fn event_loop(&mut self) -> Result<(), NodeError> {
-        loop {
-            tokio::select! {
-                // 处理网络消息
-                msg = self.network.receive() => {
-                    self.handle_network_message(msg?).await?;
-                }
-                
-                // 处理共识事件
-                event = self.consensus.next_event() => {
-                    self.handle_consensus_event(event?).await?;
-                }
-                
-                // 处理API请求
-                request = self.api_server.receive() => {
-                    self.handle_api_request(request?).await?;
-                }
-            }
-        }
-    }
-}
-```
-
-### 9.2 智能合约示例
-
-```rust
-#[derive(Clone, Debug)]
-pub struct TokenContract {
-    balances: HashMap<Address, u64>,
-    allowances: HashMap<(Address, Address), u64>,
-    total_supply: u64,
-    owner: Address,
-}
-
-impl TokenContract {
-    pub fn new(initial_supply: u64, owner: Address) -> Self {
-        let mut balances = HashMap::new();
-        balances.insert(owner, initial_supply);
-        
-        Self {
-            balances,
-            allowances: HashMap::new(),
-            total_supply: initial_supply,
-            owner,
-        }
-    }
-    
-    pub fn transfer(&mut self, from: Address, to: Address, amount: u64) -> Result<(), ContractError> {
-        if self.balances.get(&from).unwrap_or(&0) < &amount {
-            return Err(ContractError::InsufficientBalance);
-        }
-        
-        *self.balances.entry(from).or_insert(0) -= amount;
-        *self.balances.entry(to).or_insert(0) += amount;
-        
-        Ok(())
-    }
-    
-    pub fn approve(&mut self, owner: Address, spender: Address, amount: u64) -> Result<(), ContractError> {
-        self.allowances.insert((owner, spender), amount);
-        Ok(())
-    }
-    
-    pub fn transfer_from(&mut self, spender: Address, from: Address, to: Address, amount: u64) -> Result<(), ContractError> {
-        let allowance = self.allowances.get(&(from, spender)).unwrap_or(&0);
-        if allowance < &amount {
-            return Err(ContractError::InsufficientAllowance);
-        }
-        
-        if self.balances.get(&from).unwrap_or(&0) < &amount {
-            return Err(ContractError::InsufficientBalance);
-        }
-        
-        *self.allowances.entry((from, spender)).or_insert(0) -= amount;
-        *self.balances.entry(from).or_insert(0) -= amount;
-        *self.balances.entry(to).or_insert(0) += amount;
+        // 等待所有组件
+        tokio::try_join!(
+            network_handle,
+            consensus_handle,
+            contract_handle,
+            metrics_handle
+        )?;
         
         Ok(())
     }
 }
 ```
 
-## 10. 总结与展望
+## 总结
 
-### 10.1 架构总结
+本文档建立了Web3分布式系统的完整架构框架，包括：
 
-Web3分布式系统架构的核心特征包括：
+1. **分布式系统基础**：系统模型、故障模型、FLP不可能性
+2. **拜占庭容错理论**：PBFT算法、容错边界
+3. **共识机制架构**：层次结构、混合共识
+4. **P2P网络架构**：Kademlia DHT、网络拓扑
+5. **区块链存储架构**：默克尔树、状态存储
+6. **智能合约架构**：WebAssembly VM、执行引擎
+7. **安全性分析**：攻击模型、安全证明
+8. **性能优化**：并行处理、缓存优化
+9. **完整实现**：系统架构和组件集成
 
-1. **去中心化设计**：通过P2P网络和共识机制实现去中心化
-2. **密码学安全**：基于数学证明的安全保障
-3. **可扩展性**：通过分层架构和并行处理实现扩展
-4. **互操作性**：通过标准化协议实现系统互操作
-
-### 10.2 未来发展方向
-
-1. **Layer 2扩展**：通过状态通道和侧链提高吞吐量
-2. **跨链互操作**：实现不同区块链网络间的资产和数据交换
-3. **隐私保护**：通过零知识证明和同态加密保护用户隐私
-4. **量子抗性**：开发抗量子计算的密码学算法
-
-### 10.3 形式化验证
-
-未来工作将重点关注：
-
-1. **协议形式化**：使用Coq或Isabelle形式化验证共识协议
-2. **智能合约验证**：开发自动化的合约安全验证工具
-3. **性能建模**：建立精确的性能预测模型
-4. **安全证明**：提供更严格的安全性质证明
-
----
-
-## 参考文献
-
-1. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
-2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
-3. Castro, M., & Liskov, B. (1999). Practical Byzantine fault tolerance.
-4. Maymounkov, P., & Mazières, D. (2002). Kademlia: A peer-to-peer information system based on the XOR metric.
-5. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger.
+这个架构框架为构建安全、高效、可扩展的Web3系统提供了理论基础和实现指导。

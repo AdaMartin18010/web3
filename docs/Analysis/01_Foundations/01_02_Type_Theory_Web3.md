@@ -53,6 +53,7 @@ $$\forall \Gamma, \tau: \Gamma \vdash P : \tau \implies P \text{ 不会产生类
 例如，对于函数应用 $(λx.e_1) e_2 \rightsquigarrow e_1[e_2/x]$：
 
 如果 $\Gamma \vdash (λx.e_1) e_2 : \tau$，则：
+
 - $\Gamma \vdash λx.e_1 : \tau_1 \to \tau$
 - $\Gamma \vdash e_2 : \tau_1$
 
@@ -86,6 +87,7 @@ $$\frac{\Gamma, x: \tau \vdash e : \tau'}{\Gamma \vdash λx.e : \tau \multimap \
 对于变量 $x$，如果 $x: \tau \in \Gamma$，则 $x$ 恰好使用一次。
 
 对于函数应用 $e_1 e_2$：
+
 - $e_1$ 中的变量恰好使用一次
 - $e_2$ 中的变量恰好使用一次
 - 应用后，$e_1$ 和 $e_2$ 都被消耗
@@ -164,6 +166,7 @@ $$x \preceq y \iff \text{变量 } x \text{ 的生命周期包含在 } y \text{ �
 $$\tau ::= \text{Int} \mid \text{Bool} \mid \tau_1 \to \tau_2 \mid \square \tau \mid \diamond \tau$$
 
 其中：
+
 - $\square \tau$ 表示"总是 $\tau$"
 - $\diamond \tau$ 表示"有时 $\tau$"
 
@@ -695,7 +698,8 @@ mod tests {
 ---
 
 **参考文献**:
+
 - [Linear Logic](https://plato.stanford.edu/entries/logic-linear/)
 - [Type Theory](https://ncatlab.org/nlab/show/type+theory)
 - [Rust Type System](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
-- [Dependent Types](https://en.wikipedia.org/wiki/Dependent_type) 
+- [Dependent Types](https://en.wikipedia.org/wiki/Dependent_type)

@@ -35,6 +35,7 @@
 $$SC = (S, \Sigma, \delta, s_0, F)$$
 
 其中：
+
 - $S$ 是状态集合
 - $\Sigma$ 是输入字母表（交易类型）
 - $\delta: S \times \Sigma \to S$ 是状态转换函数
@@ -112,6 +113,7 @@ $$s_n = \delta(s_{n-1}, \sigma_n) \text{ 是安全的}$$
 $$\mathcal{M} = \{M_1, M_2, \ldots, M_n\}$$
 
 每个模块 $M_i = (I_i, O_i, F_i)$ 包含：
+
 - $I_i$: 输入接口
 - $O_i$: 输出接口
 - $F_i$: 功能实现
@@ -142,6 +144,7 @@ $$\mathcal{M} = \{M_1, M_2, \ldots, M_n\}$$
 $$Proxy = (Implementation, Admin, UpgradeLogic)$$
 
 其中：
+
 - $Implementation$ 是当前实现合约
 - $Admin$ 是管理员地址
 - $UpgradeLogic$ 是升级逻辑
@@ -1046,7 +1049,8 @@ mod tests {
 ---
 
 **参考文献**:
+
 - [Ethereum Smart Contracts](https://ethereum.org/en/developers/docs/smart-contracts/)
 - [Solidity Documentation](https://docs.soliditylang.org/)
 - [Smart Contract Security](https://consensys.net/diligence/)
-- [Gas Optimization](https://ethereum.org/en/developers/docs/gas/) 
+- [Gas Optimization](https://ethereum.org/en/developers/docs/gas/)

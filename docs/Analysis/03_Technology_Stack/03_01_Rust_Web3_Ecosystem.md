@@ -36,6 +36,7 @@ Rust在Web3开发中的优势可以形式化为：
 $$Advantage_{Rust} = Safety + Performance + Concurrency + ZeroCost$$
 
 其中：
+
 - $Safety$ 是内存和并发安全
 - $Performance$ 是运行时性能
 - $Concurrency$ 是并发安全
@@ -986,7 +987,8 @@ mod tests {
 ---
 
 **参考文献**:
+
 - [Rust Programming Language](https://www.rust-lang.org/)
 - [Substrate Documentation](https://docs.substrate.io/)
 - [Solana Documentation](https://docs.solana.com/)
-- [Ink! Smart Contracts](https://use.ink/) 
+- [Ink! Smart Contracts](https://use.ink/)

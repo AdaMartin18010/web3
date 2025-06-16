@@ -44,6 +44,7 @@ Web3作为下一代互联网的愿景，建立在去中心化、密码学安全�
 ### 定理 1.1 (Web3系统一致性)
 
 对于任意Web3系统 $\mathcal{W}$，如果满足以下条件：
+
 1. 诚实节点比例 $\alpha > \frac{2}{3}$
 2. 网络同步延迟 $\Delta < \tau$（其中 $\tau$ 是共识超时时间）
 3. 密码学协议 $P$ 是安全的
@@ -335,7 +336,7 @@ use std::collections::HashMap;
 use sha2::{Sha256, Digest};
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Block {
     pub index: u64,
     pub timestamp: u64,
@@ -345,7 +346,7 @@ pub struct Block {
     pub nonce: u64,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Transaction {
     pub from: String,
     pub to: String,
@@ -353,7 +354,7 @@ pub struct Transaction {
     pub signature: String,
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 pub struct Blockchain {
     pub chain: Vec<Block>,
     pub difficulty: u32,
@@ -364,14 +365,14 @@ impl Blockchain {
     pub fn new() -> Self {
         let mut chain = Vec::new();
         chain.push(Block::genesis());
-        
+
         Self {
             chain,
             difficulty: 4,
             pending_transactions: Vec::new(),
         }
     }
-    
+
     pub fn add_block(&mut self, data: Vec<Transaction>) -> Result<(), String> {
         let previous_block = self.chain.last().unwrap();
         let new_block = Block::new(
@@ -379,33 +380,33 @@ impl Blockchain {
             data,
             previous_block.hash.clone(),
         );
-        
+
         self.mine_block(new_block)?;
         Ok(())
     }
-    
+
     pub fn mine_block(&mut self, mut block: Block) -> Result<(), String> {
         let target = "0".repeat(self.difficulty as usize);
-        
+
         while &block.hash[..self.difficulty as usize] != target {
             block.nonce += 1;
             block.hash = block.calculate_hash();
         }
-        
+
         println!("Block mined: {}", block.hash);
         self.chain.push(block);
         Ok(())
     }
-    
+
     pub fn is_chain_valid(&self) -> bool {
         for i in 1..self.chain.len() {
             let current = &self.chain[i];
             let previous = &self.chain[i - 1];
-            
+
             if current.hash != current.calculate_hash() {
                 return false;
             }
-            
+
             if current.previous_hash != previous.hash {
                 return false;
             }
@@ -425,13 +426,13 @@ impl Block {
             nonce: 0,
         }
     }
-    
+
     pub fn new(index: u64, data: Vec<Transaction>, previous_hash: String) -> Self {
         let timestamp = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap()
             .as_secs();
-            
+
         let mut block = Block {
             index,
             timestamp,
@@ -440,37 +441,37 @@ impl Block {
             hash: String::new(),
             nonce: 0,
         };
-        
+
         block.hash = block.calculate_hash();
         block
     }
-    
+
     pub fn calculate_hash(&self) -> String {
-        let content = format!("{}{}{}{}{}", 
-            self.index, 
-            self.timestamp, 
+        let content = format!("{}{}{}{}{}",
+            self.index,
+            self.timestamp,
             serde_json::to_string(&self.data).unwrap(),
             self.previous_hash,
             self.nonce
         );
-        
+
         let mut hasher = Sha256::new();
         hasher.update(content.as_bytes());
         format!("{:x}", hasher.finalize())
     }
 }
 
-#[cfg(test)]
+# [cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_blockchain_creation() {
         let blockchain = Blockchain::new();
         assert_eq!(blockchain.chain.len(), 1);
         assert_eq!(blockchain.chain[0].index, 0);
     }
-    
+
     #[test]
     fn test_block_mining() {
         let mut blockchain = Blockchain::new();
@@ -482,11 +483,11 @@ mod tests {
                 signature: "sig1".to_string(),
             }
         ];
-        
+
         assert!(blockchain.add_block(transactions).is_ok());
         assert_eq!(blockchain.chain.len(), 2);
     }
-    
+
     #[test]
     fn test_chain_validity() {
         let mut blockchain = Blockchain::new();
@@ -498,7 +499,7 @@ mod tests {
                 signature: "sig1".to_string(),
             }
         ];
-        
+
         blockchain.add_block(transactions).unwrap();
         assert!(blockchain.is_chain_valid());
     }
@@ -537,4 +538,4 @@ mod tests {
 - [Bitcoin Whitepaper](https://bitcoin.org/bitcoin.pdf)
 - [Ethereum Whitepaper](https://ethereum.org/en/whitepaper/)
 - [Formal Methods in Blockchain](https://arxiv.org/abs/2001.04377)
-- [Consensus in Blockchain Systems](https://arxiv.org/abs/1708.07392) 
+- [Consensus in Blockchain Systems](https://arxiv.org/abs/1708.07392)

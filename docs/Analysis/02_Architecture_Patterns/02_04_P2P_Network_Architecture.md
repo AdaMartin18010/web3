@@ -108,14 +108,17 @@ $$E = \{(v_i, v_{parent(i)}) | i \neq root\}$$
 
 **证明**：
 环形拓扑的优点是：
+
 - 每个节点的度数为2，负载均衡
 - 支持顺序访问，适合流式处理
 
 网格拓扑的优点是：
+
 - 支持空间局部性
 - 适合并行计算
 
 树形拓扑的优点是：
+
 - 层次化结构清晰
 - 支持高效的聚合操作
 
@@ -829,7 +832,8 @@ mod tests {
 ---
 
 **参考文献**:
+
 - [Chord: A Scalable Peer-to-peer Lookup Service](https://pdos.csail.mit.edu/papers/chord:sigcomm01/chord_sigcomm.pdf)
 - [Kademlia: A Peer-to-peer Information System](https://pdos.csail.mit.edu/~petar/papers/maymounkov-kademlia-lncs.pdf)
 - [Pastry: Scalable, Decentralized Object Location](https://www.cs.rice.edu/~druschel/publications/pastry.pdf)
-- [Raft: In Search of an Understandable Consensus Algorithm](https://raft.github.io/raft.pdf) 
+- [Raft: In Search of an Understandable Consensus Algorithm](https://raft.github.io/raft.pdf)

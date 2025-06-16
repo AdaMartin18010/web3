@@ -55,6 +55,7 @@ $$s: N \rightarrow S$$
 $$C = (s, M, N)$$
 
 其中：
+
 - $s$ 是系统状态
 - $M$ 是消息集合
 - $N$ 是节点集合
@@ -784,7 +785,8 @@ $$\forall t \geq t_0: \exists t' \geq t: \text{所有正确节点在} t' \text{�
 ---
 
 **参考文献**:
+
 - Lamport, L. (1998). The part-time parliament
 - Ongaro, D., & Ousterhout, J. (2014). In search of an understandable consensus algorithm
 - Castro, M., & Liskov, B. (1999). Practical byzantine fault tolerance
-- Yin, M., et al. (2019). HotStuff: BFT consensus with linearity and responsiveness 
+- Yin, M., et al. (2019). HotStuff: BFT consensus with linearity and responsiveness

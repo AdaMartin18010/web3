@@ -1020,9 +1020,10 @@ impl DistributedKeyGeneration {
 ---
 
 **参考文献**:
+
 - Merkle, R. C. (1988). A digital signature based on a conventional encryption function
 - Patashnik, O. (1993). Compact hashing with bounded overflow
 - Bloom, B. H. (1970). Space/time trade-offs in hash coding with allowable errors
 - Schnorr, C. P. (1991). Efficient signature generation by smart cards
 - Paillier, P. (1999). Public-key cryptosystems based on composite degree residuosity classes
-- Shamir, A. (1979). How to share a secret 
+- Shamir, A. (1979). How to share a secret

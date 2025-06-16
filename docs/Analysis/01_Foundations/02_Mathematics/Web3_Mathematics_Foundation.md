@@ -302,6 +302,7 @@ $$P(X_{n+1} = j | X_n = i, X_{n-1} = i_{n-1}, \ldots) = P(X_{n+1} = j | X_n = i)
 **定义 5.3.1** (RSA系统) RSA密码系统基于大整数分解的困难性。
 
 **密钥生成**：
+
 1. 选择两个大素数 $p, q$
 2. 计算 $n = pq$ 和 $\phi(n) = (p-1)(q-1)$
 3. 选择 $e$ 使得 $\gcd(e, \phi(n)) = 1$
@@ -540,6 +541,7 @@ $$\min_{x \in \Omega} f(x)$$
 $$\mathcal{F} = (C, G, P, N, I, O)$$
 
 其中：
+
 - $C$ 是密码学理论
 - $G$ 是图论理论
 - $P$ 是概率论理论
@@ -606,4 +608,4 @@ $$\mathcal{F} = (C, G, P, N, I, O)$$
 2. Diffie, W., & Hellman, M. (1976). New directions in cryptography. IEEE Transactions on Information Theory, 22(6), 644-654.
 3. Rivest, R. L., Shamir, A., & Adleman, L. (1978). A method for obtaining digital signatures and public-key cryptosystems. Communications of the ACM, 21(2), 120-126.
 4. Koblitz, N. (1987). Elliptic curve cryptosystems. Mathematics of Computation, 48(177), 203-209.
-5. Nash, J. (1951). Non-cooperative games. Annals of Mathematics, 54(2), 286-295. 
+5. Nash, J. (1951). Non-cooperative games. Annals of Mathematics, 54(2), 286-295.

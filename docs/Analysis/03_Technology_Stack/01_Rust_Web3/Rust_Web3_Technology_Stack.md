@@ -60,6 +60,7 @@ impl Ownership for SmartContract {
 ```
 
 Rust的类型系统在编译时检查所有权和借用规则，确保：
+
 - 每个值只有一个所有者
 - 借用不能超过所有者的生命周期
 - 可变借用和不可变借用不能同时存在
@@ -186,6 +187,7 @@ decl_module! {
 ```
 
 Rust的类型系统确保：
+
 - 余额检查的类型安全
 - 转移操作的原子性
 - 错误处理的完整性
@@ -240,6 +242,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 异步运行时提供：
+
 - 高并发处理能力
 - 低内存开销
 - 高效的任务调度
@@ -300,6 +303,7 @@ impl ConsensusEngine {
 ```
 
 Rust的类型系统确保：
+
 - 区块结构的完整性
 - 验证逻辑的完备性
 - 错误处理的正确性
@@ -362,6 +366,7 @@ impl BlockchainStorage {
 ```
 
 Rust的零成本抽象确保：
+
 - 高效的序列化/反序列化
 - 低内存开销
 - 高性能I/O操作
@@ -434,6 +439,7 @@ mod token {
 ```
 
 Rust的类型系统确保：
+
 - 余额检查的类型安全
 - 转移操作的原子性
 - 错误处理的完整性
@@ -517,6 +523,7 @@ impl NetworkBehaviourEventProcess<MdnsEvent> for MyBehaviour {
 ```
 
 异步运行时提供：
+
 - 高并发连接处理
 - 低延迟消息传递
 - 高效的事件处理
@@ -592,6 +599,7 @@ impl CryptoService {
 ```
 
 Rust的内存安全确保：
+
 - 密钥的安全存储
 - 内存的及时清理
 - 防止缓冲区溢出
@@ -679,6 +687,7 @@ impl TransactionProcessor {
 ```
 
 异步运行时提供：
+
 - 高并发任务处理
 - 低内存开销
 - 高效的任务调度
@@ -766,6 +775,7 @@ mod tests {
 ```
 
 Rust的测试框架提供：
+
 - 编译时测试检查
 - 运行时测试执行
 - 详细的测试报告
@@ -821,4 +831,4 @@ Rust Web3技术栈具有以下优势：
 2. Jung, R., et al. (2020). Stacked borrows: An aliasing model for Rust. POPL, 49:1-49:32.
 3. Jung, R., et al. (2021). The future is ours: Programming model-independent views of shared memory. POPL, 50:1-50:32.
 4. Jung, R., et al. (2022). Iris from the ground up: A modular foundation for higher-order concurrent separation logic. JACM, 69:1-69:52.
-5. Jung, R., et al. (2023). RustBelt meets relaxed memory. POPL, 52:1-52:34. 
+5. Jung, R., et al. (2023). RustBelt meets relaxed memory. POPL, 52:1-52:34.

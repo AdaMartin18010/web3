@@ -24,6 +24,7 @@
 3. **终止性**：所有诚实节点最终做出决定
 
 **定义 1.2**（共识系统）：共识系统 $CS = (N, f, \text{protocol})$ 其中：
+
 - $N$ 是节点集合，$|N| = n$
 - $f$ 是最大拜占庭节点数
 - $\text{protocol}$ 是共识协议
@@ -31,6 +32,7 @@
 **定理 1.1**（FLP不可能性）：在异步网络中，即使只有一个节点可能崩溃，也无法实现确定性共识。
 
 **证明**：假设存在确定性共识算法 $A$。考虑执行序列：
+
 1. 所有消息延迟任意长
 2. 某个节点 $p$ 崩溃
 3. 其他节点无法区分 $p$ 是崩溃还是消息延迟
@@ -61,6 +63,7 @@ $$H(D \| nonce) < T$$
 其中 $H$ 是密码学哈希函数。
 
 **定义 2.2**（PoW区块链）：PoW区块链 $BC_{PoW} = (B, \text{chain}, \text{difficulty})$ 其中：
+
 - $B$ 是区块集合
 - $\text{chain}$ 是最长有效链
 - $\text{difficulty}$ 是当前难度
@@ -135,6 +138,7 @@ impl ProofOfWork {
 ### 3.1 形式化定义
 
 **定义 3.1**（权益证明）：权益证明系统 $PoS = (V, S, \pi, \text{slashing})$ 其中：
+
 - $V$ 是验证者集合
 - $S: V \rightarrow \mathbb{R}^+$ 是质押函数
 - $\pi: V \times \mathbb{N} \rightarrow [0,1]$ 是选择概率函数
@@ -149,6 +153,7 @@ $$P(v \text{ selected in round } r) = \frac{S(v)}{\sum_{v' \in V} S(v')}$$
 **定理 3.1**（PoS经济安全性）：如果攻击者控制的质押比例小于 $\frac{1}{3}$，则系统在经济上安全。
 
 **证明**：设攻击者控制的质押比例为 $\alpha < \frac{1}{3}$。攻击者需要：
+
 1. 控制验证者选择
 2. 避免被罚没
 
@@ -247,6 +252,7 @@ impl ProofOfStake {
 ### 4.1 形式化定义
 
 **定义 4.1**（PBFT系统）：PBFT系统 $PBFT = (N, f, \text{view}, \text{sequence})$ 其中：
+
 - $|N| = 3f + 1$
 - 最多 $f$ 个拜占庭节点
 - $\text{view}$ 是当前视图编号
@@ -370,6 +376,7 @@ impl PBFTNode {
 3. **流水线处理**：支持并发处理多个区块
 
 **定义 5.2**（Quorum Certificate）：法定人数证书 $QC = (\text{view}, \text{block\_hash}, \text{signatures}, \text{type})$ 其中：
+
 - $\text{view}$ 是视图编号
 - $\text{block\_hash}$ 是区块哈希
 - $\text{signatures}$ 是签名集合
@@ -511,6 +518,7 @@ impl HotStuffNode {
 ### 6.1 混合共识定义
 
 **定义 6.1**（混合共识）：混合共识系统 $HC = (C_1, C_2, \text{combine})$ 其中：
+
 - $C_1$ 是基础共识机制
 - $C_2$ 是增强共识机制
 - $\text{combine}$ 是组合函数
@@ -578,6 +586,7 @@ impl HybridConsensus {
 **定理 7.1**（51%攻击）：在PoW系统中，如果攻击者控制超过50%的算力，则可以执行双花攻击。
 
 **证明**：攻击者可以：
+
 1. 创建包含双花交易的私有链
 2. 在私有链上积累更多工作量
 3. 发布私有链，使其成为主链
@@ -585,6 +594,7 @@ impl HybridConsensus {
 **定理 7.2**（长程攻击）：在PoS系统中，攻击者可能通过重写历史来执行长程攻击。
 
 **防御机制**：
+
 1. **检查点机制**：定期创建不可逆检查点
 2. **弱主观性**：要求新节点信任最近的区块
 3. **罚没机制**：惩罚恶意验证者
@@ -817,4 +827,4 @@ mod tests {
 2. Castro, M., & Liskov, B. (1999). Practical Byzantine fault tolerance.
 3. Yin, M., et al. (2019). HotStuff: BFT consensus with linear view change and responsive responsiveness.
 4. Buterin, V., & Griffith, V. (2017). Casper the friendly finality gadget.
-5. Kiayias, A., et al. (2017). Ouroboros: A provably secure proof-of-stake blockchain protocol. 
+5. Kiayias, A., et al. (2017). Ouroboros: A provably secure proof-of-stake blockchain protocol.

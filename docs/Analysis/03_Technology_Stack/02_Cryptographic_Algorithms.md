@@ -163,6 +163,7 @@ const K: [u32; 64] = [
 ### 2.2 默克尔树
 
 **定义 2.2**（默克尔树）：给定数据块 $D = \{d_1, d_2, \ldots, d_n\}$，默克尔树 $MT = (V, E, h)$ 其中：
+
 - $V$ 是节点集合
 - $E$ 是边集合
 - $h$ 是哈希函数
@@ -603,4 +604,4 @@ mod tests {
 2. Johnson, D., Menezes, A., & Vanstone, S. (2001). The elliptic curve digital signature algorithm (ECDSA).
 3. Schnorr, C. P. (1991). Efficient signature generation by smart cards.
 4. Gennaro, R., et al. (2013). Quadratic span programs and succinct NIZKs without PCPs.
-5. Paillier, P. (1999). Public-key cryptosystems based on composite degree residuosity classes. 
+5. Paillier, P. (1999). Public-key cryptosystems based on composite degree residuosity classes.

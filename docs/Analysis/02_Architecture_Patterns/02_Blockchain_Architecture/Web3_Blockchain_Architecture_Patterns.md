@@ -141,6 +141,7 @@ impl BlockchainNode {
 ```
 
 每层通过接口抽象，确保：
+
 - 层间松耦合
 - 独立实现
 - 可替换性
@@ -230,6 +231,7 @@ impl BlockchainSystem {
 ```
 
 模块化设计确保：
+
 - 模块职责单一
 - 接口清晰明确
 - 易于测试和维护
@@ -346,6 +348,7 @@ impl ConsensusArchitecture {
 ```
 
 共识架构确保：
+
 - 状态转换的正确性
 - 消息传递的可靠性
 - 故障处理的完整性
@@ -439,6 +442,7 @@ pub trait ContractStorage {
 ```
 
 Rust的类型系统确保：
+
 - 内存安全
 - 线程安全
 - 类型安全
@@ -505,6 +509,7 @@ impl ProxyContract {
 ```
 
 代理模式确保：
+
 - 存储保持不变
 - 逻辑可以升级
 - 权限控制严格
@@ -608,6 +613,7 @@ impl OptimizedStorage {
 ```
 
 存储优化确保：
+
 - 减少存储空间
 - 提升访问速度
 - 降低存储成本
@@ -706,6 +712,7 @@ impl MessagePropagation {
 ```
 
 消息传播确保：
+
 - 消息可靠传递
 - 避免重复处理
 - 高效路由选择
@@ -801,6 +808,7 @@ impl AccessControl {
 ```
 
 访问控制确保：
+
 - 权限检查严格
 - 策略执行正确
 - 审计记录完整
@@ -916,6 +924,7 @@ impl CrossChainProtocol {
 ```
 
 跨链协议确保：
+
 - 资产安全转移
 - 操作原子性
 - 状态一致性
@@ -971,4 +980,4 @@ impl CrossChainProtocol {
 2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
 3. Back, A., et al. (2014). Enabling blockchain innovations with pegged sidechains.
 4. Wood, G. (2016). Ethereum: A secure decentralised generalised transaction ledger.
-5. Zamani, M., Movahedi, M., & Raykova, M. (2018). RapidChain: Scaling blockchain via full sharding. CCS, 931-948. 
+5. Zamani, M., Movahedi, M., & Raykova, M. (2018). RapidChain: Scaling blockchain via full sharding. CCS, 931-948.

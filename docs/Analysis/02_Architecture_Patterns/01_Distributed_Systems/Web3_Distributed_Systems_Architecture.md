@@ -34,6 +34,7 @@
 ### 1.2 拜占庭容错理论
 
 **定义 1.3**（拜占庭节点）：节点 $n \in N$ 是拜占庭节点，当且仅当：
+
 - $n$ 可能发送矛盾消息
 - $n$ 可能不按协议执行
 - $n$ 可能与其他拜占庭节点合谋
@@ -41,6 +42,7 @@
 **定理 1.1**（拜占庭容错下限）：在同步网络中，要达成拜占庭共识，至少需要 $3f + 1$ 个节点，其中 $f$ 是拜占庭节点数量。
 
 **证明**：假设只有 $3f$ 个节点，其中 $f$ 个是拜占庭节点。当所有拜占庭节点发送消息 $A$，而诚实节点发送消息 $B$ 时：
+
 - 每个诚实节点收到 $f$ 个 $A$ 消息和 $2f-1$ 个 $B$ 消息
 - 由于 $f > 2f-1$，诚实节点无法区分哪个是正确消息
 - 因此无法达成共识
@@ -60,6 +62,7 @@ $$\forall n_i, n_j \in N, \forall \sigma \in \Sigma^*: \delta^*(s_0, \sigma) = \
 ### 2.2 事件排序
 
 **定义 2.2**（因果序）：事件 $e_1$ 因果先于事件 $e_2$（记作 $e_1 \rightarrow e_2$），当且仅当：
+
 1. $e_1$ 和 $e_2$ 在同一节点，且 $e_1$ 在 $e_2$ 之前发生
 2. $e_1$ 是发送事件，$e_2$ 是对应的接收事件
 3. 存在事件 $e_3$ 使得 $e_1 \rightarrow e_3$ 且 $e_3 \rightarrow e_2$
@@ -91,6 +94,7 @@ $$E[Z_{t+1} - Z_t] = q - p < 0$$
 ### 3.2 权益证明（PoS）
 
 **定义 3.2**（权益证明）：权益证明系统 $PoS = (V, S, \pi)$ 其中：
+
 - $V$ 是验证者集合
 - $S: V \rightarrow \mathbb{R}^+$ 是质押函数
 - $\pi: V \times \mathbb{N} \rightarrow [0,1]$ 是选择概率函数
@@ -100,6 +104,7 @@ $$E[Z_{t+1} - Z_t] = q - p < 0$$
 ### 3.3 实用拜占庭容错（PBFT）
 
 **定义 3.3**（PBFT系统）：PBFT系统 $PBFT = (N, f, \text{view}, \text{sequence})$ 其中：
+
 - $|N| = 3f + 1$
 - 最多 $f$ 个拜占庭节点
 - $\text{view}$ 是当前视图编号
@@ -150,11 +155,13 @@ impl PBFTNode {
 ### 4.1 网络拓扑
 
 **定义 4.1**（P2P网络）：P2P网络 $P2P = (N, E, \text{protocol})$ 其中：
+
 - $N$ 是节点集合
 - $E \subseteq N \times N$ 是连接关系
 - $\text{protocol}$ 是通信协议
 
 **定义 4.2**（DHT网络）：分布式哈希表 $DHT = (N, K, \text{hash}, \text{routing})$ 其中：
+
 - $K$ 是键空间
 - $\text{hash}: K \rightarrow N$ 是哈希函数
 - $\text{routing}$ 是路由算法
@@ -210,6 +217,7 @@ impl KademliaNode {
 ### 5.1 默克尔树
 
 **定义 5.1**（默克尔树）：给定数据块 $D = \{d_1, d_2, \ldots, d_n\}$，默克尔树 $MT = (V, E, h)$ 其中：
+
 - $V$ 是节点集合
 - $E$ 是边集合
 - $h$ 是哈希函数
@@ -219,6 +227,7 @@ impl KademliaNode {
 ### 5.2 状态存储
 
 **定义 5.2**（状态树）：状态树 $ST = (S, \Delta, \text{root})$ 其中：
+
 - $S$ 是状态空间
 - $\Delta: S \times T \rightarrow S$ 是状态转换函数
 - $\text{root}$ 是当前状态根
@@ -271,6 +280,7 @@ impl StateTree {
 ### 6.1 合约执行模型
 
 **定义 6.1**（智能合约）：智能合约 $SC = (S, I, O, \delta)$ 其中：
+
 - $S$ 是合约状态空间
 - $I$ 是输入空间
 - $O$ 是输出空间
@@ -339,6 +349,7 @@ $$\forall m, \text{Verify}(\text{pk}, m, \text{Sign}(\text{sk}, m)) = \text{true
 ### 7.2 零知识证明
 
 **定义 7.2**（零知识证明）：对于语言 $L$，零知识证明系统 $ZKP = (P, V)$ 满足：
+
 1. **完备性**：$\forall x \in L, \Pr[V(x, P(x)) = 1] = 1$
 2. **可靠性**：$\forall x \notin L, \forall P^*, \Pr[V(x, P^*(x)) = 1] \leq \text{neg}(|x|)$
 3. **零知识性**：$\forall V^*, \exists S^*$ 使得 $\text{View}_{V^*}(P(x)) \approx S^*(x)$

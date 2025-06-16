@@ -545,7 +545,8 @@ $$\mathcal{S} = \{\text{Consistency}, \text{Liveness}, \text{Privacy}, \text{Ava
 ---
 
 **参考文献**：
+
 1. Poon, J., & Dryja, T. (2016). The bitcoin lightning network.
 2. Wood, G. (2016). Polkadot: Vision for a heterogeneous multi-chain framework.
 3. Zamani, M., Movahedi, M., & Raykova, M. (2018). RapidChain: Scaling blockchain via full sharding.
-4. Buterin, V. (2017). Plasma: Scalable autonomous smart contracts. 
+4. Buterin, V. (2017). Plasma: Scalable autonomous smart contracts.

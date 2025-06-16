@@ -42,12 +42,14 @@ Web3技术选型遵循以下原则：
 ### 2.1 Rust语言
 
 **优势**:
+
 - 内存安全，无数据竞争
 - 零成本抽象
 - 高性能
 - 丰富的Web3生态系统
 
 **适用场景**:
+
 - 区块链核心实现
 - 智能合约开发
 - 高性能网络服务
@@ -130,12 +132,14 @@ impl Web3Client {
 ### 2.2 Go语言
 
 **优势**:
+
 - 简单易学
 - 内置并发支持
 - 丰富的标准库
 - 良好的Web3支持
 
 **适用场景**:
+
 - 区块链节点实现
 - 网络服务开发
 - 工具链开发
@@ -211,12 +215,14 @@ func (w *Web3Client) CallFunction(functionName string, params ...interface{}) ([
 ### 2.3 JavaScript/TypeScript
 
 **优势**:
+
 - 前端开发标准
 - 丰富的Web3库
 - 快速原型开发
 - 浏览器集成
 
 **适用场景**:
+
 - DApp前端开发
 - 钱包应用
 - API服务
@@ -279,6 +285,7 @@ class Web3Client {
 ### 3.1 Substrate框架
 
 **特点**:
+
 - 模块化区块链开发
 - 支持多种共识机制
 - 丰富的运行时模块
@@ -351,6 +358,7 @@ decl_module! {
 ### 3.2 Solana框架
 
 **特点**:
+
 - 高性能区块链
 - 并行交易处理
 - 原生程序支持
@@ -402,6 +410,7 @@ pub fn process_instruction(
 ### 3.3 Ethereum框架
 
 **特点**:
+
 - 成熟的智能合约平台
 - 丰富的开发工具
 - 庞大的生态系统
@@ -447,6 +456,7 @@ contract MyToken is ERC20, Ownable {
 ### 4.1 libp2p
 
 **特点**:
+
 - 模块化网络栈
 - 多种传输协议
 - 内置发现机制
@@ -516,6 +526,7 @@ impl NetworkBehaviourEventProcess<MdnsEvent> for MyBehaviour {
 ### 4.2 WebRTC
 
 **特点**:
+
 - 浏览器原生支持
 - 点对点通信
 - 低延迟
@@ -788,13 +799,13 @@ members = [
 .PHONY: build test clean
 
 build:
-	go build -o bin/web3-node ./cmd/node
+ go build -o bin/web3-node ./cmd/node
 
 test:
-	go test ./...
+ go test ./...
 
 clean:
-	rm -rf bin/
+ rm -rf bin/
 ```
 
 ### 7.2 测试框架
@@ -1081,7 +1092,8 @@ impl MemoryPool {
 ---
 
 **参考文献**:
+
 - Substrate Documentation
 - Solana Documentation
 - Ethereum Documentation
-- libp2p Documentation 
+- libp2p Documentation

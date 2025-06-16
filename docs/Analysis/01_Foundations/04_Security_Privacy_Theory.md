@@ -984,8 +984,9 @@ impl SecurityProtocol {
 ---
 
 **参考文献**:
+
 - Schnorr, C. P. (1991). Efficient signature generation by smart cards
 - Paillier, P. (1999). Public-key cryptosystems based on composite degree residuosity classes
 - Shamir, A. (1979). How to share a secret
 - Rivest, R. L., Shamir, A., & Tauman, Y. (2001). How to leak a secret
-- Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system 
+- Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system

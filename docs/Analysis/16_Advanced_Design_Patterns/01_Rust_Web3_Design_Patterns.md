@@ -20,6 +20,7 @@ Web3设计模式是在去中心化应用开发中，经过验证的、可重用�
 $$\mathcal{P} = (C, P, S, I, V)$$
 
 其中：
+
 - $C$ 是上下文集合 (Context)
 - $P$ 是问题集合 (Problem)
 - $S$ 是解决方案集合 (Solution)
@@ -33,6 +34,7 @@ $$\mathcal{P} = (C, P, S, I, V)$$
 $$\text{Valid}(\mathcal{P}, I) = \forall c \in C, p \in P: \text{Satisfies}(I, S(c, p)) \land \text{Safe}(I) \land \text{Performant}(I)$$
 
 其中：
+
 - $\text{Satisfies}(I, S)$ 表示实现满足解决方案
 - $\text{Safe}(I)$ 表示实现是内存安全的
 - $\text{Performant}(I)$ 表示实现满足性能要求
@@ -88,6 +90,7 @@ impl Singleton {
 #### 推论 2.1.1 (Web3单例应用)
 
 在Web3应用中，单例模式常用于：
+
 - 全局配置管理
 - 数据库连接池
 - 缓存管理器
@@ -257,6 +260,7 @@ $$\text{AsyncObserver}(S, O) = \forall s \in S, o \in O: \text{AsyncNotify}(s, o
 $$\text{BlockchainSM} = (Q, \Sigma, \delta, q_0, F)$$
 
 其中：
+
 - $Q$ 是状态集合（所有可能的区块链状态）
 - $\Sigma$ 是输入字母表（交易集合）
 - $\delta: Q \times \Sigma \rightarrow Q$ 是状态转移函数
@@ -658,6 +662,7 @@ $$\text{ConcurrentSafe}(I) = \neg \text{DataRace}(I) \land \neg \text{Deadlock}(
 $$\mathcal{P}^* = \arg\min_{\mathcal{P}} \text{Cost}(\mathcal{P}, P)$$
 
 其中成本函数考虑：
+
 - 实现复杂度
 - 性能开销
 - 维护成本
@@ -693,4 +698,4 @@ Rust Web3设计模式提供了强大的工具来构建安全、高性能的去�
 1. **更多模式**：扩展更多Web3特定的设计模式
 2. **自动化验证**：开发自动化工具验证模式实现
 3. **性能基准**：建立标准化的性能基准测试
-4. **工具支持**：开发IDE插件支持模式实现 
+4. **工具支持**：开发IDE插件支持模式实现

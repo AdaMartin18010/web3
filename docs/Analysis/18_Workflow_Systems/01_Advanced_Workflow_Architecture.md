@@ -32,6 +32,7 @@
 $$\text{Correct}(\mathcal{W}) = \text{Safety}(\mathcal{W}) \land \text{Liveness}(\mathcal{W}) \land \text{Consistency}(\mathcal{W})$$
 
 其中：
+
 - $\text{Safety}(\mathcal{W})$ 表示系统不会进入错误状态
 - $\text{Liveness}(\mathcal{W})$ 表示系统最终会完成所有任务
 - $\text{Consistency}(\mathcal{W})$ 表示系统状态保持一致
@@ -118,6 +119,7 @@ $$(\pi_1(S, s_0), \circ) \text{ 是一个群}$$
 **证明**：
 
 笛卡尔闭范畴支持：
+
 1. **乘积**：并行执行 $w_1 \times w_2$
 2. **指数**：高阶工作流 $w_1^{w_2}$
 3. **求值**：工作流应用 $\text{eval}: (w_1^{w_2}) \times w_2 \rightarrow w_1$
@@ -160,6 +162,7 @@ $$\text{OptimalScheduling} \in \text{NP-Hard}$$
 **证明**：
 
 将工作流调度问题归约到图着色问题：
+
 1. 每个工作流对应图中的一个顶点
 2. 资源冲突对应图中的边
 3. 节点数量对应颜色数量
@@ -1126,4 +1129,4 @@ AI增强工作流将人工智能技术集成到工作流系统中。
 
 ### 未来展望
 
-工作流系统将继续向智能化、量子化、边缘化方向发展，为复杂业务场景提供更强大的编排能力。 
+工作流系统将继续向智能化、量子化、边缘化方向发展，为复杂业务场景提供更强大的编排能力。

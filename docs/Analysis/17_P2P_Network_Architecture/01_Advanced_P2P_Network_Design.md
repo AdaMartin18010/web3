@@ -60,6 +60,7 @@ $$\text{Consistency} \land \text{Availability} \land \text{PartitionTolerance} =
 3. **分区容忍性 (Partition Tolerance)**：网络分区时系统仍能工作
 
 当网络发生分区时：
+
 - 如果保证一致性，则分区内的节点无法响应请求（违反可用性）
 - 如果保证可用性，则分区内的节点可能返回不一致的数据（违反一致性）
 
@@ -78,6 +79,7 @@ $$\text{Consistency} \land \text{Availability} \land \text{PartitionTolerance} =
 3. 失效节点不发送任何消息
 
 由于系统是异步的，消息传递时间不确定。算法 $A$ 必须：
+
 - 在有限时间内达成共识（活性）
 - 所有正常节点决定相同的值（安全性）
 
@@ -158,6 +160,7 @@ $$\frac{d}{2^k} < 1 \Rightarrow k > \log d$$
 随机网络的连通性阈值是 $p_c = \frac{\ln N}{N}$。
 
 当 $p > p_c$ 时，网络几乎必然连通。这是因为：
+
 - 每个节点的期望度数为 $\langle k \rangle = p(N-1) \approx pN$
 - 当 $p > \frac{\ln N}{N}$ 时，$\langle k \rangle > \ln N$
 - 根据随机图理论，此时网络几乎必然连通。■
@@ -433,6 +436,7 @@ impl KademliaNode {
 假设只有 $3f$ 个节点，其中 $f$ 个是拜占庭节点。
 
 考虑以下场景：
+
 1. 拜占庭节点发送不同的消息给不同的诚实节点
 2. 诚实节点分为两组，每组 $f$ 个节点
 3. 每组收到不同的消息，无法达成共识
@@ -887,6 +891,7 @@ impl BloomFilter {
 $$\text{ModularP2P} = (N, P, I, C, M)$$
 
 其中：
+
 - $N$ 是网络层 (Network Layer)
 - $P$ 是协议层 (Protocol Layer)
 - $I$ 是接口层 (Interface Layer)
@@ -1074,6 +1079,7 @@ $$\text{Performance}(\mathcal{P}) = \text{Latency}(\mathcal{P}) \land \text{Thro
 $$\text{DecentralizedStorage} = (N, S, R, R)$$
 
 其中：
+
 - $N$ 是节点集合
 - $S$ 是存储协议
 - $R$ 是复制策略
@@ -1142,6 +1148,7 @@ impl IPFSNode {
 $$\text{DecentralizedComputing} = (N, T, S, E, R)$$
 
 其中：
+
 - $N$ 是计算节点集合
 - $T$ 是任务分配策略
 - $S$ 是调度算法
@@ -1165,4 +1172,4 @@ P2P网络架构是Web3技术的核心基础设施，通过分布式、去中心�
 1. **量子安全**：研究后量子密码学在P2P网络中的应用
 2. **AI集成**：探索人工智能在P2P网络优化中的应用
 3. **跨链互操作**：研究不同区块链网络间的P2P通信
-4. **边缘计算**：将P2P网络扩展到边缘计算场景 
+4. **边缘计算**：将P2P网络扩展到边缘计算场景

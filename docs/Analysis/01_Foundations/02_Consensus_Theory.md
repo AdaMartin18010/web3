@@ -22,6 +22,7 @@
 3. **终止性**：每个诚实节点最终都会做出决定
 
 **定义 1.2**（区块链共识）：区块链共识是分布式共识的特例，需要就以下内容达成一致：
+
 - 交易的有效性
 - 交易的顺序
 - 账本的最终状态
@@ -60,6 +61,7 @@ $$\alpha = \frac{f}{n}$$
 **定义 2.2**（PBFT视图）：PBFT算法将时间分为视图，每个视图有一个主节点。
 
 **定义 2.3**（PBFT消息类型）：
+
 - $PRE-PREPARE(m, v, n, d)$：主节点提议消息 $m$
 - $PREPARE(v, n, d, i)$：节点 $i$ 准备接受消息
 - $COMMIT(v, n, d, i)$：节点 $i$ 提交消息
@@ -465,4 +467,4 @@ $$TPS = \frac{|T|}{T_{block}}$$
 2. Castro, M., & Liskov, B. (1999). Practical Byzantine Fault Tolerance.
 3. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
 4. King, S., & Nadal, S. (2012). PPCoin: Peer-to-peer crypto-currency with proof-of-stake.
-5. Buterin, V. (2015). Ethereum: A secure decentralised generalised transaction ledger. 
+5. Buterin, V. (2015). Ethereum: A secure decentralised generalised transaction ledger.

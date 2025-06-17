@@ -53,10 +53,12 @@ $$A^c = U \setminus A = \{x : x \in U \text{ 且 } x \notin A\}$$
 
 **定理 1.1 (德摩根律)**
 对于任意集合 $A$ 和 $B$：
+
 1. $(A \cup B)^c = A^c \cap B^c$
 2. $(A \cap B)^c = A^c \cup B^c$
 
 **证明**：
+
 1. 对于任意 $x$：
    $$x \in (A \cup B)^c \Leftrightarrow x \notin A \cup B$$
    $$\Leftrightarrow x \notin A \text{ 且 } x \notin B$$
@@ -67,10 +69,12 @@ $$A^c = U \setminus A = \{x : x \in U \text{ 且 } x \notin A\}$$
 
 **定理 1.2 (分配律)**
 对于任意集合 $A$、$B$ 和 $C$：
+
 1. $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
 2. $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
 
 **证明**：
+
 1. 对于任意 $x$：
    $$x \in A \cap (B \cup C) \Leftrightarrow x \in A \text{ 且 } (x \in B \text{ 或 } x \in C)$$
    $$\Leftrightarrow (x \in A \text{ 且 } x \in B) \text{ 或 } (x \in A \text{ 且 } x \in C)$$
@@ -91,6 +95,7 @@ $$\mathcal{P}(A) = \{B : B \subseteq A\}$$
 对于每个元素 $x \in A$，在子集 $B$ 中可以选择包含或不包含 $x$，因此有 $2^n$ 种可能的选择。
 
 更严格的证明：使用数学归纳法。
+
 - 基础情况：$n = 0$ 时，$A = \emptyset$，$\mathcal{P}(A) = \{\emptyset\}$，$|\mathcal{P}(A)| = 1 = 2^0$
 - 归纳假设：假设对于 $|A| = k$，$|\mathcal{P}(A)| = 2^k$
 - 归纳步骤：对于 $|A| = k + 1$，选择 $a \in A$，则：
@@ -112,6 +117,7 @@ $$A \times B = \{(a, b) : a \in A \text{ 且 } b \in B\}$$
 
 **定义 2.3 (函数)**
 从集合 $A$ 到集合 $B$ 的函数 $f$ 是一个二元关系，满足：
+
 1. **定义域覆盖**：$\forall a \in A, \exists b \in B, (a, b) \in f$
 2. **单值性**：$\forall a \in A, \forall b_1, b_2 \in B, (a, b_1) \in f \land (a, b_2) \in f \Rightarrow b_1 = b_2$
 
@@ -132,6 +138,7 @@ $$\forall b \in B, \exists a \in A, f(a) = b$$
 
 **定义 2.7 (等价关系)**
 集合 $A$ 上的等价关系 $R$ 是满足以下性质的二元关系：
+
 1. **自反性**：$\forall a \in A, (a, a) \in R$
 2. **对称性**：$\forall a, b \in A, (a, b) \in R \Rightarrow (b, a) \in R$
 3. **传递性**：$\forall a, b, c \in A, (a, b) \in R \land (b, c) \in R \Rightarrow (a, c) \in R$
@@ -142,11 +149,13 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 
 **定理 2.1 (等价类性质)**
 对于等价关系 $R$：
+
 1. $\forall a \in A, a \in [a]_R$
 2. $\forall a, b \in A, [a]_R = [b]_R \Leftrightarrow (a, b) \in R$
 3. $\forall a, b \in A, [a]_R \cap [b]_R = \emptyset \lor [a]_R = [b]_R$
 
 **证明**：
+
 1. 由自反性，$(a, a) \in R$，因此 $a \in [a]_R$
 2. 如果 $[a]_R = [b]_R$，则 $b \in [a]_R$，因此 $(a, b) \in R$。反之，如果 $(a, b) \in R$，则对于任意 $c \in [a]_R$，$(a, c) \in R$，由传递性 $(b, c) \in R$，因此 $c \in [b]_R$，即 $[a]_R \subseteq [b]_R$。类似地 $[b]_R \subseteq [a]_R$
 3. 如果 $[a]_R \cap [b]_R \neq \emptyset$，则存在 $c \in [a]_R \cap [b]_R$，因此 $(a, c) \in R$ 且 $(b, c) \in R$，由对称性和传递性 $(a, b) \in R$，因此 $[a]_R = [b]_R$。■
@@ -173,11 +182,13 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 集合 $A$ 是可数的，当且仅当 $|A| \leq |\mathbb{N}|$。
 
 **定理 3.2 (可数集的性质)**
+
 1. 可数集的子集是可数的
 2. 有限个可数集的并集是可数的
 3. 可数个可数集的并集是可数的
 
 **证明**：
+
 1. 如果 $B \subseteq A$ 且 $A$ 是可数的，则存在单射 $f: A \to \mathbb{N}$，限制到 $B$ 上仍然是单射
 2. 使用对角线方法可以构造单射
 3. 使用对角线方法可以构造单射。■
@@ -189,7 +200,8 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 **定义 4.1 (命题)**
 命题是一个可以判断真假的陈述句。
 
-**定义 4.2 (逻辑连接词)**
+**定义 4.2 (逻辑连接词)**:
+
 1. **否定**：$\neg p$ 表示"非 $p$"
 2. **合取**：$p \land q$ 表示"$p$ 且 $q$"
 3. **析取**：$p \lor q$ 表示"$p$ 或 $q$"
@@ -201,6 +213,7 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 
 **定理 4.1 (德摩根律)**
 对于任意命题 $p$ 和 $q$：
+
 1. $\neg(p \land q) \Leftrightarrow \neg p \lor \neg q$
 2. $\neg(p \lor q) \Leftrightarrow \neg p \land \neg q$
 
@@ -210,11 +223,13 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 谓词是包含变量的命题函数。
 
 **定义 4.5 (量词)**
+
 1. **全称量词**：$\forall x P(x)$ 表示"对于所有 $x$，$P(x)$ 成立"
 2. **存在量词**：$\exists x P(x)$ 表示"存在 $x$ 使得 $P(x)$ 成立"
 
 **定理 4.2 (量词否定)**
 对于任意谓词 $P(x)$：
+
 1. $\neg \forall x P(x) \Leftrightarrow \exists x \neg P(x)$
 2. $\neg \exists x P(x) \Leftrightarrow \forall x \neg P(x)$
 
@@ -225,6 +240,7 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 **方法**：假设前提为真，通过逻辑推理得出结论为真。
 
 **示例**：证明如果 $n$ 是偶数，则 $n^2$ 是偶数。
+
 - 假设 $n$ 是偶数，则存在整数 $k$ 使得 $n = 2k$
 - 因此 $n^2 = (2k)^2 = 4k^2 = 2(2k^2)$
 - 所以 $n^2$ 是偶数
@@ -234,6 +250,7 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 **方法**：假设结论为假，推导出矛盾，从而证明结论为真。
 
 **示例**：证明 $\sqrt{2}$ 是无理数。
+
 - 假设 $\sqrt{2}$ 是有理数，则存在互质的整数 $p, q$ 使得 $\sqrt{2} = p/q$
 - 因此 $2 = p^2/q^2$，即 $2q^2 = p^2$
 - 所以 $p^2$ 是偶数，因此 $p$ 是偶数
@@ -246,10 +263,12 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 **方法**：证明对于所有自然数 $n$，命题 $P(n)$ 成立。
 
 **步骤**：
+
 1. 基础步骤：证明 $P(0)$ 成立
 2. 归纳步骤：假设 $P(k)$ 成立，证明 $P(k+1)$ 成立
 
 **示例**：证明 $1 + 2 + \cdots + n = n(n+1)/2$。
+
 - 基础步骤：$n = 1$ 时，左边 $= 1$，右边 $= 1(1+1)/2 = 1$，成立
 - 归纳步骤：假设对于 $n = k$ 成立，即 $1 + 2 + \cdots + k = k(k+1)/2$
 - 对于 $n = k+1$：
@@ -260,11 +279,13 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 ### 6.1 区块链中的应用
 
 **状态空间建模**：
+
 - 区块链状态可以建模为集合 $S$ 中的元素
 - 交易可以建模为从状态到状态的函数 $f: S \to S$
 - 状态转换的确定性由函数的单值性保证
 
 **共识机制**：
+
 - 节点集合 $N$ 上的等价关系可以表示共识状态
 - 等价类表示达成共识的节点组
 - 传递性确保共识的一致性
@@ -272,11 +293,13 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 ### 6.2 密码学中的应用
 
 **密钥空间**：
+
 - 密钥集合 $K$ 的基数决定了系统的安全性
 - 密钥生成函数 $f: \mathbb{N} \to K$ 必须是单射的
 - 密钥验证函数 $g: K \to \{0,1\}$ 用于验证密钥有效性
 
 **哈希函数**：
+
 - 哈希函数 $H: \{0,1\}^* \to \{0,1\}^n$ 是满射函数
 - 抗碰撞性要求函数不是单射的
 - 单向性要求函数不是双射的
@@ -284,11 +307,13 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 ### 6.3 智能合约中的应用
 
 **状态机建模**：
+
 - 合约状态可以建模为有限状态集合
 - 状态转换函数 $f: S \times I \to S$ 其中 $I$ 是输入集合
 - 状态可达性可以通过图论分析
 
 **形式化验证**：
+
 - 使用谓词逻辑描述合约性质
 - 使用量词描述全局性质
 - 使用逻辑推理证明合约正确性
@@ -296,11 +321,13 @@ $$[a]_R = \{b \in A : (a, b) \in R\}$$
 ### 6.4 网络拓扑中的应用
 
 **P2P网络**：
+
 - 网络可以建模为图 $G = (V, E)$ 其中 $V$ 是节点集合，$E$ 是连接集合
 - 连通性分析确保网络可靠性
 - 图的度分布影响网络性能
 
 **路由算法**：
+
 - 路径可以建模为节点序列
 - 最短路径算法基于图的连通性
 - 路由表可以建模为函数 $f: V \times V \to V$
@@ -485,4 +512,4 @@ func (f *Function[A, B]) IsBijective(codomain map[B]bool) bool {
 
 **最后更新**: 2024-12-19
 **版本**: 1.0
-**状态**: 初始构建完成 
+**状态**: 初始构建完成

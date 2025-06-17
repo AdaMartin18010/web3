@@ -29,6 +29,7 @@
 $$b_i = (h_{i-1}, t_i, \sigma_i, \tau_i)$$
 
 其中：
+
 - $h_{i-1}$ 是前一个区块的哈希
 - $t_i$ 是交易集合
 - $\sigma_i$ 是区块签名
@@ -336,6 +337,7 @@ pub fn process_instruction(
 $$\frac{dI(t)}{dt} = \beta S(t)I(t) - \gamma I(t)$$
 
 其中：
+
 - $I(t)$ 是已感染节点数
 - $S(t)$ 是易感节点数
 - $\beta$ 是传播率

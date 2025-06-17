@@ -43,6 +43,7 @@ $$N \cup N = N$$
 $$N \cap N = N$$
 
 **证明**：根据集合运算的定义，对于任意元素 $x$：
+
 - 如果 $x \in N$，则 $x \in N \cup N$ 且 $x \in N \cap N$
 - 如果 $x \notin N$，则 $x \notin N \cup N$ 且 $x \notin N \cap N$
 
@@ -234,4 +235,4 @@ $$s_0 \rightarrow s_1 \rightarrow \cdots \rightarrow s_n$$
 2. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger.
 3. Back, A., et al. (2014). Enabling blockchain innovations with pegged sidechains.
 4. Buterin, V. (2015). On public and private blockchains.
-5. Pass, R., & Shi, E. (2017). The sleepy model of consensus. 
+5. Pass, R., & Shi, E. (2017). The sleepy model of consensus.

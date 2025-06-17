@@ -72,6 +72,7 @@ $$P(N) = P_0 \cdot N^{\alpha}$$
 其中 $P_0$ 是基准性能，$N$ 是资源数量，$\alpha$ 是扩展性指数。
 
 **定理 3.2**（扩展性分类）：
+
 - $\alpha = 1$：线性扩展
 - $\alpha < 1$：次线性扩展
 - $\alpha > 1$：超线性扩展
@@ -127,6 +128,7 @@ $$P(v_i) = \frac{stake_i}{\sum_{j=1}^{n} stake_j}$$
 **定理 4.2**（PoS性能优势）：PoS相比PoW具有更低的能源消耗和更高的可扩展性。
 
 **证明**：
+
 1. **能源效率**：PoS不需要大量计算，能源消耗显著降低
 2. **可扩展性**：PoS可以通过分片等技术实现水平扩展
 3. **最终性**：PoS通常具有更快的最终性确认
@@ -202,6 +204,7 @@ $$L_{min} = \frac{d}{c}$$
 $$L_{min} = \frac{d}{c}$$
 
 实际网络延迟还包括：
+
 - 处理延迟：$L_{processing}$
 - 排队延迟：$L_{queueing}$
 - 协议开销：$L_{protocol}$
@@ -482,6 +485,7 @@ impl GasOptimizedContract {
 ### 7.2 并行执行优化
 
 **定义 7.2**（事务依赖图）：事务间的依赖关系图 $G = (V, E)$，其中：
+
 - $V$ 是事务集合
 - $E$ 是依赖关系边
 
@@ -669,4 +673,4 @@ Web3系统性能优化是一个多层次的系统工程，需要在架构设计�
 2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
 3. Lamport, L. (1998). The part-time parliament. ACM Transactions on Computer Systems.
 4. Castro, M., & Liskov, B. (1999). Practical Byzantine fault tolerance. OSDI.
-5. Yin, M., et al. (2019). HotStuff: BFT consensus with linear view change and responsive responsiveness. PODC. 
+5. Yin, M., et al. (2019). HotStuff: BFT consensus with linear view change and responsive responsiveness. PODC.

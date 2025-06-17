@@ -13,6 +13,7 @@
 $$DAO = (M, G, T, V, E, I, C)$$
 
 其中：
+
 - $M$ 是成员集合
 - $G$ 是治理规则集合
 - $T$ 是代币经济模型
@@ -345,13 +346,13 @@ impl ComplianceChecker {
     pub fn check_transaction(&self, tx: &Transaction) -> ComplianceResult {
         // KYC检查
         let kyc_result = self.kyc_verifier.verify(&tx.from)?;
-        
+
         // AML检查
         let aml_result = self.aml_checker.check(&tx)?;
-        
+
         // 风险评估
         let risk_score = self.risk_analyzer.assess_risk(&tx)?;
-        
+
         ComplianceResult {
             kyc_verified: kyc_result.is_verified,
             aml_cleared: aml_result.is_cleared,
@@ -359,16 +360,16 @@ impl ComplianceChecker {
             compliance_status: self.determine_status(kyc_result, aml_result, risk_score),
         }
     }
-    
+
     pub fn monitor_compliance(&self, period: Duration) -> ComplianceReport {
         let mut report = ComplianceReport::new();
-        
+
         // 定期合规检查
         for tx in self.get_transactions(period) {
             let result = self.check_transaction(&tx);
             report.add_result(result);
         }
-        
+
         report
     }
 }
@@ -383,10 +384,10 @@ impl GovernanceComplianceChecker {
     pub fn check_proposal(&self, proposal: &GovernanceProposal) -> LegalAnalysis {
         // 法律分析
         let legal_analysis = self.legal_analyzer.analyze(proposal)?;
-        
+
         // 监管检查
         let regulatory_check = self.regulatory_checker.check(proposal)?;
-        
+
         LegalAnalysis {
             legal_risks: legal_analysis.risks,
             regulatory_requirements: regulatory_check.requirements,
@@ -509,4 +510,4 @@ Web3治理与合规是一个复杂而重要的领域，需要在去中心化理�
 3. Aragon. (2019). Aragon Network Governance Proposal.
 4. MakerDAO. (2020). Maker Governance Risk Framework.
 5. SEC. (2019). Framework for "Investment Contract" Analysis of Digital Assets.
-6. European Commission. (2020). Markets in Crypto-Assets (MiCA) Regulation. 
+6. European Commission. (2020). Markets in Crypto-Assets (MiCA) Regulation.

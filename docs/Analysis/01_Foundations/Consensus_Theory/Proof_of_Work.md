@@ -124,10 +124,10 @@ $$target_{new} = target_{old} \cdot \frac{t_{actual}}{t_{target}}$$
 def adjust_difficulty(last_2016_blocks, target_time=600):
     actual_time = last_2016_blocks[-1].timestamp - last_2016_blocks[0].timestamp
     ratio = actual_time / (target_time * 2016)
-    
+
     # 限制调整幅度在1/4到4倍之间
     ratio = max(0.25, min(4.0, ratio))
-    
+
     new_target = current_target * ratio
     return new_target
 ```
@@ -192,33 +192,33 @@ impl ParallelMiner {
     pub fn mine_parallel(&self, worker_count: usize) -> Option<u64> {
         let nonce_range = Arc::new(AtomicU64::new(0));
         let mut workers = Vec::new();
-        
+
         for _ in 0..worker_count {
             let nonce_range = nonce_range.clone();
             let target = self.target;
             let data = self.data.clone();
-            
+
             let worker = std::thread::spawn(move || {
                 loop {
                     let nonce = nonce_range.fetch_add(1, Ordering::Relaxed);
                     let hash = Self::hash_data(&data, nonce);
-                    
+
                     if hash < target {
                         return Some(nonce);
                     }
                 }
             });
-            
+
             workers.push(worker);
         }
-        
+
         // 等待任一worker找到解
         for worker in workers {
             if let Ok(Some(nonce)) = worker.join() {
                 return Some(nonce);
             }
         }
-        
+
         None
     }
 }
@@ -272,4 +272,4 @@ PoW机制通过计算工作证明提供了强大的安全性保证，但也面�
 - [权益证明](./Proof_of_Stake.md)
 - [拜占庭容错](./Byzantine_Fault_Tolerance.md)
 - [共识理论概述](../README.md)
-- [密码学基础](../Cryptographic_Theory/) 
+- [密码学基础](../Cryptographic_Theory/)

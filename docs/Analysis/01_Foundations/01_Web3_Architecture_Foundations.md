@@ -662,7 +662,7 @@ impl ContractModel {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
 2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.

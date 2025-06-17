@@ -6,7 +6,7 @@
 
 ## 目录结构
 
-```
+```text
 02_Architecture_Patterns/
 ├── README.md                    # 本文档
 ├── Blockchain_Architecture/     # 区块链架构
@@ -39,6 +39,7 @@
 Web3系统应该避免单一故障点，通过分布式架构实现系统的弹性和抗审查性。
 
 **设计模式**：
+
 - 节点对等性：所有节点具有相同的权限和责任
 - 数据冗余：关键数据在多个节点间复制
 - 共识机制：通过分布式共识确保一致性
@@ -49,6 +50,7 @@ Web3系统应该避免单一故障点，通过分布式架构实现系统的弹�
 Web3系统必须将安全性作为首要设计目标，特别是在处理价值转移时。
 
 **设计模式**：
+
 - 密码学保护：使用强密码学原语保护数据和通信
 - 最小权限：每个组件只拥有必要的最小权限
 - 形式化验证：对关键组件进行形式化验证
@@ -59,6 +61,7 @@ Web3系统必须将安全性作为首要设计目标，特别是在处理价值�
 Web3系统应该能够处理不断增长的用户和交易量。
 
 **设计模式**：
+
 - 分层架构：将系统分为多个功能层
 - 分片技术：将数据和处理分散到多个分片
 - 状态通道：将部分交易移到链下处理
@@ -236,6 +239,7 @@ P2P网络是一个图 $G = (V, E)$，其中：
 ### 节点发现机制
 
 **算法 2.1** (Kademlia DHT)
+
 ```rust
 pub struct KademliaNode {
     node_id: NodeId,
@@ -282,6 +286,7 @@ impl KademliaNode {
 ### 消息路由
 
 **模式 2.4** (Flooding路由)
+
 ```rust
 pub struct FloodingRouter {
     message_cache: LruCache<MessageId, Instant>,
@@ -322,6 +327,7 @@ impl FloodingRouter {
 - $V$ 是验证机制
 
 **模式 2.5** (锁定-铸造模式)
+
 ```rust
 pub struct LockMintBridge {
     source_chain: ChainId,
@@ -349,6 +355,7 @@ impl LockMintBridge {
 ### 原子交换
 
 **算法 2.2** (HTLC原子交换)
+
 ```rust
 pub struct HTLC {
     hashlock: Hash,
@@ -386,6 +393,7 @@ impl HTLC {
 ### 并行处理
 
 **模式 2.6** (并行交易处理)
+
 ```rust
 pub struct ParallelProcessor {
     workers: Vec<JoinHandle<()>>,
@@ -428,6 +436,7 @@ impl ParallelProcessor {
 ### 缓存策略
 
 **模式 2.7** (多级缓存)
+
 ```rust
 pub struct MultiLevelCache {
     l1_cache: LruCache<Key, Value>,  // 内存缓存
@@ -465,6 +474,7 @@ impl MultiLevelCache {
 ### 访问控制
 
 **模式 2.8** (基于角色的访问控制)
+
 ```rust
 pub struct RBAC {
     roles: HashMap<Address, Role>,
@@ -486,6 +496,7 @@ impl RBAC {
 ### 输入验证
 
 **模式 2.9** (防御性编程)
+
 ```rust
 pub trait InputValidator {
     fn validate(&self, input: &[u8]) -> Result<(), ValidationError>;
@@ -542,4 +553,4 @@ Web3架构模式的核心在于：
 
 - [基础理论](../01_Foundations/)
 - [技术栈](../03_Technology_Stack/)
-- [行业应用](../04_Industry_Applications/) 
+- [行业应用](../04_Industry_Applications/)

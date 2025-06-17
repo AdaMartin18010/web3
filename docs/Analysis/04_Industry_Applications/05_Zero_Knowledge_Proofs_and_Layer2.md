@@ -7,6 +7,7 @@
 ### 1.1 研究目标
 
 本文旨在：
+
 1. 建立零知识证明的形式化理论框架
 2. 分析Layer2扩展技术的架构模式
 3. 探讨ZKP在Layer2中的应用
@@ -73,6 +74,7 @@ impl ZkSnarkSystem {
 **定理 2.1**（zk-SNARK的安全性）：在q-SPDH假设下，zk-SNARK系统满足知识可靠性，即如果验证者接受证明，则证明者必须知道对应的见证。
 
 **证明**：
+
 1. **知识提取器构造**：给定成功的证明者，可以构造知识提取器
 2. **q-SPDH假设**：基于椭圆曲线配对的复杂性假设
 3. **归约证明**：将知识提取问题归约到q-SPDH问题
@@ -240,6 +242,7 @@ $$S_{L2} = \frac{S_{L1}}{1 + S_{L1} \cdot \epsilon}$$
 其中 $\epsilon$ 是Layer2引入的额外风险。
 
 **证明**：
+
 1. **风险模型**：Layer2的失败概率 $P_{L2} = P_{L1} + \epsilon \cdot (1 - P_{L1})$
 2. **安全性定义**：$S = \frac{1}{P}$
 3. **关系推导**：$S_{L2} = \frac{1}{P_{L1} + \epsilon \cdot (1 - P_{L1})} = \frac{S_{L1}}{1 + S_{L1} \cdot \epsilon}$
@@ -360,6 +363,7 @@ impl PrivacyTransaction {
 **定理 5.1**（证明生成复杂度）：对于包含 $n$ 个约束的电路，zk-SNARK证明生成的时间复杂度为 $O(n \log n)$。
 
 **证明**：
+
 1. **FFT计算**：多项式计算需要 $O(n \log n)$ 时间
 2. **椭圆曲线运算**：每个约束需要常数次椭圆曲线运算
 3. **总体复杂度**：$O(n \log n) + O(n) = O(n \log n)$
@@ -514,6 +518,7 @@ impl StarkNet {
 **定理 7.1**（零知识性）：在计算安全性模型下，如果存在模拟器 $S$，使得对于所有验证者 $V^*$，$S(x, V^*) \approx \langle P(x,w), V^*(x) \rangle$，则协议满足零知识性。
 
 **证明**：
+
 1. **模拟器构造**：构造能够模拟真实交互的算法
 2. **不可区分性**：证明模拟器输出与真实交互在计算上不可区分
 3. **归约**：将区分问题归约到底层困难问题
@@ -635,4 +640,4 @@ impl QuantumResistantZKP {
 - [zkSync Documentation](https://docs.zksync.io/)
 - [StarkNet Documentation](https://docs.starknet.io/)
 - [Polygon zkEVM](https://wiki.polygon.technology/docs/zkEVM/)
-- [Zero Knowledge Proofs](https://z.cash/technology/zksnarks/) 
+- [Zero Knowledge Proofs](https://z.cash/technology/zksnarks/)

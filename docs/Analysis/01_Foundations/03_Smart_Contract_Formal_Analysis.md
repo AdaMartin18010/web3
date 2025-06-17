@@ -17,6 +17,7 @@
 **定义 1.2**（智能合约系统）：智能合约系统可以形式化定义为：
 $$SC = (C, S, T, E, V)$$
 其中：
+
 - $C$ 是合约集合
 - $S$ 是状态空间
 - $T$ 是交易集合
@@ -38,6 +39,7 @@ $$\delta: State \times Transaction \to State$$
 **定义 1.5**（合约执行）：合约执行是一个三元组：
 $$(c, t, \sigma) \xrightarrow{E} (c', t', \sigma')$$
 其中：
+
 - $c$ 是合约代码
 - $t$ 是交易
 - $\sigma$ 是当前状态
@@ -78,7 +80,7 @@ $$\llbracket x := e \rrbracket(\sigma, t) = (\sigma[x \mapsto \llbracket e \rrbr
 
 $$\llbracket c_1; c_2 \rrbracket(\sigma, t) = \llbracket c_2 \rrbracket(\llbracket c_1 \rrbracket(\sigma, t))$$
 
-$$\llbracket \text{if } b \text{ then } c_1 \text{ else } c_2 \rrbracket(\sigma, t) = 
+$$\llbracket \text{if } b \text{ then } c_1 \text{ else } c_2 \rrbracket(\sigma, t) =
 \begin{cases}
 \llbracket c_1 \rrbracket(\sigma, t) & \text{if } \llbracket b \rrbracket\sigma = \text{true} \\
 \llbracket c_2 \rrbracket(\sigma, t) & \text{if } \llbracket b \rrbracket\sigma = \text{false}
@@ -138,16 +140,16 @@ impl ModelChecker {
     pub fn check_safety(&self, initial_state: State) -> SafetyResult {
         let mut visited = HashSet::new();
         let mut queue = VecDeque::new();
-        
+
         queue.push_back(initial_state);
         visited.insert(initial_state);
-        
+
         while let Some(state) = queue.pop_front() {
             // 检查是否为不安全状态
             if self.unsafe_states.contains(&state) {
                 return SafetyResult::Unsafe(state);
             }
-            
+
             // 探索后继状态
             if let Some(successors) = self.transitions.get(&state) {
                 for successor in successors {
@@ -158,7 +160,7 @@ impl ModelChecker {
                 }
             }
         }
-        
+
         SafetyResult::Safe
     }
 }
@@ -181,14 +183,14 @@ pub struct DataFlowAnalyzer {
 impl DataFlowAnalyzer {
     pub fn analyze_reaching_definitions(&mut self) {
         let mut changed = true;
-        
+
         while changed {
             changed = false;
-            
+
             for block in self.cfg.blocks() {
                 let old_definitions = self.reaching_definitions[block].clone();
                 let new_definitions = self.compute_reaching_definitions(block);
-                
+
                 if old_definitions != new_definitions {
                     self.reaching_definitions.insert(block, new_definitions);
                     changed = true;
@@ -196,22 +198,22 @@ impl DataFlowAnalyzer {
             }
         }
     }
-    
+
     fn compute_reaching_definitions(&self, block: BasicBlock) -> HashSet<Definition> {
         let mut definitions = HashSet::new();
-        
+
         // 合并前驱块的定义
         for pred in self.cfg.predecessors(block) {
             definitions.extend(&self.reaching_definitions[pred]);
         }
-        
+
         // 添加当前块的定义
         for stmt in block.statements() {
             if let Statement::Assignment(var, _) = stmt {
                 definitions.insert(Definition::new(var.clone()));
             }
         }
-        
+
         definitions
     }
 }
@@ -233,7 +235,7 @@ impl SymbolicExecutor {
     pub fn execute(&mut self, contract: &Contract) -> Vec<ExecutionPath> {
         let mut paths = Vec::new();
         let mut worklist = vec![ExecutionState::new(contract.entry_point())];
-        
+
         while let Some(state) = worklist.pop() {
             match self.execute_instruction(&state) {
                 ExecutionResult::Terminate(result) => {
@@ -247,7 +249,7 @@ impl SymbolicExecutor {
                     let mut true_branch = true_state;
                     true_branch.path_conditions.push(condition.clone());
                     worklist.push(true_branch);
-                    
+
                     let mut false_branch = false_state;
                     false_branch.path_conditions.push(Expression::Not(Box::new(condition)));
                     worklist.push(false_branch);
@@ -257,13 +259,13 @@ impl SymbolicExecutor {
                 }
             }
         }
-        
+
         paths
     }
-    
+
     fn execute_instruction(&self, state: &ExecutionState) -> ExecutionResult {
         let instruction = state.current_instruction();
-        
+
         match instruction {
             Instruction::Assignment(var, expr) => {
                 let value = self.evaluate_expression(expr, &state.symbolic_state);
@@ -274,7 +276,7 @@ impl SymbolicExecutor {
             }
             Instruction::Condition(condition) => {
                 let cond_value = self.evaluate_expression(condition, &state.symbolic_state);
-                
+
                 if cond_value.is_concrete() {
                     // 具体条件，选择一条路径
                     let mut new_state = state.clone();
@@ -288,10 +290,10 @@ impl SymbolicExecutor {
                     // 符号条件，分支执行
                     let mut true_state = state.clone();
                     true_state.advance_true();
-                    
+
                     let mut false_state = state.clone();
                     false_state.advance_false();
-                    
+
                     ExecutionResult::Branch(cond_value, true_state, false_state)
                 }
             }
@@ -322,26 +324,26 @@ impl TheoremProver {
     pub fn new() -> Self {
         let context = Context::new(&z3::Config::new());
         let solver = Solver::new(&context);
-        
+
         Self { context, solver }
     }
-    
+
     pub fn verify_invariant(&mut self, contract: &Contract, invariant: &Expression) -> VerificationResult {
         // 将合约转换为SMT公式
         let contract_formula = self.contract_to_smt(contract);
-        
+
         // 将不变量转换为SMT公式
         let invariant_formula = self.expression_to_smt(invariant);
-        
+
         // 检查是否存在违反不变量的状态
         let violation = Ast::and(&self.context, &[
             &contract_formula,
             &Ast::not(&self.context, &invariant_formula)
         ]);
-        
+
         self.solver.push();
         self.solver.assert(&violation);
-        
+
         match self.solver.check() {
             z3::SatResult::Sat => {
                 let model = self.solver.get_model().unwrap();
@@ -355,13 +357,13 @@ impl TheoremProver {
             }
         }
     }
-    
+
     fn contract_to_smt(&self, contract: &Contract) -> Ast {
         // 将合约转换为SMT公式
         // 这里简化处理，实际实现需要更复杂的转换
         Ast::true_const(&self.context)
     }
-    
+
     fn expression_to_smt(&self, expr: &Expression) -> Ast {
         match expr {
             Expression::Variable(name) => {
@@ -393,11 +395,11 @@ impl TheoremProver {
 ### 5.1 安全代币合约
 
 ```rust
-#[ink::contract]
+# [ink::contract]
 mod secure_token {
     use ink::storage::Mapping;
     use ink::prelude::*;
-    
+
     #[ink(storage)]
     pub struct SecureToken {
         total_supply: Balance,
@@ -406,7 +408,7 @@ mod secure_token {
         owner: AccountId,
         paused: bool,
     }
-    
+
     #[ink(event)]
     pub struct Transfer {
         #[ink(topic)]
@@ -415,7 +417,7 @@ mod secure_token {
         to: Option<AccountId>,
         value: Balance,
     }
-    
+
     #[ink(event)]
     pub struct Approval {
         #[ink(topic)]
@@ -424,20 +426,20 @@ mod secure_token {
         spender: AccountId,
         value: Balance,
     }
-    
+
     impl SecureToken {
         #[ink(constructor)]
         pub fn new(initial_supply: Balance) -> Self {
             let owner = Self::env().caller();
             let mut balances = Mapping::default();
             balances.insert(owner, &initial_supply);
-            
+
             Self::env().emit_event(Transfer {
                 from: None,
                 to: Some(owner),
                 value: initial_supply,
             });
-            
+
             Self {
                 total_supply: initial_supply,
                 balances,
@@ -446,56 +448,56 @@ mod secure_token {
                 paused: false,
             }
         }
-        
+
         #[ink(message)]
         pub fn total_supply(&self) -> Balance {
             self.total_supply
         }
-        
+
         #[ink(message)]
         pub fn balance_of(&self, account: AccountId) -> Balance {
             self.balances.get(account).unwrap_or(0)
         }
-        
+
         #[ink(message)]
         pub fn transfer(&mut self, to: AccountId, value: Balance) -> bool {
             self._transfer(Self::env().caller(), to, value)
         }
-        
+
         #[ink(message)]
         pub fn transfer_from(&mut self, from: AccountId, to: AccountId, value: Balance) -> bool {
             let caller = Self::env().caller();
             let current_allowance = self.allowances.get((from, caller)).unwrap_or(0);
-            
+
             if current_allowance < value {
                 return false;
             }
-            
+
             // 更新授权额度
             self.allowances.insert((from, caller), &(current_allowance - value));
-            
+
             self._transfer(from, to, value)
         }
-        
+
         #[ink(message)]
         pub fn approve(&mut self, spender: AccountId, value: Balance) -> bool {
             let owner = Self::env().caller();
             self.allowances.insert((owner, spender), &value);
-            
+
             Self::env().emit_event(Approval {
                 owner,
                 spender,
                 value,
             });
-            
+
             true
         }
-        
+
         #[ink(message)]
         pub fn allowance(&self, owner: AccountId, spender: AccountId) -> Balance {
             self.allowances.get((owner, spender)).unwrap_or(0)
         }
-        
+
         #[ink(message)]
         pub fn pause(&mut self) -> bool {
             if Self::env().caller() != self.owner {
@@ -504,7 +506,7 @@ mod secure_token {
             self.paused = true;
             true
         }
-        
+
         #[ink(message)]
         pub fn unpause(&mut self) -> bool {
             if Self::env().caller() != self.owner {
@@ -513,35 +515,35 @@ mod secure_token {
             self.paused = false;
             true
         }
-        
+
         fn _transfer(&mut self, from: AccountId, to: AccountId, value: Balance) -> bool {
             // 检查暂停状态
             if self.paused {
                 return false;
             }
-            
+
             // 检查余额
             let from_balance = self.balance_of(from);
             if from_balance < value {
                 return false;
             }
-            
+
             // 防止自转账
             if from == to {
                 return true;
             }
-            
+
             // 更新余额
             self.balances.insert(from, &(from_balance - value));
             let to_balance = self.balance_of(to);
             self.balances.insert(to, &(to_balance + value));
-            
+
             Self::env().emit_event(Transfer {
                 from: Some(from),
                 to: Some(to),
                 value,
             });
-            
+
             true
         }
     }
@@ -552,70 +554,70 @@ mod secure_token {
 
 ```rust
 // 使用Rust的属性宏定义验证规范
-#[cfg(test)]
+# [cfg(test)]
 mod tests {
     use super::*;
     use ink::env::test;
-    
+
     #[test]
     fn test_total_supply_invariant() {
         let accounts = test::default_accounts::<Environment>();
         let mut token = SecureToken::new(1000);
-        
+
         // 验证总供应量不变性
         assert_eq!(token.total_supply(), 1000);
-        
+
         // 执行转账
         token.transfer(accounts.bob, 100);
-        
+
         // 验证总供应量仍然不变
         assert_eq!(token.total_supply(), 1000);
     }
-    
+
     #[test]
     fn test_balance_invariant() {
         let accounts = test::default_accounts::<Environment>();
         let mut token = SecureToken::new(1000);
-        
+
         let initial_balance = token.balance_of(accounts.alice);
         token.transfer(accounts.bob, 100);
-        
+
         // 验证发送方余额减少
         assert_eq!(token.balance_of(accounts.alice), initial_balance - 100);
-        
+
         // 验证接收方余额增加
         assert_eq!(token.balance_of(accounts.bob), 100);
     }
-    
+
     #[test]
     fn test_no_overflow() {
         let accounts = test::default_accounts::<Environment>();
         let mut token = SecureToken::new(Balance::MAX);
-        
+
         // 尝试转账超过余额的数量
         let result = token.transfer(accounts.bob, Balance::MAX);
         assert!(!result);
-        
+
         // 验证余额未变化
         assert_eq!(token.balance_of(accounts.alice), Balance::MAX);
         assert_eq!(token.balance_of(accounts.bob), 0);
     }
-    
+
     #[test]
     fn test_pause_functionality() {
         let accounts = test::default_accounts::<Environment>();
         let mut token = SecureToken::new(1000);
-        
+
         // 非所有者无法暂停
         test::set_caller::<Environment>(accounts.bob);
         let pause_result = token.pause();
         assert!(!pause_result);
-        
+
         // 所有者可以暂停
         test::set_caller::<Environment>(accounts.alice);
         let pause_result = token.pause();
         assert!(pause_result);
-        
+
         // 暂停后无法转账
         test::set_caller::<Environment>(accounts.bob);
         let transfer_result = token.transfer(accounts.charlie, 100);

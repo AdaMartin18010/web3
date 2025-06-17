@@ -798,4 +798,4 @@ impl ConsensusModel {
 2. Ongaro, D., & Ousterhout, J. (2014). In search of an understandable consensus algorithm.
 3. Castro, M., & Liskov, B. (1999). Practical Byzantine fault tolerance.
 4. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
-5. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform. 
+5. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.

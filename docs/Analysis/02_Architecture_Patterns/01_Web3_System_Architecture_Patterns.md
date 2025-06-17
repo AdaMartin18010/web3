@@ -34,6 +34,7 @@ Web3架构设计遵循以下核心原则：
 $$L = \{L_1, L_2, L_3, L_4, L_5\}$$
 
 其中：
+
 - $L_1$：网络层 (Network Layer)
 - $L_2$：共识层 (Consensus Layer)
 - $L_3$：数据层 (Data Layer)
@@ -95,6 +96,7 @@ $$L = \{L_1, L_2, L_3, L_4, L_5\}$$
 $$H = (M, S, P, R_M, R_P)$$
 
 其中：
+
 - $M$ 是主节点集合
 - $S$ 是从节点集合
 - $P$ 是对等节点集合
@@ -110,6 +112,7 @@ $$H = (M, S, P, R_M, R_P)$$
 $$C = (B_0, B_1, ..., B_n)$$
 
 其中每个区块 $B_i$ 包含：
+
 - $h_{i-1}$：前一个区块的哈希
 - $tx_i$：交易集合
 - $\sigma_i$：区块签名
@@ -157,6 +160,7 @@ $$\forall tx \in S_i: tx \notin S_j$$
 $$SC = (M, S_1, S_2, ..., S_n, B)$$
 
 其中：
+
 - $M$ 是主链
 - $S_i$ 是侧链
 - $B$ 是桥接协议
@@ -174,6 +178,7 @@ $$\text{transfer}: M \times S_i \times \text{Amount} \rightarrow S_i \times M$$
 $$SM = (S, \Sigma, \delta, s_0, F)$$
 
 其中：
+
 - $S$ 是状态集合
 - $\Sigma$ 是输入字母表
 - $\delta: S \times \Sigma \rightarrow S$ 是状态转移函数
@@ -199,6 +204,7 @@ $$\tau = s_0 \xrightarrow{\sigma_1} s_1 \xrightarrow{\sigma_2} s_2 \xrightarrow{
 $$P = (A, I, R)$$
 
 其中：
+
 - $A$ 是代理合约
 - $I$ 是实现合约
 - $R \subseteq A \times I$ 是代理关系
@@ -214,6 +220,7 @@ $$\text{delegate}: A \times \text{Method} \times \text{Args} \rightarrow I \time
 $$F = (F, T, C)$$
 
 其中：
+
 - $F$ 是工厂合约
 - $T$ 是模板合约
 - $C$ 是创建函数
@@ -247,6 +254,7 @@ $$\text{create}: F \times T \times \text{Params} \rightarrow \text{Instance}$$
 $$\frac{dI(t)}{dt} = \beta S(t)I(t) - \gamma I(t)$$
 
 其中：
+
 - $I(t)$ 是已感染节点数
 - $S(t)$ 是易感节点数
 - $\beta$ 是传播率
@@ -308,6 +316,7 @@ $$\delta: S \times \text{Transaction} \rightarrow S$$
 $$DS = (N, D, R)$$
 
 其中：
+
 - $N$ 是节点集合
 - $D$ 是数据集合
 - $R \subseteq D \times N$ 是数据分布关系
@@ -339,6 +348,7 @@ $$\text{replicate}: D \times N \rightarrow 2^N$$
 $$AC = (S, O, P)$$
 
 其中：
+
 - $S$ 是主体集合
 - $O$ 是客体集合
 - $P \subseteq S \times O \times \text{Permission}$ 是权限关系
@@ -354,6 +364,7 @@ $$\text{check\_permission}: S \times O \times \text{Permission} \rightarrow \{\t
 $$L = (e_1, e_2, ..., e_n)$$
 
 其中每个事件 $e_i$ 包含：
+
 - 时间戳
 - 用户ID
 - 操作类型
@@ -394,6 +405,7 @@ $$\text{balance}: \text{Request} \times N \rightarrow N_i$$
 $$V = (C, M, S)$$
 
 其中：
+
 - $C$ 是计算能力
 - $M$ 是内存容量
 - $S$ 是存储容量
@@ -1049,10 +1061,10 @@ mod model_tests {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
 2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
 3. Wood, G. (2016). Polkadot: Vision for a heterogeneous multi-chain framework.
 4. Lamport, L. (1998). The part-time parliament.
-5. Castro, M., & Liskov, B. (1999). Practical Byzantine fault tolerance. 
+5. Castro, M., & Liskov, B. (1999). Practical Byzantine fault tolerance.

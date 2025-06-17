@@ -530,4 +530,4 @@ impl InMemoryStorage {
 2. Substrate Documentation. (2023). Parity Technologies.
 3. Solana Program Library. (2023). Solana Foundation.
 4. libp2p Documentation. (2023). Protocol Labs.
-5. RocksDB Documentation. (2023). Facebook. 
+5. RocksDB Documentation. (2023). Facebook.

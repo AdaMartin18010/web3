@@ -9,6 +9,7 @@
 ### 2.1 共识问题的形式化
 
 **定义 2.1**（共识问题）：共识问题是一个三元组 $(P, V, \mathcal{A})$，其中：
+
 - $P$ 是参与者集合
 - $V$ 是值域
 - $\mathcal{A}$ 是算法集合
@@ -56,6 +57,7 @@ $$\text{Accept}(p, r, v) \iff \text{send}(p, \langle \text{ACCEPT}, r, v \rangle
 **定理 3.1**（Paxos 安全性）：Paxos 算法在最多 $f < \frac{n}{2}$ 个节点故障的情况下保证一致性。
 
 **证明**：
+
 1. 假设两个值 $v_1$ 和 $v_2$ 被决定
 2. 根据 Paxos 规则，每个值需要 $\frac{n}{2} + 1$ 个接受
 3. 由于 $f < \frac{n}{2}$，至少有一个诚实节点接受了两个值
@@ -78,6 +80,7 @@ $$\text{LogReplication}(n, entry) \iff \text{append}(n, entry) \land \text{repli
 **定理 3.2**（Raft 安全性）：Raft 算法保证日志一致性和领导者唯一性。
 
 **证明**：
+
 1. 领导者唯一性：每个任期最多一个领导者
 2. 日志一致性：通过日志匹配属性保证
 3. 安全性：通过选举限制和日志复制规则保证 ■
@@ -105,6 +108,7 @@ $$P(\text{double-spend}) \leq \left(\frac{1-p}{p}\right)^k$$
 其中 $k$ 是确认区块数。
 
 **证明**：
+
 1. 建模为随机游走过程
 2. 攻击者链长度与诚实链长度的差值 $Z_t$ 的期望增长率为 $q - p < 0$
 3. 应用随机游走理论
@@ -126,6 +130,7 @@ $$\text{CreateBlock}(v, transactions) = \text{Block}(v, transactions, \text{sign
 **定理 4.2**（PoS 激励相容性）：在适当的惩罚机制下，PoS 是激励相容的。
 
 **证明**：
+
 1. 恶意行为的期望损失：$E[\text{Loss}] = stake(v) \times P(\text{detection})$
 2. 诚实行为的期望收益：$E[\text{Gain}] = \text{blockReward} \times P(\text{selection})$
 3. 当 $E[\text{Loss}] > E[\text{Gain}]$ 时，诚实行为是最优策略 ■
@@ -149,6 +154,7 @@ $$\text{Commit}(n, m) \iff \text{receive}(n, 2f+1 \text{ PREPARE}) \land \text{s
 **定理 4.3**（PBFT 安全性）：PBFT 在最多 $f < \frac{n}{3}$ 个拜占庭节点的情况下保证安全性。
 
 **证明**：
+
 1. 一致性：需要 $2f+1$ 个准备消息和 $2f+1$ 个提交消息
 2. 由于 $f < \frac{n}{3}$，$2f+1 > \frac{2n}{3}$
 3. 任何两个集合的交集至少包含一个诚实节点
@@ -163,6 +169,7 @@ $$\text{Commit}(n, m) \iff \text{receive}(n, 2f+1 \text{ PREPARE}) \land \text{s
 **定理 5.1**（共识算法消息复杂度下界）：任何拜占庭容错共识算法至少需要 $O(n^2)$ 消息复杂度。
 
 **证明**：
+
 1. 每个节点需要向其他节点发送消息
 2. 至少需要两轮消息交换
 3. 因此总消息数为 $O(n^2)$ ■
@@ -189,6 +196,7 @@ $$\text{Commit}(n, m) \iff \text{receive}(n, 2f+1 \text{ PREPARE}) \land \text{s
 $$T(S) = \frac{\text{transactions per block}}{\text{block time}}$$
 
 **优化策略**：
+
 1. **批量处理**：$T_{batch} = \frac{n \times T_{single}}{1 + \frac{C_{fixed}}{n \times C_{var}}}$
 2. **并行处理**：$T_{parallel} = n \times T_{single}$
 3. **分片处理**：$T_{shard} = k \times T_{single}$
@@ -266,6 +274,7 @@ $$T_{batch} = \frac{T_{single}}{1 + \frac{C_{fixed}}{n \times C_{var}}}$$
 其中 $n$ 是批量大小，$C_{fixed}$ 是固定验证开销，$C_{var}$ 是每交易变动开销。
 
 **证明**：
+
 1. 单交易验证时间：$T_{single} = C_{fixed} + C_{var}$
 2. 批量验证时间：$T_{batch} = C_{fixed} + n \times C_{var}$
 3. 吞吐量提升：$\frac{T_{single}}{T_{batch}} = \frac{C_{fixed} + C_{var}}{C_{fixed} + n \times C_{var}}$
@@ -275,4 +284,4 @@ $$T_{batch} = \frac{T_{single}}{1 + \frac{C_{fixed}}{n \times C_{var}}}$$
 
 共识理论为分布式系统提供了坚实的理论基础。通过形式化定义和数学证明，我们建立了各种共识算法的安全性和性能保证。在实际应用中，需要根据具体需求选择合适的共识机制，并在安全性、性能和去中心化程度之间找到平衡。
 
-现代区块链系统通常采用混合共识机制，结合不同算法的优势，以实现更好的整体性能。未来的研究方向包括提高共识效率、增强安全性证明，以及探索新的共识范式。 
+现代区块链系统通常采用混合共识机制，结合不同算法的优势，以实现更好的整体性能。未来的研究方向包括提高共识效率、增强安全性证明，以及探索新的共识范式。

@@ -82,6 +82,7 @@ graph TD
 ### 2.3 质量保证
 
 **质量指标：**
+
 - **完整性**: 覆盖所有相关内容的程度
 - **准确性**: 理论表达和证明的正确性
 - **一致性**: 术语定义和符号使用的一致性
@@ -143,6 +144,7 @@ $$\mathcal{U} = \bigcup_{i=1}^{n} \mathcal{T}_i$$
 
 **定义 3.3 (密码学原语)**
 Web3系统使用的密码学原语包括：
+
 - 哈希函数: $H: \{0,1\}^* \to \{0,1\}^n$
 - 数字签名: $\text{Sign}(sk, m) \to \sigma$
 - 零知识证明: $\text{ZKProof}(w, x) \to \pi$
@@ -306,6 +308,7 @@ ethers = "2.0"
 发现多种共识算法的具体实现：
 
 **工作量证明 (PoW)：**
+
 ```rust
 struct ProofOfWork {
     difficulty: u64,
@@ -338,6 +341,7 @@ impl ProofOfWork {
 ```
 
 **权益证明 (PoS)：**
+
 ```rust
 struct ProofOfStake {
     validators: HashMap<Address, u64>, // 地址 -> 权益
@@ -783,7 +787,7 @@ impl Bridge {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
 2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
@@ -792,4 +796,4 @@ impl Bridge {
 5. Goldreich, O. (2001). Foundations of cryptography.
 6. Rust Team. (2021). The Rust Programming Language.
 7. Go Team. (2021). The Go Programming Language.
-8. Various Web3 Projects. (2020-2024). Open source implementations and documentation. 
+8. Various Web3 Projects. (2020-2024). Open source implementations and documentation.

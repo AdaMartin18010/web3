@@ -9,6 +9,7 @@
 ### 2.1 分布式系统定义
 
 **定义 2.1**（分布式系统）：分布式系统 $DS$ 是一个三元组 $(N, C, P)$，其中：
+
 - $N$ 是节点集合
 - $C$ 是通信网络
 - $P$ 是协议集合
@@ -31,6 +32,7 @@ $$A(S) = \frac{\text{uptime}(S)}{\text{total\_time}(S)}$$
 **定理 2.1**（CAP 定理）：分布式系统最多只能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance）中的两个。
 
 **证明**：
+
 1. 假设系统同时满足 CAP 三个性质
 2. 在网络分区时，为了保持一致性，系统必须拒绝写操作
 3. 这违反了可用性
@@ -41,6 +43,7 @@ $$A(S) = \frac{\text{uptime}(S)}{\text{total\_time}(S)}$$
 ### 3.1 P2P 网络定义
 
 **定义 3.1**（P2P 网络）：P2P 网络是一个图 $G = (V, E)$，其中：
+
 - $V$ 是节点集合
 - $E$ 是连接集合
 - 每个节点既是客户端又是服务器
@@ -56,18 +59,21 @@ $$\text{P2PNetwork} = \{G | G = (V, E) \land \forall v \in V: \text{isClient}(v)
 $$\forall v_1, v_2 \in V: \text{degree}(v_1) \approx \text{degree}(v_2)$$
 
 **路由算法**：
+
 1. **泛洪算法**：$\text{Flood}(m, TTL) = \{v \in V | \text{distance}(v, \text{source}) \leq TTL\}$
 2. **随机游走**：$\text{RandomWalk}(m, steps) = \text{random path of length } steps$
 
 **定理 3.1**（泛洪复杂度）：泛洪算法的消息复杂度为 $O(|V|)$。
 
 **证明**：
+
 1. 每个节点最多接收一次消息
 2. 总消息数为 $O(|V|)$ ■
 
 #### 3.2.2 结构化 P2P (DHT)
 
 **定义 3.3**（DHT）：分布式哈希表是一个三元组 $(K, V, F)$，其中：
+
 - $K$ 是键空间
 - $V$ 是值空间
 - $F: K \to V$ 是映射函数
@@ -82,6 +88,7 @@ $$\text{FindSuccessor}(id) = \arg\min_{n \in N} \{n \geq id\}$$
 **定理 3.2**（Chord 路由复杂度）：Chord 的路由复杂度为 $O(\log |V|)$。
 
 **证明**：
+
 1. 每次路由将距离减半
 2. 需要 $\log_2 |V|$ 步到达目标
 3. 因此复杂度为 $O(\log |V|)$ ■
@@ -181,6 +188,7 @@ where
 ### 4.1 分布式存储定义
 
 **定义 4.1**（分布式存储）：分布式存储系统是一个四元组 $(D, N, R, C)$，其中：
+
 - $D$ 是数据集合
 - $N$ 是节点集合
 - $R$ 是复制策略
@@ -213,6 +221,7 @@ $$\text{ResolveConflict}(d) = \arg\max_{v \in \text{versions}(d)} \{\text{timest
 $$\forall d \in D: \forall n \in R(d): \text{isMaster}(n, d)$$
 
 **一致性级别**：
+
 - **强一致性**：$W + R > N$
 - **最终一致性**：$W + R \leq N$
 
@@ -227,6 +236,7 @@ $$f: D \to \{1, 2, \ldots, k\}$$
 **定理 4.1**（分片负载均衡）：使用一致性哈希进行分片，负载不均衡度为 $O(\log k)$。
 
 **证明**：
+
 1. 一致性哈希的负载分布遵循泊松分布
 2. 最大负载与平均负载的比值约为 $\log k$
 3. 因此负载不均衡度为 $O(\log k)$ ■
@@ -365,6 +375,7 @@ where
 ### 5.1 微服务定义
 
 **定义 5.1**（微服务）：微服务是一个独立的、可部署的服务单元，具有以下特征：
+
 1. **单一职责**：每个服务只负责一个业务功能
 2. **独立部署**：服务可以独立部署和扩展
 3. **松耦合**：服务间通过标准协议通信
@@ -380,6 +391,7 @@ $$\text{Microservice} = \{S | S = (F, I, D) \land \text{singleResponsibility}(F)
 $$\text{DiscoverService}(name) = R(name)$$
 
 **负载均衡策略**：
+
 1. **轮询**：$\text{RoundRobin}(instances) = \text{next}(instances)$
 2. **随机**：$\text{Random}(instances) = \text{random}(instances)$
 3. **最少连接**：$\text{LeastConnections}(instances) = \arg\min_{i \in instances} \{\text{connections}(i)\}$
@@ -390,6 +402,7 @@ $$\text{DiscoverService}(name) = R(name)$$
 $$\text{ServiceMesh} = (P, C, O)$$
 
 其中：
+
 - $P$ 是代理集合
 - $C$ 是控制平面
 - $O$ 是观测系统
@@ -397,6 +410,7 @@ $$\text{ServiceMesh} = (P, C, O)$$
 **定理 5.1**（服务网格性能）：服务网格引入的延迟为 $O(1)$。
 
 **证明**：
+
 1. 代理处理是本地操作
 2. 延迟主要由网络传输决定
 3. 代理处理延迟为常数时间 ■
@@ -509,6 +523,7 @@ impl ServiceMeshProxy {
 ### 6.1 事件驱动架构定义
 
 **定义 6.1**（事件驱动架构）：事件驱动架构是一个四元组 $(E, P, C, H)$，其中：
+
 - $E$ 是事件集合
 - $P$ 是生产者集合
 - $C$ 是消费者集合
@@ -523,6 +538,7 @@ $$\text{EventDrivenArchitecture} = \{(E, P, C, H) | E \subseteq \text{Events}, P
 $$S = (e_1, e_2, \ldots, e_n)$$
 
 **流处理操作**：
+
 1. **过滤**：$\text{Filter}(S, p) = \{e \in S | p(e)\}$
 2. **映射**：$\text{Map}(S, f) = \{f(e) | e \in S\}$
 3. **聚合**：$\text{Aggregate}(S, f, init) = f(f(\ldots f(init, e_1), e_2), \ldots, e_n)$
@@ -535,6 +551,7 @@ $$\text{State} = \text{fold}(\text{Events}, \text{initialState}, \text{applyEven
 **定理 6.1**（事件溯源一致性）：事件溯源保证最终一致性。
 
 **证明**：
+
 1. 所有状态变更都通过事件记录
 2. 重放事件序列得到相同状态
 3. 因此保证最终一致性 ■
@@ -661,6 +678,7 @@ $$A = \frac{\text{uptime}}{\text{total\_time}}$$
 **定理 7.1**（缓存优化）：使用缓存可以将响应时间从 $T$ 降低到 $T \times (1 - \text{hit\_rate})$。
 
 **证明**：
+
 1. 缓存命中时响应时间为 0
 2. 缓存未命中时响应时间为 $T$
 3. 平均响应时间为 $T \times (1 - \text{hit\_rate})$ ■
@@ -668,6 +686,7 @@ $$A = \frac{\text{uptime}}{\text{total\_time}}$$
 **定理 7.2**（并行优化）：使用 $n$ 个并行处理器可以将处理时间从 $T$ 降低到 $\frac{T}{n}$。
 
 **证明**：
+
 1. 工作负载被平均分配到 $n$ 个处理器
 2. 每个处理器处理 $\frac{1}{n}$ 的工作量
 3. 总处理时间为 $\frac{T}{n}$ ■
@@ -677,7 +696,8 @@ $$A = \frac{\text{uptime}}{\text{total\_time}}$$
 分布式系统架构为 Web3 提供了坚实的技术基础。通过形式化定义和数学证明，我们建立了各种架构模式的理论基础。在实际应用中，需要根据具体需求选择合适的架构模式，并在性能、可用性和一致性之间找到平衡。
 
 未来的研究方向包括：
+
 1. 自动化的服务发现和负载均衡
 2. 智能的事件流处理
 3. 自适应的性能优化
-4. 形式化的架构验证 
+4. 形式化的架构验证

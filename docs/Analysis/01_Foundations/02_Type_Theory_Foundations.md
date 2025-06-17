@@ -40,7 +40,7 @@ $$\frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 : 
 2. **抽象**：$\lambda x.e$ 是值
 3. **应用**：$e_1 e_2$ 可以归约或 $e_1$ 是函数值
 
-**算法 1.1 (类型检查器)**
+**算法 1.1 (类型检查器)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -121,6 +121,7 @@ $$\Gamma : \text{Var} \rightarrow \text{Type}$$
 $$\tau ::= \text{Base} \mid \tau_1 \multimap \tau_2 \mid \tau_1 \otimes \tau_2 \mid !\tau$$
 
 其中：
+
 - $\multimap$ 表示线性函数类型
 - $\otimes$ 表示张量积类型
 - $!$ 表示指数类型（可重复使用）
@@ -148,7 +149,7 @@ $$\frac{\Gamma_1 \vdash e_1 : \tau_1 \multimap \tau_2 \quad \Gamma_2 \vdash e_2 
 **定理 2.2 (上下文分离)**
 如果 $\Gamma_1, \Gamma_2 \vdash e : \tau$，则 $\Gamma_1$ 和 $\Gamma_2$ 中的变量集合不相交。
 
-**算法 2.1 (线性类型检查器)**
+**算法 2.1 (线性类型检查器)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -361,7 +362,7 @@ Rust的所有权系统保证内存安全。
 
 ### 3.3 借用检查器
 
-**算法 3.1 (借用检查器)**
+**算法 3.1 (借用检查器)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -436,6 +437,7 @@ impl BorrowChecker {
 $$\tau ::= \text{Base} \mid \tau_1 \rightarrow \tau_2 \mid \Box \tau \mid \Diamond \tau$$
 
 其中：
+
 - $\Box \tau$ 表示"总是"类型
 - $\Diamond \tau$ 表示"有时"类型
 
@@ -447,7 +449,7 @@ $$\frac{\Gamma \vdash e : \tau}{\Gamma \vdash \text{sometimes } e : \Diamond \ta
 
 ### 4.2 时态类型系统
 
-**算法 4.1 (时态类型检查器)**
+**算法 4.1 (时态类型检查器)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -531,7 +533,7 @@ $$e \rightarrow e'$$
 **定义 5.4 (大步语义)**
 $$e \Downarrow v$$
 
-**算法 5.1 (类型安全的求值器)**
+**算法 5.1 (类型安全的求值器)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -712,4 +714,4 @@ impl ConcurrentContext {
 - **并发编程**：支持安全的分布式计算
 - **形式化验证**：为区块链协议提供数学保证
 
-通过形式化的类型理论，我们可以构建更加安全、可靠、高效的Web3系统。 
+通过形式化的类型理论，我们可以构建更加安全、可靠、高效的Web3系统。

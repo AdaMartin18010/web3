@@ -115,7 +115,7 @@ Paxos算法中的角色定义：
 - **接受者 (Acceptor)**：$A = \{a_1, a_2, \ldots, a_n\}$，接受提议
 - **学习者 (Learner)**：$L = \{l_1, l_2, \ldots, l_k\}$，学习最终决定
 
-**算法 2.1 (Paxos算法)**
+**算法 2.1 (Paxos算法)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -197,7 +197,7 @@ Raft节点状态定义：
 - **跟随者 (Follower)**：$F = \{f_1, f_2, \ldots, f_{n-1}\}$，响应领导者请求
 - **候选人 (Candidate)**：$C = \{c_1, c_2, \ldots, c_k\}$，参与领导者选举
 
-**算法 2.2 (Raft领导者选举)**
+**算法 2.2 (Raft领导者选举)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -293,7 +293,7 @@ $$\text{Log}_i = [\text{entry}_1, \text{entry}_2, \ldots, \text{entry}_n]$$
 - **单调性**：节点增减时，只有 $\frac{K}{|N|}$ 的键需要重新映射
 - **分散性**：相同键映射到不同节点概率低
 
-**算法 3.1 (一致性哈希)**
+**算法 3.1 (一致性哈希)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -346,7 +346,7 @@ $$\text{Heartbeat}_i(t) = \begin{cases}
 **算法 4.1 (故障检测)**
 
 ```rust
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct FailureDetector {
     suspects: HashSet<NodeId>,
     heartbeat_timeout: Duration,
@@ -358,17 +358,17 @@ impl FailureDetector {
         loop {
             // 发送心跳
             self.broadcast_heartbeat().await;
-            
+
             // 检查超时
             let timeouts = self.check_timeouts().await;
             for suspect in timeouts {
                 self.suspect_node(suspect).await;
             }
-            
+
             tokio::time::sleep(self.heartbeat_interval).await;
         }
     }
-    
+
     async fn suspect_node(&mut self, node_id: NodeId) {
         self.suspects.insert(node_id);
         // 通知其他组件
@@ -408,7 +408,7 @@ impl FailureDetector {
 **算法 5.1 (两阶段提交)**
 
 ```rust
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct TwoPhaseCommit {
     coordinator: NodeId,
     participants: Vec<NodeId>,
@@ -419,7 +419,7 @@ impl TwoPhaseCommit {
     pub async fn execute(&self) -> Result<bool, TransactionError> {
         // 准备阶段
         let prepare_responses = self.prepare_phase().await?;
-        
+
         if self.all_prepared(&prepare_responses) {
             // 提交阶段
             self.commit_phase().await?;
@@ -430,15 +430,15 @@ impl TwoPhaseCommit {
             Ok(false)
         }
     }
-    
+
     async fn prepare_phase(&self) -> Result<Vec<PrepareResponse>, TransactionError> {
         let mut responses = Vec::new();
-        
+
         for participant in &self.participants {
             let response = self.send_prepare(*participant).await?;
             responses.push(response);
         }
-        
+
         Ok(responses)
     }
 }
@@ -484,7 +484,7 @@ Lamport时钟函数 $L : E \rightarrow \mathbb{N}$ 满足：
 **算法 6.1 (Lamport时钟)**
 
 ```rust
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct LamportClock {
     local_time: u64,
     process_id: NodeId,
@@ -497,17 +497,17 @@ impl LamportClock {
             process_id,
         }
     }
-    
+
     pub fn tick(&mut self) -> u64 {
         self.local_time += 1;
         self.local_time
     }
-    
+
     pub fn receive_message(&mut self, message_time: u64) -> u64 {
         self.local_time = std::cmp::max(self.local_time, message_time) + 1;
         self.local_time
     }
-    
+
     pub fn send_message(&mut self) -> u64 {
         self.tick()
     }

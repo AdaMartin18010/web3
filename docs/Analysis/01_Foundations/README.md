@@ -6,7 +6,7 @@
 
 ## 理论体系结构
 
-```
+```text
 01_Foundations/
 ├── README.md                           # 本文件 - 理论体系概述
 ├── 01_Set_Theory_and_Logic/            # 集合论与逻辑基础

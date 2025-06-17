@@ -1142,4 +1142,4 @@ await client.sendMessage(2, 'recipient_address', 'Hello from chain 1');
 3. **消息传递**: 支持跨链消息通信
 4. **状态验证**: 支持轻客户端验证
 
-所有实现都采用Rust和ink!框架，确保安全性和性能。可以根据具体需求进行定制和扩展。 
+所有实现都采用Rust和ink!框架，确保安全性和性能。可以根据具体需求进行定制和扩展。

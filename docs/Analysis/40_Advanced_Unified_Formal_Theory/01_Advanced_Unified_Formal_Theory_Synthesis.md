@@ -828,4 +828,4 @@ impl Proof {
 2. Pnueli, A. (1977). The temporal logic of programs. In 18th Annual Symposium on Foundations of Computer Science (pp. 46-57).
 3. Lamport, L. (1998). The part-time parliament. ACM Transactions on Computer Systems, 16(2), 133-169.
 4. Pierce, B. C. (2002). Types and programming languages. MIT press.
-5. Clarke, E. M., Grumberg, O., & Peled, D. (1999). Model checking. MIT press. 
+5. Clarke, E. M., Grumberg, O., & Peled, D. (1999). Model checking. MIT press.

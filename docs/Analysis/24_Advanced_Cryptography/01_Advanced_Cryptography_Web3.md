@@ -1,20 +1,24 @@
 # 高级密码学在Web3中的应用：理论与实现
 
 ## 目录
-1. [引言：密码学与Web3的融合](#1-引言密码学与web3的融合)
-2. [密码学基础理论](#2-密码学基础理论)
-3. [零知识证明系统](#3-零知识证明系统)
-4. [同态加密技术](#4-同态加密技术)
-5. [后量子密码学](#5-后量子密码学)
-6. [多方安全计算](#6-多方安全计算)
-7. [密码学协议设计](#7-密码学协议设计)
-8. [结论与展望](#8-结论与展望)
+
+- [高级密码学在Web3中的应用：理论与实现](#高级密码学在web3中的应用理论与实现)
+  - [目录](#目录)
+  - [1. 引言：密码学与Web3的融合](#1-引言密码学与web3的融合)
+  - [2. 密码学基础理论](#2-密码学基础理论)
+  - [3. 零知识证明系统](#3-零知识证明系统)
+  - [4. 同态加密技术](#4-同态加密技术)
+  - [5. 后量子密码学](#5-后量子密码学)
+  - [6. 多方安全计算](#6-多方安全计算)
+  - [7. 密码学协议设计](#7-密码学协议设计)
+  - [8. 结论与展望](#8-结论与展望)
 
 ## 1. 引言：密码学与Web3的融合
 
 密码学是Web3技术的核心基础，为去中心化系统提供安全、隐私和信任保障。
 
 **定义 1.1** (Web3密码学系统) Web3密码学系统是一个五元组 $\mathcal{C} = (K, E, S, V, P)$
+
 - $K$：密钥生成算法
 - $E$：加密算法
 - $S$：签名算法
@@ -30,6 +34,7 @@
 **证明**：通过构造性证明，使用单向函数构建签名方案。
 
 **椭圆曲线密码学**：
+
 ```rust
 use secp256k1::{Secp256k1, SecretKey, PublicKey, Message, Signature};
 
@@ -64,6 +69,7 @@ impl EllipticCurveCrypto {
 ```
 
 **哈希函数**：
+
 ```rust
 use sha2::{Sha256, Digest};
 use blake2::{Blake2b, Digest as Blake2Digest};
@@ -119,16 +125,19 @@ impl HashFunctions {
 ## 3. 零知识证明系统
 
 **定义 3.1** (零知识证明) 零知识证明是一个三元组 $(P, V, \mathcal{R})$，其中：
+
 - $P$：证明者
 - $V$：验证者
 - $\mathcal{R}$：关系集合
 
 **零知识性质**：
+
 1. **完备性**：诚实证明者能说服诚实验证者
 2. **可靠性**：不诚实证明者无法说服诚实验证者
 3. **零知识性**：验证者无法获得除证明有效性外的任何信息
 
 **zk-SNARK实现**：
+
 ```rust
 use bellman::{Circuit, ConstraintSystem, SynthesisError};
 use pairing::bls12_381::{Bls12, Fr};
@@ -185,6 +194,7 @@ impl ZkSnarkSystem {
 ```
 
 **zk-STARK实现**：
+
 ```rust
 pub struct ZkStarkSystem;
 
@@ -236,6 +246,7 @@ $Eval(Enc(m_1), Enc(m_2)) = Enc(f(m_1, m_2))$
 **定理 4.1** (同态性质) 对于任意函数 $f$，存在同态加密方案支持 $f$ 的计算。
 
 **BFV同态加密实现**：
+
 ```rust
 use concrete::{FheUint8, FheUint16, FheUint32, FheUint64};
 
@@ -298,6 +309,7 @@ impl PrivacyVotingSystem {
 **定义 5.1** (后量子密码学) 抵抗量子计算机攻击的密码学方案。
 
 **格密码学**：
+
 ```rust
 use lattice_crypto::{LatticeParams, LWE, RingLWE};
 
@@ -348,6 +360,7 @@ impl LatticeSignature {
 ```
 
 **基于哈希的签名**：
+
 ```rust
 pub struct HashBasedSignature {
     tree_height: usize,
@@ -410,6 +423,7 @@ impl HashBasedSignature {
 **定理 6.1** (通用安全计算) 任何函数都可以通过安全多方计算协议计算。
 
 **Yao's Garbled Circuit实现**：
+
 ```rust
 pub struct SecureMultiPartyComputation {
     parties: Vec<Party>,
@@ -501,6 +515,7 @@ impl SecureMultiPartyComputation {
 **定义 7.1** (密码学协议) 密码学协议是多个参与方之间的交互式算法。
 
 **门限签名协议**：
+
 ```rust
 pub struct ThresholdSignature {
     threshold: usize,
@@ -583,6 +598,7 @@ impl ThresholdSignature {
 ```
 
 **隐私保护协议**：
+
 ```rust
 pub struct PrivacyPreservingProtocol;
 
@@ -621,6 +637,7 @@ impl PrivacyPreservingProtocol {
 ## 8. 结论与展望
 
 密码学在Web3中的关键作用：
+
 1. **身份认证**：数字签名和零知识证明
 2. **数据隐私**：同态加密和多方计算
 3. **安全通信**：端到端加密
@@ -628,8 +645,9 @@ impl PrivacyPreservingProtocol {
 5. **量子抗性**：后量子密码学
 
 未来发展方向：
+
 - **量子密码学**：量子密钥分发和量子随机数生成
 - **后量子标准化**：NIST后量子密码学标准
 - **可组合性**：模块化密码学协议设计
 - **性能优化**：高效密码学原语实现
-- **形式化验证**：密码学协议的形式化证明 
+- **形式化验证**：密码学协议的形式化证明

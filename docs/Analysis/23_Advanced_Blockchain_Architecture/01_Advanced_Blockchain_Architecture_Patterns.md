@@ -33,6 +33,7 @@
 $$\mathcal{B} = \{\mathcal{S}, \mathcal{C}, \mathcal{N}, \mathcal{D}, \mathcal{A}, \mathcal{P}, \mathcal{S}\}$$
 
 其中：
+
 - $\mathcal{S}$ 是系统架构模式集合
 - $\mathcal{C}$ 是共识机制模式集合
 - $\mathcal{N}$ 是网络层模式集合
@@ -51,6 +52,7 @@ $$\mathcal{B} = \{\mathcal{S}, \mathcal{C}, \mathcal{N}, \mathcal{D}, \mathcal{A
 $$\text{BlockchainLayers} = \{L_1, L_2, L_3, L_4, L_5\}$$
 
 其中：
+
 - $L_1$ 是网络层 (Network Layer)
 - $L_2$ 是共识层 (Consensus Layer)
 - $L_3$ 是数据层 (Data Layer)
@@ -172,6 +174,7 @@ impl MicroserviceArchitecture {
 $$\text{Consensus} = (N, F, P, S)$$
 
 其中：
+
 - $N$ 是节点集合
 - $F$ 是故障节点数量
 - $P$ 是协议集合
@@ -318,6 +321,7 @@ P2P网络是去中心化的网络架构：
 $$\text{P2PNetwork} = (N, T, R, P)$$
 
 其中：
+
 - $N$ 是节点集合
 - $T$ 是网络拓扑
 - $R$ 是路由算法
@@ -384,6 +388,7 @@ impl P2PNetwork {
 $$\text{ProtocolStack} = \{P_1, P_2, P_3, P_4\}$$
 
 其中：
+
 - $P_1$ 是物理层协议
 - $P_2$ 是网络层协议
 - $P_3$ 是传输层协议
@@ -444,6 +449,7 @@ impl ProtocolStack {
 $$\text{BlockchainStorage} = (C, I, S, M)$$
 
 其中：
+
 - $C$ 是链式结构
 - $I$ 是索引结构
 - $S$ 是状态存储
@@ -500,6 +506,7 @@ impl BlockchainStorage {
 $$\text{DistributedStorage} = (N, R, C, S)$$
 
 其中：
+
 - $N$ 是节点集合
 - $R$ 是复制策略
 - $C$ 是一致性协议
@@ -562,6 +569,7 @@ impl DistributedStorage {
 $$\text{SmartContractEngine} = (V, E, S, G)$$
 
 其中：
+
 - $V$ 是虚拟机
 - $E$ 是执行环境
 - $S$ 是状态管理
@@ -628,6 +636,7 @@ DApp是去中心化应用：
 $$\text{DApp} = (F, B, I, U)$$
 
 其中：
+
 - $F$ 是前端
 - $B$ 是区块链后端
 - $I$ 是接口
@@ -692,6 +701,7 @@ impl DApp {
 $$\text{CryptoSecurity} = (H, S, E, V)$$
 
 其中：
+
 - $H$ 是哈希函数
 - $S$ 是数字签名
 - $E$ 是加密算法
@@ -740,6 +750,7 @@ impl CryptoSecurity {
 $$\text{NetworkSecurity} = (A, E, I, M)$$
 
 其中：
+
 - $A$ 是认证机制
 - $E$ 是加密通信
 - $I$ 是入侵检测
@@ -788,6 +799,7 @@ impl NetworkSecurity {
 $$\text{ParallelProcessing} = (T, S, L, C)$$
 
 其中：
+
 - $T$ 是线程池
 - $S$ 是任务调度
 - $L$ 是负载均衡
@@ -859,6 +871,7 @@ impl ParallelProcessor {
 $$\text{CacheOptimization} = (M, P, E, R)$$
 
 其中：
+
 - $M$ 是多级缓存
 - $P$ 是预取策略
 - $E$ 是过期策略
@@ -1082,4 +1095,4 @@ impl BlockchainCache {
 - 跨链协议
 - 分布式存储系统
 
-通过Rust等系统级语言，可以构建高性能、高安全性的区块链系统。 
+通过Rust等系统级语言，可以构建高性能、高安全性的区块链系统。

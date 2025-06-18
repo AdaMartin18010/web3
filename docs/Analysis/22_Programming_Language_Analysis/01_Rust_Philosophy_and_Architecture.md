@@ -86,6 +86,7 @@ Rust的类型系统保证并发安全。
 $$\text{Ownership} = (V, O, L)$$
 
 其中：
+
 - $V$ 是值集合
 - $O$ 是所有者集合
 - $L$ 是生命周期集合
@@ -172,6 +173,7 @@ impl OwnershipChecker {
 $$\text{Borrow} = (R, T, L)$$
 
 其中：
+
 - $R$ 是引用集合
 - $T$ 是借用类型（不可变/可变）
 - $L$ 是生命周期
@@ -255,6 +257,7 @@ impl BorrowChecker {
 $$\text{Lifetime} = (S, E, V)$$
 
 其中：
+
 - $S$ 是开始点
 - $E$ 是结束点
 - $V$ 是有效性条件
@@ -325,6 +328,7 @@ Rust类型系统是一个强类型系统：
 $$\text{TypeSystem} = (T, R, C, I)$$
 
 其中：
+
 - $T$ 是类型集合
 - $R$ 是类型规则集合
 - $C$ 是类型约束集合
@@ -404,6 +408,7 @@ impl TypeChecker {
 $$\text{Generic} = (P, C, I)$$
 
 其中：
+
 - $P$ 是类型参数集合
 - $C$ 是约束集合
 - $I$ 是实例化规则
@@ -469,6 +474,7 @@ Trait是接口抽象：
 $$\text{Trait} = (M, A, C)$$
 
 其中：
+
 - $M$ 是方法集合
 - $A$ 是关联类型集合
 - $C$ 是约束集合
@@ -545,6 +551,7 @@ Rust的并发模型基于所有权和类型系统：
 $$\text{ConcurrencyModel} = (T, S, M)$$
 
 其中：
+
 - $T$ 是线程模型
 - $S$ 是同步原语
 - $M$ 是内存模型
@@ -628,6 +635,7 @@ Rust的内存模型基于C++11内存模型：
 $$\text{MemoryModel} = (O, B, S)$$
 
 其中：
+
 - $O$ 是操作顺序
 - $B$ 是屏障
 - $S$ 是同步
@@ -693,6 +701,7 @@ impl MemoryModelChecker {
 $$\text{BlockchainApp} = (C, N, S, V)$$
 
 其中：
+
 - $C$ 是共识算法
 - $N$ 是网络层
 - $S$ 是存储层
@@ -785,6 +794,7 @@ impl SmartContract {
 $$\text{CryptoApp} = (H, S, E, V)$$
 
 其中：
+
 - $H$ 是哈希函数
 - $S$ 是签名算法
 - $E$ 是加密算法
@@ -933,6 +943,7 @@ impl InlineOptimization {
 $$\text{RuntimeOptimization} = (M, C, P)$$
 
 其中：
+
 - $M$ 是内存管理
 - $C$ 是并发优化
 - $P$ 是性能监控

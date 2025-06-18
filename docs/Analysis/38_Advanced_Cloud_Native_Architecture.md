@@ -20,12 +20,14 @@ This document provides a comprehensive formal analysis of cloud-native architect
 ### 1.1 Cloud-Native System Definition
 
 **Definition 1.1** (Cloud-Native System): A cloud-native system is a tuple $C = (S, O, R, M)$ where:
+
 - $S$ is the set of services
 - $O$ is the orchestration system
 - $R$ is the resource management system
 - $M$ is the monitoring and observability system
 
 **Definition 1.2** (Container): A container $c$ is a tuple $c = (I, E, R, N)$ where:
+
 - $I$ is the container image
 - $E$ is the execution environment
 - $R$ is the resource requirements
@@ -90,6 +92,7 @@ where
 ### 2.1 Pod Scheduling
 
 **Definition 2.1** (Pod): A pod $p$ is a tuple $p = (C, N, S, A)$ where:
+
 - $C$ is the set of containers
 - $N$ is the network configuration
 - $S$ is the storage configuration
@@ -250,12 +253,14 @@ impl ResourceManager {
 ### 3.1 Service Mesh Definition
 
 **Definition 3.1** (Service Mesh): A service mesh is a tuple $M = (P, C, T, O)$ where:
+
 - $P$ is the set of proxies
 - $C$ is the control plane
 - $T$ is the traffic management
 - $O$ is the observability system
 
 **Definition 3.2** (Sidecar Proxy): A sidecar proxy $s$ is a tuple $s = (I, O, P, C)$ where:
+
 - $I$ is the inbound traffic handling
 - $O$ is the outbound traffic handling
 - $P$ is the policy enforcement
@@ -416,6 +421,7 @@ impl TrafficManager {
 ### 4.1 Observability Pillars
 
 **Definition 4.1** (Observability): Observability is a tuple $O = (M, T, L)$ where:
+
 - $M$ is the metrics collection
 - $T$ is the tracing system
 - $L$ is the logging system
@@ -488,6 +494,7 @@ impl TracingSystem {
 ### 4.2 Metrics and Alerting
 
 **Definition 4.3** (Metric): A metric $m$ is a tuple $m = (N, V, T, L)$ where:
+
 - $N$ is the metric name
 - $V$ is the metric value
 - $T$ is the timestamp
@@ -642,6 +649,7 @@ impl VerticalPodAutoscaler {
 ### 6.1 Multi-cloud Architecture
 
 **Definition 6.1** (Multi-cloud System): A multi-cloud system is a tuple $MC = (C_1, C_2, \ldots, C_n, O)$ where:
+
 - $C_i$ are cloud providers
 - $O$ is the orchestration layer
 
@@ -963,6 +971,7 @@ impl GitOpsController {
 ### 8.2 Serverless Architecture
 
 **Definition 8.2** (Serverless Function): A serverless function is a tuple $F = (C, T, E, S)$ where:
+
 - $C$ is the function code
 - $T$ is the trigger mechanism
 - $E$ is the execution environment
@@ -1007,4 +1016,4 @@ impl ServerlessPlatform {
 
 This document provides a comprehensive formal analysis of cloud-native architecture, establishing mathematical foundations, proving correctness properties, and providing practical implementations. The integration of container orchestration, service mesh, observability, auto-scaling, and multi-cloud capabilities ensures robust and scalable cloud-native systems suitable for Web3 and enterprise applications.
 
-The formal models and implementations presented here serve as a foundation for building advanced cloud-native systems that can handle the complexity of distributed applications while maintaining mathematical rigor and practical applicability. 
+The formal models and implementations presented here serve as a foundation for building advanced cloud-native systems that can handle the complexity of distributed applications while maintaining mathematical rigor and practical applicability.

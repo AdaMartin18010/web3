@@ -301,20 +301,20 @@ impl BlockchainSystem {
             data_layer: DataLayer::new(),
         }
     }
-    
+
     pub async fn process_transaction(&self, transaction: Transaction) -> Result<TransactionResult, BlockchainError> {
         // 1. 应用层处理
         let app_result = self.application_layer.process(&transaction).await?;
-        
+
         // 2. 共识层验证
         let consensus_result = self.consensus_layer.validate(&transaction).await?;
-        
+
         // 3. 网络层广播
         self.network_layer.broadcast(&transaction).await?;
-        
+
         // 4. 数据层存储
         self.data_layer.store(&transaction).await?;
-        
+
         Ok(TransactionResult::new(consensus_result))
     }
 }
@@ -342,7 +342,7 @@ impl ConsensusEngine {
             state: ConsensusState::new(),
         }
     }
-    
+
     pub async fn run_consensus(&mut self) -> Result<Block, ConsensusError> {
         self.algorithm.run(&mut self.state).await
     }
@@ -367,37 +367,37 @@ impl PerformanceOptimizer {
             metrics: PerformanceMetrics::new(),
         }
     }
-    
+
     pub async fn optimize_transaction_processing(&self, transactions: &[Transaction]) -> Result<Vec<TransactionResult>, OptimizationError> {
         let mut results = Vec::new();
-        
+
         // 并行处理交易
         let futures: Vec<_> = transactions
             .iter()
             .map(|tx| self.process_transaction_optimized(tx))
             .collect();
-        
+
         let transaction_results = futures::future::join_all(futures).await;
-        
+
         for result in transaction_results {
             results.push(result?);
         }
-        
+
         Ok(results)
     }
-    
+
     async fn process_transaction_optimized(&self, transaction: &Transaction) -> Result<TransactionResult, OptimizationError> {
         // 检查缓存
         if let Some(cached_result) = self.cache.get(&transaction.hash()) {
             return Ok(cached_result.clone());
         }
-        
+
         // 处理交易
         let result = self.process_transaction(transaction).await?;
-        
+
         // 缓存结果
         self.cache.put(transaction.hash(), result.clone());
-        
+
         Ok(result)
     }
 }
@@ -419,17 +419,17 @@ impl MemoryManager {
             allocator: CustomAllocator::new(),
         }
     }
-    
+
     pub fn allocate_block(&mut self, size: usize) -> Result<MemoryBlock, MemoryError> {
         // 优先从池中分配
         if let Some(block) = self.pool.allocate(size) {
             return Ok(block);
         }
-        
+
         // 从分配器分配
         self.allocator.allocate(size)
     }
-    
+
     pub fn deallocate_block(&mut self, block: MemoryBlock) -> Result<(), MemoryError> {
         // 尝试归还到池中
         if self.pool.can_accept(block.size()) {
@@ -437,7 +437,7 @@ impl MemoryManager {
         } else {
             self.allocator.deallocate(block);
         }
-        
+
         Ok(())
     }
 }

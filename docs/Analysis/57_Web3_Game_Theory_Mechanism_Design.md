@@ -23,7 +23,7 @@ Web3博弈是指在去中心化网络中的参与者策略交互。
 2. **策略空间** $S_i$ 为参与者 $i$ 的策略集
 3. **收益函数** $u_i: S_1 \times S_2 \times ... \times S_n \to \mathbb{R}$
 
-**算法 1.2.1 (博弈建模算法)**
+**算法 1.2.1 (博弈建模算法)**:
 
 ```rust
 pub struct Game {
@@ -74,7 +74,7 @@ $$\forall i \in N, \forall s_i \in S_i: u_i(s_i^*, s_{-i}^*) \geq u_i(s_i, s_{-i
 **定理 2.1.1 (纳什均衡存在性)**
 每个有限博弈都存在至少一个纳什均衡。
 
-**算法 2.1.1 (纳什均衡计算算法)**
+**算法 2.1.1 (纳什均衡计算算法)**:
 
 ```rust
 pub struct NashEquilibriumFinder {
@@ -151,7 +151,7 @@ impl NashEquilibriumFinder {
 混合策略组合 $\sigma^*$ 是纳什均衡，当且仅当：
 $$\forall i \in N, \forall \sigma_i: u_i(\sigma_i^*, \sigma_{-i}^*) \geq u_i(\sigma_i, \sigma_{-i}^*)$$
 
-**算法 2.2.1 (混合策略纳什均衡算法)**
+**算法 2.2.1 (混合策略纳什均衡算法)**:
 
 ```rust
 pub struct MixedStrategyNashFinder {
@@ -230,7 +230,7 @@ Web3机制包括共识机制、治理机制、激励机制等。
 **定理 3.2.1 (显示原理)**
 任何社会选择函数都可以通过激励相容的机制实现。
 
-**算法 3.2.1 (激励相容机制设计算法)**
+**算法 3.2.1 (激励相容机制设计算法)**:
 
 ```rust
 pub struct IncentiveCompatibleMechanism {
@@ -296,7 +296,7 @@ impl IncentiveCompatibleMechanism {
 **定义 3.3.1 (VCG机制)**
 VCG机制是一种激励相容的拍卖机制，通过外部性定价实现效率。
 
-**算法 3.3.1 (VCG机制算法)**
+**算法 3.3.1 (VCG机制算法)**:
 
 ```rust
 pub struct VCGMechanism {
@@ -359,14 +359,14 @@ Web3拍卖包括NFT拍卖、代币拍卖、计算资源拍卖等。
 
 ### 4.2 拍卖类型
 
-**定义 4.2.1 (拍卖类型)**
+**定义 4.2.1 (拍卖类型)**:
 
 1. **英式拍卖**：公开竞价，价高者得
 2. **荷兰式拍卖**：从高价开始递减
 3. **密封投标拍卖**：同时提交密封投标
 4. **Vickrey拍卖**：密封投标，次高价支付
 
-**算法 4.2.1 (拍卖机制算法)**
+**算法 4.2.1 (拍卖机制算法)**:
 
 ```rust
 pub struct AuctionMechanism {
@@ -443,7 +443,7 @@ impl AuctionMechanism {
 **定理 4.3.1 (Myerson最优拍卖)**
 在独立私有价值模型中，最优拍卖是虚拟价值最高的投标者获胜，支付等于虚拟价值。
 
-**算法 4.3.1 (最优拍卖设计算法)**
+**算法 4.3.1 (最优拍卖设计算法)**:
 
 ```rust
 pub struct OptimalAuctionDesigner {
@@ -519,7 +519,7 @@ impl AllocationRule for VirtualValueAllocationRule {
 **定义 5.1.2 (共识策略)**
 共识策略包括诚实、恶意、自私等行为模式。
 
-**算法 5.1.1 (共识博弈建模算法)**
+**算法 5.1.1 (共识博弈建模算法)**:
 
 ```rust
 pub struct ConsensusGame {
@@ -600,7 +600,7 @@ impl ConsensusGame {
 **定理 5.2.1 (拜占庭容错条件)**
 在 $n$ 个节点中，最多 $f$ 个拜占庭节点，当且仅当 $n > 3f$ 时可以实现拜占庭容错。
 
-**算法 5.2.1 (拜占庭博弈分析算法)**
+**算法 5.2.1 (拜占庭博弈分析算法)**:
 
 ```rust
 pub struct ByzantineGameAnalyzer {
@@ -683,7 +683,7 @@ DAO治理博弈是代币持有者参与治理决策的博弈。
 **定义 6.1.2 (治理策略)**
 治理策略包括投票、提案、委托等行为。
 
-**算法 6.1.1 (DAO治理博弈算法)**
+**算法 6.1.1 (DAO治理博弈算法)**:
 
 ```rust
 pub struct DAOGovernanceGame {
@@ -748,7 +748,7 @@ impl DAOGovernanceGame {
 **定义 6.2.1 (投票机制)**
 投票机制是决定如何聚合个体偏好的规则。
 
-**算法 6.2.1 (投票机制设计算法)**
+**算法 6.2.1 (投票机制设计算法)**:
 
 ```rust
 pub struct VotingMechanismDesigner {
@@ -797,7 +797,7 @@ impl VotingMechanismDesigner {
 **定义 7.1.1 (激励相容)**
 机制是激励相容的，当且仅当诚实行为是每个参与者的最优策略。
 
-**算法 7.1.1 (激励相容机制设计算法)**
+**算法 7.1.1 (激励相容机制设计算法)**:
 
 ```rust
 pub struct IncentiveCompatibleDesigner {
@@ -840,7 +840,7 @@ impl IncentiveCompatibleDesigner {
 **定义 7.2.1 (代币经济学)**
 代币经济学是研究代币供应、需求、分配和使用的经济学。
 
-**算法 7.2.1 (代币经济学设计算法)**
+**算法 7.2.1 (代币经济学设计算法)**:
 
 ```rust
 pub struct TokenEconomicsDesigner {
@@ -894,7 +894,7 @@ impl TokenEconomicsDesigner {
 **定义 8.1.1 (网络安全博弈)**
 网络安全博弈是攻击者和防御者之间的策略博弈。
 
-**算法 8.1.1 (网络安全博弈分析算法)**
+**算法 8.1.1 (网络安全博弈分析算法)**:
 
 ```rust
 pub struct SecurityGameAnalyzer {
@@ -933,7 +933,7 @@ impl SecurityGameAnalyzer {
 **定义 8.2.1 (资源分配博弈)**
 资源分配博弈是多个参与者竞争有限资源的博弈。
 
-**算法 8.2.1 (资源分配博弈算法)**
+**算法 8.2.1 (资源分配博弈算法)**:
 
 ```rust
 pub struct ResourceAllocationGame {

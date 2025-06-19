@@ -62,6 +62,7 @@ P2P网络是一个分布式网络系统，其中节点既是客户端又是服�
 $$\text{P2P Network} = (N, \mathcal{C}, \mathcal{S}, \mathcal{R})$$
 
 其中：
+
 - $N$ 是节点集合
 - $\mathcal{C}$ 是客户端功能集合
 - $\mathcal{S}$ 是服务器功能集合
@@ -83,6 +84,7 @@ $$\text{P2P Network} = (N, \mathcal{C}, \mathcal{S}, \mathcal{R})$$
 $$\text{DHT} = (K, V, \mathcal{H}, \mathcal{R})$$
 
 其中：
+
 - $K$ 是键空间
 - $V$ 是值空间
 - $\mathcal{H}: K \to N$ 是哈希函数
@@ -114,7 +116,8 @@ Kademlia使用并行查询和冗余路径，提高了容错性。■
 
 $$\text{Discovery}: \text{NewNode} \times \text{BootstrapNodes} \to \text{NetworkView}$$
 
-**算法 2.3.1 (随机游走发现)**
+**算法 2.3.1 (随机游走发现)**:
+
 ```rust
 fn random_walk_discovery(
     new_node: NodeId,
@@ -204,7 +207,7 @@ $$\forall t \geq T: \text{consistent}(S_t)$$
 **定义 4.1.1 (网络协议栈)**
 Web3网络协议栈是一个分层架构：
 
-```
+```text
 ┌─────────────────┐
 │   应用层        │ 智能合约、DApp
 ├─────────────────┤
@@ -224,6 +227,7 @@ Web3网络协议栈是一个分层架构：
 $$\text{Protocol} = (S, \Sigma, \delta, s_0, F)$$
 
 其中：
+
 - $S$ 是状态集合
 - $\Sigma$ 是输入字母表
 - $\delta: S \times \Sigma \to S$ 是转移函数
@@ -238,6 +242,7 @@ $$\text{Protocol} = (S, \Sigma, \delta, s_0, F)$$
 $$\text{Message} = (\text{Header}, \text{Payload}, \text{Signature})$$
 
 其中：
+
 - $\text{Header}$ 包含元数据（类型、长度、时间戳等）
 - $\text{Payload}$ 包含实际数据
 - $\text{Signature}$ 是消息的数字签名
@@ -296,7 +301,8 @@ $$\text{Propagation}: M \times V \to 2^V$$
 
 $$\text{Synchronization}: 2^V \to 2^V$$
 
-**算法 5.2.1 (Gossip协议)**
+**算法 5.2.1 (Gossip协议)**:
+
 ```rust
 fn gossip_protocol(
     node: NodeId,
@@ -353,7 +359,8 @@ $$\min_{G} \sum_{i,j} d(i,j) \text{ subject to } \text{constraints}$$
 
 $$\text{Routing}: V \times V \to \text{Path}$$
 
-**算法 6.2.1 (Dijkstra算法)**
+**算法 6.2.1 (Dijkstra算法)**:
+
 ```rust
 fn dijkstra_shortest_path(
     graph: &Graph,
@@ -436,6 +443,7 @@ Web3网络面临的主要威胁：
 $$\text{ThreatModel} = (A, C, O)$$
 
 其中：
+
 - $A$ 是攻击者能力集合
 - $C$ 是攻击成本
 - $O$ 是攻击目标
@@ -447,7 +455,8 @@ $$\text{ThreatModel} = (A, C, O)$$
 
 $$\text{Authentication}: \text{Identity} \times \text{Proof} \to \{\text{true}, \text{false}\}$$
 
-**算法 7.2.1 (PoW身份验证)**
+**算法 7.2.1 (PoW身份验证)**:
+
 ```rust
 fn pow_identity_verification(
     node_id: NodeId,
@@ -496,7 +505,8 @@ fn pow_identity_verification(
 
 $$\max_{\text{network}} \text{Performance} \text{ subject to } \text{constraints}$$
 
-**算法 8.2.1 (负载均衡)**
+**算法 8.2.1 (负载均衡)**:
+
 ```rust
 fn load_balancing(
     nodes: &[NodeId],
@@ -553,7 +563,8 @@ $$\text{CrossChain}: \text{Chain}_1 \times \text{Message} \to \text{Chain}_2$$
 
 $$\text{AtomicSwap}: \text{Asset}_1 \times \text{Asset}_2 \to \text{Exchange}$$
 
-**算法 9.2.1 (哈希时间锁定合约)**
+**算法 9.2.1 (哈希时间锁定合约)**:
+
 ```rust
 fn htlc_atomic_swap(
     alice: Address,
@@ -607,6 +618,7 @@ HTLC协议可以保证原子交换的安全性。
 $$\text{QuantumNetwork} = (Q, \mathcal{E}, \mathcal{M})$$
 
 其中：
+
 - $Q$ 是量子节点集合
 - $\mathcal{E}$ 是量子纠缠集合
 - $\mathcal{M}$ 是量子测量操作集合
@@ -1033,4 +1045,4 @@ pub enum StorageError {
 
 ---
 
-*本文档提供了Web3网络架构的完整理论框架，为实际网络系统设计和实现提供了坚实的理论基础。* 
+*本文档提供了Web3网络架构的完整理论框架，为实际网络系统设计和实现提供了坚实的理论基础。*

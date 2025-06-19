@@ -5,15 +5,41 @@
 - [高级统一形式理论综合](#高级统一形式理论综合)
   - [目录](#目录)
   - [1. 引言](#1-引言)
+    - [1.1 统一框架的目标](#11-统一框架的目标)
+    - [1.2 统一框架的意义](#12-统一框架的意义)
   - [2. 统一形式系统框架](#2-统一形式系统框架)
+    - [2.1 基本定义](#21-基本定义)
+    - [2.2 统一公理系统](#22-统一公理系统)
   - [3. 类型理论统一](#3-类型理论统一)
+    - [3.1 统一类型系统](#31-统一类型系统)
+    - [3.2 线性类型系统](#32-线性类型系统)
+    - [3.3 时态类型系统](#33-时态类型系统)
   - [4. 时态逻辑与控制论统一](#4-时态逻辑与控制论统一)
+    - [4.1 统一时态逻辑](#41-统一时态逻辑)
+    - [4.2 控制论统一](#42-控制论统一)
+    - [4.3 时态逻辑控制](#43-时态逻辑控制)
   - [5. Petri网与分布式系统统一](#5-petri网与分布式系统统一)
+    - [5.1 统一Petri网](#51-统一petri网)
+    - [5.2 分布式系统统一](#52-分布式系统统一)
+    - [5.3 Petri网与分布式系统映射](#53-petri网与分布式系统映射)
   - [6. 形式语言理论统一](#6-形式语言理论统一)
+    - [6.1 统一形式语言](#61-统一形式语言)
+    - [6.2 自动机统一](#62-自动机统一)
   - [7. 量子形式理论](#7-量子形式理论)
+    - [7.1 量子类型系统](#71-量子类型系统)
+    - [7.2 量子逻辑](#72-量子逻辑)
   - [8. 理论映射与转换](#8-理论映射与转换)
+    - [8.1 映射系统](#81-映射系统)
+    - [8.2 转换规则](#82-转换规则)
   - [9. Rust实现示例](#9-rust实现示例)
+    - [9.1 统一类型系统实现](#91-统一类型系统实现)
+    - [9.2 统一时态逻辑实现](#92-统一时态逻辑实现)
+    - [9.3 统一Petri网实现](#93-统一petri网实现)
   - [10. 应用与展望](#10-应用与展望)
+    - [10.1 应用领域](#101-应用领域)
+    - [10.2 未来发展方向](#102-未来发展方向)
+    - [10.3 挑战与机遇](#103-挑战与机遇)
+  - [结论](#结论)
 
 ## 1. 引言
 
@@ -40,6 +66,7 @@
 **定义 2.1**（统一形式系统）：统一形式系统是一个八元组：
 $$\mathcal{UFS} = (S, T, L, C, P, Q, M, F)$$
 其中：
+
 - $S$ 是符号系统
 - $T$ 是类型系统
 - $L$ 是逻辑系统
@@ -73,6 +100,7 @@ $$\phi: \mathcal{T}_1 \leftrightarrow \mathcal{T}_2$$
 **定义 3.1**（统一类型系统）：统一类型系统定义为：
 $$\mathcal{UTS} = (E, \tau, \vdash, \rightarrow, \otimes, \multimap, \diamond)$$
 其中：
+
 - $E$ 是表达式集合
 - $\tau$ 是类型集合
 - $\vdash$ 是类型判定关系
@@ -100,6 +128,7 @@ $$\frac{\Gamma \vdash e : \tau}{\Gamma, x: \tau \vdash e : \tau}$$
 $$\frac{\Gamma \vdash e : \tau}{\Gamma \vdash \text{next}(e) : \diamond \tau}$$
 
 **定义 3.6**（时态操作符）：
+
 - $\diamond \tau$：下一个时刻的类型
 - $\square \tau$：总是成立的类型
 - $\tau_1 \mathcal{U} \tau_2$：直到操作符
@@ -111,6 +140,7 @@ $$\frac{\Gamma \vdash e : \tau}{\Gamma \vdash \text{next}(e) : \diamond \tau}$$
 **定义 4.1**（统一时态逻辑）：统一时态逻辑定义为：
 $$\mathcal{UTL} = (P, \mathcal{T}, \models, \text{next}, \text{until}, \text{always}, \text{eventually})$$
 其中：
+
 - $P$ 是命题集合
 - $\mathcal{T}$ 是时间结构
 - $\models$ 是满足关系
@@ -126,6 +156,7 @@ $$\phi ::= p \mid \neg \phi \mid \phi \wedge \phi \mid \text{next}(\phi) \mid \p
 **定义 4.3**（统一控制系统）：统一控制系统定义为：
 $$\mathcal{UCS} = (X, U, Y, f, g, h)$$
 其中：
+
 - $X$ 是状态空间
 - $U$ 是控制输入空间
 - $Y$ 是输出空间
@@ -152,6 +183,7 @@ $$\mathcal{TLC} = (\mathcal{UTL}, \mathcal{UCS}, \text{synthesize})$$
 **定义 5.1**（统一Petri网）：统一Petri网定义为：
 $$\mathcal{UPN} = (P, T, F, M_0, \lambda, \tau)$$
 其中：
+
 - $P$ 是库所集合
 - $T$ 是变迁集合
 - $F \subseteq (P \times T) \cup (T \times P)$ 是流关系
@@ -160,6 +192,7 @@ $$\mathcal{UPN} = (P, T, F, M_0, \lambda, \tau)$$
 - $\tau: T \rightarrow \mathbb{R}^+$ 是变迁延迟
 
 **定义 5.2**（Petri网性质）：
+
 - **活性**：每个变迁最终都能被激发
 - **有界性**：每个库所的标记数有上界
 - **可达性**：从初始标识可达的所有标识
@@ -170,6 +203,7 @@ $$\mathcal{UPN} = (P, T, F, M_0, \lambda, \tau)$$
 **定义 5.3**（统一分布式系统）：统一分布式系统定义为：
 $$\mathcal{UDS} = (N, M, C, P, L)$$
 其中：
+
 - $N$ 是节点集合
 - $M$ 是消息集合
 - $C$ 是通信协议
@@ -179,6 +213,7 @@ $$\mathcal{UDS} = (N, M, C, P, L)$$
 **定义 5.4**（一致性协议）：一致性协议定义为：
 $$\mathcal{CP} = (N, \text{propose}, \text{decide}, \text{learn})$$
 其中：
+
 - $\text{propose}: V \rightarrow \text{Unit}$ 是提议函数
 - $\text{decide}: V \rightarrow \text{Unit}$ 是决定函数
 - $\text{learn}: V \rightarrow \text{Unit}$ 是学习函数
@@ -188,6 +223,7 @@ $$\mathcal{CP} = (N, \text{propose}, \text{decide}, \text{learn})$$
 **定义 5.5**（映射关系）：Petri网与分布式系统的映射：
 $$\phi: \mathcal{UPN} \rightarrow \mathcal{UDS}$$
 其中：
+
 - 库所映射到节点状态
 - 变迁映射到消息传递
 - 标识映射到系统状态
@@ -201,12 +237,14 @@ $$\phi: \mathcal{UPN} \rightarrow \mathcal{UDS}$$
 **定义 6.1**（统一形式语言）：统一形式语言定义为：
 $$\mathcal{UFL} = (\Sigma, G, A, R)$$
 其中：
+
 - $\Sigma$ 是字母表
 - $G$ 是文法系统
 - $A$ 是自动机系统
 - $R$ 是正则表达式系统
 
 **定义 6.2**（乔姆斯基层次）：乔姆斯基层次定义为：
+
 - **类型0**：无限制文法
 - **类型1**：上下文相关文法
 - **类型2**：上下文无关文法
@@ -217,6 +255,7 @@ $$\mathcal{UFL} = (\Sigma, G, A, R)$$
 **定义 6.3**（统一自动机）：统一自动机定义为：
 $$\mathcal{UA} = (Q, \Sigma, \delta, q_0, F, \lambda)$$
 其中：
+
 - $Q$ 是状态集合
 - $\Sigma$ 是输入字母表
 - $\delta: Q \times \Sigma \rightarrow Q$ 是转移函数
@@ -233,6 +272,7 @@ $$\mathcal{UA} = (Q, \Sigma, \delta, q_0, F, \lambda)$$
 **定义 7.1**（量子类型系统）：量子类型系统定义为：
 $$\mathcal{QTS} = (E, \tau, \vdash, \otimes, \multimap, \text{measure}, \text{superpose})$$
 其中：
+
 - $\otimes$ 是张量积类型
 - $\text{measure}$ 是测量操作
 - $\text{superpose}$ 是叠加操作
@@ -245,6 +285,7 @@ $$\tau ::= \text{Qubit} \mid \tau \otimes \tau \mid \tau \multimap \tau \mid \te
 **定义 7.3**（量子逻辑）：量子逻辑定义为：
 $$\mathcal{QL} = (H, \mathcal{O}, \text{measure}, \text{evolve})$$
 其中：
+
 - $H$ 是希尔伯特空间
 - $\mathcal{O}$ 是观测算子集合
 - $\text{measure}$ 是测量函数
@@ -259,6 +300,7 @@ $$\mathcal{QL} = (H, \mathcal{O}, \text{measure}, \text{evolve})$$
 **定义 8.1**（理论映射系统）：理论映射系统定义为：
 $$\mathcal{TMS} = (\mathcal{T}_1, \mathcal{T}_2, \phi, \psi, \text{verify})$$
 其中：
+
 - $\mathcal{T}_1, \mathcal{T}_2$ 是源理论和目标理论
 - $\phi: \mathcal{T}_1 \rightarrow \mathcal{T}_2$ 是正向映射
 - $\psi: \mathcal{T}_2 \rightarrow \mathcal{T}_1$ 是反向映射
@@ -771,4 +813,4 @@ impl PetriNet {
 3. **应用指导**：为实际系统设计提供了理论指导
 4. **创新基础**：为理论创新提供了统一的基础
 
-统一形式理论框架将继续发展，为构建安全、可靠、高效的复杂系统提供坚实的理论基础。 
+统一形式理论框架将继续发展，为构建安全、可靠、高效的复杂系统提供坚实的理论基础。

@@ -5,17 +5,49 @@
 - [高级代理框架理论形式化分析](#高级代理框架理论形式化分析)
   - [目录](#目录)
   - [1. 引言](#1-引言)
+    - [1.1 研究背景](#11-研究背景)
+    - [1.2 形式化分析的重要性](#12-形式化分析的重要性)
   - [2. 代理框架的形式化基础](#2-代理框架的形式化基础)
+    - [2.1 基本定义](#21-基本定义)
+    - [2.2 处理流程](#22-处理流程)
   - [3. 异步并发模型](#3-异步并发模型)
+    - [3.1 异步执行](#31-异步执行)
+    - [3.2 并发控制](#32-并发控制)
+    - [3.3 任务调度](#33-任务调度)
   - [4. HTTP协议处理](#4-http协议处理)
+    - [4.1 HTTP解析](#41-http解析)
+    - [4.2 协议升级](#42-协议升级)
   - [5. 连接管理理论](#5-连接管理理论)
+    - [5.1 连接池](#51-连接池)
+    - [5.2 连接生命周期](#52-连接生命周期)
   - [6. 路由与负载均衡](#6-路由与负载均衡)
+    - [6.1 路由算法](#61-路由算法)
+    - [6.2 负载均衡](#62-负载均衡)
   - [7. 安全机制](#7-安全机制)
+    - [7.1 TLS实现](#71-tls实现)
+    - [7.2 访问控制](#72-访问控制)
   - [8. 性能优化理论](#8-性能优化理论)
+    - [8.1 零拷贝技术](#81-零拷贝技术)
+    - [8.2 内存管理](#82-内存管理)
+    - [8.3 缓存策略](#83-缓存策略)
   - [9. 可扩展性设计](#9-可扩展性设计)
+    - [9.1 插件系统](#91-插件系统)
+    - [9.2 中间件](#92-中间件)
   - [10. Rust实现示例](#10-rust实现示例)
+    - [10.1 基础代理框架](#101-基础代理框架)
+    - [10.2 连接池实现](#102-连接池实现)
+    - [10.3 负载均衡器实现](#103-负载均衡器实现)
+    - [10.4 中间件实现](#104-中间件实现)
   - [11. 形式化验证](#11-形式化验证)
+    - [11.1 并发安全验证](#111-并发安全验证)
+    - [11.2 性能验证](#112-性能验证)
+    - [11.3 安全验证](#113-安全验证)
   - [12. 未来发展方向](#12-未来发展方向)
+    - [12.1 协议扩展](#121-协议扩展)
+    - [12.2 性能优化](#122-性能优化)
+    - [12.3 安全增强](#123-安全增强)
+    - [12.4 智能化](#124-智能化)
+  - [结论](#结论)
 
 ## 1. 引言
 
@@ -39,6 +71,7 @@
 **定义 2.1**（代理框架）：代理框架是一个六元组：
 $$\mathcal{P} = (S, R, H, C, L, F)$$
 其中：
+
 - $S$ 是服务器集合
 - $R$ 是请求集合
 - $H$ 是处理器集合
@@ -49,6 +82,7 @@ $$\mathcal{P} = (S, R, H, C, L, F)$$
 **定义 2.2**（请求）：请求是一个四元组：
 $$r = (id, method, uri, headers)$$
 其中：
+
 - $id$ 是请求标识符
 - $method$ 是HTTP方法
 - $uri$ 是统一资源标识符
@@ -57,6 +91,7 @@ $$r = (id, method, uri, headers)$$
 **定义 2.3**（响应）：响应是一个四元组：
 $$resp = (id, status, headers, body)$$
 其中：
+
 - $id$ 是响应标识符
 - $status$ 是HTTP状态码
 - $headers$ 是HTTP头部集合
@@ -68,6 +103,7 @@ $$resp = (id, status, headers, body)$$
 $$\text{process}: R \rightarrow \text{Response}$$
 
 处理流程包含以下阶段：
+
 1. **接收阶段**：接收客户端请求
 2. **解析阶段**：解析HTTP协议
 3. **路由阶段**：确定目标服务器
@@ -89,6 +125,7 @@ $$\text{Task} = \text{Future}[\text{Result}]$$
 **定义 3.2**（异步执行器）：异步执行器定义为：
 $$\mathcal{E} = (T, S, \text{schedule})$$
 其中：
+
 - $T$ 是任务集合
 - $S$ 是调度器
 - $\text{schedule}: T \rightarrow \text{Unit}$ 是调度函数
@@ -105,6 +142,7 @@ $$\forall r_1, r_2 \in R: r_1 \neq r_2 \Rightarrow \text{isolated}(r_1, r_2)$$
 
 **证明**：
 Rust的所有权系统确保：
+
 1. 每个值只有一个所有者
 2. 借用检查器防止数据竞争
 3. 生命周期系统确保内存安全
@@ -117,6 +155,7 @@ $$\text{schedule}: T \times \text{Priority} \rightarrow \text{Unit}$$
 **定义 3.6**（工作窃取）：工作窃取调度器定义为：
 $$\mathcal{WS} = (Q_1, Q_2, \ldots, Q_n, \text{steal})$$
 其中：
+
 - $Q_i$ 是第 $i$ 个工作队列
 - $\text{steal}: Q_i \times Q_j \rightarrow Q_i$ 是窃取函数
 
@@ -129,6 +168,7 @@ $$\mathcal{WS} = (Q_1, Q_2, \ldots, Q_n, \text{steal})$$
 **定义 4.1**（HTTP解析器）：HTTP解析器定义为：
 $$\text{HTTPParser} = (B, P, \text{parse})$$
 其中：
+
 - $B$ 是字节缓冲区
 - $P$ 是解析状态
 - $\text{parse}: B \rightarrow \text{Request} \cup \text{Error}$ 是解析函数
@@ -155,6 +195,7 @@ $$\text{multiplex}: \text{Stream}_1 \times \text{Stream}_2 \times \cdots \times 
 **定义 5.1**（连接池）：连接池定义为：
 $$\mathcal{CP} = (C, \text{acquire}, \text{release}, \text{max\_size})$$
 其中：
+
 - $C$ 是连接集合
 - $\text{acquire}: \mathcal{CP} \rightarrow C \cup \text{None}$ 是获取连接函数
 - $\text{release}: C \rightarrow \mathcal{CP}$ 是释放连接函数
@@ -182,6 +223,7 @@ $$\text{timeout}: C \times \text{Duration} \rightarrow \text{Unit}$$
 **定义 6.1**（路由表）：路由表定义为：
 $$\mathcal{RT} = (R, \text{match}, \text{target})$$
 其中：
+
 - $R$ 是路由规则集合
 - $\text{match}: \text{Request} \times R \rightarrow \text{Boolean}$ 是匹配函数
 - $\text{target}: R \rightarrow S$ 是目标服务器函数
@@ -194,6 +236,7 @@ $$\text{route}: \text{Request} \rightarrow S \cup \text{None}$$
 **定义 6.3**（负载均衡器）：负载均衡器定义为：
 $$\mathcal{LB} = (S, \text{select}, \text{health\_check})$$
 其中：
+
 - $S$ 是服务器集合
 - $\text{select}: \text{Request} \times S \rightarrow S$ 是选择函数
 - $\text{health\_check}: S \rightarrow \text{Boolean}$ 是健康检查函数
@@ -221,6 +264,7 @@ $$\mathcal{LB} = (S, \text{select}, \text{health\_check})$$
 **定义 7.1**（TLS连接）：TLS连接定义为：
 $$\text{TLSConnection} = (C, \text{cert}, \text{cipher}, \text{key\_exchange})$$
 其中：
+
 - $C$ 是底层连接
 - $\text{cert}$ 是证书
 - $\text{cipher}$ 是加密套件
@@ -256,6 +300,7 @@ $$\text{zero\_copy}: \text{Buffer}_1 \rightarrow \text{Buffer}_2$$
 **定义 8.2**（内存池）：内存池定义为：
 $$\mathcal{MP} = (P, \text{alloc}, \text{free}, \text{size})$$
 其中：
+
 - $P$ 是内存块集合
 - $\text{alloc}: \mathcal{MP} \times \text{Size} \rightarrow \text{Pointer}$ 是分配函数
 - $\text{free}: \text{Pointer} \rightarrow \mathcal{MP}$ 是释放函数
@@ -268,6 +313,7 @@ $$\mathcal{MP} = (P, \text{alloc}, \text{free}, \text{size})$$
 **定义 8.3**（缓存）：缓存定义为：
 $$\mathcal{Cache} = (K, V, \text{get}, \text{set}, \text{evict})$$
 其中：
+
 - $K$ 是键集合
 - $V$ 是值集合
 - $\text{get}: K \rightarrow V \cup \text{None}$ 是获取函数
@@ -283,6 +329,7 @@ $$\mathcal{Cache} = (K, V, \text{get}, \text{set}, \text{evict})$$
 **定义 9.1**（插件）：插件定义为：
 $$\text{Plugin} = (H, \text{init}, \text{process}, \text{cleanup})$$
 其中：
+
 - $H$ 是钩子集合
 - $\text{init}$ 是初始化函数
 - $\text{process}$ 是处理函数
@@ -959,4 +1006,4 @@ impl Middleware for AuthenticationMiddleware {
 3. **指导实现**：为实际系统提供理论指导
 4. **推动创新**：为新技术发展提供基础
 
-代理框架的形式化理论将继续发展，为构建高性能、安全、可扩展的网络基础设施提供坚实的理论基础。 
+代理框架的形式化理论将继续发展，为构建高性能、安全、可扩展的网络基础设施提供坚实的理论基础。

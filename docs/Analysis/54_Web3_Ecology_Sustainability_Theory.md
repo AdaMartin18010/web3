@@ -42,6 +42,7 @@ Web3生态系统是一个由多个相互作用的组件构成的复杂系统：
 $$\text{Web3Ecosystem} = (N, I, F, E)$$
 
 其中：
+
 - $N$ 是节点集合 (Nodes)
 - $I$ 是交互关系集合 (Interactions)
 - $F$ 是功能集合 (Functions)
@@ -95,6 +96,7 @@ Web3节点种群的增长模型：
 $$\frac{dN}{dt} = rN\left(1 - \frac{N}{K}\right)$$
 
 其中：
+
 - $N$ 是种群大小
 - $r$ 是内禀增长率
 - $K$ 是环境承载力
@@ -452,37 +454,37 @@ impl Web3Ecosystem {
     pub fn calculate_stability(&self) -> f64 {
         let diversity = self.calculate_diversity();
         let redundancy = self.calculate_redundancy();
-        
+
         // 稳定性 = f(多样性, 冗余度)
         diversity * 0.6 + redundancy * 0.4
     }
-    
+
     /// 计算生态多样性
     pub fn calculate_diversity(&self) -> f64 {
         let node_types: HashSet<NodeType> = self.nodes
             .iter()
             .map(|node| node.node_type.clone())
             .collect();
-        
+
         // Shannon多样性指数
         let total_nodes = self.nodes.len() as f64;
         let mut diversity = 0.0;
-        
+
         for node_type in node_types {
             let count = self.nodes
                 .iter()
                 .filter(|node| node.node_type == node_type)
                 .count() as f64;
-            
+
             let proportion = count / total_nodes;
             if proportion > 0.0 {
                 diversity -= proportion * proportion.ln();
             }
         }
-        
+
         diversity
     }
-    
+
     /// 计算生态冗余度
     pub fn calculate_redundancy(&self) -> f64 {
         let critical_functions: Vec<EcosystemFunction> = self.functions
@@ -490,23 +492,23 @@ impl Web3Ecosystem {
             .filter(|f| f.is_critical)
             .cloned()
             .collect();
-        
+
         let mut redundancy = 0.0;
         for function in critical_functions {
             let providers = self.nodes
                 .iter()
                 .filter(|node| node.provides_function(&function))
                 .count();
-            
+
             redundancy += (providers as f64 - 1.0).max(0.0);
         }
-        
+
         redundancy / critical_functions.len() as f64
     }
 }
 
 /// 生态系统节点
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct EcosystemNode {
     pub id: NodeId,
     pub node_type: NodeType,
@@ -521,10 +523,10 @@ impl EcosystemNode {
     pub fn calculate_carbon_footprint(&self) -> f64 {
         let non_renewable_energy = self.energy_consumption * (1.0 - self.renewable_energy_ratio);
         let carbon_intensity = 0.5; // kg CO2/kWh
-        
+
         non_renewable_energy * carbon_intensity
     }
-    
+
     /// 检查是否为绿色节点
     pub fn is_green_node(&self) -> bool {
         self.renewable_energy_ratio >= 0.8
@@ -548,7 +550,7 @@ impl SustainabilityAssessment {
         let economic_score = self.calculate_economic_score();
         let social_score = self.calculate_social_score();
         let environmental_score = self.calculate_environmental_score();
-        
+
         TripleBottomLine {
             economic: economic_score,
             social: social_score,
@@ -556,35 +558,35 @@ impl SustainabilityAssessment {
             overall: (economic_score + social_score + environmental_score) / 3.0,
         }
     }
-    
+
     /// 计算经济得分
     pub fn calculate_economic_score(&self) -> f64 {
         let gdp_growth = self.economic_metrics.gdp_growth;
         let employment_rate = self.economic_metrics.employment_rate;
         let income_equality = self.economic_metrics.income_equality;
-        
+
         (gdp_growth * 0.4 + employment_rate * 0.4 + income_equality * 0.2) / 100.0
     }
-    
+
     /// 计算社会得分
     pub fn calculate_social_score(&self) -> f64 {
         let education_access = self.social_metrics.education_access;
         let healthcare_access = self.social_metrics.healthcare_access;
         let social_inclusion = self.social_metrics.social_inclusion;
-        
+
         (education_access * 0.4 + healthcare_access * 0.4 + social_inclusion * 0.2) / 100.0
     }
-    
+
     /// 计算环境得分
     pub fn calculate_environmental_score(&self) -> f64 {
         let carbon_emissions = self.environmental_metrics.carbon_emissions;
         let renewable_energy = self.environmental_metrics.renewable_energy_ratio;
         let waste_recycling = self.environmental_metrics.waste_recycling_rate;
-        
+
         let carbon_score = (100.0 - carbon_emissions).max(0.0) / 100.0;
         let renewable_score = renewable_energy / 100.0;
         let waste_score = waste_recycling / 100.0;
-        
+
         carbon_score * 0.5 + renewable_score * 0.3 + waste_score * 0.2
     }
 }
@@ -606,13 +608,13 @@ impl GreenConsensus {
             ConsensusType::ProofOfAuthority => 0.99, // 99% 效率
         }
     }
-    
+
     /// 计算碳足迹
     pub fn calculate_carbon_footprint(&self) -> f64 {
         let base_energy = 1000.0; // kWh per transaction
         let efficiency = self.calculate_energy_efficiency();
         let carbon_intensity = 0.5; // kg CO2/kWh
-        
+
         base_energy * (1.0 - efficiency) * carbon_intensity
     }
 }
@@ -635,34 +637,34 @@ impl EcologicalGovernance {
         if !self.validate_proposal(&proposal)? {
             return Err(GovernanceError::InvalidProposal);
         }
-        
+
         // 投票
         let vote_result = self.dao.vote(&proposal)?;
-        
+
         if vote_result.passed {
             // 执行提案
             self.execute_proposal(&proposal)?;
-            
+
             // 更新碳信用
             if let Some(carbon_impact) = proposal.carbon_impact {
                 self.carbon_credits.update_credits(carbon_impact)?;
             }
-            
+
             // 记录审计
             self.environmental_audit.record_execution(&proposal)?;
         }
-        
+
         Ok(())
     }
-    
+
     /// 计算治理效率
     pub fn calculate_governance_efficiency(&self) -> f64 {
         let participation_rate = self.dao.get_participation_rate();
         let decision_quality = self.calculate_decision_quality();
-        
+
         participation_rate * 0.6 + decision_quality * 0.4
     }
-    
+
     /// 计算决策质量
     pub fn calculate_decision_quality(&self) -> f64 {
         let recent_decisions = self.dao.get_recent_decisions(100);
@@ -670,7 +672,7 @@ impl EcologicalGovernance {
             .iter()
             .filter(|decision| decision.outcome == DecisionOutcome::Positive)
             .count();
-        
+
         positive_outcomes as f64 / recent_decisions.len() as f64
     }
 }
@@ -688,18 +690,18 @@ impl CarbonCreditSystem {
         if credits > self.total_credits {
             return Err(CarbonCreditError::InsufficientCredits);
         }
-        
+
         *self.allocated_credits.entry(node_id).or_insert(0.0) += credits;
         self.total_credits -= credits;
-        
+
         Ok(())
     }
-    
+
     /// 计算碳信用价值
     pub fn calculate_credit_value(&self, credits: f64) -> f64 {
         credits * self.carbon_price
     }
-    
+
     /// 更新碳信用
     pub fn update_credits(&mut self, carbon_impact: f64) -> Result<(), CarbonCreditError> {
         if carbon_impact > 0.0 {
@@ -713,7 +715,7 @@ impl CarbonCreditSystem {
             }
             self.total_credits -= required_credits;
         }
-        
+
         Ok(())
     }
 }
@@ -742,7 +744,7 @@ impl EthereumGreenTransition {
     pub fn calculate_environmental_benefits(&self) -> EnvironmentalBenefits {
         let energy_savings = self.old_energy_consumption - self.new_energy_consumption;
         let carbon_savings = energy_savings * 0.5; // kg CO2/kWh
-        
+
         EnvironmentalBenefits {
             energy_savings,
             carbon_savings,
@@ -774,7 +776,7 @@ impl RenewableMiningFarm {
         let renewable_score = self.renewable_energy_ratio;
         let storage_score = (self.energy_storage_capacity / 1000.0).min(1.0);
         let grid_score = if self.grid_integration { 1.0 } else { 0.5 };
-        
+
         renewable_score * 0.6 + storage_score * 0.3 + grid_score * 0.1
     }
 }
@@ -875,4 +877,4 @@ Web3系统工程的生态学与可持续发展理论为构建环境友好、可�
 - [00_Progress_Tracking.md](./00_Progress_Tracking.md) - 项目进度跟踪
 - [52_Web3_Systems_Engineering_Philosophy.md](./52_Web3_Systems_Engineering_Philosophy.md) - Web3系统工程哲学基础
 - [53_Web3_Cognitive_Science_AI_Foundations.md](./53_Web3_Cognitive_Science_AI_Foundations.md) - Web3认知科学与人工智能基础
-- [46_Quantum_Web3_Theory.md](./46_Quantum_Web3_Theory.md) - 量子Web3理论 
+- [46_Quantum_Web3_Theory.md](./46_Quantum_Web3_Theory.md) - 量子Web3理论

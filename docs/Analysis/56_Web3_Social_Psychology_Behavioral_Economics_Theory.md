@@ -488,14 +488,14 @@ impl SocialCognitionModel {
             interactions: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     /// 添加代理
     pub fn add_agent(&self, id: String, agent: Agent) -> Result<(), String> {
         let mut agents = self.agents.lock().unwrap();
         agents.insert(id, agent);
         Ok(())
     }
-    
+
     /// 社会认知过程
     pub fn cognitive_process(&self, agent_id: &str, stimulus: &str) -> String {
         let agents = self.agents.lock().unwrap();
@@ -505,7 +505,7 @@ impl SocialCognitionModel {
             "Unknown agent".to_string()
         }
     }
-    
+
     /// 记录交互
     pub fn record_interaction(&self, from: String, to: String, action: String) {
         let interaction = Interaction {
@@ -536,7 +536,7 @@ impl Agent {
             social_network: Vec::new(),
         }
     }
-    
+
     /// 处理刺激
     pub fn process_stimulus(&self, stimulus: &str) -> String {
         // 简化的认知处理
@@ -550,17 +550,17 @@ impl Agent {
             "Neutral response".to_string()
         }
     }
-    
+
     /// 更新信念
     pub fn update_belief(&mut self, topic: String, value: f64) {
         self.beliefs.insert(topic, value);
     }
-    
+
     /// 更新态度
     pub fn update_attitude(&mut self, object: String, value: f64) {
         self.attitudes.insert(object, value);
     }
-    
+
     /// 添加社交连接
     pub fn add_connection(&mut self, agent_id: String) {
         self.social_network.push(agent_id);
@@ -598,7 +598,7 @@ impl ProspectTheory {
             gamma: 0.61,
         }
     }
-    
+
     /// 价值函数
     pub fn value_function(&self, x: f64) -> f64 {
         if x >= 0.0 {
@@ -607,25 +607,25 @@ impl ProspectTheory {
             -self.lambda * (-x).powf(self.beta)
         }
     }
-    
+
     /// 权重函数
     pub fn weight_function(&self, p: f64) -> f64 {
         p.powf(self.gamma) / (p.powf(self.gamma) + (1.0 - p).powf(self.gamma)).powf(1.0 / self.gamma)
     }
-    
+
     /// 前景值计算
     pub fn prospect_value(&self, outcomes: &[(f64, f64)]) -> f64 {
         let mut value = 0.0;
-        
+
         for (outcome, probability) in outcomes {
             let v = self.value_function(*outcome);
             let w = self.weight_function(*probability);
             value += v * w;
         }
-        
+
         value
     }
-    
+
     /// 风险态度判断
     pub fn risk_attitude(&self, prospect_value: f64, expected_value: f64) -> String {
         if prospect_value > expected_value {
@@ -651,7 +651,7 @@ impl TimePreferenceModel {
             delta: 0.95,
         }
     }
-    
+
     /// 贴现函数
     pub fn discount_function(&self, t: usize) -> f64 {
         if t == 0 {
@@ -660,17 +660,17 @@ impl TimePreferenceModel {
             self.beta * self.delta.powi(t as i32)
         }
     }
-    
+
     /// 现值计算
     pub fn present_value(&self, future_value: f64, time: usize) -> f64 {
         future_value * self.discount_function(time)
     }
-    
+
     /// 时间一致性检查
     pub fn time_consistency(&self, short_delay: usize, long_delay: usize) -> bool {
         let short_discount = self.discount_function(short_delay);
         let long_discount = self.discount_function(long_delay);
-        
+
         // 检查是否满足时间一致性
         short_discount / long_discount == self.discount_function(short_delay - long_delay)
     }
@@ -699,30 +699,30 @@ impl TokenIncentiveSystem {
             participants: HashMap::new(),
         }
     }
-    
+
     /// 添加参与者
     pub fn add_participant(&mut self, id: String, initial_tokens: u64) -> Result<(), String> {
         if self.circulating_supply + initial_tokens > self.total_supply {
             return Err("Exceeds total supply".to_string());
         }
-        
+
         let participant = Participant {
             id: id.clone(),
             tokens: initial_tokens,
             contribution_score: 0.0,
             reputation: 0.0,
         };
-        
+
         self.participants.insert(id, participant);
         self.circulating_supply += initial_tokens;
         Ok(())
     }
-    
+
     /// 贡献奖励
     pub fn reward_contribution(&mut self, participant_id: &str, contribution: f64) -> Result<u64, String> {
         if let Some(participant) = self.participants.get_mut(participant_id) {
             let reward = (contribution * self.reward_pool as f64 / 1000.0) as u64;
-            
+
             if reward <= self.reward_pool {
                 participant.tokens += reward;
                 participant.contribution_score += contribution;
@@ -736,7 +736,7 @@ impl TokenIncentiveSystem {
             Err("Participant not found".to_string())
         }
     }
-    
+
     /// 声誉惩罚
     pub fn penalize(&mut self, participant_id: &str, penalty: f64) -> Result<(), String> {
         if let Some(participant) = self.participants.get_mut(participant_id) {
@@ -746,7 +746,7 @@ impl TokenIncentiveSystem {
             Err("Participant not found".to_string())
         }
     }
-    
+
     /// 获取参与者信息
     pub fn get_participant(&self, id: &str) -> Option<&Participant> {
         self.participants.get(id)
@@ -782,7 +782,7 @@ impl GroupDecisionSystem {
             consensus_threshold,
         }
     }
-    
+
     /// 添加成员
     pub fn add_member(&mut self, id: String, influence: f64) {
         let member = GroupMember {
@@ -793,49 +793,49 @@ impl GroupDecisionSystem {
         };
         self.members.push(member);
     }
-    
+
     /// 群体决策
     pub fn make_decision(&mut self, topic: String) -> DecisionResult {
         // 收集初始意见
         let initial_opinions: Vec<f64> = self.members.iter().map(|m| m.initial_opinion).collect();
-        
+
         // 意见动力学演化
         let final_opinions = self.opinion_dynamics(&initial_opinions);
-        
+
         // 计算群体意见
         let group_opinion = self.calculate_group_opinion(&final_opinions);
-        
+
         // 判断是否达成共识
         let consensus = self.check_consensus(&final_opinions);
-        
+
         let decision = Decision {
             topic,
             group_opinion,
             consensus,
             timestamp: std::time::SystemTime::now(),
         };
-        
+
         self.decision_history.push(decision.clone());
-        
+
         DecisionResult {
             decision,
             individual_opinions: final_opinions,
         }
     }
-    
+
     /// 意见动力学
     fn opinion_dynamics(&self, initial_opinions: &[f64]) -> Vec<f64> {
         let mut opinions = initial_opinions.to_vec();
         let learning_rate = 0.1;
         let iterations = 100;
-        
+
         for _ in 0..iterations {
             let mut new_opinions = opinions.clone();
-            
+
             for i in 0..opinions.len() {
                 let mut influence_sum = 0.0;
                 let mut weighted_sum = 0.0;
-                
+
                 for j in 0..opinions.len() {
                     if i != j {
                         let influence = self.members[j].influence;
@@ -843,49 +843,49 @@ impl GroupDecisionSystem {
                         weighted_sum += influence * opinions[j];
                     }
                 }
-                
+
                 if influence_sum > 0.0 {
                     let average_opinion = weighted_sum / influence_sum;
                     new_opinions[i] += learning_rate * (average_opinion - opinions[i]);
                     new_opinions[i] = new_opinions[i].max(0.0).min(1.0);
                 }
             }
-            
+
             opinions = new_opinions;
         }
-        
+
         opinions
     }
-    
+
     /// 计算群体意见
     fn calculate_group_opinion(&self, opinions: &[f64]) -> f64 {
         let mut weighted_sum = 0.0;
         let mut total_influence = 0.0;
-        
+
         for (i, opinion) in opinions.iter().enumerate() {
             let influence = self.members[i].influence;
             weighted_sum += influence * opinion;
             total_influence += influence;
         }
-        
+
         if total_influence > 0.0 {
             weighted_sum / total_influence
         } else {
             0.5
         }
     }
-    
+
     /// 检查共识
     fn check_consensus(&self, opinions: &[f64]) -> bool {
         if opinions.is_empty() {
             return false;
         }
-        
+
         let mean_opinion = opinions.iter().sum::<f64>() / opinions.len() as f64;
         let variance = opinions.iter()
             .map(|&x| (x - mean_opinion).powi(2))
             .sum::<f64>() / opinions.len() as f64;
-        
+
         variance < (1.0 - self.consensus_threshold).powi(2)
     }
 }
@@ -899,7 +899,7 @@ pub struct GroupMember {
 }
 
 /// 决策
-#[derive(Clone)]
+# [derive(Clone)]
 pub struct Decision {
     pub topic: String,
     pub group_opinion: f64,
@@ -1037,4 +1037,4 @@ $$\text{TechnologyFusion}(F) \implies \text{BetterEffect}(F)$$
 2. 行为经济学基础理论
 3. 代币经济学设计
 4. 群体动力学模型
-5. 激励机制设计理论 
+5. 激励机制设计理论

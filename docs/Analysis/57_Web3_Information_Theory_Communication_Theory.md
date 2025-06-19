@@ -42,6 +42,7 @@ $$H(X) = -\sum_{i=1}^{n} p_i \log_2 p_i$$
 
 **定理 2.1.1** (熵的性质)
 香农熵具有以下性质：
+
 1. $H(X) \geq 0$
 2. $H(X) = 0$ 当且仅当 $X$ 是确定性变量
 3. $H(X) \leq \log_2 n$，等号当且仅当 $X$ 是均匀分布
@@ -319,19 +320,19 @@ impl EntropyCalculator {
             total_count: 0,
         }
     }
-    
+
     /// 添加符号
     pub fn add_symbol(&mut self, symbol: char) {
         *self.symbol_counts.entry(symbol).or_insert(0) += 1;
         self.total_count += 1;
     }
-    
+
     /// 计算香农熵
     pub fn shannon_entropy(&self) -> f64 {
         if self.total_count == 0 {
             return 0.0;
         }
-        
+
         let mut entropy = 0.0;
         for &count in self.symbol_counts.values() {
             let probability = count as f64 / self.total_count as f64;
@@ -341,18 +342,18 @@ impl EntropyCalculator {
         }
         entropy
     }
-    
+
     /// 计算互信息
     pub fn mutual_information(&self, other: &EntropyCalculator) -> f64 {
         self.shannon_entropy() - self.conditional_entropy(other)
     }
-    
+
     /// 计算条件熵
     pub fn conditional_entropy(&self, other: &EntropyCalculator) -> f64 {
         let joint_entropy = self.joint_entropy(other);
         joint_entropy - other.shannon_entropy()
     }
-    
+
     /// 计算联合熵
     pub fn joint_entropy(&self, other: &EntropyCalculator) -> f64 {
         self.shannon_entropy() + other.shannon_entropy()
@@ -368,17 +369,17 @@ impl ChannelCapacity {
     pub fn new(error_probability: f64) -> Self {
         Self { error_probability }
     }
-    
+
     /// 计算二进制对称信道容量
     pub fn binary_symmetric_capacity(&self) -> f64 {
         if self.error_probability == 0.0 || self.error_probability == 1.0 {
             0.0
         } else {
-            1.0 + self.error_probability * self.error_probability.log2() 
+            1.0 + self.error_probability * self.error_probability.log2()
                 + (1.0 - self.error_probability) * (1.0 - self.error_probability).log2()
         }
     }
-    
+
     /// 计算AWGN信道容量
     pub fn awgn_capacity(&self, signal_power: f64, noise_power: f64) -> f64 {
         0.5 * (1.0 + signal_power / noise_power).log2()
@@ -405,7 +406,7 @@ impl HuffmanEncoder {
             code_table: HashMap::new(),
         }
     }
-    
+
     /// 构建频率表
     pub fn build_frequency_table(&mut self, text: &str) {
         self.frequency_table.clear();
@@ -413,21 +414,21 @@ impl HuffmanEncoder {
             *self.frequency_table.entry(ch).or_insert(0) += 1;
         }
     }
-    
+
     /// 构建霍夫曼树
     pub fn build_huffman_tree(&mut self) {
         let mut heap = BinaryHeap::new();
-        
+
         // 创建叶子节点
         for (&symbol, &frequency) in &self.frequency_table {
             heap.push(HuffmanNode::Leaf { symbol, frequency });
         }
-        
+
         // 构建树
         while heap.len() > 1 {
             let left = heap.pop().unwrap();
             let right = heap.pop().unwrap();
-            
+
             let combined_freq = left.frequency() + right.frequency();
             heap.push(HuffmanNode::Internal {
                 left: Box::new(left),
@@ -435,13 +436,13 @@ impl HuffmanEncoder {
                 frequency: combined_freq,
             });
         }
-        
+
         // 生成编码表
         if let Some(root) = heap.pop() {
             self.generate_codes(&root, String::new());
         }
     }
-    
+
     /// 生成编码
     fn generate_codes(&mut self, node: &HuffmanNode, code: String) {
         match node {
@@ -454,7 +455,7 @@ impl HuffmanEncoder {
             }
         }
     }
-    
+
     /// 编码文本
     pub fn encode(&self, text: &str) -> String {
         let mut encoded = String::new();
@@ -521,37 +522,37 @@ impl ReedSolomonEncoder {
             generator_polynomial: Self::generate_polynomial(n - k),
         }
     }
-    
+
     /// 生成生成多项式
     fn generate_polynomial(degree: usize) -> Vec<u8> {
         let mut poly = vec![1];
-        
+
         for i in 0..degree {
             let mut new_poly = vec![0; poly.len() + 1];
-            
+
             // 乘以 (x + α^i)
             for j in 0..poly.len() {
                 new_poly[j] ^= poly[j];
                 new_poly[j + 1] ^= poly[j];
             }
-            
+
             poly = new_poly;
         }
-        
+
         poly
     }
-    
+
     /// 编码信息
     pub fn encode(&self, message: &[u8]) -> Vec<u8> {
         if message.len() != self.k {
             panic!("Message length must be {}", self.k);
         }
-        
+
         // 多项式除法
         let mut remainder = vec![0; self.n - self.k];
         let mut dividend = message.to_vec();
         dividend.extend_from_slice(&remainder);
-        
+
         for i in 0..self.k {
             if dividend[i] != 0 {
                 let factor = dividend[i];
@@ -560,22 +561,22 @@ impl ReedSolomonEncoder {
                 }
             }
         }
-        
+
         // 构造码字
         let mut codeword = message.to_vec();
         codeword.extend_from_slice(&dividend[self.k..]);
         codeword
     }
-    
+
     /// 解码码字
     pub fn decode(&self, received: &[u8]) -> Result<Vec<u8>, String> {
         if received.len() != self.n {
             return Err("Received word length must be {}".to_string());
         }
-        
+
         // 简化的解码实现
         let syndrome = self.calculate_syndrome(received);
-        
+
         if syndrome.iter().all(|&x| x == 0) {
             // 无错误
             Ok(received[..self.k].to_vec())
@@ -584,20 +585,20 @@ impl ReedSolomonEncoder {
             self.correct_errors(received, &syndrome)
         }
     }
-    
+
     /// 计算症状
     fn calculate_syndrome(&self, received: &[u8]) -> Vec<u8> {
         let mut syndrome = vec![0; self.n - self.k];
-        
+
         for i in 0..syndrome.len() {
             for j in 0..received.len() {
                 syndrome[i] ^= received[j] * self.power(i * j);
             }
         }
-        
+
         syndrome
     }
-    
+
     /// 纠错
     fn correct_errors(&self, received: &[u8], syndrome: &[u8]) -> Result<Vec<u8>, String> {
         if syndrome.iter().filter(|&&x| x != 0).count() <= (self.n - self.k) / 2 {
@@ -606,7 +607,7 @@ impl ReedSolomonEncoder {
             Err("Too many errors to correct".to_string())
         }
     }
-    
+
     /// 计算幂
     fn power(&self, exponent: usize) -> u8 {
         (exponent % 255) as u8
@@ -641,20 +642,20 @@ impl P2PNode {
             message_queue: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     /// 启动节点
     pub fn start(&self) -> Result<(), String> {
         let listener = TcpListener::bind(&self.address)
             .map_err(|e| format!("Failed to bind: {}", e))?;
-        
+
         println!("Node {} listening on {}", self.id, self.address);
-        
+
         for stream in listener.incoming() {
             match stream {
                 Ok(stream) => {
                     let peers = Arc::clone(&self.peers);
                     let message_queue = Arc::clone(&self.message_queue);
-                    
+
                     std::thread::spawn(move || {
                         Self::handle_connection(stream, peers, message_queue);
                     });
@@ -662,10 +663,10 @@ impl P2PNode {
                 Err(e) => eprintln!("Connection failed: {}", e),
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 处理连接
     fn handle_connection(
         mut stream: TcpStream,
@@ -673,7 +674,7 @@ impl P2PNode {
         message_queue: Arc<Mutex<Vec<Message>>>,
     ) {
         let mut buffer = [0; 1024];
-        
+
         match stream.read(&mut buffer) {
             Ok(n) => {
                 let message = String::from_utf8_lossy(&buffer[..n]);
@@ -685,26 +686,26 @@ impl P2PNode {
             Err(e) => eprintln!("Failed to read: {}", e),
         }
     }
-    
+
     /// 添加对等节点
     pub fn add_peer(&self, id: String, address: String) {
         let mut peers = self.peers.lock().unwrap();
         peers.insert(id, address);
     }
-    
+
     /// 发送消息
     pub fn send_message(&self, peer_id: &str, message: Message) -> Result<(), String> {
         let peers = self.peers.lock().unwrap();
         if let Some(address) = peers.get(peer_id) {
             let mut stream = TcpStream::connect(address)
                 .map_err(|e| format!("Failed to connect: {}", e))?;
-            
+
             let message_json = serde_json::to_string(&message)
                 .map_err(|e| format!("Failed to serialize: {}", e))?;
-            
+
             stream.write_all(message_json.as_bytes())
                 .map_err(|e| format!("Failed to send: {}", e))?;
-            
+
             Ok(())
         } else {
             Err("Peer not found".to_string())
@@ -713,7 +714,7 @@ impl P2PNode {
 }
 
 /// 消息定义
-#[derive(Clone, serde::Serialize, serde::Deserialize)]
+# [derive(Clone, serde::Serialize, serde::Deserialize)]
 pub struct Message {
     pub from: String,
     pub to: String,
@@ -722,7 +723,7 @@ pub struct Message {
     pub timestamp: u64,
 }
 
-#[derive(Clone, serde::Serialize, serde::Deserialize)]
+# [derive(Clone, serde::Serialize, serde::Deserialize)]
 pub enum MessageType {
     Ping,
     Pong,
@@ -812,4 +813,4 @@ $$\text{TechnologyFusion} = \text{InformationTheory} \cap \text{CommunicationThe
 2. 通信系统原理
 3. 分布式系统通信
 4. 编码理论应用
-5. 量子信息论基础 
+5. 量子信息论基础

@@ -45,6 +45,7 @@ Rust语言在Web3生态系统中的广泛应用，特别是在区块链、智能
 **定理 2.1 (类型安全性)** 对于任意表达式 $e \in \mathcal{E}$，如果 $\Gamma \vdash e : \tau$，则 $e$ 在类型 $\tau$ 下是类型安全的。
 
 **证明** 通过结构归纳法证明：
+
 1. 基础情况：对于字面量，类型安全性直接成立
 2. 归纳步骤：对于复合表达式，通过类型规则保证类型安全性
 
@@ -79,7 +80,7 @@ $$\frac{\Gamma \vdash e : \tau^{own}}{\Gamma \vdash \&e : \&'a \tau}$$
 
 **定理 3.1 (泛型实例化)** 如果 $\Gamma \vdash e : \forall \alpha. \tau(\alpha)$，则对于任意类型 $\sigma$，有 $\Gamma \vdash e[\sigma] : \tau(\sigma)$。
 
-**Web3应用示例 3.1 (泛型智能合约)**
+**Web3应用示例 3.1 (泛型智能合约)**:
 
 ```rust
 // 泛型智能合约类型
@@ -368,6 +369,7 @@ impl StateDependentContract {
 **定义 7.1 (高阶类型)** 高阶类型 $F[\tau]$ 是类型的类型，如函子、单子等。
 
 **定义 7.2 (函子)** 函子 $F$ 满足：
+
 - $F[\text{id}] = \text{id}$
 - $F[f \circ g] = F[f] \circ F[g]$
 
@@ -400,6 +402,7 @@ fn process_transaction(tx: Transaction) -> Result<ProcessedTx, ContractError> {
 ### 7.2 单子理论
 
 **定义 7.3 (单子)** 单子 $M$ 是一个函子，具有：
+
 - $\text{return} : A \rightarrow M[A]$
 - $\text{bind} : M[A] \rightarrow (A \rightarrow M[B]) \rightarrow M[B]$
 
@@ -697,6 +700,7 @@ impl ContractResourceManager {
 **定理 10.2 (内存安全)** Rust的类型系统保证程序不会出现内存错误。
 
 **证明** 通过以下机制保证：
+
 1. 所有权系统防止重复释放
 2. 借用检查器防止数据竞争
 3. 生命周期系统保证引用有效性
@@ -1053,4 +1057,4 @@ impl VerifiedConsensus {
 *文档版本: 1.0*  
 *最后更新: 2024-12-19*  
 *作者: Web3架构分析团队*  
-*许可证: MIT* 
+*许可证: MIT*

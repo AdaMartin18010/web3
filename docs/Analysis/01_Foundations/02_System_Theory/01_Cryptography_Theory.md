@@ -2,13 +2,34 @@
 
 ## 目录
 
-1. [理论基础](#1-理论基础)
-2. [形式化定义](#2-形式化定义)
-3. [核心算法](#3-核心算法)
-4. [Web3应用场景](#4-web3应用场景)
-5. [Rust实现](#5-rust实现)
-6. [安全性分析](#6-安全性分析)
-7. [结论与展望](#7-结论与展望)
+- [密码学理论：Web3安全的形式化基础](#密码学理论web3安全的形式化基础)
+  - [目录](#目录)
+  - [1. 理论基础](#1-理论基础)
+    - [1.1 密码学在Web3中的作用](#11-密码学在web3中的作用)
+    - [1.2 Web3密码学特性](#12-web3密码学特性)
+  - [2. 形式化定义](#2-形式化定义)
+    - [2.1 基础概念](#21-基础概念)
+    - [2.2 加密方案](#22-加密方案)
+  - [3. 核心算法](#3-核心算法)
+    - [3.1 RSA加密](#31-rsa加密)
+    - [3.2 椭圆曲线密码学](#32-椭圆曲线密码学)
+    - [3.3 哈希函数](#33-哈希函数)
+  - [4. Web3应用场景](#4-web3应用场景)
+    - [4.1 数字签名](#41-数字签名)
+    - [4.2 零知识证明](#42-零知识证明)
+    - [4.3 同态加密](#43-同态加密)
+  - [5. Rust实现](#5-rust实现)
+    - [5.1 密码学库框架](#51-密码学库框架)
+    - [5.2 安全随机数生成](#52-安全随机数生成)
+  - [6. 安全性分析](#6-安全性分析)
+    - [6.1 安全性证明](#61-安全性证明)
+    - [6.2 量子抗性](#62-量子抗性)
+  - [7. 结论与展望](#7-结论与展望)
+    - [7.1 理论贡献](#71-理论贡献)
+    - [7.2 实践价值](#72-实践价值)
+    - [7.3 未来发展方向](#73-未来发展方向)
+    - [7.4 技术路线图](#74-技术路线图)
+  - [参考文献](#参考文献)
 
 ## 1. 理论基础
 
@@ -82,7 +103,8 @@ $$\forall \text{PPT} \mathcal{A}, |\Pr[\text{Exp}_{\Pi,\mathcal{A}}^{\text{IND-C
 **定义 3.1 (RSA问题)**
 给定 $(N, e, c)$，计算 $m$ 使得 $c \equiv m^e \pmod{N}$。
 
-**算法 3.1 (RSA密钥生成)**
+**算法 3.1 (RSA密钥生成)**:
+
 ```rust
 // RSA密钥生成
 pub struct RSAKeyPair {
@@ -149,7 +171,8 @@ impl RSAPrivateKey {
 **定义 3.3 (椭圆曲线离散对数问题)**
 给定点 $P, Q \in E$，计算 $k$ 使得 $Q = kP$。
 
-**算法 3.2 (ECDSA签名)**
+**算法 3.2 (ECDSA签名)**:
+
 ```rust
 // ECDSA签名
 pub struct ECDSAKeyPair {
@@ -207,7 +230,8 @@ impl ECPublicKey {
 2. **抗原像性**：难以找到 $x$ 使得 $H(x) = y$
 3. **抗第二原像性**：给定 $x$，难以找到 $y \neq x$ 使得 $H(x) = H(y)$
 
-**算法 3.3 (SHA-256实现)**
+**算法 3.3 (SHA-256实现)**:
+
 ```rust
 // SHA-256哈希函数
 pub struct SHA256 {
@@ -357,7 +381,8 @@ const K: [u32; 64] = [
 - $\text{Sign}(sk, m) \rightarrow \sigma$：签名
 - $\text{Verify}(pk, m, \sigma) \rightarrow b$：验证
 
-**实现 4.1 (数字签名)**
+**实现 4.1 (数字签名)**:
+
 ```rust
 // 数字签名
 pub struct DigitalSignature {
@@ -386,7 +411,8 @@ impl DigitalSignature {
 2. **可靠性**：不诚实证明者无法说服验证者
 3. **零知识性**：验证者无法获得额外信息
 
-**实现 4.2 (zk-SNARK)**
+**实现 4.2 (zk-SNARK)**:
+
 ```rust
 // zk-SNARK证明系统
 pub struct ZkSnark {
@@ -414,7 +440,8 @@ impl ZkSnark {
 同态加密方案允许在密文上进行计算：
 $$E(m_1) \otimes E(m_2) = E(m_1 \oplus m_2)$$
 
-**实现 4.3 (同态加密)**
+**实现 4.3 (同态加密)**:
+
 ```rust
 // 同态加密
 pub struct HomomorphicEncryption {
@@ -646,7 +673,8 @@ ECDSA在椭圆曲线离散对数假设下是安全的。
 **定理 6.3 (后量子密码学)**
 基于格、多变量、哈希的密码学是量子抗性的。
 
-**实现 6.1 (格密码学)**
+**实现 6.1 (格密码学)**:
+
 ```rust
 // 格密码学
 pub struct LatticeCrypto {
@@ -741,4 +769,4 @@ graph TD
 2. Menezes, A. J., Van Oorschot, P. C., & Vanstone, S. A. (1996). Handbook of applied cryptography. CRC Press.
 3. Goldwasser, S., & Bellare, M. (2008). Lecture notes on cryptography. MIT.
 4. Boneh, D., & Shoup, V. (2020). A graduate course in applied cryptography. Cambridge University Press.
-5. Nielsen, M. A., & Chuang, I. L. (2010). Quantum computation and quantum information. Cambridge University Press. 
+5. Nielsen, M. A., & Chuang, I. L. (2010). Quantum computation and quantum information. Cambridge University Press.

@@ -2,13 +2,35 @@
 
 ## 目录
 
-1. [理论基础](#1-理论基础)
-2. [形式化定义](#2-形式化定义)
-3. [核心定理](#3-核心定理)
-4. [Web3应用场景](#4-web3应用场景)
-5. [Rust实现](#5-rust实现)
-6. [性能与复杂度分析](#6-性能与复杂度分析)
-7. [结论与展望](#7-结论与展望)
+- [信息论：Web3通信的形式化基础](#信息论web3通信的形式化基础)
+  - [目录](#目录)
+  - [1. 理论基础](#1-理论基础)
+    - [1.1 信息论在Web3中的作用](#11-信息论在web3中的作用)
+    - [1.2 Web3信息处理特点](#12-web3信息处理特点)
+  - [2. 形式化定义](#2-形式化定义)
+    - [2.1 基础概念](#21-基础概念)
+    - [2.2 信道容量](#22-信道容量)
+  - [3. 核心定理](#3-核心定理)
+    - [3.1 香农三大定理](#31-香农三大定理)
+    - [3.2 编码理论](#32-编码理论)
+    - [3.3 数据压缩](#33-数据压缩)
+  - [4. Web3应用场景](#4-web3应用场景)
+    - [4.1 区块链数据压缩](#41-区块链数据压缩)
+    - [4.2 网络协议优化](#42-网络协议优化)
+    - [4.3 信息熵分析](#43-信息熵分析)
+  - [5. Rust实现](#5-rust实现)
+    - [5.1 信息论库框架](#51-信息论库框架)
+    - [5.2 编码器框架](#52-编码器框架)
+  - [6. 性能与复杂度分析](#6-性能与复杂度分析)
+    - [6.1 时间复杂度分析](#61-时间复杂度分析)
+    - [6.2 空间复杂度分析](#62-空间复杂度分析)
+    - [6.3 压缩效率分析](#63-压缩效率分析)
+  - [7. 结论与展望](#7-结论与展望)
+    - [7.1 理论贡献](#71-理论贡献)
+    - [7.2 实践价值](#72-实践价值)
+    - [7.3 未来发展方向](#73-未来发展方向)
+    - [7.4 技术路线图](#74-技术路线图)
+  - [参考文献](#参考文献)
 
 ## 1. 理论基础
 
@@ -61,7 +83,8 @@ $$H(X|Y) = -\sum_{x,y} p(x, y) \log p(x|y)$$
 $X$ 和 $Y$ 之间的互信息：
 $$I(X; Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)$$
 
-**定理 2.1 (熵的基本性质)**
+**定理 2.1 (熵的基本性质)**:
+
 1. $H(X) \geq 0$
 2. $H(X) \leq \log |\mathcal{X}|$
 3. $H(X, Y) \leq H(X) + H(Y)$
@@ -117,7 +140,8 @@ $$C = \max_{p(x)} I(X; Y)$$
 **定义 3.3 (校验矩阵)**
 校验矩阵 $H$ 满足 $C = \{x : xH^T = 0\}$。
 
-**算法 3.1 (汉明码编码)**
+**算法 3.1 (汉明码编码)**:
+
 ```rust
 // 汉明码编码
 pub struct HammingCode {
@@ -215,7 +239,8 @@ impl HammingCode {
 **定义 3.4 (前缀码)**
 前缀码是满足前缀条件的编码，即没有码字是其他码字的前缀。
 
-**算法 3.2 (Huffman编码)**
+**算法 3.2 (Huffman编码)**:
+
 ```rust
 // Huffman编码
 pub struct HuffmanCode {
@@ -371,7 +396,8 @@ $$\mathcal{B} = \{B_1, B_2, \ldots, B_n\}$$
 
 其中每个 $B_i$ 包含交易、时间戳、哈希等信息。
 
-**实现 4.1 (区块压缩)**
+**实现 4.1 (区块压缩)**:
+
 ```rust
 // 区块链数据压缩
 pub struct BlockchainCompressor {
@@ -466,7 +492,8 @@ $$\mathcal{C} = (\mathcal{M}, \mathcal{R}, p(r|m))$$
 
 其中 $\mathcal{M}$ 是消息集合，$\mathcal{R}$ 是接收集合。
 
-**实现 4.2 (协议优化)**
+**实现 4.2 (协议优化)**:
+
 ```rust
 // 网络协议优化
 pub struct NetworkOptimizer {
@@ -532,7 +559,8 @@ impl NetworkOptimizer {
 区块链系统的信息熵：
 $$H(\mathcal{B}) = -\sum_{b \in \mathcal{B}} p(b) \log p(b)$$
 
-**实现 4.3 (熵分析器)**
+**实现 4.3 (熵分析器)**:
+
 ```rust
 // 信息熵分析器
 pub struct EntropyAnalyzer {
@@ -926,4 +954,4 @@ graph TD
 2. Shannon, C. E. (1948). A mathematical theory of communication. Bell system technical journal, 27(3), 379-423.
 3. MacKay, D. J. (2003). Information theory, inference and learning algorithms. Cambridge university press.
 4. Gallager, R. G. (1968). Information theory and reliable communication. John Wiley & Sons.
-5. Berlekamp, E. R. (1968). Algebraic coding theory. McGraw-Hill. 
+5. Berlekamp, E. R. (1968). Algebraic coding theory. McGraw-Hill.

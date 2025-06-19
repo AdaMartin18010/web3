@@ -2,13 +2,33 @@
 
 ## 目录
 
-1. [理论基础](#1-理论基础)
-2. [形式化定义](#2-形式化定义)
-3. [核心定理](#3-核心定理)
-4. [Web3应用场景](#4-web3应用场景)
-5. [Rust实现](#5-rust实现)
-6. [机制设计](#6-机制设计)
-7. [结论与展望](#7-结论与展望)
+- [博弈论：Web3激励机制的形式化基础](#博弈论web3激励机制的形式化基础)
+  - [目录](#目录)
+  - [1. 理论基础](#1-理论基础)
+    - [1.1 博弈论在Web3中的作用](#11-博弈论在web3中的作用)
+    - [1.2 Web3博弈特点](#12-web3博弈特点)
+  - [2. 形式化定义](#2-形式化定义)
+    - [2.1 基础概念](#21-基础概念)
+    - [2.2 扩展型博弈](#22-扩展型博弈)
+  - [3. 核心定理](#3-核心定理)
+    - [3.1 纳什均衡理论](#31-纳什均衡理论)
+    - [3.2 重复博弈](#32-重复博弈)
+  - [4. Web3应用场景](#4-web3应用场景)
+    - [4.1 共识机制博弈](#41-共识机制博弈)
+    - [4.2 代币经济学博弈](#42-代币经济学博弈)
+    - [4.3 治理博弈](#43-治理博弈)
+  - [5. Rust实现](#5-rust实现)
+    - [5.1 博弈论库框架](#51-博弈论库框架)
+    - [5.2 机制设计](#52-机制设计)
+  - [6. 机制设计](#6-机制设计)
+    - [6.1 激励相容性](#61-激励相容性)
+    - [6.2 效率与公平性](#62-效率与公平性)
+  - [7. 结论与展望](#7-结论与展望)
+    - [7.1 理论贡献](#71-理论贡献)
+    - [7.2 实践价值](#72-实践价值)
+    - [7.3 未来发展方向](#73-未来发展方向)
+    - [7.4 技术路线图](#74-技术路线图)
+  - [参考文献](#参考文献)
 
 ## 1. 理论基础
 
@@ -87,7 +107,8 @@ $$\forall i \in N, u_i(s') \geq u_i(s) \text{ and } \exists j \in N, u_j(s') > u
 
 **证明：** 通过Brouwer不动点定理。
 
-**算法 3.1 (纳什均衡计算)**
+**算法 3.1 (纳什均衡计算)**:
+
 ```rust
 // 纳什均衡计算器
 pub struct NashEquilibriumCalculator {
@@ -176,7 +197,8 @@ $$G^T = (N, \{S_i^T\}_{i \in N}, \{U_i^T\}_{i \in N})$$
 **定理 3.2 (民间定理)**
 在无限重复博弈中，任何可行的个体理性收益都可以通过子博弈完美均衡实现。
 
-**实现 3.1 (重复博弈分析)**
+**实现 3.1 (重复博弈分析)**:
+
 ```rust
 // 重复博弈分析器
 pub struct RepeatedGameAnalyzer {
@@ -287,7 +309,8 @@ $$\mathcal{G}_{consensus} = (N_{miners}, \{S_i\}, \{u_i\})$$
 
 其中参与者是矿工，策略是挖矿行为。
 
-**实现 4.1 (PoW博弈分析)**
+**实现 4.1 (PoW博弈分析)**:
+
 ```rust
 // PoW共识博弈分析
 pub struct PoWGameAnalyzer {
@@ -391,7 +414,8 @@ pub struct AttackAnalysis {
 代币博弈是代币持有者之间的策略互动：
 $$\mathcal{G}_{token} = (N_{holders}, \{S_i\}, \{u_i\})$$
 
-**实现 4.2 (代币经济学分析)**
+**实现 4.2 (代币经济学分析)**:
+
 ```rust
 // 代币经济学博弈分析
 pub struct TokenEconomicsAnalyzer {
@@ -509,7 +533,8 @@ impl LiquidityAnalysis {
 治理博弈是DAO成员之间的投票决策：
 $$\mathcal{G}_{governance} = (N_{voters}, \{S_i\}, \{u_i\})$$
 
-**实现 4.3 (DAO治理分析)**
+**实现 4.3 (DAO治理分析)**:
+
 ```rust
 // DAO治理博弈分析
 pub struct DAOGovernanceAnalyzer {
@@ -870,7 +895,8 @@ pub struct AuctionMechanism {
 **定理 6.1 (显示原理)**
 任何社会选择函数都可以通过激励相容的直接机制实现。
 
-**实现 6.1 (激励相容检查)**
+**实现 6.1 (激励相容检查)**:
+
 ```rust
 // 激励相容性检查器
 pub struct IncentiveCompatibilityChecker;
@@ -939,7 +965,8 @@ pub type AgentType = f64; // 简化为单一数值类型
 **定义 6.3 (公平性)**
 机制是公平的，如果满足某种公平标准（如无嫉妒、比例公平等）。
 
-**实现 6.2 (效率公平性分析)**
+**实现 6.2 (效率公平性分析)**:
+
 ```rust
 // 效率公平性分析器
 pub struct EfficiencyFairnessAnalyzer;
@@ -1071,4 +1098,4 @@ graph TD
 2. Myerson, R. B. (1991). Game theory: analysis of conflict. Harvard university press.
 3. Fudenberg, D., & Tirole, J. (1991). Game theory. MIT press.
 4. Mas-Colell, A., Whinston, M. D., & Green, J. R. (1995). Microeconomic theory. Oxford university press.
-5. Nisan, N., Roughgarden, T., Tardos, E., & Vazirani, V. V. (2007). Algorithmic game theory. Cambridge university press. 
+5. Nisan, N., Roughgarden, T., Tardos, E., & Vazirani, V. V. (2007). Algorithmic game theory. Cambridge university press.

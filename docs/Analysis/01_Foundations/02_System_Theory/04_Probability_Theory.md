@@ -2,13 +2,34 @@
 
 ## 目录
 
-1. [理论基础](#1-理论基础)
-2. [形式化定义](#2-形式化定义)
-3. [核心定理](#3-核心定理)
-4. [Web3应用场景](#4-web3应用场景)
-5. [Rust实现](#5-rust实现)
-6. [随机过程](#6-随机过程)
-7. [结论与展望](#7-结论与展望)
+- [概率论：Web3随机性的形式化基础](#概率论web3随机性的形式化基础)
+  - [目录](#目录)
+  - [1. 理论基础](#1-理论基础)
+    - [1.1 概率论在Web3中的作用](#11-概率论在web3中的作用)
+    - [1.2 Web3概率特点](#12-web3概率特点)
+  - [2. 形式化定义](#2-形式化定义)
+    - [2.1 基础概念](#21-基础概念)
+    - [2.2 条件概率](#22-条件概率)
+  - [3. 核心定理](#3-核心定理)
+    - [3.1 中心极限定理](#31-中心极限定理)
+    - [3.2 马尔可夫链](#32-马尔可夫链)
+    - [3.3 随机游走](#33-随机游走)
+  - [4. Web3应用场景](#4-web3应用场景)
+    - [4.1 随机数生成](#41-随机数生成)
+    - [4.2 共识机制随机性](#42-共识机制随机性)
+    - [4.3 网络延迟建模](#43-网络延迟建模)
+  - [5. Rust实现](#5-rust实现)
+    - [5.1 概率分布库](#51-概率分布库)
+    - [5.2 统计分析工具](#52-统计分析工具)
+  - [6. 随机过程](#6-随机过程)
+    - [6.1 布朗运动](#61-布朗运动)
+    - [6.2 几何布朗运动](#62-几何布朗运动)
+  - [7. 结论与展望](#7-结论与展望)
+    - [7.1 理论贡献](#71-理论贡献)
+    - [7.2 实践价值](#72-实践价值)
+    - [7.3 未来发展方向](#73-未来发展方向)
+    - [7.4 技术路线图](#74-技术路线图)
+  - [参考文献](#参考文献)
 
 ## 1. 理论基础
 
@@ -92,7 +113,8 @@ $$\frac{\sum_{i=1}^n X_i - n\mu}{\sqrt{n}\sigma} \xrightarrow{d} N(0,1)$$
 
 **证明：** 使用特征函数方法。
 
-**算法 3.1 (正态分布生成)**
+**算法 3.1 (正态分布生成)**:
+
 ```rust
 // 正态分布生成器
 pub struct NormalDistribution {
@@ -157,7 +179,8 @@ $$P(X_{n+1} = j | X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0) = P(X_{n+1} = j
 转移矩阵 $P = (p_{ij})$ 满足：
 $$p_{ij} = P(X_{n+1} = j | X_n = i)$$
 
-**算法 3.2 (马尔可夫链模拟)**
+**算法 3.2 (马尔可夫链模拟)**:
+
 ```rust
 // 马尔可夫链模拟器
 pub struct MarkovChain {
@@ -251,7 +274,8 @@ $$S_n = X_1 + X_2 + \cdots + X_n$$
 
 其中 $X_i$ 是独立同分布随机变量。
 
-**算法 3.3 (随机游走模拟)**
+**算法 3.3 (随机游走模拟)**:
+
 ```rust
 // 随机游走模拟器
 pub struct RandomWalk {
@@ -337,7 +361,8 @@ $$\forall \text{PPT} \mathcal{A}, |\Pr[\mathcal{A}(X) = 1] - \Pr[\mathcal{A}(Y) 
 
 其中 $X$ 是随机数，$Y$ 是均匀分布。
 
-**实现 4.1 (VRF实现)**
+**实现 4.1 (VRF实现)**:
+
 ```rust
 // 可验证随机函数
 pub struct VRF {
@@ -414,7 +439,8 @@ $$P(\text{Validator}_i \text{ selected}) = \frac{w_i}{\sum_{j=1}^n w_j}$$
 
 其中 $w_i$ 是验证者 $i$ 的权重。
 
-**实现 4.2 (PoS随机选择)**
+**实现 4.2 (PoS随机选择)**:
+
 ```rust
 // PoS随机选择器
 pub struct PoSRandomSelector {
@@ -479,7 +505,8 @@ pub struct Validator {
 网络延迟是随机变量：
 $$D \sim \text{Distribution}(\mu, \sigma^2)$$
 
-**实现 4.3 (网络延迟模拟)**
+**实现 4.3 (网络延迟模拟)**:
+
 ```rust
 // 网络延迟模拟器
 pub struct NetworkDelaySimulator {
@@ -762,7 +789,8 @@ pub struct HypothesisTestResult {
 2. 独立增量
 3. $W(t) - W(s) \sim N(0, t-s)$
 
-**实现 6.1 (布朗运动模拟)**
+**实现 6.1 (布朗运动模拟)**:
+
 ```rust
 // 布朗运动模拟器
 pub struct BrownianMotion {
@@ -837,7 +865,8 @@ pub struct BrownianMotionStatistics {
 几何布朗运动满足：
 $$dS(t) = \mu S(t) dt + \sigma S(t) dW(t)$$
 
-**实现 6.2 (几何布朗运动)**
+**实现 6.2 (几何布朗运动)**:
+
 ```rust
 // 几何布朗运动
 pub struct GeometricBrownianMotion {
@@ -930,4 +959,4 @@ graph TD
 2. Durrett, R. (2019). Probability: theory and examples. Cambridge university press.
 3. Ross, S. M. (2014). Introduction to probability models. Academic press.
 4. Grimmett, G., & Stirzaker, D. (2020). Probability and random processes. Oxford university press.
-5. Kallenberg, O. (2006). Foundations of modern probability. Springer Science & Business Media. 
+5. Kallenberg, O. (2006). Foundations of modern probability. Springer Science & Business Media.

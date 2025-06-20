@@ -109,6 +109,7 @@ $$\mathcal{L}(\mathbf{b}_1, \ldots, \mathbf{b}_n) = \left\{ \sum_{i=1}^{n} z_i \
 #### 3.3.1 LWE问题的形式化定义
 
 **定义 3.4** (LWE问题). 给定参数 $n, q$ 和错误分布 $\chi$ 在 $\mathbb{Z}_q$ 上，LWE问题定义如下：
+
 - 秘密 $\mathbf{s} \in \mathbb{Z}_q^n$ 随机选择
 - 给定多个样本 $(\mathbf{a}_i, b_i)$，其中 $\mathbf{a}_i \in \mathbb{Z}_q^n$ 随机选择，$b_i = \langle \mathbf{a}_i, \mathbf{s} \rangle + e_i \mod q$，$e_i$ 从 $\chi$ 中采样
 - 目标是恢复秘密 $\mathbf{s}$
@@ -181,6 +182,7 @@ SPHINCS+签名方案的关键组件：
 **定义 5.1** (量子抗性区块链). 量子抗性区块链是一种分布式账本系统，其所有密码学原语都能抵抗已知的量子算法攻击。
 
 形式化定义一个量子抗性区块链系统 $\mathcal{B}_Q = (P, S, C, T, V)$，其中：
+
 - $P$ 是参与节点集合
 - $S$ 是系统状态空间
 - $C$ 是量子抗性共识协议
@@ -372,4 +374,4 @@ contract QuantumResistantVerifier {
 5. Alagic, G., et al. (2020). Status Report on the Second Round of the NIST Post-Quantum Cryptography Standardization Process.
 6. Lyubashevsky, V., et al. (2010). On Ideal Lattices and Learning with Errors over Rings.
 7. Shor, P.W. (1997). Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer.
-8. Grover, L.K. (1996). A Fast Quantum Mechanical Algorithm for Database Search. 
+8. Grover, L.K. (1996). A Fast Quantum Mechanical Algorithm for Database Search.

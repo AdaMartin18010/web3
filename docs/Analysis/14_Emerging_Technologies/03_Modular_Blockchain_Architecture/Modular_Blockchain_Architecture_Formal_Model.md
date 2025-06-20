@@ -27,6 +27,7 @@ Web3生态系统正在从单一链架构向多链和模块化架构演进，以�
 $$\mathcal{M} = (E, S, D, C, I)$$
 
 其中：
+
 - $E$ 是执行层（Execution Layer）
 - $S$ 是结算层（Settlement Layer）
 - $D$ 是数据可用性层（Data Availability Layer）
@@ -42,6 +43,7 @@ $$\mathcal{M} = (E, S, D, C, I)$$
 $$E = (State_E, Exec, Prove)$$
 
 其中：
+
 - $State_E$ 是执行层状态空间
 - $Exec: State_E \times Tx \rightarrow State_E$ 是状态转换函数
 - $Prove: State_E \times Tx \times State_E \rightarrow Proof$ 是状态转换证明生成函数
@@ -53,6 +55,7 @@ $$E = (State_E, Exec, Prove)$$
 $$S = (State_S, Verify, Finalize, Resolve)$$
 
 其中：
+
 - $State_S$ 是结算层状态空间
 - $Verify: Proof \rightarrow \{0, 1\}$ 是证明验证函数
 - $Finalize: State_S \times Batch \rightarrow State_S$ 是状态批量更新函数
@@ -65,6 +68,7 @@ $$S = (State_S, Verify, Finalize, Resolve)$$
 $$D = (Store, Retrieve, Prove_{DA})$$
 
 其中：
+
 - $Store: Data \rightarrow Commitment$ 是数据存储函数
 - $Retrieve: Commitment \rightarrow Data$ 是数据检索函数
 - $Prove_{DA}: Data \times Commitment \rightarrow Proof_{DA}$ 是数据可用性证明生成函数
@@ -76,6 +80,7 @@ $$D = (Store, Retrieve, Prove_{DA})$$
 $$C = (Propose, Validate, Finalize_C)$$
 
 其中：
+
 - $Propose: State \times Tx_{set} \rightarrow Block$ 是区块提议函数
 - $Validate: Block \rightarrow \{0, 1\}$ 是区块验证函数
 - $Finalize_C: Chain \times Block \rightarrow Chain$ 是链更新函数
@@ -151,7 +156,7 @@ $$m_{A \rightarrow B} = (header, payload, signature)$$
 
 以下是模块间通信协议的伪代码表示：
 
-```
+```pseudocode
 Protocol ModuleCommunication:
   // 发送方模块A
   function Send(message m, recipient B):
@@ -309,7 +314,7 @@ impl BlockchainModule for DataAvailabilityLayer {
 
 ### 6.1 模块化区块链架构图
 
-```
+```text
 +-------------------+      +-------------------+
 |                   |      |                   |
 |   执行层 (E)      |<---->|   结算层 (S)      |
@@ -327,7 +332,7 @@ impl BlockchainModule for DataAvailabilityLayer {
 
 ### 6.2 模块间消息流
 
-```
+```text
 执行层 (E) ---StateTransitionProof---> 结算层 (S)
 结算层 (S) ---ExecutionRequest-----> 执行层 (E)
 执行层 (E) ---DataStorage----------> 数据可用性层 (D)
@@ -338,7 +343,7 @@ impl BlockchainModule for DataAvailabilityLayer {
 
 ### 6.3 状态转换图
 
-```
+```text
                     执行交易
   +--------+     +------------+     +--------+
   | 状态 S |---->| 状态转换 Δ |---->| 状态 S'|
@@ -460,4 +465,4 @@ Ethereum的模块化路线图将单体架构分解为多个专门的层：
 5. Zhang, F., et al. (2020). "Layered Consensus." arXiv preprint.
 6. Adler, J., et al. (2020). "Building Scalable Decentralized Payment Systems." arXiv preprint.
 7. Gudgeon, L., et al. (2020). "DeFi Protocols for Loanable Funds: Interest Rates, Liquidity and Market Efficiency." ACM Conference on Advances in Financial Technologies.
-8. Chitra, T. (2020). "Competitive equilibria between staking and on-chain lending." Cryptoeconomic Systems Journal. 
+8. Chitra, T. (2020). "Competitive equilibria between staking and on-chain lending." Cryptoeconomic Systems Journal.

@@ -9,6 +9,7 @@ This module presents a comprehensive theory of design patterns for Web3 systems,
 ### 1.1 Formal Pattern Definition
 
 **Definition 1.1.1** (Design Pattern) A design pattern is a tuple $\mathcal{P} = (N, P, S, C, I)$ where:
+
 - $N$: Pattern name and classification
 - $P$: Problem description and context
 - $S$: Solution structure and components
@@ -16,6 +17,7 @@ This module presents a comprehensive theory of design patterns for Web3 systems,
 - $I$: Implementation guidelines
 
 **Definition 1.1.2** (Pattern Category) Design patterns are categorized as:
+
 - **Creational**: Object creation mechanisms
 - **Structural**: Object composition and relationships
 - **Behavioral**: Communication between objects
@@ -25,6 +27,7 @@ This module presents a comprehensive theory of design patterns for Web3 systems,
 **Theorem 1.1.1** (Pattern Completeness) Any Web3 system can be constructed using a finite set of fundamental design patterns.
 
 **Proof**:
+
 1. Web3 systems have finite state spaces
 2. Each state transition can be modeled by behavioral patterns
 3. Object relationships can be modeled by structural patterns
@@ -43,6 +46,7 @@ $$\text{Conflicts}(\mathcal{P}_1, \mathcal{P}_2) = \emptyset$$
 $$(\mathcal{P}_1 \circ \mathcal{P}_2) \circ \mathcal{P}_3 = \mathcal{P}_1 \circ (\mathcal{P}_2 \circ \mathcal{P}_3)$$
 
 **Proof**:
+
 1. Pattern names form a monoid under composition
 2. Problem and solution sets are associative under union and tensor
 3. Consequences are associative under composition
@@ -53,6 +57,7 @@ $$(\mathcal{P}_1 \circ \mathcal{P}_2) \circ \mathcal{P}_3 = \mathcal{P}_1 \circ 
 ### 2.1 Singleton Pattern Theory
 
 **Definition 2.1.1** (Singleton Pattern) The singleton pattern $\mathcal{S}_{singleton} = (N, P, S, C, I)$ where:
+
 - $N$: "Singleton - Global Access Point"
 - $P$: Need for single instance with global access
 - $S$: Private constructor, static instance, global access method
@@ -65,6 +70,7 @@ $$\forall t_1, t_2 \in \text{Time}: \text{Instance}(t_1) = \text{Instance}(t_2)$
 **Theorem 2.1.1** (Singleton Uniqueness) Under proper implementation, a singleton guarantees exactly one instance exists.
 
 **Proof**:
+
 1. Private constructor prevents external instantiation
 2. Static instance ensures single storage location
 3. Global access method provides controlled access
@@ -73,6 +79,7 @@ $$\forall t_1, t_2 \in \text{Time}: \text{Instance}(t_1) = \text{Instance}(t_2)$
 ### 2.2 Factory Pattern Theory
 
 **Definition 2.2.1** (Factory Pattern) The factory pattern $\mathcal{F}_{factory} = (N, P, S, C, I)$ where:
+
 - $N$: "Factory - Object Creation Abstraction"
 - $P$: Complex object creation logic
 - $S$: Creator interface, concrete creators, product hierarchy
@@ -85,6 +92,7 @@ $$\forall p_1, p_2 \in \text{Parameters}: p_1 \neq p_2 \rightarrow f(p_1) \neq f
 **Theorem 2.2.1** (Factory Correctness) A factory pattern correctly creates objects if it satisfies the product specification.
 
 **Proof**:
+
 1. Factory encapsulates creation logic
 2. Product specification defines correctness criteria
 3. Factory implementation ensures specification satisfaction
@@ -93,6 +101,7 @@ $$\forall p_1, p_2 \in \text{Parameters}: p_1 \neq p_2 \rightarrow f(p_1) \neq f
 ### 2.3 Observer Pattern Theory
 
 **Definition 2.3.1** (Observer Pattern) The observer pattern $\mathcal{O}_{observer} = (N, P, S, C, I)$ where:
+
 - $N$: "Observer - Event Notification"
 - $P$: One-to-many dependency relationships
 - $S$: Subject interface, observer interface, notification mechanism
@@ -105,6 +114,7 @@ $$\forall s \in \text{Subjects}, o \in \text{Observers}: \text{Registered}(o, s)
 **Theorem 2.3.1** (Observer Completeness) All registered observers receive notifications for all relevant events.
 
 **Proof**:
+
 1. Subject maintains observer registry
 2. Event occurrence triggers notification loop
 3. Each registered observer receives notification
@@ -115,6 +125,7 @@ $$\forall s \in \text{Subjects}, o \in \text{Observers}: \text{Registered}(o, s)
 ### 3.1 Async Singleton Pattern
 
 **Definition 3.1.1** (Async Singleton) The async singleton pattern $\mathcal{AS}_{async-singleton} = (N, P, S, C, I)$ where:
+
 - $N$: "Async Singleton - Thread-Safe Global Access"
 - $P$: Single instance in concurrent environment
 - $S$: Atomic initialization, async access method, thread safety
@@ -127,6 +138,7 @@ $$\forall t_1, t_2 \in \text{Threads}: \text{Instance}(t_1) = \text{Instance}(t_
 **Theorem 3.1.1** (Async Singleton Correctness) A properly implemented async singleton guarantees thread-safe single instance access.
 
 **Proof**:
+
 1. Atomic operations ensure thread safety
 2. Double-checked locking prevents race conditions
 3. Memory barriers ensure visibility
@@ -135,6 +147,7 @@ $$\forall t_1, t_2 \in \text{Threads}: \text{Instance}(t_1) = \text{Instance}(t_
 ### 3.2 Async Factory Pattern
 
 **Definition 3.2.1** (Async Factory) The async factory pattern $\mathcal{AF}_{async-factory} = (N, P, S, C, I)$ where:
+
 - $N$: "Async Factory - Concurrent Object Creation"
 - $P$: Asynchronous object creation with dependencies
 - $S$: Async creator interface, future-based creation, dependency injection
@@ -147,6 +160,7 @@ $$\forall p \in \text{Parameters}: \text{Await}(f_{async}(p)) \in \text{Product}
 **Theorem 3.2.1** (Async Factory Completeness) An async factory eventually produces valid products for all valid inputs.
 
 **Proof**:
+
 1. Async factory handles concurrent requests
 2. Dependency resolution ensures completeness
 3. Error handling maintains system stability
@@ -155,6 +169,7 @@ $$\forall p \in \text{Parameters}: \text{Await}(f_{async}(p)) \in \text{Product}
 ### 3.3 Async Observer Pattern
 
 **Definition 3.3.1** (Async Observer) The async observer pattern $\mathcal{AO}_{async-observer} = (N, P, S, C, I)$ where:
+
 - $N$: "Async Observer - Non-blocking Notifications"
 - $P$: Asynchronous event notification without blocking
 - $S$: Async subject interface, async observer interface, event streams
@@ -167,6 +182,7 @@ $$\forall s \in \text{Subjects}, o \in \text{Observers}: \text{Registered}(o, s)
 **Theorem 3.3.1** (Async Observer Fairness) All registered observers eventually receive notifications in fair order.
 
 **Proof**:
+
 1. Event streams ensure eventual delivery
 2. Fair scheduling prevents starvation
 3. Backpressure handling maintains system stability
@@ -177,6 +193,7 @@ $$\forall s \in \text{Subjects}, o \in \text{Observers}: \text{Registered}(o, s)
 ### 4.1 Blockchain Observer Pattern
 
 **Definition 4.1.1** (Blockchain Observer) The blockchain observer pattern $\mathcal{BO}_{blockchain-observer} = (N, P, S, C, I)$ where:
+
 - $N$: "Blockchain Observer - Event Monitoring"
 - $P$: Monitor blockchain events and state changes
 - $S$: Block listener, transaction monitor, event emitter
@@ -184,6 +201,7 @@ $$\forall s \in \text{Subjects}, o \in \text{Observers}: \text{Registered}(o, s)
 - $I$: WebSocket connections, event indexing, state synchronization
 
 **Definition 4.1.2** (Blockchain Event) A blockchain event $e = (block, transaction, log)$ where:
+
 - $block$: Block information
 - $transaction$: Transaction details
 - $log$: Event log data
@@ -191,6 +209,7 @@ $$\forall s \in \text{Subjects}, o \in \text{Observers}: \text{Registered}(o, s)
 **Theorem 4.1.1** (Blockchain Observer Completeness) A blockchain observer captures all relevant events from the monitored blockchain.
 
 **Proof**:
+
 1. WebSocket connections provide real-time updates
 2. Event indexing ensures no events are missed
 3. State synchronization maintains consistency
@@ -199,6 +218,7 @@ $$\forall s \in \text{Subjects}, o \in \text{Observers}: \text{Registered}(o, s)
 ### 4.2 Consensus Pattern
 
 **Definition 4.2.1** (Consensus Pattern) The consensus pattern $\mathcal{C}_{consensus} = (N, P, S, C, I)$ where:
+
 - $N$: "Consensus - Agreement Protocol"
 - $P$: Achieve agreement among distributed nodes
 - $S$: Consensus algorithm, voting mechanism, agreement validation
@@ -211,6 +231,7 @@ $$\forall n_1, n_2 \in \text{Nodes}: \text{Agreed}(n_1, v) \land \text{Agreed}(n
 **Theorem 4.2.1** (Consensus Correctness) A Byzantine fault-tolerant consensus protocol guarantees safety and liveness under network partitions.
 
 **Proof**:
+
 1. Byzantine fault tolerance handles malicious nodes
 2. Network resilience ensures message delivery
 3. Agreement validation prevents conflicts
@@ -219,6 +240,7 @@ $$\forall n_1, n_2 \in \text{Nodes}: \text{Agreed}(n_1, v) \land \text{Agreed}(n
 ### 4.3 Smart Contract Pattern
 
 **Definition 4.3.1** (Smart Contract Pattern) The smart contract pattern $\mathcal{SC}_{smart-contract} = (N, P, S, C, I)$ where:
+
 - $N$: "Smart Contract - Programmable Logic"
 - $P$: Execute business logic on blockchain
 - $S$: Contract interface, state management, function execution
@@ -231,6 +253,7 @@ $$\forall \text{state} \in \text{States}: \text{Valid}(\text{state}) \rightarrow
 **Theorem 4.3.1** (Contract Correctness) A formally verified smart contract satisfies its specification under all valid inputs.
 
 **Proof**:
+
 1. Formal verification ensures specification compliance
 2. Security audits identify vulnerabilities
 3. Invariant checking maintains consistency
@@ -714,6 +737,7 @@ impl ContractFunction {
 **Theorem 6.1.1** (Singleton Efficiency) The singleton pattern has constant time complexity $O(1)$ for instance access.
 
 **Proof**:
+
 1. Instance is created once and cached
 2. Subsequent access requires only pointer dereference
 3. Therefore, access time is constant
@@ -721,6 +745,7 @@ impl ContractFunction {
 **Theorem 6.1.2** (Observer Scalability) The observer pattern has linear time complexity $O(n)$ for notifications where $n$ is the number of observers.
 
 **Proof**:
+
 1. Each observer must be notified individually
 2. Notification loop iterates through all observers
 3. Therefore, time complexity is linear
@@ -732,6 +757,7 @@ impl ContractFunction {
 **Theorem 6.2.1** (Singleton Memory Efficiency) The singleton pattern has minimal memory overhead compared to multiple instances.
 
 **Proof**:
+
 1. Only one instance exists in memory
 2. No additional overhead for instance management
 3. Therefore, memory usage is minimized
@@ -745,6 +771,7 @@ impl ContractFunction {
 **Theorem 7.1.1** (Observer Security) The observer pattern maintains security if observers cannot modify subject state.
 
 **Proof**:
+
 1. Observer interface provides read-only access
 2. Subject controls all state modifications
 3. Therefore, security is maintained
@@ -756,6 +783,7 @@ impl ContractFunction {
 **Theorem 7.2.1** (Smart Contract Security) A smart contract pattern is secure if it prevents reentrancy and overflow attacks.
 
 **Proof**:
+
 1. Reentrancy guards prevent recursive calls
 2. Overflow checks prevent integer overflow
 3. Therefore, security is maintained
@@ -767,6 +795,7 @@ impl ContractFunction {
 **Definition 8.1.1** (DeFi Pattern) A DeFi pattern implements decentralized finance functionality using Web3 design patterns.
 
 **Case Study**: Automated Market Maker (AMM)
+
 - Uses observer pattern for price monitoring
 - Uses factory pattern for pool creation
 - Uses singleton pattern for global state
@@ -776,6 +805,7 @@ impl ContractFunction {
 **Definition 8.2.1** (NFT Pattern) An NFT pattern implements non-fungible token functionality using Web3 design patterns.
 
 **Case Study**: NFT Marketplace
+
 - Uses observer pattern for event monitoring
 - Uses factory pattern for NFT creation
 - Uses observer pattern for bid/ask updates
@@ -800,4 +830,4 @@ This module establishes a comprehensive theory of design patterns for Web3 syste
 2. Freeman, S., Robson, E., & Sierra, K. (2004). Head first design patterns.
 3. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
 4. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger.
-5. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system. 
+5. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.

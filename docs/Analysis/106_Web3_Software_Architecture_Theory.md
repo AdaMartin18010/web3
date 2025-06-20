@@ -9,6 +9,7 @@ This module presents a comprehensive theory of software architecture for Web3 sy
 ### 1.1 Formal Architecture Definition
 
 **Definition 1.1.1** (Software Architecture) A software architecture is a tuple $\mathcal{A} = (C, R, P, S, Q)$ where:
+
 - $C$: Set of components
 - $R$: Set of relationships between components
 - $P$: Set of properties and constraints
@@ -16,6 +17,7 @@ This module presents a comprehensive theory of software architecture for Web3 sy
 - $Q$: Quality attributes and requirements
 
 **Definition 1.1.2** (Architecture Style) An architecture style is a collection of design decisions that:
+
 - Apply to recurring design problems
 - Define component types and relationships
 - Specify constraints on component composition
@@ -28,6 +30,7 @@ This module presents a comprehensive theory of software architecture for Web3 sy
 ### 1.2 Architecture Quality Attributes
 
 **Definition 1.1.3** (Quality Attributes) Quality attributes are measurable properties of software architecture:
+
 - **Performance**: Response time, throughput, resource utilization
 - **Security**: Confidentiality, integrity, availability
 - **Scalability**: Horizontal and vertical scaling capabilities
@@ -40,6 +43,7 @@ $$\text{Trade-off}(Q_1, Q_2) = \text{Improvement}(Q_1) \rightarrow \text{Degrada
 **Theorem 1.1.2** (Quality Attribute Dependencies) Quality attributes are not independent; improving one may affect others.
 
 **Proof**:
+
 1. Security measures may impact performance
 2. Scalability may affect maintainability
 3. Reliability may require additional complexity
@@ -50,6 +54,7 @@ $$\text{Trade-off}(Q_1, Q_2) = \text{Improvement}(Q_1) \rightarrow \text{Degrada
 ### 2.1 Microservices Theory
 
 **Definition 2.1.1** (Microservice) A microservice is a tuple $\mathcal{M} = (I, P, D, C, A)$ where:
+
 - $I$: Interface and API definition
 - $P$: Business logic and processing
 - $D$: Data storage and persistence
@@ -57,6 +62,7 @@ $$\text{Trade-off}(Q_1, Q_2) = \text{Improvement}(Q_1) \rightarrow \text{Degrada
 - $A$: Autonomy and independence
 
 **Definition 2.1.2** (Microservices Architecture) A microservices architecture $\mathcal{MA} = (\mathcal{M}_1, \mathcal{M}_2, ..., \mathcal{M}_n, \mathcal{N})$ where:
+
 - $\mathcal{M}_i$: Individual microservices
 - $\mathcal{N}$: Network and communication infrastructure
 
@@ -67,11 +73,13 @@ $$\text{Trade-off}(Q_1, Q_2) = \text{Improvement}(Q_1) \rightarrow \text{Degrada
 ### 2.2 Service Communication Theory
 
 **Definition 2.2.1** (Service Communication) Service communication is defined by:
+
 - **Synchronous**: Request-response pattern
 - **Asynchronous**: Event-driven pattern
 - **Message-based**: Queue-based pattern
 
 **Definition 2.2.2** (Communication Protocol) A communication protocol $P = (M, T, S, E)$ where:
+
 - $M$: Message format and structure
 - $T$: Transport mechanism
 - $S$: Serialization format
@@ -80,6 +88,7 @@ $$\text{Trade-off}(Q_1, Q_2) = \text{Improvement}(Q_1) \rightarrow \text{Degrada
 **Theorem 2.2.1** (Communication Reliability) Reliable communication between microservices requires proper error handling and retry mechanisms.
 
 **Proof**:
+
 1. Network failures are inevitable in distributed systems
 2. Proper error handling ensures message delivery
 3. Retry mechanisms handle transient failures
@@ -96,6 +105,7 @@ $$\text{Balance}(requests, instances) \rightarrow \text{Distribution}[instance, 
 **Theorem 2.3.1** (Load Balancing Optimality) Optimal load balancing minimizes response time and maximizes throughput.
 
 **Proof**:
+
 1. Even distribution reduces bottlenecks
 2. Minimized response time improves user experience
 3. Maximized throughput increases system capacity
@@ -106,6 +116,7 @@ $$\text{Balance}(requests, instances) \rightarrow \text{Distribution}[instance, 
 ### 3.1 Workflow Theory
 
 **Definition 3.1.1** (Workflow) A workflow is a tuple $\mathcal{W} = (T, F, C, D, S)$ where:
+
 - $T$: Set of tasks or activities
 - $F$: Flow control and sequencing
 - $C$: Conditions and decision points
@@ -113,6 +124,7 @@ $$\text{Balance}(requests, instances) \rightarrow \text{Distribution}[instance, 
 - $S$: State management and persistence
 
 **Definition 3.1.2** (Workflow Engine) A workflow engine $\mathcal{WE} = (P, E, M, H)$ where:
+
 - $P$: Process definition and execution
 - $E$: Event handling and routing
 - $M$: State management and persistence
@@ -136,6 +148,7 @@ $$\text{if } C \text{ then } T_1 \text{ else } T_2$$
 **Theorem 3.2.1** (Pattern Composition) Any workflow can be constructed from basic patterns.
 
 **Proof**:
+
 1. Sequential pattern handles ordered execution
 2. Parallel pattern handles concurrent execution
 3. Conditional pattern handles decision making
@@ -146,6 +159,7 @@ $$\text{if } C \text{ then } T_1 \text{ else } T_2$$
 ### 4.1 IoT System Theory
 
 **Definition 4.1.1** (IoT System) An IoT system is a tuple $\mathcal{IoT} = (D, N, P, A, S)$ where:
+
 - $D$: Set of devices and sensors
 - $N$: Network connectivity and protocols
 - $P$: Data processing and analytics
@@ -153,6 +167,7 @@ $$\text{if } C \text{ then } T_1 \text{ else } T_2$$
 - $S$: Security and privacy mechanisms
 
 **Definition 4.1.2** (IoT Device) An IoT device $\mathcal{D} = (S, P, C, T)$ where:
+
 - $S$: Sensors and actuators
 - $P$: Processing capabilities
 - $C$: Communication interfaces
@@ -161,6 +176,7 @@ $$\text{if } C \text{ then } T_1 \text{ else } T_2$$
 **Theorem 4.1.1** (IoT Scalability) IoT systems can scale to millions of devices through hierarchical architecture.
 
 **Proof**:
+
 1. Hierarchical organization reduces complexity
 2. Local processing reduces network load
 3. Distributed architecture enables scaling
@@ -172,6 +188,7 @@ $$\text{if } C \text{ then } T_1 \text{ else } T_2$$
 $$\text{Device} \rightarrow \text{Gateway} \rightarrow \text{Cloud} \rightarrow \text{Application}$$
 
 **Definition 4.2.2** (Data Processing Pipeline) A data processing pipeline $P = (I, F, O)$ where:
+
 - $I$: Input data sources
 - $F$: Filtering and transformation functions
 - $O$: Output destinations
@@ -179,6 +196,7 @@ $$\text{Device} \rightarrow \text{Gateway} \rightarrow \text{Cloud} \rightarrow 
 **Theorem 4.2.1** (Data Integrity) IoT data integrity is maintained through cryptographic verification and redundancy.
 
 **Proof**:
+
 1. Cryptographic signatures verify data authenticity
 2. Redundancy ensures data availability
 3. Checksums detect data corruption
@@ -189,12 +207,14 @@ $$\text{Device} \rightarrow \text{Gateway} \rightarrow \text{Cloud} \rightarrow 
 ### 5.1 Component Theory
 
 **Definition 5.1.1** (Software Component) A software component is a tuple $\mathcal{C} = (I, P, S, D)$ where:
+
 - $I$: Interface and contract
 - $P$: Properties and behavior
 - $S$: State and data
 - $D$: Dependencies and requirements
 
 **Definition 5.1.2** (Component Assembly) Component assembly $\mathcal{CA} = (\mathcal{C}_1, \mathcal{C}_2, ..., \mathcal{C}_n, \mathcal{B})$ where:
+
 - $\mathcal{C}_i$: Individual components
 - $\mathcal{B}$: Binding and composition rules
 
@@ -205,11 +225,13 @@ $$\text{Device} \rightarrow \text{Gateway} \rightarrow \text{Cloud} \rightarrow 
 ### 5.2 Component Communication
 
 **Definition 5.2.1** (Component Communication) Components communicate through:
+
 - **Method calls**: Direct invocation
 - **Events**: Asynchronous notifications
 - **Shared state**: Common data structures
 
 **Definition 5.2.2** (Communication Contract) A communication contract defines:
+
 - Message format and structure
 - Protocol and semantics
 - Error handling and recovery
@@ -218,6 +240,7 @@ $$\text{Device} \rightarrow \text{Gateway} \rightarrow \text{Cloud} \rightarrow 
 **Theorem 5.2.1** (Communication Correctness) Correct component communication requires proper contract enforcement.
 
 **Proof**:
+
 1. Contracts define expected behavior
 2. Enforcement ensures compliance
 3. Validation prevents errors
@@ -782,6 +805,7 @@ pub struct ProcessedData {
 ### 7.1 Architecture Performance Metrics
 
 **Definition 7.1.1** (Performance Metrics) Key performance metrics include:
+
 - **Response Time**: $T_{response} = T_{processing} + T_{network} + T_{queue}$
 - **Throughput**: $\text{Throughput} = \frac{\text{Requests}}{\text{Time}}$
 - **Resource Utilization**: $\text{Utilization} = \frac{\text{Used Resources}}{\text{Total Resources}}$
@@ -804,6 +828,7 @@ $$\text{Scalability} = \frac{\text{Performance at Load N}}{\text{Performance at 
 ### 8.1 Architecture Security
 
 **Definition 8.1.1** (Security Properties) Key security properties include:
+
 - **Confidentiality**: Information is not disclosed to unauthorized parties
 - **Integrity**: Information is not modified by unauthorized parties
 - **Availability**: System is accessible to authorized parties
@@ -815,6 +840,7 @@ $$\text{Scalability} = \frac{\text{Performance at Load N}}{\text{Performance at 
 ### 8.2 Web3 Security Considerations
 
 **Definition 8.2.1** (Web3 Security) Web3 security requires protection against:
+
 - **Sybil attacks**: Multiple fake identities
 - **51% attacks**: Majority control of network
 - **Smart contract vulnerabilities**: Code-level security issues
@@ -828,6 +854,7 @@ $$\text{Scalability} = \frac{\text{Performance at Load N}}{\text{Performance at 
 ### 9.1 DeFi Architecture
 
 **Case Study**: Decentralized Exchange (DEX)
+
 - **Microservices**: Order matching, liquidity pools, price feeds
 - **Workflow**: Order processing, settlement, fee distribution
 - **Component Integration**: Modular trading engine
@@ -835,6 +862,7 @@ $$\text{Scalability} = \frac{\text{Performance at Load N}}{\text{Performance at 
 ### 9.2 Supply Chain Architecture
 
 **Case Study**: Blockchain Supply Chain
+
 - **Microservices**: Product tracking, authentication, compliance
 - **Workflow**: Product lifecycle, certification, delivery
 - **Component Integration**: Modular tracking system
@@ -860,4 +888,4 @@ This module establishes a comprehensive theory of software architecture for Web3
 3. van der Aalst, W. M. (2016). Process mining: Data science in action.
 4. Atzori, L., Iera, A., & Morabito, G. (2010). The internet of things: A survey.
 5. Szyperski, C. (2002). Component software: Beyond object-oriented programming.
-6. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger. 
+6. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger.

@@ -9,19 +9,22 @@ This module presents a comprehensive formal mathematical theory for Web3 systems
 ### 1.1 Formal Systems and Axiomatization
 
 **Definition 1.1.1** (Web3 Formal System) A Web3 formal system is a tuple $\mathcal{W} = (\Sigma, \mathcal{R}, \mathcal{A}, \vdash)$ where:
+
 - $\Sigma$ is a finite alphabet of Web3 symbols
 - $\mathcal{R}$ is a set of inference rules
 - $\mathcal{A}$ is a set of axioms
 - $\vdash$ is a provability relation
 
 **Definition 1.1.2** (Web3 Axiom Schema) The Web3 axiom schema consists of:
+
 1. **Consistency Axiom**: $\forall x, y \in \mathcal{S}: \text{Consistent}(x, y) \rightarrow \text{Valid}(x \cup y)$
 2. **Decentralization Axiom**: $\forall n \in \mathcal{N}: \text{Node}(n) \rightarrow \text{Autonomous}(n)$
 3. **Immutability Axiom**: $\forall b \in \mathcal{B}: \text{Block}(b) \rightarrow \text{Immutable}(b)$
 
 **Theorem 1.1.1** (Web3 Consistency) The Web3 formal system is consistent if and only if there exists no proof of both $\phi$ and $\neg\phi$ for any formula $\phi$.
 
-**Proof**: 
+**Proof**:
+
 1. Assume inconsistency: $\vdash \phi$ and $\vdash \neg\phi$
 2. By explosion principle: $\vdash \psi$ for any $\psi$
 3. This contradicts the consistency axiom
@@ -30,12 +33,14 @@ This module presents a comprehensive formal mathematical theory for Web3 systems
 ### 1.2 Category Theory in Web3
 
 **Definition 1.2.1** (Web3 Category) A Web3 category $\mathcal{C}$ consists of:
+
 - Objects: Web3 entities (blocks, transactions, nodes)
 - Morphisms: Web3 operations (transactions, consensus, validation)
 - Composition: Sequential operation execution
 - Identity: Null operations
 
 **Definition 1.2.2** (Blockchain Functor) A blockchain functor $F: \mathcal{C} \rightarrow \mathcal{D}$ maps:
+
 - Blocks to states: $F(B) = S$
 - Transactions to transitions: $F(T) = \delta$
 - Preserves composition: $F(T_1 \circ T_2) = F(T_1) \circ F(T_2)$
@@ -43,7 +48,8 @@ This module presents a comprehensive formal mathematical theory for Web3 systems
 **Theorem 1.2.1** (Yoneda Lemma for Web3) For any Web3 object $X$ and functor $F$:
 $$F(X) \cong \text{Nat}(\text{Hom}(-, X), F)$$
 
-**Proof**: 
+**Proof**:
+
 1. Define natural transformation $\eta: \text{Hom}(-, X) \rightarrow F$
 2. For each object $Y$, $\eta_Y: \text{Hom}(Y, X) \rightarrow F(Y)$
 3. Naturality condition: $\eta_Y(f \circ g) = F(f) \circ \eta_X(g)$
@@ -52,6 +58,7 @@ $$F(X) \cong \text{Nat}(\text{Hom}(-, X), F)$$
 ### 1.3 Formal Language Theory
 
 **Definition 1.3.1** (Web3 Grammar) A Web3 grammar $G = (V, T, P, S)$ where:
+
 - $V$: Non-terminal symbols (block structures, transaction types)
 - $T$: Terminal symbols (hashes, addresses, signatures)
 - $P$: Production rules (consensus rules, validation rules)
@@ -62,6 +69,7 @@ $$F(X) \cong \text{Nat}(\text{Hom}(-, X), F)$$
 **Theorem 1.3.1** (Web3 Language Decidability) The membership problem for Web3 languages is decidable in polynomial time.
 
 **Proof**:
+
 1. Construct parsing automaton for grammar $G$
 2. Each production rule has bounded complexity
 3. Parse tree construction is polynomial in input size
@@ -72,6 +80,7 @@ $$F(X) \cong \text{Nat}(\text{Hom}(-, X), F)$$
 ### 2.1 Petri Net Models for Blockchain
 
 **Definition 2.1.1** (Blockchain Petri Net) A blockchain Petri net $N = (P, T, F, M_0)$ where:
+
 - $P$: Places (unconfirmed transactions, mempool, confirmed blocks)
 - $T$: Transitions (mining, validation, consensus)
 - $F$: Flow relation (token flow between places)
@@ -83,6 +92,7 @@ $$\forall p \in \bullet t_c: M(p) \geq F(p, t_c)$$
 **Theorem 2.1.1** (Consensus Liveness) If the blockchain Petri net is live, then consensus will eventually be reached.
 
 **Proof**:
+
 1. Liveness implies every transition is eventually enabled
 2. Consensus transitions are included in $T$
 3. Therefore, consensus will eventually occur
@@ -90,6 +100,7 @@ $$\forall p \in \bullet t_c: M(p) \geq F(p, t_c)$$
 ### 2.2 Temporal Logic for Web3
 
 **Definition 2.2.1** (Web3 Temporal Logic) The Web3 temporal logic extends LTL with blockchain-specific operators:
+
 - $\text{EventuallyConfirmed}(\phi)$: $\phi$ will eventually be confirmed
 - $\text{AlwaysValid}(\phi)$: $\phi$ remains valid forever
 - $\text{NextBlock}(\phi)$: $\phi$ holds in the next block
@@ -100,6 +111,7 @@ $$\forall \sigma \in \text{Executions}: \sigma \models \text{AlwaysValid}(\phi)$
 **Theorem 2.2.1** (Safety Preservation) If a blockchain satisfies safety property $\phi$ and all transitions preserve $\phi$, then $\phi$ is maintained.
 
 **Proof**:
+
 1. Base case: Initial state satisfies $\phi$
 2. Inductive step: Each transition preserves $\phi$
 3. By induction, all reachable states satisfy $\phi$
@@ -117,6 +129,7 @@ $$f(nonce, difficulty) = \text{SHA256}(block \| nonce) < 2^{256-difficulty}$$
 **Theorem 3.1.1** (Consensus Convergence) Under reasonable network conditions, consensus converges with probability 1.
 
 **Proof**:
+
 1. Each round has positive probability of success
 2. Independent trials with positive probability
 3. By Borel-Cantelli lemma, consensus occurs almost surely
@@ -124,6 +137,7 @@ $$f(nonce, difficulty) = \text{SHA256}(block \| nonce) < 2^{256-difficulty}$$
 ### 3.2 Network Optimization
 
 **Definition 3.2.1** (Network Graph) The Web3 network is modeled as a directed graph $G = (V, E)$ where:
+
 - $V$: Nodes (validators, miners, users)
 - $E$: Connections (peer-to-peer links)
 
@@ -133,6 +147,7 @@ $$\text{Efficiency}(G) = \frac{\text{Connected Components}(G)}{|V|} \cdot \text{
 **Theorem 3.2.1** (Optimal Network Structure) For a given number of nodes, the optimal network structure minimizes average path length while maintaining connectivity.
 
 **Proof**:
+
 1. Connectivity is necessary for consensus
 2. Shorter paths reduce latency
 3. Optimal structure balances these constraints
@@ -487,6 +502,7 @@ impl PetriNet {
 **Theorem 5.1.1** (Proof Search Complexity) The proof search algorithm has worst-case time complexity $O(2^n)$ where $n$ is the number of inference rules.
 
 **Proof**:
+
 1. Each rule application can branch into multiple subgoals
 2. In worst case, each subgoal requires exploring all rules
 3. This leads to exponential growth in search space
@@ -494,6 +510,7 @@ impl PetriNet {
 **Theorem 5.1.2** (Petri Net Analysis) Reachability analysis for bounded Petri nets is PSPACE-complete.
 
 **Proof**:
+
 1. Membership in PSPACE: Use nondeterministic algorithm
 2. PSPACE-hardness: Reduce from QBF problem
 3. Therefore, PSPACE-complete
@@ -506,6 +523,7 @@ $$\forall \sigma \in \text{Executions}: \sigma \models \text{SecurityInvariant}(
 **Theorem 5.2.1** (Security Preservation) If all transitions preserve security property $\phi$ and the initial state satisfies $\phi$, then $\phi$ is maintained throughout execution.
 
 **Proof**:
+
 1. Base case: Initial state satisfies $\phi$
 2. Inductive step: Each transition preserves $\phi$
 3. By induction, all reachable states satisfy $\phi$
@@ -515,6 +533,7 @@ $$\forall \sigma \in \text{Executions}: \sigma \models \text{SecurityInvariant}(
 ### 6.1 Smart Contract Verification
 
 **Definition 6.1.1** (Contract Specification) A smart contract specification is a tuple $(P, Q, I)$ where:
+
 - $P$: Precondition (input validation)
 - $Q$: Postcondition (output guarantee)
 - $I$: Invariant (state consistency)
@@ -549,4 +568,4 @@ This module establishes a comprehensive formal mathematical foundation for Web3 
 2. Hopcroft, J. E., & Ullman, J. D. (1979). Introduction to automata theory, languages, and computation.
 3. Reisig, W. (2013). Understanding Petri nets: Modeling techniques, analysis methods, case studies.
 4. Clarke, E. M., Grumberg, O., & Peled, D. A. (1999). Model checking.
-5. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger. 
+5. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger.

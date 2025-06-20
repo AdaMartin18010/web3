@@ -5,17 +5,54 @@
 - [高级区块链形式化理论综合分析 v2](#高级区块链形式化理论综合分析-v2)
   - [目录](#目录)
   - [1. 引言](#1-引言)
+    - [1.1 研究背景](#11-研究背景)
+    - [1.2 形式化分析的重要性](#12-形式化分析的重要性)
   - [2. 区块链基础理论](#2-区块链基础理论)
+    - [2.1 基本定义](#21-基本定义)
+    - [2.2 区块链性质](#22-区块链性质)
   - [3. 分布式账本形式化](#3-分布式账本形式化)
+    - [3.1 账本结构](#31-账本结构)
+    - [3.2 Merkle树](#32-merkle树)
+    - [3.3 状态转换](#33-状态转换)
   - [4. 共识机制理论](#4-共识机制理论)
+    - [4.1 共识问题](#41-共识问题)
+    - [4.2 工作量证明(PoW)](#42-工作量证明pow)
+    - [4.3 权益证明(PoS)](#43-权益证明pos)
+    - [4.4 拜占庭容错(BFT)](#44-拜占庭容错bft)
   - [5. 密码学基础](#5-密码学基础)
+    - [5.1 哈希函数](#51-哈希函数)
+    - [5.2 数字签名](#52-数字签名)
+    - [5.3 零知识证明](#53-零知识证明)
   - [6. 智能合约理论](#6-智能合约理论)
+    - [6.1 智能合约定义](#61-智能合约定义)
+    - [6.2 形式化验证](#62-形式化验证)
+    - [6.3 自动化验证](#63-自动化验证)
   - [7. 可扩展性理论](#7-可扩展性理论)
+    - [7.1 扩展性问题](#71-扩展性问题)
+    - [7.2 分片技术](#72-分片技术)
+    - [7.3 状态通道](#73-状态通道)
+    - [7.4 侧链](#74-侧链)
   - [8. 经济学模型](#8-经济学模型)
+    - [8.1 激励机制](#81-激励机制)
+    - [8.2 代币经济学](#82-代币经济学)
+    - [8.3 博弈论分析](#83-博弈论分析)
   - [9. 隐私保护理论](#9-隐私保护理论)
+    - [9.1 隐私定义](#91-隐私定义)
+    - [9.2 环签名](#92-环签名)
+    - [9.3 零知识证明](#93-零知识证明)
   - [10. 量子安全理论](#10-量子安全理论)
+    - [10.1 量子威胁](#101-量子威胁)
+    - [10.2 格密码学](#102-格密码学)
+    - [10.3 基于哈希的签名](#103-基于哈希的签名)
   - [11. Rust实现示例](#11-rust实现示例)
+    - [11.1 区块链核心实现](#111-区块链核心实现)
+    - [11.2 共识机制实现](#112-共识机制实现)
+    - [11.3 智能合约实现](#113-智能合约实现)
   - [12. 未来发展方向](#12-未来发展方向)
+    - [12.1 技术发展](#121-技术发展)
+    - [12.2 应用扩展](#122-应用扩展)
+    - [12.3 理论研究](#123-理论研究)
+  - [结论](#结论)
 
 ## 1. 引言
 
@@ -39,6 +76,7 @@
 **定义 2.1**（区块链系统）：区块链系统是一个五元组：
 $$\mathcal{BC} = (N, B, S, T, C)$$
 其中：
+
 - $N$ 是节点集合
 - $B$ 是区块集合
 - $S$ 是状态空间
@@ -48,6 +86,7 @@ $$\mathcal{BC} = (N, B, S, T, C)$$
 **定义 2.2**（区块链状态）：区块链状态是一个三元组：
 $$s = (L, M, G)$$
 其中：
+
 - $L$ 是账本状态
 - $M$ 是内存池
 - $G$ 是全局状态
@@ -55,6 +94,7 @@ $$s = (L, M, G)$$
 **定义 2.3**（区块）：区块是一个四元组：
 $$B = (h_{prev}, tx, nonce, h)$$
 其中：
+
 - $h_{prev}$ 是前一个区块的哈希
 - $tx$ 是交易集合
 - $nonce$ 是随机数
@@ -311,7 +351,7 @@ use sha2::{Sha256, Digest};
 use serde::{Serialize, Deserialize};
 use chrono::{DateTime, Utc};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Transaction {
     pub from: String,
     pub to: String,
@@ -321,7 +361,7 @@ pub struct Transaction {
     pub timestamp: DateTime<Utc>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Block {
     pub index: u64,
     pub timestamp: DateTime<Utc>,
@@ -332,7 +372,7 @@ pub struct Block {
     pub merkle_root: String,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Blockchain {
     pub chain: Vec<Block>,
     pub pending_transactions: Vec<Transaction>,
@@ -398,7 +438,7 @@ impl Blockchain {
         };
 
         let mined_block = self.mine_block(block)?;
-        
+
         // Add mining reward
         let reward_transaction = Transaction {
             from: "System".to_string(),
@@ -541,14 +581,14 @@ use std::sync::{Arc, Mutex};
 use tokio::sync::mpsc;
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ConsensusMessage {
     Propose(Block),
     Vote(u64, String, bool), // block_index, voter_id, vote
     Commit(u64),
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct ConsensusNode {
     pub id: String,
     pub blockchain: Arc<Mutex<Blockchain>>,
@@ -574,7 +614,7 @@ impl ConsensusNode {
 
     pub async fn propose_block(&self, block: Block) -> Result<(), String> {
         let message = ConsensusMessage::Propose(block.clone());
-        
+
         // Send proposal to all peers
         for (peer_id, sender) in &self.peers {
             if let Err(e) = sender.send(message.clone()).await {
@@ -590,7 +630,7 @@ impl ConsensusNode {
 
     pub async fn vote(&mut self, block_index: u64, vote: bool) -> Result<(), String> {
         let message = ConsensusMessage::Vote(block_index, self.id.clone(), vote);
-        
+
         // Send vote to all peers
         for (peer_id, sender) in &self.peers {
             if let Err(e) = sender.send(message.clone()).await {
@@ -655,7 +695,7 @@ impl ConsensusNode {
             ConsensusMessage::Vote(block_index, voter_id, vote) => {
                 // Record vote
                 self.votes.entry(block_index).or_insert_with(HashMap::new).insert(voter_id, vote);
-                
+
                 // Check consensus
                 self.check_consensus(block_index).await?;
             }
@@ -676,7 +716,7 @@ impl ConsensusNode {
 }
 
 // Proof of Work implementation
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct ProofOfWork {
     pub difficulty: u32,
     pub target: String,
@@ -692,7 +732,7 @@ impl ProofOfWork {
         loop {
             block.nonce += 1;
             let hash = self.calculate_hash(block);
-            
+
             if hash.starts_with(&self.target) {
                 block.hash = hash;
                 return block.nonce;
@@ -722,7 +762,7 @@ impl ProofOfWork {
 }
 
 // Proof of Stake implementation
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct ProofOfStake {
     pub validators: HashMap<String, u64>, // address -> stake
     pub total_stake: u64,
@@ -772,14 +812,14 @@ impl ProofOfStake {
 use std::collections::HashMap;
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ContractState {
     Active,
     Paused,
     Terminated,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SmartContract {
     pub address: String,
     pub code: String,
@@ -789,7 +829,7 @@ pub struct SmartContract {
     pub owner: String,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ContractCall {
     pub from: String,
     pub to: String,
@@ -798,7 +838,7 @@ pub struct ContractCall {
     pub value: u64,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct ContractExecutor {
     pub contracts: HashMap<String, SmartContract>,
     pub accounts: HashMap<String, u64>,
@@ -814,7 +854,7 @@ impl ContractExecutor {
 
     pub fn deploy_contract(&mut self, owner: String, code: String, initial_balance: u64) -> String {
         let address = self.generate_address();
-        
+
         let contract = SmartContract {
             address: address.clone(),
             code,
@@ -858,7 +898,7 @@ impl ContractExecutor {
                 if call.params.len() != 2 {
                     return Err("Transfer requires 2 parameters".to_string());
                 }
-                
+
                 let to = &call.params[0];
                 let amount: u64 = call.params[1].parse()
                     .map_err(|_| "Invalid amount".to_string())?;
@@ -877,10 +917,10 @@ impl ContractExecutor {
                 if call.params.len() != 2 {
                     return Err("Set storage requires 2 parameters".to_string());
                 }
-                
+
                 let key = &call.params[0];
                 let value = &call.params[1];
-                
+
                 // In a real implementation, this would update the contract storage
                 Ok(format!("Set {} = {}", key, value))
             }
@@ -888,7 +928,7 @@ impl ContractExecutor {
                 if call.params.len() != 1 {
                     return Err("Get storage requires 1 parameter".to_string());
                 }
-                
+
                 let key = &call.params[0];
                 let value = contract.storage.get(key).unwrap_or(&"0".to_string());
                 Ok(value.clone())
@@ -990,4 +1030,4 @@ impl ContractExecutor {
 3. **指导实现**：为实际系统提供理论指导
 4. **推动创新**：为新技术发展提供基础
 
-区块链的形式化理论将继续发展，为构建安全、可扩展、去中心化的系统提供坚实的理论基础。 
+区块链的形式化理论将继续发展，为构建安全、可扩展、去中心化的系统提供坚实的理论基础。

@@ -126,7 +126,8 @@ $$conn = (id, addr, state)$$
 $$async\_io: \text{Operation} \rightarrow \text{Future}[\text{Result}]$$
 
 **定义 3.4**（事件循环）：事件循环处理异步事件：
-$$event\_loop: \text{Event} \rightarrow \text{Handler}\]
+
+$$event\_loop: \text{Event} \rightarrow \text{Handler}\]$$
 
 **定理 3.2**（异步正确性）：异步I/O模型正确处理并发请求。
 
@@ -251,13 +252,16 @@ $$boundary: \text{Trusted} \times \text{Untrusted} \rightarrow \text{Interface}$
 ### 7.2 访问控制
 
 **定义 7.3**（访问控制）：访问控制定义为：
+
 $$
 access\_control: \text{Subject} \times \text{Object} \times \text{Action} \rightarrow \{\text{Allow}, \text{Deny}\}
 $$
 
 **定义 7.4**（权限模型）：权限模型定义为：
+
 $$permission\_model = (S, O, A, P)$$
 其中：
+
 - $S$ 是主体集合
 - $O$ 是对象集合
 - $A$ 是操作集合

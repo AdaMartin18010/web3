@@ -5,17 +5,49 @@
 - [高级时态逻辑控制综合理论 v2](#高级时态逻辑控制综合理论-v2)
   - [目录](#目录)
   - [1. 引言](#1-引言)
+    - [1.1 研究背景](#11-研究背景)
+    - [1.2 形式化分析的重要性](#12-形式化分析的重要性)
   - [2. 时态逻辑基础理论](#2-时态逻辑基础理论)
+    - [2.1 基本定义](#21-基本定义)
+    - [2.2 语义定义](#22-语义定义)
   - [3. 线性时态逻辑](#3-线性时态逻辑)
+    - [3.1 LTL语法](#31-ltl语法)
+    - [3.2 LTL模型检查](#32-ltl模型检查)
   - [4. 计算树逻辑](#4-计算树逻辑)
+    - [4.1 CTL语法](#41-ctl语法)
+    - [4.2 CTL模型检查](#42-ctl模型检查)
   - [5. 时间时态逻辑](#5-时间时态逻辑)
+    - [5.1 时间LTL](#51-时间ltl)
+    - [5.2 时间CTL](#52-时间ctl)
   - [6. 模型检查理论](#6-模型检查理论)
+    - [6.1 状态空间表示](#61-状态空间表示)
+    - [6.2 自动机理论](#62-自动机理论)
+    - [6.3 模型检查算法](#63-模型检查算法)
   - [7. 控制理论](#7-控制理论)
+    - [7.1 控制系统](#71-控制系统)
+    - [7.2 稳定性理论](#72-稳定性理论)
+    - [7.3 可控性](#73-可控性)
   - [8. 控制综合](#8-控制综合)
+    - [8.1 控制综合问题](#81-控制综合问题)
+    - [8.2 控制器设计](#82-控制器设计)
+    - [8.3 最优控制](#83-最优控制)
   - [9. 实时系统理论](#9-实时系统理论)
+    - [9.1 实时系统](#91-实时系统)
+    - [9.2 时间约束](#92-时间约束)
+    - [9.3 实时验证](#93-实时验证)
   - [10. 形式化验证](#10-形式化验证)
+    - [10.1 模型检查](#101-模型检查)
+    - [10.2 定理证明](#102-定理证明)
+    - [10.3 静态分析](#103-静态分析)
   - [11. Rust实现示例](#11-rust实现示例)
+    - [11.1 LTL模型检查器](#111-ltl模型检查器)
+    - [11.2 控制系统](#112-控制系统)
+    - [11.3 实时调度器](#113-实时调度器)
   - [12. 未来发展方向](#12-未来发展方向)
+    - [12.1 理论发展](#121-理论发展)
+    - [12.2 应用扩展](#122-应用扩展)
+    - [12.3 工具支持](#123-工具支持)
+  - [结论](#结论)
 
 ## 1. 引言
 
@@ -42,6 +74,7 @@
 $$\phi ::= p \mid \neg \phi \mid \phi \land \phi \mid \phi \lor \phi \mid \phi \rightarrow \phi \mid \Box \phi \mid \Diamond \phi \mid \phi \mathcal{U} \phi \mid \bigcirc \phi$$
 
 其中：
+
 - $p$ 是原子命题
 - $\Box$ 是总是操作符
 - $\Diamond$ 是将来操作符
@@ -51,6 +84,7 @@ $$\phi ::= p \mid \neg \phi \mid \phi \land \phi \mid \phi \lor \phi \mid \phi \
 **定义 2.3**（Kripke模型）：Kripke模型是一个三元组：
 $$\mathcal{M} = (W, R, V)$$
 其中：
+
 - $W$ 是世界集合
 - $R \subseteq W \times W$ 是可达关系
 - $V: W \rightarrow 2^P$ 是赋值函数
@@ -58,6 +92,7 @@ $$\mathcal{M} = (W, R, V)$$
 ### 2.2 语义定义
 
 **定义 2.4**（时态逻辑语义）：时态逻辑语义定义为：
+
 - $\mathcal{M}, w \models p$ 当且仅当 $p \in V(w)$
 - $\mathcal{M}, w \models \Box \phi$ 当且仅当 $\forall v: (w,v) \in R \Rightarrow \mathcal{M}, v \models \phi$
 - $\mathcal{M}, w \models \Diamond \phi$ 当且仅当 $\exists v: (w,v) \in R \land \mathcal{M}, v \models \phi$
@@ -73,6 +108,7 @@ $$\mathcal{M} = (W, R, V)$$
 $$\phi ::= p \mid \neg \phi \mid \phi_1 \land \phi_2 \mid \phi_1 \lor \phi_2 \mid \phi_1 \rightarrow \phi_2 \mid \bigcirc \phi \mid \phi_1 \mathcal{U} \phi_2 \mid \diamond \phi \mid \square \phi$$
 
 **定义 3.2**（LTL语义）：对于无限序列 $\pi = \pi_0 \pi_1 \pi_2 \cdots$ 和位置 $i \geq 0$：
+
 - $\pi, i \models p$ 当且仅当 $p \in \pi_i$
 - $\pi, i \models \neg \phi$ 当且仅当 $\pi, i \not\models \phi$
 - $\pi, i \models \phi_1 \land \phi_2$ 当且仅当 $\pi, i \models \phi_1$ 且 $\pi, i \models \phi_2$
@@ -80,6 +116,7 @@ $$\phi ::= p \mid \neg \phi \mid \phi_1 \land \phi_2 \mid \phi_1 \lor \phi_2 \mi
 - $\pi, i \models \phi_1 \mathcal{U} \phi_2$ 当且仅当存在 $j \geq i$ 使得 $\pi, j \models \phi_2$ 且对于所有 $i \leq k < j$ 都有 $\pi, k \models \phi_1$
 
 **定理 3.1**（LTL等价性）：以下等价关系成立：
+
 - $\diamond \phi \equiv \text{true} \mathcal{U} \phi$
 - $\square \phi \equiv \neg \diamond \neg \phi$
 - $\phi_1 \mathcal{W} \phi_2 \equiv (\phi_1 \mathcal{U} \phi_2) \lor \square \phi_1$
@@ -98,6 +135,7 @@ $$\phi ::= p \mid \neg \phi \mid \phi_1 \land \phi_2 \mid \phi_1 \lor \phi_2 \mi
 $$\phi ::= p \mid \neg \phi \mid \phi_1 \land \phi_2 \mid \phi_1 \lor \phi_2 \mid \phi_1 \rightarrow \phi_2 \mid \text{EX} \phi \mid \text{AX} \phi \mid \text{EF} \phi \mid \text{AF} \phi \mid \text{EG} \phi \mid \text{AG} \phi \mid \text{E}[\phi_1 \mathcal{U} \phi_2] \mid \text{A}[\phi_1 \mathcal{U} \phi_2]$$
 
 其中：
+
 - $\text{EX}$ 表示存在下一个状态
 - $\text{AX}$ 表示所有下一个状态
 - $\text{EF}$ 表示存在路径将来
@@ -106,6 +144,7 @@ $$\phi ::= p \mid \neg \phi \mid \phi_1 \land \phi_2 \mid \phi_1 \lor \phi_2 \mi
 - $\text{AG}$ 表示所有路径总是
 
 **定义 4.2**（CTL语义）：对于Kripke结构 $M = (S, R, L)$ 和状态 $s \in S$：
+
 - $M, s \models p$ 当且仅当 $p \in L(s)$
 - $M, s \models \text{EX} \phi$ 当且仅当存在 $s'$ 使得 $R(s, s')$ 且 $M, s' \models \phi$
 - $M, s \models \text{EF} \phi$ 当且仅当存在从 $s$ 开始的路径 $\pi$ 和位置 $i$ 使得 $M, \pi_i \models \phi$
@@ -128,6 +167,7 @@ $$\phi ::= p \mid \neg \phi \mid \phi_1 \land \phi_2 \mid \phi_1 \mathcal{U}_{[a
 其中 $[a,b]$ 是时间区间。
 
 **定义 5.2**（时间语义）：对于时间序列 $\pi = (\sigma, \tau)$：
+
 - $\pi, i \models \phi_1 \mathcal{U}_{[a,b]} \phi_2$ 当且仅当存在 $j \geq i$ 使得 $\tau_j - \tau_i \in [a,b]$ 且 $\pi, j \models \phi_2$ 且对于所有 $i \leq k < j$ 都有 $\pi, k \models \phi_1$
 
 **定理 5.1**（时间约束一致性）：时间LTL保证时间约束的一致性。
@@ -153,6 +193,7 @@ $$\phi ::= p \mid \neg \phi \mid \phi_1 \land \phi_2 \mid \phi_1 \mathcal{U}_{[a
 **定义 6.3**（Büchi自动机）：Büchi自动机是五元组：
 $$A = (Q, \Sigma, \delta, q_0, F)$$
 其中：
+
 - $Q$ 是有限状态集合
 - $\Sigma$ 是输入字母表
 - $\delta: Q \times \Sigma \rightarrow 2^Q$ 是转移函数
@@ -160,6 +201,7 @@ $$A = (Q, \Sigma, \delta, q_0, F)$$
 - $F \subseteq Q$ 是接受状态集合
 
 **定义 6.4**（Büchi接受）：无限字 $w = w_0 w_1 w_2 \cdots$ 被Büchi自动机接受，如果存在运行 $\rho = q_0 q_1 q_2 \cdots$ 使得：
+
 1. $\rho_0 = q_0$
 2. $\rho_{i+1} \in \delta(\rho_i, w_i)$ 对于所有 $i \geq 0$
 3. $\text{Inf}(\rho) \cap F \neq \emptyset$
@@ -169,6 +211,7 @@ $$A = (Q, \Sigma, \delta, q_0, F)$$
 ### 6.3 模型检查算法
 
 **算法 6.1**（LTL模型检查）：LTL模型检查算法：
+
 1. 将LTL公式转换为Büchi自动机
 2. 构造系统与自动机的乘积
 3. 检查乘积自动机是否为空
@@ -182,6 +225,7 @@ $$A = (Q, \Sigma, \delta, q_0, F)$$
 **定义 7.1**（控制系统）：控制系统是一个四元组：
 $$\mathcal{CS} = (X, U, Y, f)$$
 其中：
+
 - $X$ 是状态空间
 - $U$ 是控制输入空间
 - $Y$ 是输出空间
@@ -198,6 +242,7 @@ $$f(x,u) = Ax + Bu$$
 $$\forall \epsilon > 0, \exists \delta > 0: \|x(0) - x_e\| < \delta \Rightarrow \|x(t) - x_e\| < \epsilon$$
 
 **定义 7.4**（李雅普诺夫函数）：函数 $V: X \rightarrow \mathbb{R}$ 是李雅普诺夫函数，如果：
+
 1. $V(x) > 0$ for $x \neq x_e$
 2. $V(x_e) = 0$
 3. $\dot{V}(x) < 0$ for $x \neq x_e$
@@ -999,4 +1044,4 @@ impl RealTimeScheduler {
 3. **保证实时**：确保实时系统的时序要求
 4. **保证安全**：保证系统安全性质
 
-时态逻辑控制理论将继续发展，为形式化验证和控制系统设计提供坚实的理论基础。 
+时态逻辑控制理论将继续发展，为形式化验证和控制系统设计提供坚实的理论基础。

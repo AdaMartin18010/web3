@@ -237,9 +237,11 @@ $$\forall s \in S: \text{totalSupply}(s) = \sum_{a \in Accounts} \text{balance}(
 $$\forall s, s' \in S: s' = \text{transfer}(s, from, to, amount) \Rightarrow \text{totalSupply}(s') = \text{totalSupply}(s)$$
 
 **属性 3**: 转账后发送者余额减少，接收者余额增加
-$$\forall s, s' \in S: s' = \text{transfer}(s, from, to, amount) \Rightarrow \\
+$$
+\forall s, s' \in S: s' = \text{transfer}(s, from, to, amount) \Rightarrow \\
 \text{balance}(s', from) = \text{balance}(s, from) - amount \wedge \\
-\text{balance}(s', to) = \text{balance}(s, to) + amount$$
+\text{balance}(s', to) = \text{balance}(s, to) + amount
+$$
 
 ## Rust实现示例
 

@@ -19,12 +19,14 @@
 ### 基本定义
 
 **定义 1.1** (非同质化代币) 非同质化代币是一个四元组 $NFT = (id, M, O, P)$，其中：
+
 - $id \in \mathbb{N}$ 是唯一标识符
 - $M$ 是元数据集合
 - $O: NFT \rightarrow A$ 是所有权映射，$A$ 是地址集合
 - $P$ 是代币属性集合
 
 **定义 1.2** (NFT集合) NFT集合是一个三元组 $C = (T, S, F)$，其中：
+
 - $T$ 是代币集合
 - $S$ 是状态转换函数集合
 - $F$ 是功能接口集合
@@ -36,6 +38,7 @@
 ### 状态转换模型
 
 **定义 1.3** (状态转换) NFT状态转换函数 $\delta: S \times A \times O \rightarrow S$，其中：
+
 - $S$ 是系统状态集合
 - $A$ 是操作集合
 - $O$ 是操作参数集合
@@ -119,6 +122,7 @@ interface IERC1155 {
 ### 元数据标准化
 
 **定义 3.3** (元数据模式) 元数据模式是一个三元组 $M = (F, C, V)$，其中：
+
 - $F$ 是字段集合
 - $C$ 是约束集合
 - $V$ 是验证函数集合
@@ -134,6 +138,7 @@ interface IERC1155 {
 ### 扩展机制
 
 **定义 4.1** (标准扩展) 标准扩展是一个二元组 $E = (I_e, C_e)$，其中：
+
 - $I_e$ 是扩展接口集合
 - $C_e$ 是兼容性约束集合
 
@@ -146,6 +151,7 @@ interface IERC1155 {
 ### 标准治理
 
 **定义 4.3** (治理机制) 治理机制是一个四元组 $G = (A, V, D, I)$，其中：
+
 - $A$ 是参与者集合
 - $V$ 是投票规则集合
 - $D$ 是决策函数集合
@@ -172,6 +178,7 @@ interface IERC1155 {
 **定义 5.3** (实现一致性) 实现一致性函数 $\gamma: I \times S \rightarrow \{0,1\}$，表示实现 $I$ 是否符合标准规范 $S$。
 
 **定义 5.4** (测试套件) 测试套件是一个三元组 $T = (C, E, A)$，其中：
+
 - $C$ 是测试用例集合
 - $E$ 是期望结果集合
 - $A$ 是断言函数集合
@@ -186,4 +193,4 @@ interface IERC1155 {
 2. ERC-1155 Multi Token Standard, Ethereum Improvement Proposals
 3. EIP-2981: NFT Royalty Standard
 4. Formal Verification of Smart Contracts, Runtime Verification Inc.
-5. The Art and Science of NFT Standards, Web3 Foundation 
+5. The Art and Science of NFT Standards, Web3 Foundation

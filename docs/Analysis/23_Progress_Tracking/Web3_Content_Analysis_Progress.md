@@ -24,7 +24,7 @@
 
 | 目录 | 状态 | 完成度 | 备注 |
 |------|------|--------|------|
-| `/docs/Matter/Theory` | 进行中 | 20% | 已分析分布式系统理论和共识理论相关内容 |
+| `/docs/Matter/Theory` | 进行中 | 35% | 已分析分布式系统理论、共识理论、类型理论和控制理论相关内容 |
 | `/docs/Matter/FormalModel` | 未开始 | 0% | 计划下一步分析 |
 | `/docs/Matter/Mathematics` | 未开始 | 0% | 计划后续分析 |
 | `/docs/Matter/FormalLanguage` | 未开始 | 0% | 计划后续分析 |
@@ -41,11 +41,13 @@
 |------|------|--------|------|
 | `17_Systems_Theory/01_Web3_Distributed_Systems_Theory.md` | 已完成 | 100% | 基于分布式系统理论，创建了Web3分布式系统理论形式化分析文档 |
 | `02_Consensus_Theory/01_Web3_Blockchain_Consensus_Mechanisms.md` | 已完成 | 100% | 基于共识理论，创建了Web3区块链共识机制形式化分析文档 |
+| `03_Architecture/01_Web3_Type_Systems_Architecture.md` | 已完成 | 100% | 基于线性仿射时态类型理论，创建了Web3类型系统架构形式化分析文档 |
+| `19_Control_Theory/01_Web3_Control_Theory_Architecture.md` | 已完成 | 100% | 基于时态逻辑控制理论，创建了Web3控制理论架构形式化分析文档 |
 
 ## 下一步计划
 
 1. **继续分析`/docs/Matter/Theory`目录**
-   - 重点关注类型理论、控制理论等相关内容
+   - 重点关注量子系统理论、Petri网理论等相关内容
    - 提取与Web3架构相关的形式化理论
 
 2. **开始对`/docs/Matter/FormalModel`目录的分析**
@@ -54,7 +56,7 @@
 
 3. **扩展已创建文档**
    - 为`02_Consensus_Theory`目录添加更多文档，如共识算法安全性分析
-   - 开始构建`03_Architecture`目录下的文档，关注区块链架构设计
+   - 为`03_Architecture`目录添加更多文档，如模块化区块链架构设计
 
 ## 工作日志
 
@@ -66,13 +68,21 @@
 - 创建`17_Systems_Theory/01_Web3_Distributed_Systems_Theory.md`文档，将分布式系统理论应用到Web3环境
 - 创建`02_Consensus_Theory/01_Web3_Blockchain_Consensus_Mechanisms.md`文档，形式化分析Web3区块链共识机制
 
-### 计划 2024-07-21
+### 2024-07-21
 
-- 分析`/docs/Matter/Theory`目录下的类型理论相关文件
-- 创建`03_Architecture`目录下的区块链架构相关文档
-- 开始分析`/docs/Matter/FormalModel`目录
+- 分析`/docs/Matter/Theory/Linear_Affine_Temporal_Type_Theory`目录，提取类型理论相关内容
+- 创建`03_Architecture/01_Web3_Type_Systems_Architecture.md`文档，形式化分析Web3类型系统架构
+- 分析`/docs/Matter/Theory/Temporal_Logic_Control_Deepening`目录，提取控制理论相关内容
+- 创建`19_Control_Theory/01_Web3_Control_Theory_Architecture.md`文档，形式化分析Web3控制理论架构
+- 更新进度跟踪文档，将`/docs/Matter/Theory`目录完成度更新为35%
+
+### 计划 2024-07-22
+
+- 分析`/docs/Matter/Theory`目录下的量子系统理论和Petri网理论相关文件
+- 开始分析`/docs/Matter/FormalModel`目录，提取形式化模型在Web3中的应用
+- 为`03_Architecture`目录添加模块化区块链架构设计相关文档
 
 ---
 
-**更新日期**: 2024年7月20日
+**更新日期**: 2024年7月21日
 **项目状态**: 进行中

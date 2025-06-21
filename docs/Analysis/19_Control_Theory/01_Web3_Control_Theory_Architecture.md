@@ -117,7 +117,7 @@ Web3控制系统架构是一个多层次结构：
 **定义 2.1 (区块链状态模型)**
 区块链状态可以用时态逻辑模型表示：
 
-```
+```text
 State(B, t) = {
     blocks: [...],
     transactions: [...],
@@ -148,7 +148,7 @@ Property(State(B, t))
 **定义 2.2 (智能合约时态规约)**
 智能合约行为可以通过时态规约形式化描述：
 
-```
+```text
 // 时态安全属性
 AlwaysEventually(condition, response)
 Never(dangerousState)
@@ -180,7 +180,7 @@ Verify(Contract, ContractSpec) -> Boolean
 **定义 2.3 (时态属性验证)**
 时态属性验证是通过模型检查确认系统满足时态逻辑规约：
 
-```
+```text
 // 模型检查问题
 ModelCheck(M, φ) = M ⊨ φ
 
@@ -210,7 +210,7 @@ Web3系统的关键安全属性可通过时态逻辑验证。
 **定义 3.1 (共识反馈控制)**
 共识机制可以表示为反馈控制系统：
 
-```
+```text
 // 共识状态
 ConsensusState = {
     proposedBlocks: [...],
@@ -240,7 +240,7 @@ ControlLaw(currentState, targetState) -> Action
 **定义 3.2 (资源分配控制)**
 区块链资源分配可以通过动态控制系统建模：
 
-```
+```text
 // 资源状态
 ResourceState = {
     computationLoad: [...],
@@ -270,7 +270,7 @@ AdaptiveControl(currentAllocation, performance) -> newAllocation
 **定义 3.3 (自适应控制)**
 自适应控制策略根据系统状态动态调整控制参数：
 
-```
+```text
 // 参数集
 ControlParameters = {
     timeout: T,
@@ -302,7 +302,7 @@ AdaptParameters(params, performance) -> newParams
 **定义 4.1 (网络分区容错)**
 网络分区容错是系统在网络分区情况下维持部分功能的能力：
 
-```
+```text
 // 分区模型
 Partition(network) -> [subnetwork1, subnetwork2, ...]
 
@@ -329,7 +329,7 @@ Recover(partitionedState) -> consistentState
 **定义 4.2 (Byzantine稳定性)**
 系统在存在Byzantine节点条件下保持正常运行的能力：
 
-```
+```text
 // Byzantine故障模型
 ByzantineModel(nodes, f) -> [honestNodes, byzantineNodes]
 
@@ -355,7 +355,7 @@ Liveness(protocol, byzantineModel) -> Boolean
 **定义 4.3 (Lyapunov稳定性)**
 使用Lyapunov函数分析Web3系统稳定性：
 
-```
+```text
 // Lyapunov函数
 V(state) -> R+
 
@@ -381,7 +381,7 @@ V(equilibrium) = 0
 **定义 5.1 (多智能体控制)**
 区块链节点网络可建模为多智能体控制系统：
 
-```
+```text
 // 智能体模型
 Agent = {
     state: State,
@@ -413,7 +413,7 @@ MultiAgentSystem = {
 **定义 5.2 (分层控制)**
 Web3系统可实现为分层控制架构：
 
-```
+```text
 // 分层控制
 HierarchicalControl = {
     strategicLayer: HighLevelObjectives -> Plans,
@@ -443,7 +443,7 @@ InterLayerCommunication = {
 **定义 5.3 (协同控制)**
 协同控制允许节点通过本地交互实现全局目标：
 
-```
+```text
 // 本地交互
 LocalInteraction(agent, neighbors) -> Information
 
@@ -537,4 +537,4 @@ Layer2扩展解决方案通过分层控制管理吞吐量：
 7. Emerson, E. A. (1990). Temporal and modal logic. Handbook of Theoretical Computer Science.
 8. Ferrag, M. A., et al. (2018). Formal verification of blockchain consensus algorithms. In International Conference on Formal Methods.
 9. Garay, J., Kiayias, A., & Leonardos, N. (2015). The bitcoin backbone protocol: Analysis and applications. In EUROCRYPT.
-10. Lamport, L., Shostak, R., & Pease, M. (1982). The Byzantine generals problem. ACM Transactions on Programming Languages and Systems. 
+10. Lamport, L., Shostak, R., & Pease, M. (1982). The Byzantine generals problem. ACM Transactions on Programming Languages and Systems.

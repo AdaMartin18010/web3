@@ -117,7 +117,7 @@ Web3环境的量子化面临以下挑战：
 **定义 2.1 (量子安全哈希)**
 量子安全哈希函数是抵抗量子计算攻击的密码学哈希函数，满足：
 
-```
+```text
 H : {0,1}* → {0,1}^n
 
 // 量子抗碰撞性
@@ -142,7 +142,7 @@ H : {0,1}* → {0,1}^n
 **定义 2.2 (后量子密码学)**
 后量子密码学系统是能抵抗量子计算攻击的密码学系统：
 
-```
+```text
 // 后量子签名方案
 PQSig = (KeyGen, Sign, Verify)
 
@@ -166,7 +166,7 @@ Web3系统可通过替换密码原语实现后量子安全。
 **定义 2.3 (量子密钥分发网络)**
 量子密钥分发(QKD)网络是一种利用量子力学原理的安全密钥协商基础设施：
 
-```
+```text
 // QKD协议
 QKD = (QuantumExchange, ClassicalPostProcess, KeyExtraction)
 
@@ -192,7 +192,7 @@ QKDNet = (Nodes, Channels, Protocols, KeyManagement)
 **定义 3.1 (量子共识协议)**
 量子共识协议利用量子计算和量子通信实现分布式共识：
 
-```
+```text
 // 量子共识状态
 QuantumConsensusState = {
     classicalState: ClassicalState,
@@ -220,7 +220,7 @@ QuantumConsensus = (Init, Propose, Validate, Finalize)
 **定义 3.2 (量子工作量证明)**
 量子工作量证明(qPoW)是利用量子计算难题的共识机制：
 
-```
+```text
 // 量子难题
 QuantumChallenge = {
     problem: Problem,
@@ -248,7 +248,7 @@ qPoW = (GenerateChallenge, SolveQuantumProblem, Verify)
 **定义 3.3 (量子权益证明)**
 量子权益证明(qPoS)是结合量子随机性的权益证明变体：
 
-```
+```text
 // 量子随机源
 QuantumRandom = (Generate, Verify, Distribute)
 
@@ -274,7 +274,7 @@ qPoS = (Stake, SelectValidator(QuantumRandom), FinalizeBlock)
 **定义 4.1 (量子智能合约)**
 量子智能合约是结合经典逻辑和量子算法的自执行协议：
 
-```
+```text
 // 量子合约定义
 QuantumContract = {
     classicalState: State,
@@ -301,7 +301,7 @@ QuantumContract = {
 **定义 4.2 (量子线性类型)**
 量子线性类型系统确保量子资源正确使用：
 
-```
+```text
 // 量子线性类型
 type Qubit = Linear Quantum
 
@@ -328,7 +328,7 @@ type Measure[A] = A ⊸ (Classical × Optional[A])
 **定义 4.3 (量子合约验证)**
 量子智能合约验证是形式化证明合约满足规范的过程：
 
-```
+```text
 // 量子合约规范
 QuantumSpec = {
     pre: Precondition,
@@ -359,7 +359,7 @@ QuantumVerification = (ModelChecking, TypeChecking, QuantumSimulation)
 **定义 5.1 (混合架构)**
 混合量子经典架构结合两种计算范式：
 
-```
+```text
 // 混合架构组件
 HybridArchitecture = {
     classicalNodes: [ClassicalNode],
@@ -386,7 +386,7 @@ HybridArchitecture = {
 **定义 5.2 (量子原生架构)**
 量子原生Web3架构基于量子计算模型设计：
 
-```
+```text
 // 量子原生组件
 QuantumNativeArchitecture = {
     quantumNetwork: EntangledNetwork,
@@ -509,4 +509,4 @@ LayeredQuantumArchitecture = {
 7. Shor, P. W. (1994). Algorithms for quantum computation: Discrete logarithms and factoring. In Proceedings 35th Annual Symposium on Foundations of Computer Science.
 8. Unruh, D. (2012). Quantum proofs of knowledge. In Annual International Conference on the Theory and Applications of Cryptographic Techniques.
 9. Vasin, P. (2014). BlackCoin's proof-of-stake protocol v2. BlackCoin Foundation.
-10. Yamamoto, Y., et al. (2019). Quantum information processing with photons. NPJ Quantum Information, 5(1), 1-14. 
+10. Yamamoto, Y., et al. (2019). Quantum information processing with photons. NPJ Quantum Information, 5(1), 1-14.

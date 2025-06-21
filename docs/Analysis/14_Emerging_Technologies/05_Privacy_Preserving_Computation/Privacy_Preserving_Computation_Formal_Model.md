@@ -44,11 +44,12 @@
 
 **实现基础**: 通常基于**秘密分享 (Secret Sharing)**，如Shamir秘密分享方案。
 
-**应用模型：MPC用于私密交易**
-1.  **输入**: Alice想发送 $v_A$ Token，Bob想发送 $v_B$ Token。
-2.  **分享**: Alice和Bob将他们的交易金额 $v_A, v_B$ 进行秘密分享，并将份额 $[[v_A]], [[v_B]]$ 发送给一组MPC节点。
-3.  **计算**: MPC节点在秘密分享上执行加法操作，计算出总金额的秘密分享 $[[v_{total}]] = [[v_A]] + [[v_B]]$。
-4.  **输出**: 节点将最终结果的秘密分享结合起来，只揭露总金额 $v_{total}$，而不揭露单个交易的金额。
+**应用模型：MPC用于私密交易**:
+
+1. **输入**: Alice想发送 $v_A$ Token，Bob想发送 $v_B$ Token。
+2. **分享**: Alice和Bob将他们的交易金额 $v_A, v_B$ 进行秘密分享，并将份额 $[[v_A]], [[v_B]]$ 发送给一组MPC节点。
+3. **计算**: MPC节点在秘密分享上执行加法操作，计算出总金额的秘密分享 $[[v_{total}]] = [[v_A]] + [[v_B]]$。
+4. **输出**: 节点将最终结果的秘密分享结合起来，只揭露总金额 $v_{total}$，而不揭露单个交易的金额。
 
 ### 2.2 全同态加密 (FHE)
 
@@ -61,11 +62,12 @@
 \]
 **pk** 是公钥。
 
-**应用模型：FHE用于机密智能合约**
-1.  **加密状态**: 智能合约的状态被FHE加密并存储在链上。
-2.  **加密输入**: 用户将与合约交互的输入数据进行加密。
-3.  **同态求值**: 区块链节点（或特定的外包计算网络）在加密的状态和加密的输入上同态地执行智能合约的逻辑（$\text{Eval}$）。
-4.  **更新加密状态**: 执行结果是一个新的加密状态，它将替换旧的加密状态存储在链上。用户可以解密他们关心的那部分结果。
+**应用模型：FHE用于机密智能合约**:
+
+1. **加密状态**: 智能合约的状态被FHE加密并存储在链上。
+2. **加密输入**: 用户将与合约交互的输入数据进行加密。
+3. **同态求值**: 区块链节点（或特定的外包计算网络）在加密的状态和加密的输入上同态地执行智能合约的逻辑（$\text{Eval}$）。
+4. **更新加密状态**: 执行结果是一个新的加密状态，它将替换旧的加密状态存储在链上。用户可以解密他们关心的那部分结果。
 
 ```mermaid
 graph TD
@@ -93,9 +95,10 @@ graph TD
 **目标**: 允许用户提交大额交易订单，而不在撮合完成前向公众揭露订单的细节（如价格、数量）。
 
 **MPC实现**:
-1.  **订单提交**: 交易员 $\mathcal{P}_i$ 将其订单 $o_i = (\text{price}_i, \text{amount}_i)$ 进行秘密分享，并将份额 $[[o_i]]$ 发送给MPC节点网络。
-2.  **撮合逻辑**: MPC节点网络在秘密分享上运行订单簿撮合函数 $\mathcal{F}_{\text{match}}([[o_1]], [[o_2]], \dots)$。
-3.  **结果揭露**: 只有当订单被成功撮合时，交易的结果才会被重构并公开，用于链上结算。未成交的订单细节永不公开。
+
+1. **订单提交**: 交易员 $\mathcal{P}_i$ 将其订单 $o_i = (\text{price}_i, \text{amount}_i)$ 进行秘密分享，并将份额 $[[o_i]]$ 发送给MPC节点网络。
+2. **撮合逻辑**: MPC节点网络在秘密分享上运行订单簿撮合函数 $\mathcal{F}_{\text{match}}([[o_1]], [[o_2]], \dots)$。
+3. **结果揭露**: 只有当订单被成功撮合时，交易的结果才会被重构并公开，用于链上结算。未成交的订单细节永不公开。
 
 **安全性**: 在半诚实模型下，只要少于阈值数量的MPC节点被腐化，任何单个节点的视图都无法泄露任何订单信息。
 
@@ -104,18 +107,20 @@ graph TD
 **目标**: DAO成员可以对提案进行投票，但个人的投票选择不被公开，只公开最终的计票结果。
 
 **FHE实现**:
-1.  **密钥生成**: 一个受信任的委员会或一个MPC网络共同生成一个FHE密钥对 (pk, sk)。公钥 pk 被公开。
-2.  **加密投票**: 每个成员 $\mathcal{P}_i$ 将其投票 $v_i \in \{0, 1\}$ 加密为 $\text{Enc}(\text{pk}, v_i)$ 并广播。
-3.  **同态计票**: 任何人都可以公开地、同态地将所有加密的投票相加：
+
+1. **密钥生成**: 一个受信任的委员会或一个MPC网络共同生成一个FHE密钥对 (pk, sk)。公钥 pk 被公开。
+2. **加密投票**: 每个成员 $\mathcal{P}_i$ 将其投票 $v_i \in \{0, 1\}$ 加密为 $\text{Enc}(\text{pk}, v_i)$ 并广播。
+3. **同态计票**: 任何人都可以公开地、同态地将所有加密的投票相加：
     \[
     c_{result} = \text{Eval}(\text{pk}, \text{ADD}, \text{Enc}(\text{pk}, v_1), \dots, \text{Enc}(\text{pk}, v_n))
     \]
-4.  **解密结果**: 委员会或MPC网络使用私钥 sk 解密 $c_{result}$，得到最终的投票总和，并公布。
+4. **解密结果**: 委员会或MPC网络使用私钥 sk 解密 $c_{result}$，得到最终的投票总和，并公布。
 
 **安全性**: 由于同态性，除了最终的总和外，关于个人投票的任何信息都不会被泄露。
 
 ## 4. 参考文献
-1.  Goldreich, O. (2004). "Foundations of Cryptography: Volume 2, Basic Applications."
-2.  Gentry, C. (2009). "A fully homomorphic encryption scheme."
-3.  Yao, A. C. (1986). "How to generate and exchange secrets."
-4.  Ben-Sasson, E., et al. (2014). "Succinct non-interactive zero knowledge for a von Neumann architecture." 
+
+1. Goldreich, O. (2004). "Foundations of Cryptography: Volume 2, Basic Applications."
+2. Gentry, C. (2009). "A fully homomorphic encryption scheme."
+3. Yao, A. C. (1986). "How to generate and exchange secrets."
+4. Ben-Sasson, E., et al. (2014). "Succinct non-interactive zero knowledge for a von Neumann architecture."

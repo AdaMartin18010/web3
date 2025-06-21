@@ -19,7 +19,7 @@
 | $\mathcal{A}$ | 概率多项式时间 (PPT) 敌手 | `\mathcal{A}` |
 | $\text{Adv}_{\mathcal{A}}(\lambda)$ | 敌手 $\mathcal{A}$ 的优势 | `\text{Adv}_{\mathcal{A}}(\lambda)` |
 | $\negl(\lambda)$ | 可忽略函数 | `\negl(\lambda)` |
-| $|\psi\rangle$ | 量子比特状态 | `|\psi\rangle` |
+| $\|\psi\rangle$ | 量子比特状态 | `\|\psi\rangle` |
 
 ### 1.2 计算困难性假设
 

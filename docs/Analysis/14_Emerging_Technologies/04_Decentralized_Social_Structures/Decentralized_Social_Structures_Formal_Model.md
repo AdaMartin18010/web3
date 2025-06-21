@@ -39,17 +39,19 @@ DeSoc旨在通过非转移性的"灵魂绑定通证"（SBTs）来表示身份、
 \[
 sbt_{i,j} = (\text{issuer}, \text{owner}, \text{type}, \text{content}, \sigma_i)
 \]
--   $\text{issuer} = \mathcal{S}_i$
--   $\text{owner} = \mathcal{S}_j$
--   $\text{type}$: SBT的类型（如"教育证书"、"POAP"、"会员资格"）。
--   $\text{content}$: 具体内容（如课程名称、活动详情）。
--   $\sigma_i$: 发行者 $\mathcal{S}_i$ 对该SBT内容的数字签名，以确保其真实性。
+
+- $\text{issuer} = \mathcal{S}_i$
+- $\text{owner} = \mathcal{S}_j$
+- $\text{type}$: SBT的类型（如"教育证书"、"POAP"、"会员资格"）。
+- $\text{content}$: 具体内容（如课程名称、活动详情）。
+- $\sigma_i$: 发行者 $\mathcal{S}_i$ 对该SBT内容的数字签名，以确保其真实性。
 
 ### 2.3 去中心化社交图谱 (Decentralized Social Graph)
 
 **定义 2.3 (社交图谱)**: 一个去中心化社交图谱是一个有向图 $G_S = (V, E)$，其中：
--   $V$ 是灵魂（账户）的集合，即 $V = \{\mathcal{S}_1, \mathcal{S}_2, \ldots\}$。
--   $E$ 是SBT发行关系的集合。一条从 $\mathcal{S}_i$ 到 $\mathcal{S}_j$ 的有向边 $e_{i,j} \in E$ 存在，当且仅当 $\mathcal{S}_i$ 至少向 $\mathcal{S}_j$ 发行了一个SBT。
+
+- $V$ 是灵魂（账户）的集合，即 $V = \{\mathcal{S}_1, \mathcal{S}_2, \ldots\}$。
+- $E$ 是SBT发行关系的集合。一条从 $\mathcal{S}_i$ 到 $\mathcal{S}_j$ 的有向边 $e_{i,j} \in E$ 存在，当且仅当 $\mathcal{S}_i$ 至少向 $\mathcal{S}_j$ 发行了一个SBT。
 
 此图谱是公开可验证的，因为它构建在区块链之上。
 
@@ -78,8 +80,9 @@ graph TD
 \[
 \mathcal{R}(\mathcal{S}_j) = \sum_{sbt_{i,j} \in \text{SBTs of } \mathcal{S}_j} w_i \cdot v(sbt_{i,j})
 \]
--   $w_i$: 发行者 $\mathcal{S}_i$ 的声誉权重（这可以递归地依赖于 $\mathcal{R}(\mathcal{S}_i)$，类似于PageRank）。
--   $v(sbt_{i,j})$: 该SBT本身的价值。
+
+- $w_i$: 发行者 $\mathcal{S}_i$ 的声誉权重（这可以递归地依赖于 $\mathcal{R}(\mathcal{S}_i)$，类似于PageRank）。
+- $v(sbt_{i,j})$: 该SBT本身的价值。
 
 ### 3.2 Sybil攻击与抗共谋
 
@@ -88,10 +91,11 @@ graph TD
 **定义 3.2 (社区检测)**: 为了抵抗Sybil攻击，我们可以利用图论中的社区检测算法（如Girvan-Newman算法）来识别社交图谱中连接紧密但与其他部分稀疏连接的子图。这些子图很可能是共谋的Sybil集群。
 
 **形式化方法**:
-1.  计算图中每条边的"介数中心性"（betweenness centrality）。
-2.  移除中心性最高的边。
-3.  重复此过程，直到图分裂成多个独立的社区。
-4.  对来自可疑社区的SBTs在声誉计算中给予较低的权重。
+
+1. 计算图中每条边的"介数中心性"（betweenness centrality）。
+2. 移除中心性最高的边。
+3. 重复此过程，直到图分裂成多个独立的社区。
+4. 对来自可疑社区的SBTs在声誉计算中给予较低的权重。
 
 ## 4. 隐私保护的形式化方法
 
@@ -100,26 +104,29 @@ graph TD
 **定义 4.1 (选择性披露)**: 一个灵魂 $\mathcal{S}_j$ 可以生成一个零知识证明 $\pi_{zkp}$，来证明它拥有某种类型的SBT，而无需透露具体的SBT内容或发行者。
 
 **形式化博弈 (ZKP for SBT Possession)**:
--   **目标**: 灵魂 $\mathcal{S}_j$ 希望向验证者 $\mathcal{V}$ 证明它拥有一个由"顶级大学"发行的学位SBT。
--   **公开信息**: 顶级大学的灵魂地址集合 $\{\mathcal{S}_{U_1}, \mathcal{S}_{U_2}, \ldots\}$。
--   **证明生成**: $\mathcal{S}_j$ 生成证明 $\pi$:
+
+- **目标**: 灵魂 $\mathcal{S}_j$ 希望向验证者 $\mathcal{V}$ 证明它拥有一个由"顶级大学"发行的学位SBT。
+- **公开信息**: 顶级大学的灵魂地址集合 $\{\mathcal{S}_{U_1}, \mathcal{S}_{U_2}, \ldots\}$。
+- **证明生成**: $\mathcal{S}_j$ 生成证明 $\pi$:
     \[
     \pi = ZKP\{ (sbt_{i,j}) : \text{owner}(sbt_{i,j}) = \mathcal{S}_j \land \text{issuer}(sbt_{i,j}) \in \{\mathcal{S}_{U_1}, \dots\} \}
     \]
--   **验证**: 验证者 $\mathcal{V}$ 检查证明 $\pi$ 的有效性。如果有效，$\mathcal{V}$ 相信了该论断，但不知道具体是哪所大学颁发的学位，也不知道学位的任何细节。
+- **验证**: 验证者 $\mathcal{V}$ 检查证明 $\pi$ 的有效性。如果有效，$\mathcal{V}$ 相信了该论断，但不知道具体是哪所大学颁发的学位，也不知道学位的任何细节。
 
 ## 5. DeSoc应用模型：基于社区恢复的贷款
 
 DeSoc可以实现传统金融无法做到的事情，例如无抵押贷款。
 
 **模型**:
-1.  **社区**: Alice 属于多个紧密的社区（例如，她的大学校友会、她参与的DAO、她的运动俱乐部），这些关系由SBTs代表。
-2.  **贷款申请**: Alice 希望申请一笔无抵押贷款。
-3.  **社区担保**: Alice可以请求其社区成员（担保人）为她作保。担保人通过发行一个"担保SBT"来锁定一小笔资金。
-4.  **风险评估**: 贷款协议根据Alice的SBTs（教育、工作经历）和她获得的社区担保SBTs数量来评估其信用风险。
-5.  **社区恢复**: 如果Alice违约，她将失去所有相关的信誉SBTs。她的担保人会损失锁定的资金，但更重要的是，整个社区的信誉会受损。这创造了一种强大的社会压力来鼓励还款。如果她无法还款，社区成员可以帮助她，这是一种社会性的恢复机制。
+
+1. **社区**: Alice 属于多个紧密的社区（例如，她的大学校友会、她参与的DAO、她的运动俱乐部），这些关系由SBTs代表。
+2. **贷款申请**: Alice 希望申请一笔无抵押贷款。
+3. **社区担保**: Alice可以请求其社区成员（担保人）为她作保。担保人通过发行一个"担保SBT"来锁定一小笔资金。
+4. **风险评估**: 贷款协议根据Alice的SBTs（教育、工作经历）和她获得的社区担保SBTs数量来评估其信用风险。
+5. **社区恢复**: 如果Alice违约，她将失去所有相关的信誉SBTs。她的担保人会损失锁定的资金，但更重要的是，整个社区的信誉会受损。这创造了一种强大的社会压力来鼓励还款。如果她无法还款，社区成员可以帮助她，这是一种社会性的恢复机制。
 
 ## 6. 参考文献
-1.  Buterin, V., Weyl, G., & Ohlhaver, P. (2022). "Decentralized Society: Finding Web3's Soul."
-2.  Girvan, M., & Newman, M. E. (2002). "Community structure in social and biological networks."
-3.  Goldwasser, S., Micali, S., & Rackoff, C. (1989). "The knowledge complexity of interactive proof systems." 
+
+1. Buterin, V., Weyl, G., & Ohlhaver, P. (2022). "Decentralized Society: Finding Web3's Soul."
+2. Girvan, M., & Newman, M. E. (2002). "Community structure in social and biological networks."
+3. Goldwasser, S., Micali, S., & Rackoff, C. (1989). "The knowledge complexity of interactive proof systems."

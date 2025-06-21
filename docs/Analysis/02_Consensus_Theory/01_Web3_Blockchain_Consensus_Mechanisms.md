@@ -44,6 +44,7 @@
 
 **定义 1.3 (区块)**
 区块是一个数据结构 $B = (h_{prev}, tx_{set}, nonce, h)$，其中：
+
 - $h_{prev}$ 是前一区块的哈希
 - $tx_{set}$ 是交易集合
 - $nonce$ 是用于满足共识条件的值
@@ -64,6 +65,7 @@
 在开放网络环境下，区块链共识机制必须能够容忍拜占庭故障，并在异步或部分同步网络模型中运行。
 
 **证明：**
+
 1. 开放网络中节点可以自由加入离开
 2. 无法验证节点身份和行为
 3. 节点可能表现为任意行为（拜占庭故障）
@@ -76,6 +78,7 @@
 在异步网络中，确定性区块链共识算法无法同时满足安全性和活性，即使只有一个节点可能崩溃。
 
 **证明：**
+
 1. 应用FLP不可能性定理
 2. 异步网络中无法区分慢节点和崩溃节点
 3. 因此，任何确定性算法要么牺牲安全性，要么牺牲活性
@@ -84,6 +87,7 @@
 区块链系统无法同时最优化安全性、去中心化和可扩展性这三个属性。
 
 **证明：**
+
 1. 提高安全性需要更多节点验证，降低可扩展性
 2. 提高去中心化增加协调成本，降低可扩展性
 3. 提高可扩展性通常需要减少验证节点或简化协议，影响安全性或去中心化
@@ -136,6 +140,7 @@ fn pow_mining(prev_hash: Hash, transactions: Vec<Transaction>, target: Hash) -> 
 在诚实节点控制多数算力的假设下，PoW共识保证区块链的安全性，攻击者成功概率随确认深度指数减小。
 
 **证明：**
+
 1. 假设诚实节点控制算力比例 $p > 0.5$
 2. 攻击者控制算力比例 $q = 1 - p < 0.5$
 3. 攻击者创建长度为 $k$ 的分叉的概率为 $(\frac{q}{p})^k$
@@ -146,6 +151,7 @@ fn pow_mining(prev_hash: Hash, transactions: Vec<Transaction>, target: Hash) -> 
 如果攻击者控制超过50%的算力，则可以成功执行双重支付攻击。
 
 **证明：**
+
 1. 攻击者控制算力比例 $q > 0.5$
 2. 诚实节点控制算力比例 $p = 1 - q < 0.5$
 3. 攻击者可以以概率1创建比诚实链更长的分叉
@@ -161,6 +167,7 @@ $$Reward(B) = BlockReward + \sum_{tx \in B} Fee(tx)$$
 在理想情况下，节点获得区块奖励的概率与其贡献的算力成正比。
 
 **证明：**
+
 1. 节点 $i$ 的算力为 $h_i$
 2. 总网络算力为 $H = \sum_{j} h_j$
 3. 节点 $i$ 找到下一个区块的概率为 $p_i = \frac{h_i}{H}$
@@ -170,6 +177,7 @@ $$Reward(B) = BlockReward + \sum_{tx \in B} Fee(tx)$$
 在诚实节点占多数的情况下，遵循协议是PoW矿工的最优策略。
 
 **证明：**
+
 1. 偏离协议（如扣留区块、忽略交易）不会增加矿工的预期收益
 2. 诚实挖矿最大化矿工的预期收益
 3. 因此，协议是激励兼容的
@@ -185,6 +193,7 @@ $$P(i) = \frac{S_i}{\sum_{j \in N} S_j}$$
 
 **定义 3.2 (PoS变种)**
 PoS有多种变种，包括：
+
 - 链式PoS：基于币龄或伪随机选择
 - 基于投票的PoS：验证者投票确认区块
 - 委托PoS：权益持有者委托验证者
@@ -219,6 +228,7 @@ fn pos_validator_selection(validators: &[Validator], seed: u64) -> Validator {
 在诚实节点控制多数权益的假设下，PoS共识保证区块链的安全性。
 
 **证明：**
+
 1. 假设诚实节点控制权益比例 $p > 2/3$
 2. 攻击者控制权益比例 $q = 1 - p < 1/3$
 3. 攻击者无法阻止区块确认（需要超过1/3的权益）
@@ -232,6 +242,7 @@ $$Penalty(v, violation) = f(stake_v, severity_{violation})$$
 通过适当的惩罚机制，PoS可以使攻击成本超过潜在收益。
 
 **证明：**
+
 1. 攻击需要验证者违反协议
 2. 违反协议会导致权益被惩罚
 3. 惩罚金额可以设置为高于潜在攻击收益
@@ -246,6 +257,7 @@ $$Penalty(v, violation) = f(stake_v, severity_{violation})$$
 在纯PoS系统中，如果没有额外保护机制，长程攻击是可行的。
 
 **证明：**
+
 1. 在PoS中，创建替代区块不需要实际资源消耗
 2. 攻击者可以从早期区块开始构建替代链
 3. 如果攻击者曾经控制足够权益，可以构建有效的替代链
@@ -253,6 +265,7 @@ $$Penalty(v, violation) = f(stake_v, severity_{violation})$$
 
 **定义 3.5 (长程攻击防御)**
 长程攻击防御机制包括：
+
 - 检查点：定期确认不可逆转的区块
 - 弱主观性：新节点信任最近的检查点
 - 时间戳验证：限制区块时间偏差
@@ -261,6 +274,7 @@ $$Penalty(v, violation) = f(stake_v, severity_{violation})$$
 定期检查点机制可以有效防止长程攻击。
 
 **证明：**
+
 1. 检查点之前的区块被视为最终确定
 2. 攻击者无法创建包含替代检查点的有效链
 3. 因此，检查点机制防止了长程攻击
@@ -317,6 +331,7 @@ fn dpos_elect_validators(
 DPoS比传统PoS具有更高的交易处理效率。
 
 **证明：**
+
 1. DPoS限制了验证者数量（通常为几十个）
 2. 验证者数量少导致通信复杂度降低
 3. 预定义的区块生产顺序减少协调开销
@@ -326,6 +341,7 @@ DPoS比传统PoS具有更高的交易处理效率。
 DPoS面临验证者集中化的风险，特别是当权益分布不均时。
 
 **证明：**
+
 1. 验证者数量有限（通常为几十个）
 2. 大权益持有者可以控制多个验证者位置
 3. 权益集中会导致验证者集中
@@ -340,6 +356,7 @@ DPoS治理是权益持有者通过投票参与系统决策的过程。
 在合理设计的DPoS系统中，验证者有激励生产区块并遵守协议。
 
 **证明：**
+
 1. 验证者获得区块奖励和交易费用
 2. 不当行为会导致声誉损失和委托减少
 3. 失去委托意味着收益减少
@@ -349,6 +366,7 @@ DPoS治理是权益持有者通过投票参与系统决策的过程。
 在DPoS中，委托者面临监督验证者行为的困难。
 
 **证明：**
+
 1. 委托者可能缺乏技术知识评估验证者
 2. 监督成本高于潜在收益增加
 3. 导致"理性无知"现象
@@ -363,6 +381,7 @@ DPoS治理是权益持有者通过投票参与系统决策的过程。
 
 **定义 5.2 (PoW+PoS混合)**
 PoW+PoS混合共识结合工作量证明和权益证明的特点：
+
 - PoW可用于领导者选举
 - PoS可用于区块确认
 
@@ -397,6 +416,7 @@ fn hybrid_consensus(
 
 **定义 5.3 (分层共识)**
 分层共识是一种架构，不同层次使用不同的共识机制。例如：
+
 - 基础层：使用PoW或PoS确保安全性
 - 执行层：使用BFT类算法确保快速终局性
 
@@ -404,6 +424,7 @@ fn hybrid_consensus(
 分层共识架构可以同时获得安全性和高性能。
 
 **证明：**
+
 1. 基础层提供强安全保障，但可能较慢
 2. 执行层提供快速处理，但可能安全性较弱
 3. 结合两层的优势，系统整体既安全又高效
@@ -415,6 +436,7 @@ fn hybrid_consensus(
 混合共识系统的安全性取决于其最弱的组成部分。
 
 **证明：**
+
 1. 攻击者只需破坏一个共识层即可攻击系统
 2. 系统安全性不高于最弱环节的安全性
 3. 因此，整体安全性由最弱部分决定
@@ -423,6 +445,7 @@ fn hybrid_consensus(
 混合共识增加了系统复杂性和潜在攻击面。
 
 **证明：**
+
 1. 多种共识机制增加代码复杂性
 2. 机制间交互创造新的攻击面
 3. 复杂性增加错误概率
@@ -434,6 +457,7 @@ fn hybrid_consensus(
 
 **定义 6.1 (共识性能指标)**
 共识性能指标包括：
+
 - 吞吐量：每秒处理的交易数
 - 延迟：交易确认时间
 - 可扩展性：系统容纳更多节点的能力
@@ -442,6 +466,7 @@ fn hybrid_consensus(
 在性能方面，一般有：DPoS > PoS > PoW。
 
 **证明：**
+
 1. PoW需要大量计算，区块生成慢（约10分钟/区块）
 2. PoS不需要解决计算难题，区块生成更快（约数秒到数分钟）
 3. DPoS验证者少，协调开销低，区块生成最快（约1-3秒）
@@ -451,6 +476,7 @@ fn hybrid_consensus(
 
 **定义 6.2 (去中心化指标)**
 去中心化指标包括：
+
 - 节点分布：参与节点的地理和组织分散程度
 - 准入门槛：参与共识的难度
 - 权力集中度：决策权的分布情况
@@ -459,6 +485,7 @@ fn hybrid_consensus(
 在去中心化方面，一般有：PoW > PoS > DPoS。
 
 **证明：**
+
 1. PoW允许任何人通过计算参与，准入门槛低
 2. PoS要求持有代币，存在初始分配不均问题
 3. DPoS限制验证者数量，权力更集中
@@ -473,6 +500,7 @@ fn hybrid_consensus(
 在能源效率方面，一般有：DPoS ≈ PoS >> PoW。
 
 **证明：**
+
 1. PoW需要大量计算，能源消耗高
 2. PoS不需要解决计算难题，能源消耗低
 3. DPoS与PoS类似，能源消耗低
@@ -482,6 +510,7 @@ fn hybrid_consensus(
 没有一种共识算法在所有方面都是最优的，选择取决于系统优先级。
 
 **证明：**
+
 1. PoW优先安全性和去中心化，牺牲效率
 2. PoS平衡安全性、去中心化和效率
 3. DPoS优先效率，牺牲部分去中心化
@@ -498,4 +527,4 @@ fn hybrid_consensus(
 7. Gilad, Y., Hemo, R., Micali, S., Vlachos, G., & Zeldovich, N. (2017). Algorand: Scaling byzantine agreements for cryptocurrencies. In Proceedings of the 26th Symposium on Operating Systems Principles (pp. 51-68).
 8. Bano, S., Sonnino, A., Al-Bassam, M., Azouvi, S., McCorry, P., Meiklejohn, S., & Danezis, G. (2019). SoK: Consensus in the age of blockchains. In Proceedings of the 1st ACM Conference on Advances in Financial Technologies (pp. 183-198).
 9. Gervais, A., Karame, G. O., Wüst, K., Glykantzis, V., Ritzdorf, H., & Capkun, S. (2016). On the security and performance of proof of work blockchains. In Proceedings of the 2016 ACM SIGSAC conference on computer and communications security (pp. 3-16).
-10. Bentov, I., Pass, R., & Shi, E. (2016). Snow white: Provably secure proofs of stake. IACR Cryptology ePrint Archive, 2016(919). 
+10. Bentov, I., Pass, R., & Shi, E. (2016). Snow white: Provably secure proofs of stake. IACR Cryptology ePrint Archive, 2016(919).

@@ -11,6 +11,7 @@ Consensus = (Π, M, δ, Output)
 ```
 
 其中：
+
 - `Π` 是参与者集合
 - `M` 是消息空间
 - `δ : (LocalState × M) → LocalState` 是状态转换函数
@@ -25,6 +26,7 @@ ConsensusSecurity = Safety ∧ Liveness ∧ Fairness
 **定理 1.1.1** (安全性与活性权衡) 在异步网络中，拜占庭容错共识系统无法同时保证完全的安全性和活性。
 
 **证明**:
+
 1. 假设存在同时保证完全安全性和活性的共识协议P
 2. 根据FLP不可能性定理，在异步网络中即使只有一个节点可能失效，也没有确定性算法可以保证共识
 3. 因此P必须在某些条件下牺牲安全性或活性，与假设矛盾
@@ -38,6 +40,7 @@ ThreatModel = (f, N, NetworkModel, AdversaryType)
 ```
 
 其中：
+
 - `f` 是可能的恶意节点数量
 - `N` 是总节点数量
 - `NetworkModel` ∈ {Synchronous, PartialSynchronous, Asynchronous}
@@ -46,6 +49,7 @@ ThreatModel = (f, N, NetworkModel, AdversaryType)
 **定理 1.2.1** (最大容错性) 在部分同步网络中，任何共识算法最多容忍 f < N/3 的拜占庭节点。
 
 **证明**:
+
 1. 根据经典的DLS结果，拜占庭协议在部分同步模型中需要 N > 3f
 2. 假设存在容许 f ≥ N/3 的算法
 3. 可构造一个不一致性场景，违反安全性假设
@@ -62,6 +66,7 @@ PoWConsensus = (Π, D, H, Target)
 ```
 
 其中：
+
 - `Π` 是矿工集合
 - `D` 是数据集合(区块)
 - `H : D × Nonce → {0,1}^k` 是哈希函数
@@ -70,6 +75,7 @@ PoWConsensus = (Π, D, H, Target)
 **定理 2.1.1** (PoW安全门槛) 工作量证明系统安全当且仅当诚实矿工控制算力严格大于50%。
 
 **证明**:
+
 1. 假设诚实矿工算力为p，攻击者算力为q，且p + q = 1
 2. 攻击者构造长度为k的私有链的概率: P(success) = (q/p)^k
 3. 当q > p时，随着k增加，P(success) → 1
@@ -86,6 +92,7 @@ SelfishMining = (WithholdStrategy, ReleaseStrategy, ForkChoiceRule)
 **定理 2.2.1** (自私挖矿门槛) 当网络传播参数为γ时，自私挖矿在算力占比α > (1-γ)/3时有利可图。
 
 **证明**:
+
 1. 设网络传播参数为γ，表示诚实矿工选择攻击者区块的概率
 2. 分析不同领先状态下的马尔可夫链收益
 3. 计算相对收益率R(α,γ) > α
@@ -96,6 +103,7 @@ SelfishMining = (WithholdStrategy, ReleaseStrategy, ForkChoiceRule)
 **定理 2.2.2** (长程攻击可行性) 在纯PoW系统中，任何算力占比的攻击者理论上都可以成功发起长程攻击，但成功概率随链长指数降低。
 
 **证明**:
+
 1. 攻击者从高度h重构到当前高度H的成功概率：P(success) = (q/p)^(H-h)
 2. 当h=0（从创世区块开始）时，P(success) = (q/p)^H
 3. 无论q多小，随着时间推移，存在非零概率成功
@@ -112,6 +120,7 @@ Checkpoint = {B_i | i ∈ CheckpointIndices}
 **定理 2.3.1** (检查点安全性) 检查点机制可有效防止长程攻击，将安全性从概率保证提升为确定性保证。
 
 **证明**:
+
 1. 设最近检查点为块高度h_c
 2. 攻击者需要从h_c之后开始构造攻击链
 3. 这将安全模型从依赖历史全链转变为仅依赖最后检查点之后的区块
@@ -128,6 +137,7 @@ PoSConsensus = (Π, S, V, R, E)
 ```
 
 其中：
+
 - `Π` 是验证者集合
 - `S` 是质押金额函数，S : Π → ℝ⁺
 - `V` 是投票规则
@@ -137,6 +147,7 @@ PoSConsensus = (Π, S, V, R, E)
 **定理 3.1.1** (PoS安全门槛) 权益证明系统安全当且仅当诚实验证者控制质押超过总质押的2/3。
 
 **证明**:
+
 1. 根据拜占庭一致性要求，当f < n/3时系统可安全运行
 2. 在PoS中，投票权重与质押成正比
 3. 因此需要诚实质押 > 总质押的2/3
@@ -153,6 +164,7 @@ NothingAtStake = ∃v∈Π, ∃B₁,B₂∈Blocks, B₁≠B₂ : Vote(v, B₁) �
 **定理 3.2.1** (惩罚机制有效性) 适当设计的惩罚机制可有效解决无利害关系问题。
 
 **证明**:
+
 1. 设计证据系统Proof(v, B₁, B₂)证明验证者v对冲突区块投票
 2. 定义惩罚函数Slash(v) = min(S(v), SlashingConstant)
 3. 证明当SlashingConstant > 预期双签收益时
@@ -169,6 +181,7 @@ UnbondingPeriod = t_withdraw - t_request
 **定理 3.3.1** (权益锁定有效性) 足够长的权益锁定期可有效防止长程攻击。
 
 **证明**:
+
 1. 攻击者需要控制足够权益进行分叉攻击
 2. 设锁定期为T，检查点频率为C
 3. 当T > C时，攻击者无法在检查点确认前撤回权益
@@ -187,6 +200,7 @@ HybridConsensus = (PoWComponent, PoSComponent, CombiningFunction)
 **定理 4.1.1** (混合共识优势) 适当设计的混合共识可同时缓解PoW和PoS的各自弱点。
 
 **证明**:
+
 1. PoW提供初始随机性和权益分配
 2. PoS提供能效和最终性
 3. 通过组合使攻击者需同时控制计算资源和经济资源
@@ -203,6 +217,7 @@ LayeredConsensus = (BaseLayer, FinalityLayer)
 **定理 4.2.1** (分层共识安全性) 分层共识可以在保持基础层安全性的前提下，通过最终性层提供更强保证。
 
 **证明**:
+
 1. 基础层提供活性和概率性安全保证
 2. 最终性层提供确定性最终确认
 3. 即使最终性层临时失效，系统仍能依靠基础层运行
@@ -219,6 +234,7 @@ BFTConsensus = (Π, M, V, Q)
 ```
 
 其中：
+
 - `Π` 是验证者集合
 - `M` 是消息集合
 - `V` 是投票规则
@@ -227,6 +243,7 @@ BFTConsensus = (Π, M, V, Q)
 **定理 5.1.1** (法定人数交集) BFT安全性要求任意两个法定人数必须有交集，且交集中至少有一个诚实节点。
 
 **证明**:
+
 1. 令Q₁和Q₂为任意两个法定人数
 2. 安全性要求 |Q₁ ∩ Q₂| > f，其中f是最大恶意节点数
 3. 当N > 3f时，可构造法定人数使得|Q₁| = |Q₂| = 2f+1
@@ -243,6 +260,7 @@ GST(GlobalStabilizationTime) = max{t_receive(m) - t_send(m)}
 **定理 5.2.1** (延迟容忍度) 同步BFT协议的安全性在最大网络延迟限制内得到保障。
 
 **证明**:
+
 1. 设计协议超时时间T > GST
 2. 当网络延迟d ≤ GST时，所有消息在超时前到达
 3. 当d > GST时，可能发生视图切换，但安全性保持
@@ -259,6 +277,7 @@ Evidence = {(v, sig₁, sig₂) | v ∈ Π, conflicts(sig₁, sig₂)}
 **定理 5.3.1** (可归责安全) 可归责安全性要求任何违反安全性的行为都能被识别并惩罚。
 
 **证明**:
+
 1. 所有关键协议消息都必须签名
 2. 冲突行为会产生可验证的证据
 3. 证据可用于识别并惩罚恶意行为
@@ -275,6 +294,7 @@ DAGConsensus = (V, E, W, TopOrder)
 ```
 
 其中：
+
 - `V` 是顶点集合(交易或区块)
 - `E` 是边集合(引用关系)
 - `W` 是权重函数
@@ -283,6 +303,7 @@ DAGConsensus = (V, E, W, TopOrder)
 **定理 6.1.1** (DAG并发性) DAG结构允许比线性区块链更高的并发性和吞吐量。
 
 **证明**:
+
 1. 线性区块链要求严格顺序处理
 2. DAG允许并行添加不相关交易
 3. 仅冲突交易需要确定顺序
@@ -299,6 +320,7 @@ ConflictSet(tx) = {tx' | conflicts(tx, tx')}
 **定理 6.2.1** (虚拟投票收敛) 基于累积权重的虚拟投票最终收敛到唯一结果。
 
 **证明**:
+
 1. 定义交易累积权重W(tx) = ∑_{v∈V(tx)} w(v)，其中V(tx)是引用tx的顶点集
 2. 对于冲突交易tx₁和tx₂，诚实节点选择W(tx₁) > W(tx₂)的交易
 3. 随着时间推移，W(tx_winner) - W(tx_loser)持续增加
@@ -315,6 +337,7 @@ Total_Weight = w + (1-w)
 **定理 6.3.1** (DAG安全阈值) 典型DAG共识协议在攻击者权重低于33%时保持安全。
 
 **证明**:
+
 1. 分析最坏情况下的累积权重演化
 2. 证明当w < 1/3时，诚实交易的累积权重最终超过任何竞争交易
 3. 当w ≥ 1/3时，攻击者可能通过分割攻击破坏一致性
@@ -338,6 +361,7 @@ SecurityComparisonFramework = {
 **定理 7.1.1** (三元悖论) 没有共识算法能同时最优化安全性、去中心化和可扩展性。
 
 **证明**:
+
 1. 增强安全性通常需要更多验证步骤和冗余，降低可扩展性
 2. 增强去中心化通常增加协调成本，降低可扩展性
 3. 增强可扩展性通常需要降低冗余或中心化某些组件
@@ -354,6 +378,7 @@ SecurityRequirement(App) = (SafetyPriority, LivenessPriority, FinancialStakes)
 **定理 7.2.1** (场景适应) 不同共识算法适合不同的应用场景和安全需求。
 
 **证明**:
+
 1. 高价值金融应用需要优先考虑安全性，适合BFT或高门槛PoS
 2. 高频低价值交易应用需要优先考虑活性和吞吐量，适合DAG或分片
 3. 公开访问应用需要抗审查性，适合PoW等无许可机制
@@ -376,6 +401,7 @@ FormalVerification = {
 **定理 8.1.1** (验证复杂性) 完整共识算法的形式化验证具有高计算复杂度。
 
 **证明**:
+
 1. 状态空间随节点数指数增长
 2. 异步模型引入无限可能的事件排序
 3. 拜占庭行为模式难以穷举
@@ -392,6 +418,7 @@ IncentiveCompatible = ∀v∈Π, ∀S∈Strategies : Utility(v, FollowProtocol) 
 **定理 8.2.1** (博弈论安全) 在经济理性假设下，适当的奖惩机制可使遵循协议成为Nash均衡。
 
 **证明**:
+
 1. 设计奖励使得诚实行为收益最大化
 2. 设计惩罚使得作恶行为成本高于收益
 3. 引入适当随机性防止确定性攻击
@@ -425,4 +452,4 @@ IncentiveCompatible = ∀v∈Π, ∀S∈Strategies : Utility(v, FollowProtocol) 
 4. Castro, M., & Liskov, B. (1999). *Practical Byzantine Fault Tolerance*.
 5. Eyal, I., & Sirer, E. G. (2014). *Majority is not Enough: Bitcoin Mining is Vulnerable*.
 6. Pass, R., & Shi, E. (2017). *The Sleepy Model of Consensus*.
-7. Sompolinsky, Y., & Zohar, A. (2015). *Secure High-Rate Transaction Processing in Bitcoin*. 
+7. Sompolinsky, Y., & Zohar, A. (2015). *Secure High-Rate Transaction Processing in Bitcoin*.

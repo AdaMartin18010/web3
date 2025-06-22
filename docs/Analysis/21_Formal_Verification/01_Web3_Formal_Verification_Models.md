@@ -11,6 +11,7 @@ V : System × Specification → {True, False}
 ```
 
 其中：
+
 - `System` 是被验证的系统模型
 - `Specification` 是形式化的规范要求
 - 结果 `True` 表示系统满足规范，`False` 表示不满足
@@ -18,6 +19,7 @@ V : System × Specification → {True, False}
 **定理 1.1.1** (验证的完备性) 形式化验证在设定的模型和规范框架内可以提供完备的正确性证明。
 
 **证明**:
+
 1. 系统和规范都被精确建模为数学结构
 2. 验证问题转化为该数学结构上的定理证明问题
 3. 在给定模型和逻辑框架下，证明的结果是完备的
@@ -31,6 +33,7 @@ Web3System = (Nodes, Consensus, SmartContracts, State, Transitions)
 ```
 
 其中：
+
 - `Nodes` 是去中心化节点集合
 - `Consensus` 是共识协议
 - `SmartContracts` 是可执行的链上程序
@@ -40,6 +43,7 @@ Web3System = (Nodes, Consensus, SmartContracts, State, Transitions)
 **定理 1.2.1** (Web3验证复杂性) Web3系统的形式化验证比传统集中式系统更复杂。
 
 **证明**:
+
 1. 并发性：多节点并发执行导致状态空间爆炸
 2. 非确定性：共识过程引入的非确定性增加验证难度
 3. 开放性：任意节点可加入离开，使边界条件难以确定
@@ -55,6 +59,7 @@ STS = (S, S₀, A, →, L)
 ```
 
 其中：
+
 - `S` 是状态集
 - `S₀ ⊆ S` 是初始状态集
 - `A` 是动作集
@@ -78,6 +83,7 @@ s →^{b} s'
 ```
 
 其中：
+
 - `p ∈ AP` 是原子命题
 - `X` 是下一步操作符
 - `U` 是直到操作符
@@ -89,12 +95,14 @@ s →^{b} s'
 ```
 
 其中：
+
 - `A` 是全称路径量词（所有路径）
 - `E` 是存在路径量词（存在路径）
 
 **定理 2.2.1** (规范表达力) CTL和LTL各有表达优势，两者不可互相完全翻译。
 
 **证明**:
+
 1. CTL可表达"存在路径"性质，LTL无法表达
 2. LTL可表达公平性等路径性质，CTL中需要特殊处理
 3. 因此二者在表达能力上不可完全互相翻译
@@ -108,6 +116,7 @@ PN = (P, T, F, M₀)
 ```
 
 其中：
+
 - `P` 是库所集合
 - `T` 是变迁集合
 - `F ⊆ (P × T) ∪ (T × P)` 是流关系
@@ -120,6 +129,7 @@ Web3PN = (P, T, F, M₀, Σ, G, A)
 ```
 
 其中额外的：
+
 - `Σ` 是颜色集（数据类型）
 - `G : T → 谓词` 是转换守卫
 - `A : T → 动作` 是变迁动作
@@ -127,6 +137,7 @@ Web3PN = (P, T, F, M₀, Σ, G, A)
 **定理 2.3.1** (建模能力) Web3 Petri网可以有效建模区块链并发交易处理。
 
 **证明**:
+
 1. 库所可表示链上状态和账户
 2. 变迁可表示交易和状态更新
 3. 颜色可表示复杂数据结构
@@ -145,6 +156,7 @@ ModelCheck : STS × φ → {True, False} × (反例?)
 **定理 3.1.1** (状态空间爆炸) Web3系统的模型检验面临状态空间爆炸问题。
 
 **证明**:
+
 1. N个节点可能产生O(2^N)个全局状态
 2. 交易并发执行产生组合爆炸
 3. 时间和概率因素进一步扩大状态空间
@@ -162,6 +174,7 @@ ModelCheck : STS × φ → {True, False} × (反例?)
 **定理 3.2.1** (抽象正确性) 良好的抽象保持验证性质。
 
 **证明**:
+
 1. 对于任意路径 π 在原系统中
 2. 存在路径 π' 在抽象系统中
 3. 如果 π' 满足性质 φ，则 π 也满足 φ（对安全性质）
@@ -183,6 +196,7 @@ PC = c₁ ∧ c₂ ∧ ... ∧ cₙ
 **定理 3.3.1** (智能合约符号执行) 符号执行可有效发现智能合约漏洞。
 
 **证明**:
+
 1. 符号变量表示任意输入
 2. 路径约束表示执行条件
 3. 约束求解发现漏洞触发条件
@@ -333,6 +347,7 @@ Web3VerifyFramework = {
 **定理 6.2.1** (可组合性验证) 可组合系统需要模块化验证方法。
 
 **证明**:
+
 1. Web3系统高度可组合（DeFi组合）
 2. 全局验证计算代价高
 3. 模块化验证结合局部性质能有效降低复杂度
@@ -363,4 +378,4 @@ Web3VerifyFramework = {
 2. Buterin, V. et al. (2016). *A Next-Generation Smart Contract and Decentralized Application Platform*.
 3. Sergey, I., Kumar, A., & Hobor, A. (2018). *Scilla: a Smart Contract Intermediate-Level Language*.
 4. Grishchenko, I., Maffei, M., & Schneidewind, C. (2018). *A Semantic Framework for the Security Analysis of Ethereum Smart Contracts*.
-5. Nakamoto, S. (2008). *Bitcoin: A Peer-to-Peer Electronic Cash System*. 
+5. Nakamoto, S. (2008). *Bitcoin: A Peer-to-Peer Electronic Cash System*.

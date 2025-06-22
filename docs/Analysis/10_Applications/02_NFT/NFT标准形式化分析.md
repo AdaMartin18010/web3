@@ -12,100 +12,166 @@
 
 ## 引言
 
-非同质化代币(Non-Fungible Token, NFT)作为区块链技术的重要应用，需要严格的形式化定义和标准规范以确保互操作性和安全性。本文提供了NFT标准的形式化分析框架，包括数学模型、协议规范和验证方法。
+非同质化代币（Non-Fungible Token，NFT）是Web3生态系统中的重要组成部分，代表了区块链上的独特数字资产。本文档提供了NFT标准的形式化理论分析，包括ERC-721、ERC-1155等主要NFT标准的数学定义、互操作性分析和验证框架。通过严格的形式化方法，我们能够精确描述NFT标准的行为、属性和安全性，为Web3生态系统提供坚实的理论基础。
 
 ## NFT形式化定义
 
 ### 基本定义
 
-**定义 1.1** (非同质化代币) 非同质化代币是一个四元组 $NFT = (id, M, O, P)$，其中：
+非同质化代币可以形式化定义为一个五元组：
 
-- $id \in \mathbb{N}$ 是唯一标识符
-- $M$ 是元数据集合
-- $O: NFT \rightarrow A$ 是所有权映射，$A$ 是地址集合
-- $P$ 是代币属性集合
+$$\mathcal{NFT} = (\mathcal{I}, \mathcal{O}, \mathcal{M}, \mathcal{T}, \mathcal{P})$$
 
-**定义 1.2** (NFT集合) NFT集合是一个三元组 $C = (T, S, F)$，其中：
+其中：
+- $\mathcal{I}$ 表示代币标识符集合
+- $\mathcal{O}$ 表示所有者集合
+- $\mathcal{M}$ 表示元数据集合
+- $\mathcal{T}$ 表示转移函数集合
+- $\mathcal{P}$ 表示权限函数集合
 
-- $T$ 是代币集合
-- $S$ 是状态转换函数集合
-- $F$ 是功能接口集合
+### 2.2 NFT与FT的区别
 
-**定理 1.1** (唯一性原则) 对于任意两个NFT $t_1, t_2 \in T$，如果 $t_1 \neq t_2$，则 $id(t_1) \neq id(t_2)$。
+NFT与同质化代币（FT）的关键区别可以形式化为：
 
-**证明：** 通过合约实现保证每个铸造的NFT都分配唯一的标识符，通常使用自增计数器或其他确定性方法。
+1. **唯一性**：对于NFT，$\forall i, j \in \mathcal{I}, i \neq j \Rightarrow \mathcal{M}(i) \neq \mathcal{M}(j)$
+2. **不可分割性**：对于NFT，$\forall i \in \mathcal{I}, \forall o \in \mathcal{O}, balance(o, i) \in \{0, 1\}$
+3. **元数据关联**：对于NFT，$\forall i \in \mathcal{I}, \exists m \in \mathcal{M}, tokenURI(i) = m$
 
-### 状态转换模型
+### 2.3 NFT所有权模型
 
-**定义 1.3** (状态转换) NFT状态转换函数 $\delta: S \times A \times O \rightarrow S$，其中：
+NFT的所有权可以形式化为函数 $owner: \mathcal{I} \rightarrow \mathcal{O}$，满足：
 
-- $S$ 是系统状态集合
-- $A$ 是操作集合
-- $O$ 是操作参数集合
+$$\forall i \in \mathcal{I}, \exists! o \in \mathcal{O}, owner(i) = o$$
 
-**定义 1.4** (转移函数) 转移函数 $\tau: T \times A \times A \rightarrow T$，其中 $\tau(t, a_1, a_2)$ 表示将代币 $t$ 从地址 $a_1$ 转移到地址 $a_2$。
-
-**定理 1.2** (状态一致性) 对于任意有效的状态转换序列，系统最终状态是确定的。
-
-**证明：** 由于区块链的确定性特性，相同的操作序列总是产生相同的最终状态。
+其中 $\exists!$ 表示"存在唯一"，即每个NFT只能有一个所有者。
 
 ## 标准规范形式化
 
 ### ERC-721标准
 
-**定义 2.1** (ERC-721接口) ERC-721标准定义了以下核心接口：
+#### 3.1 ERC-721基本定义
 
-```solidity
-interface IERC721 {
-    function balanceOf(address owner) external view returns (uint256);
-    function ownerOf(uint256 tokenId) external view returns (address);
-    function safeTransferFrom(address from, address to, uint256 tokenId) external;
-    function transferFrom(address from, address to, uint256 tokenId) external;
-    function approve(address to, uint256 tokenId) external;
-    function getApproved(uint256 tokenId) external view returns (address);
-    function setApprovalForAll(address operator, bool approved) external;
-    function isApprovedForAll(address owner, address operator) external view returns (bool);
-}
-```
+ERC-721标准可以形式化定义为：
 
-**定义 2.2** (ERC-721元数据扩展) 元数据扩展接口定义为：
+$$\mathcal{ERC721} = (\mathcal{I}, \mathcal{O}, \mathcal{M}, \mathcal{T}, \mathcal{A})$$
 
-```solidity
-interface IERC721Metadata {
-    function name() external view returns (string memory);
-    function symbol() external view returns (string memory);
-    function tokenURI(uint256 tokenId) external view returns (string memory);
-}
-```
+其中：
+- $\mathcal{I} \subset \mathbb{N}$ 是代币ID集合
+- $\mathcal{O} \subset \{0, 1\}^{160}$ 是以太坊地址集合
+- $\mathcal{M}$ 是元数据集合
+- $\mathcal{T}$ 是转移函数集合
+- $\mathcal{A}$ 是授权函数集合
 
-**定理 2.1** (ERC-721完备性) ERC-721标准提供了NFT基本操作的完备集合。
+#### 3.2 ERC-721核心函数
 
-**证明：** ERC-721定义了所有权查询、转移和授权操作，这些操作构成了NFT管理的基本功能集。
+ERC-721标准定义了以下核心函数：
+
+1. **balanceOf**: $\mathcal{O} \rightarrow \mathbb{N}$，返回地址拥有的NFT数量
+2. **ownerOf**: $\mathcal{I} \rightarrow \mathcal{O}$，返回NFT的所有者
+3. **transferFrom**: $\mathcal{O} \times \mathcal{O} \times \mathcal{I} \rightarrow \{0, 1\}$，转移NFT所有权
+4. **approve**: $\mathcal{O} \times \mathcal{I} \rightarrow \{0, 1\}$，授权地址操作特定NFT
+5. **getApproved**: $\mathcal{I} \rightarrow \mathcal{O}$，获取NFT的授权地址
+6. **setApprovalForAll**: $\mathcal{O} \times \{0, 1\} \rightarrow \{0, 1\}$，授权地址操作所有NFT
+7. **isApprovedForAll**: $\mathcal{O} \times \mathcal{O} \rightarrow \{0, 1\}$，检查是否授权所有NFT
+
+#### 3.3 ERC-721元数据扩展
+
+ERC-721元数据扩展定义了以下函数：
+
+1. **name**: $\emptyset \rightarrow string$，返回代币名称
+2. **symbol**: $\emptyset \rightarrow string$，返回代币符号
+3. **tokenURI**: $\mathcal{I} \rightarrow string$，返回NFT的元数据URI
+
+#### 3.4 ERC-721状态转换
+
+ERC-721的转移操作可以形式化为状态转换：
+
+$$s_{i+1} = \delta(s_i, transferFrom(from, to, tokenId))$$
+
+其中 $s_i$ 和 $s_{i+1}$ 分别是转换前后的状态，状态转换函数 $\delta$ 满足：
+
+$$ownerOf(tokenId, s_{i+1}) = to$$
+$$balanceOf(from, s_{i+1}) = balanceOf(from, s_i) - 1$$
+$$balanceOf(to, s_{i+1}) = balanceOf(to, s_i) + 1$$
+
+#### 3.5 ERC-721安全性分析
+
+**定理 1（ERC-721所有权安全性）**：在正确实现的ERC-721合约中，NFT所有权只能通过授权转移。
+
+**证明**：
+根据ERC-721规范，`transferFrom`函数只有在以下条件之一满足时才能成功：
+1. 调用者是NFT的当前所有者：`msg.sender == ownerOf(tokenId)`
+2. 调用者被授权操作特定NFT：`msg.sender == getApproved(tokenId)`
+3. 调用者被授权操作所有NFT：`isApprovedForAll(ownerOf(tokenId), msg.sender) == true`
+
+如果这些条件都不满足，转移操作将被拒绝。因此，NFT所有权只能通过授权转移。
 
 ### ERC-1155标准
 
-**定义 2.3** (ERC-1155接口) ERC-1155标准定义了以下核心接口：
+#### 4.1 ERC-1155基本定义
 
-```solidity
-interface IERC1155 {
-    function balanceOf(address account, uint256 id) external view returns (uint256);
-    function balanceOfBatch(address[] calldata accounts, uint256[] calldata ids)
-        external view returns (uint256[] memory);
-    function setApprovalForAll(address operator, bool approved) external;
-    function isApprovedForAll(address account, address operator) external view returns (bool);
-    function safeTransferFrom(
-        address from, address to, uint256 id, uint256 amount, bytes calldata data
-    ) external;
-    function safeBatchTransferFrom(
-        address from, address to, uint256[] calldata ids, 
-        uint256[] calldata amounts, bytes calldata data
-    ) external;
-}
-```
+ERC-1155标准可以形式化定义为：
 
-**定理 2.2** (ERC-1155效率) ERC-1155相比ERC-721在批量操作场景下更高效。
+$$\mathcal{ERC1155} = (\mathcal{I}, \mathcal{O}, \mathcal{B}, \mathcal{T}, \mathcal{A})$$
 
-**证明：** ERC-1155通过批量转移和查询操作减少了交易数量，降低了gas消耗。
+其中：
+- $\mathcal{I} \subset \mathbb{N}$ 是代币ID集合
+- $\mathcal{O} \subset \{0, 1\}^{160}$ 是以太坊地址集合
+- $\mathcal{B}: \mathcal{O} \times \mathcal{I} \rightarrow \mathbb{N}$ 是余额映射
+- $\mathcal{T}$ 是转移函数集合
+- $\mathcal{A}$ 是授权函数集合
+
+#### 4.2 ERC-1155核心函数
+
+ERC-1155标准定义了以下核心函数：
+
+1. **balanceOf**: $\mathcal{O} \times \mathcal{I} \rightarrow \mathbb{N}$，返回地址拥有的特定ID代币数量
+2. **balanceOfBatch**: $\mathcal{O}^n \times \mathcal{I}^n \rightarrow \mathbb{N}^n$，批量查询余额
+3. **safeTransferFrom**: $\mathcal{O} \times \mathcal{O} \times \mathcal{I} \times \mathbb{N} \times \{0, 1\}^* \rightarrow \{0, 1\}$，安全转移NFT
+4. **safeBatchTransferFrom**: $\mathcal{O} \times \mathcal{O} \times \mathcal{I}^n \times \mathbb{N}^n \times \{0, 1\}^* \rightarrow \{0, 1\}$，批量安全转移NFT
+5. **setApprovalForAll**: $\mathcal{O} \times \{0, 1\} \rightarrow \{0, 1\}$，授权地址操作所有NFT
+6. **isApprovedForAll**: $\mathcal{O} \times \mathcal{O} \rightarrow \{0, 1\}$，检查是否授权所有NFT
+
+#### 4.3 ERC-1155元数据扩展
+
+ERC-1155元数据扩展定义了以下函数：
+
+1. **uri**: $\mathcal{I} \rightarrow string$，返回代币类型的元数据URI
+
+#### 4.4 ERC-1155状态转换
+
+ERC-1155的转移操作可以形式化为状态转换：
+
+$$s_{i+1} = \delta(s_i, safeTransferFrom(from, to, id, value, data))$$
+
+其中状态转换函数 $\delta$ 满足：
+
+$$balanceOf(from, id, s_{i+1}) = balanceOf(from, id, s_i) - value$$
+$$balanceOf(to, id, s_{i+1}) = balanceOf(to, id, s_i) + value$$
+
+#### 4.5 ERC-1155与ERC-721比较
+
+ERC-1155与ERC-721的关键区别可以形式化为：
+
+1. **多类型代币**：ERC-1155允许一个合约管理多种代币类型
+   $$\forall i \in \mathcal{I}, \forall o \in \mathcal{O}, balanceOf(o, i) \in \mathbb{N}$$
+
+2. **批量操作**：ERC-1155支持批量转移和查询
+   $$safeBatchTransferFrom: \mathcal{O} \times \mathcal{O} \times \mathcal{I}^n \times \mathbb{N}^n \times \{0, 1\}^* \rightarrow \{0, 1\}$$
+
+3. **半同质化**：ERC-1155允许同一ID的代币具有同质性
+   $$\forall i \in \mathcal{I}, \forall o_1, o_2 \in \mathcal{O}, fungible(i) \Rightarrow value(o_1, i) = value(o_2, i)$$
+
+#### 4.6 ERC-1155安全性分析
+
+**定理 2（ERC-1155批量操作原子性）**：在正确实现的ERC-1155合约中，批量转移操作要么全部成功，要么全部失败。
+
+**证明**：
+根据ERC-1155规范，`safeBatchTransferFrom`函数必须保证批量操作的原子性。如果任何一个转移失败，整个操作必须回滚。这可以通过以下方式形式化：
+
+$$\forall i \in [1, n], safeTransferFrom(from, to, id_i, value_i, data) = 1 \iff safeBatchTransferFrom(from, to, [id_1, ..., id_n], [value_1, ..., value_n], data) = 1$$
+
+如果任何一个 $safeTransferFrom$ 操作返回0（失败），则整个 $safeBatchTransferFrom$ 操作也返回0（失败）。
 
 ## NFT标准互操作性分析
 

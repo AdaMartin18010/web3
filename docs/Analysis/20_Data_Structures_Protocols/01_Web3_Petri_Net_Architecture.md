@@ -119,7 +119,7 @@ Web3形式化模型的层次结构：
 **定义 2.1 (PoW Petri网模型)**
 工作量证明共识机制的Petri网表示：
 
-```
+```text
 // PoW模型的位置(places)
 P = {
     mempool,         // 待处理交易池
@@ -157,7 +157,7 @@ T = {
 **定义 2.2 (PoS Petri网模型)**
 权益证明共识机制的Petri网表示：
 
-```
+```text
 // PoS模型的位置
 P = {
     validators,      // 验证者集合
@@ -194,7 +194,7 @@ T = {
 **定义 2.3 (BFT Petri网模型)**
 Byzantine容错协议的Petri网表示：
 
-```
+```text
 // BFT模型的位置
 P = {
     leaders,         // 领导者节点
@@ -233,7 +233,7 @@ BFT Petri网模型验证了在f<n/3恶意节点的情况下系统保持安全。
 **定义 3.1 (合约Petri网)**
 智能合约的Petri网表示：
 
-```
+```text
 // 智能合约位置
 P = {
     state1, state2, ..., stateN,  // 合约状态
@@ -266,7 +266,7 @@ Petri网模型可验证智能合约中关键状态的可达性。
 **定义 3.2 (合约交互Petri网)**
 多合约交互的Petri网表示：
 
-```
+```text
 // 合约交互系统
 ContractInteraction = {
     contract1: PetriNet1,
@@ -299,7 +299,7 @@ InterfacePlaces = {
 **定义 3.3 (资源流Petri网)**
 资源流动的Petri网表示：
 
-```
+```text
 // 资源流动系统
 ResourceFlow = {
     accounts: [Place],     // 账户余额位置
@@ -333,7 +333,7 @@ Petri网可验证Web3系统中的资源守恒属性。
 **定义 4.1 (并发交易Petri网)**
 并发交易系统的Petri网表示：
 
-```
+```text
 // 并发交易系统
 ConcurrentTx = {
     txPool: Place,         // 交易池
@@ -365,7 +365,7 @@ Petri网模型可优化并发交易的最大并行执行度。
 **定义 4.2 (竞争条件)**
 交易竞争条件的Petri网表示：
 
-```
+```text
 // 竞争条件模型
 RaceCondition = {
     sharedResources: [Place],  // 共享资源
@@ -393,7 +393,7 @@ Petri网分析可检测交易执行中的潜在竞争条件。
 **定义 4.3 (锁定状态)**
 活锁和死锁的Petri网表示：
 
-```
+```text
 // 死锁模型
 Deadlock = {
     waitGraph: Subgraph,   // 等待图
@@ -426,7 +426,7 @@ Petri网可验证Web3系统免于死锁和活锁。
 **定义 5.1 (安全属性)**
 Web3系统的安全属性可形式化为：
 
-```
+```text
 // 安全属性类型
 SafetyProperty = {
     invariant,      // 不变式属性
@@ -457,7 +457,7 @@ Petri网安全属性形式化足以表达关键Web3安全需求。
 **定义 5.2 (到达性分析)**
 基于Petri网的到达性分析方法：
 
-```
+```text
 // 到达图构造
 ReachabilityGraph = (V, E) where
     V = {reachable markings}
@@ -488,7 +488,7 @@ VerifySafety(P) =
 **定义 5.3 (网络不变式)**
 Petri网不变式类型：
 
-```
+```text
 // 位置不变式
 P-Invariant = {c_1, c_2, ..., c_n} where
     ∑_i c_i × M(p_i) = constant for all reachable M
@@ -517,7 +517,7 @@ T-Invariant = {d_1, d_2, ..., d_m} where
 **定义 6.1 (时间Petri网)**
 Web3时间Petri网模型：
 
-```
+```text
 // 时间Petri网
 TimedPetriNet = (P, T, F, W, M_0, I) where
     I: T → 𝕀⁺ assigns a time interval I(t)=[min(t),max(t)]
@@ -547,7 +547,7 @@ Latency = time/transaction
 **定义 6.2 (着色Petri网)**
 Web3着色Petri网模型：
 
-```
+```text
 // 着色Petri网
 ColoredPetriNet = (P, T, F, Σ, C, G, E, I) where
     Σ = color sets (资产类型)
@@ -576,7 +576,7 @@ TokenColor = {ETH, BTC, Token1, Token2, ...}
 **定义 6.3 (层次Petri网)**
 Web3层次Petri网模型：
 
-```
+```text
 // 层次Petri网
 HierarchicalPetriNet = (SNs, SN_0, PS, SA) where
     SNs = set of subnets

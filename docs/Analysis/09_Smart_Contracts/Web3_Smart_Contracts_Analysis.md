@@ -1,6 +1,7 @@
 # Web3智能合约综合分析
 
 ## 1. 智能合约基本原理
+
 ### 1.1 智能合约定义与发展
 
 **定义 1.1 (智能合约)**：
@@ -8,12 +9,14 @@
 
 **形式化定义**：
 智能合约可表示为状态转换系统 $SC = (S, I, F, T)$：
+
 - $S$ 是状态空间
 - $I \subseteq S$ 是初始状态集
 - $F \subseteq S$ 是最终状态集
 - $T \subseteq S \times A \times S$ 是转换关系，其中 $A$ 是动作集
 
 **历史发展**：
+
 1. **概念提出**：1994年，Nick Szabo首次提出智能合约概念
 2. **比特币脚本**：2009年，比特币实现了有限的脚本功能
 3. **以太坊**：2015年，以太坊引入图灵完备的智能合约平台
@@ -32,12 +35,14 @@
 给定相同的初始状态 $s_0 \in S$ 和输入序列 $[i_1, i_2, ..., i_n]$，智能合约 $SC$ 始终产生相同的最终状态 $s_n \in S$。
 
 ## 2. 智能合约执行环境
+
 ### 2.1 以太坊虚拟机(EVM)
 
 **定义 2.1 (EVM)**：
 EVM是以太坊智能合约的执行环境，基于栈的虚拟机，提供确定性执行，隔离性和沙盒化。
 
 **EVM组件**：
+
 1. **栈**：用于存储操作数和中间结果
 2. **内存**：临时存储空间，函数调用间不保留
 3. **存储**：持久存储，函数调用间保留
@@ -45,6 +50,7 @@ EVM是以太坊智能合约的执行环境，基于栈的虚拟机，提供确�
 5. **Gas计量器**：跟踪执行消耗的Gas
 
 **操作码示例**：
+
 ```text
 PUSH1 0x80  // 将值0x80推入栈
 PUSH1 0x40  // 将值0x40推入栈
@@ -58,6 +64,7 @@ JUMPI       // 如果栈顶第二个元素非零，跳转到栈顶地址
 
 **形式化表示**：
 EVM执行状态 $σ = (g, pc, m, i, s)$，其中：
+
 - $g$ 是可用Gas
 - $pc$ 是程序计数器
 - $m$ 是内存内容
@@ -70,6 +77,7 @@ EVM执行状态 $σ = (g, pc, m, i, s)$，其中：
 WebAssembly是一种二进制指令格式，用于构建高效的虚拟机环境，被多个区块链平台采用为智能合约执行环境。
 
 **WASM特点**：
+
 1. **高执行效率**：接近原生性能
 2. **内存安全**：基于类型安全的内存模型
 3. **平台独立**：可在多种环境中运行
@@ -86,12 +94,14 @@ WebAssembly是一种二进制指令格式，用于构建高效的虚拟机环境
 | 采用平台 | 以太坊 | NEAR, Polkadot, EOS |
 
 ## 3. 智能合约编程语言
+
 ### 3.1 Solidity
 
 **定义 3.1 (Solidity)**：
 Solidity是一种针对EVM的静态类型、面向合约的高级编程语言。
 
 **语言特性**：
+
 1. **合约导向**：基于合约和继承概念
 2. **静态类型**：编译时类型检查
 3. **ABI编码**：定义与合约交互的接口
@@ -99,6 +109,7 @@ Solidity是一种针对EVM的静态类型、面向合约的高级编程语言。
 5. **事件系统**：提供区块链日志机制
 
 **示例合约**：
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -137,6 +148,7 @@ contract SimpleStorage {
 ### 3.2 Rust及其他语言
 
 **Rust智能合约**：
+
 ```rust
 #[ink::contract]
 mod flipper {
@@ -175,6 +187,7 @@ mod flipper {
 | Cairo | 静态类型 | StarkNet | ZK友好 | 专业性高 |
 
 ## 4. 合约设计模式
+
 ### 4.1 常用设计模式
 
 #### 4.1.1 访问控制模式
@@ -343,6 +356,7 @@ contract ReentrancyGuard {
 ```
 
 ## 5. 智能合约安全
+
 ### 5.1 常见漏洞
 
 | 漏洞类型 | 描述 | 防御措施 |
@@ -362,7 +376,8 @@ contract ReentrancyGuard {
 形式化验证是用数学方法证明合约行为符合规范的过程。
 
 **形式化规范示例**：
-```
+
+```text
 // 令牌不可增发的规范
 INVARIANT totalSupply_final <= totalSupply_initial
 
@@ -394,18 +409,21 @@ ENSURE balanceOf(to) == PREV(balanceOf(to)) + amount
 10. **监控与报警**：实时监控异常交易
 
 ## 6. 智能合约与链下世界交互
+
 ### 6.1 预言机
 
 **定义 6.1 (区块链预言机)**：
 预言机是连接智能合约与外部世界的桥梁，提供链外数据给链上智能合约。
 
 **类型**：
+
 1. **中心化预言机**：由单一实体控制
 2. **去中心化预言机**：由多个节点组成，如Chainlink
 3. **共识预言机**：基于节点共识提供数据
 4. **计算预言机**：执行链外计算
 
 **Chainlink集成示例**：
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -439,6 +457,7 @@ contract PriceFeed {
 跨链消息传递允许不同区块链网络上的智能合约相互通信和交互。
 
 **实现方式**：
+
 1. **哈希时间锁定合约(HTLC)**：原子交换
 2. **中继链**：专门连接多个区块链的中间链
 3. **公证人机制**：由受信任的验证者验证跨链消息
@@ -447,6 +466,7 @@ contract PriceFeed {
 **示例协议**：LayerZero, Cosmos IBC, Polkadot XCMP
 
 ## 7. 智能合约可组合性
+
 ### 7.1 DeFi组合性
 
 **定义 7.1 (可组合性)**：
@@ -456,6 +476,7 @@ contract PriceFeed {
 如果智能合约 $A$, $B$, $C$ 可以组合成新系统 $D = A \circ B \circ C$，且 $D$ 保留了各组件的关键属性，则这些合约具有可组合性。
 
 **示例：闪电贷套利**：
+
 ```solidity
 function flashLoanArbitrage(uint amount) external {
     // 1. 借出闪电贷
@@ -504,6 +525,7 @@ function executeArbitrage(uint amount) external {
 代理合约模式将合约存储与逻辑分离，允许更新逻辑而保持状态和地址不变。
 
 **透明代理模式**：
+
 ```solidity
 contract TransparentProxy {
     address public admin;
@@ -549,6 +571,7 @@ contract TransparentProxy {
 ```
 
 ## 8. 未来发展趋势
+
 ### 8.1 跨虚拟机兼容性
 
 随着区块链生态系统的发展，跨虚拟机兼容性变得越来越重要：
@@ -582,4 +605,4 @@ contract TransparentProxy {
 3. Atzei, N., Bartoletti, M., & Cimoli, T. (2017). A Survey of Attacks on Ethereum Smart Contracts.
 4. Szabo, N. (1994). Smart Contracts.
 5. ConsenSys, Smart Contract Best Practices.
-6. OpenZeppelin, Secure Smart Contract Library. 
+6. OpenZeppelin, Secure Smart Contract Library.

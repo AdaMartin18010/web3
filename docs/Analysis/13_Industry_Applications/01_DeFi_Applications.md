@@ -521,4 +521,4 @@ DeFi应用分析为去中心化金融应用提供了重要的理论基础。通�
 2. Adams, H., Zinsmeister, N., & Salem, M. (2020). Uniswap v3 core.
 3. Leshner, R., & Hayes, G. (2019). Compound: The money market protocol.
 4. Klages-Mundt, A., & Minca, A. (2021). Risk measures for DeFi protocols.
-5. Chen, Y., & Bellavitis, C. (2020). Blockchain disruption and decentralized finance: The rise of decentralized business models. 
+5. Chen, Y., & Bellavitis, C. (2020). Blockchain disruption and decentralized finance: The rise of decentralized business models.

@@ -19,7 +19,7 @@
 
 ### 🏗️ 文档结构
 
-```
+```text
 docs/Analysis/
 ├── 01_Foundations/           # 基础理论 ✅
 │   ├── Blockchain_Theory.md ✅

@@ -396,10 +396,10 @@ impl ConsensusProtocol for ByzantineConsensus {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
 2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
 3. Lamport, L. (1998). The part-time parliament.
 4. Castro, M., & Liskov, B. (1999). Practical byzantine fault tolerance.
-5. Goldwasser, S., Micali, S., & Rackoff, C. (1985). The knowledge complexity of interactive proof systems. 
+5. Goldwasser, S., Micali, S., & Rackoff, C. (1985). The knowledge complexity of interactive proof systems.

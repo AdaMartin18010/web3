@@ -13,6 +13,7 @@ Layer2扩展技术可以形式化定义为一个五元组：
 $$\mathcal{L2} = (\mathcal{L1}, \mathcal{S}, \mathcal{T}, \mathcal{B}, \mathcal{V})$$
 
 其中：
+
 - $\mathcal{L1}$ 表示基础层协议
 - $\mathcal{S}$ 表示Layer2状态空间
 - $\mathcal{T}$ 表示Layer2交易集合
@@ -42,6 +43,7 @@ Rollup是一类将交易执行和状态存储转移到链下，但将交易数�
 $$\mathcal{Rollup} = (\mathcal{S}, \mathcal{T}, \mathcal{B}, \mathcal{D}, \mathcal{P})$$
 
 其中：
+
 - $\mathcal{S}$ 是状态空间
 - $\mathcal{T}$ 是交易集合
 - $\mathcal{B}$ 是批次集合
@@ -55,6 +57,7 @@ ZK-Rollup使用零知识证明来验证状态转换的正确性，可以形式�
 $$\mathcal{ZKR} = (\mathcal{S}, \mathcal{T}, \mathcal{B}, \mathcal{D}, \mathcal{P}_{zk}, \mathcal{V}_{zk})$$
 
 其中：
+
 - $\mathcal{P}_{zk}: \mathcal{S} \times \mathcal{T} \times \mathcal{B} \rightarrow \pi_{zk}$ 是生成零知识证明的函数
 - $\mathcal{V}_{zk}: \mathcal{S} \times \mathcal{S}' \times \pi_{zk} \rightarrow \{0,1\}$ 是验证零知识证明的函数
 
@@ -77,6 +80,7 @@ Optimistic Rollup假设状态转换默认是正确的，但允许在挑战期内
 $$\mathcal{OR} = (\mathcal{S}, \mathcal{T}, \mathcal{B}, \mathcal{D}, \mathcal{P}_{fraud}, \mathcal{V}_{fraud}, \Delta)$$
 
 其中：
+
 - $\mathcal{P}_{fraud}: \mathcal{S} \times \mathcal{T} \times \mathcal{B} \rightarrow \pi_{fraud}$ 是生成欺诈证明的函数
 - $\mathcal{V}_{fraud}: \mathcal{S} \times \mathcal{S}' \times \pi_{fraud} \rightarrow \{0,1\}$ 是验证欺诈证明的函数
 - $\Delta$ 是挑战期的长度
@@ -114,6 +118,7 @@ $$\pi_{fraud} = (s, tx, s', \sigma)$$
 $$\mathcal{SC} = (\mathcal{P}, \mathcal{S}, \mathcal{T}, \mathcal{C}, \mathcal{D})$$
 
 其中：
+
 - $\mathcal{P}$ 是参与者集合
 - $\mathcal{S}$ 是状态空间
 - $\mathcal{T}$ 是交易集合
@@ -156,6 +161,7 @@ Plasma是一种使用默克尔树和欺诈证明的Layer2解决方案，可以�
 $$\mathcal{Plasma} = (\mathcal{S}, \mathcal{T}, \mathcal{B}, \mathcal{MT}, \mathcal{E}, \mathcal{V})$$
 
 其中：
+
 - $\mathcal{S}$ 是状态空间
 - $\mathcal{T}$ 是交易集合
 - $\mathcal{B}$ 是Plasma区块集合
@@ -170,6 +176,7 @@ Plasma区块可以形式化定义为：
 $$b = (h, T, s, sig_{op})$$
 
 其中：
+
 - $h$ 是区块头，包含元数据
 - $T \subset \mathcal{T}$ 是包含在区块中的交易集合
 - $s \in \mathcal{S}$ 是执行所有交易后的状态
@@ -182,6 +189,7 @@ Plasma的退出机制可以形式化为：
 $$Exit(u, tx, \pi_{incl}, \pi_{own}) \rightarrow \{0,1\}$$
 
 其中：
+
 - $u$ 是UTXO或账户
 - $tx$ 是创建 $u$ 的交易
 - $\pi_{incl}$ 是 $tx$ 包含在Plasma区块中的证明
@@ -209,6 +217,7 @@ $$Exit(u, tx, \pi_{incl}, \pi_{own}) \rightarrow \{0,1\}$$
 $$\mathcal{SC} = (\mathcal{BC}_{main}, \mathcal{BC}_{side}, \mathcal{P}_{m \rightarrow s}, \mathcal{P}_{s \rightarrow m})$$
 
 其中：
+
 - $\mathcal{BC}_{main}$ 是主链
 - $\mathcal{BC}_{side}$ 是侧链
 - $\mathcal{P}_{m \rightarrow s}: \mathcal{BC}_{main} \times \mathcal{BC}_{side} \rightarrow \{0,1\}$ 是从主链到侧链的转移证明
@@ -230,6 +239,7 @@ $$\mathcal{SC} = (\mathcal{BC}_{main}, \mathcal{BC}_{side}, \mathcal{P}_{m \righ
 $$SPV(tx, b, \pi) \rightarrow \{0,1\}$$
 
 其中：
+
 - $tx$ 是交易
 - $b$ 是包含交易的区块
 - $\pi$ 是交易包含在区块中的默克尔证明

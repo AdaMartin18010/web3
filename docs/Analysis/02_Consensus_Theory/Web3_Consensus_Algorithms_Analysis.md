@@ -1,12 +1,14 @@
 # Web3共识算法综合分析
 
 ## 1. 共识算法理论基础
+
 ### 1.1 共识问题形式化定义
 
 共识问题是分布式系统中的核心问题，要求分布式节点集合在某个值上达成一致。
 
 **定义 1.1 (共识问题)**：
 共识问题要求满足以下三个性质：
+
 - **一致性**：所有正确节点最终决定相同的值
 - **有效性**：如果所有正确节点提议相同的值，则该值被决定
 - **终止性**：每个正确节点最终都会决定一个值
@@ -27,6 +29,7 @@
 4. **时序故障(Timing Fault)**：节点可能违反时间约束
 
 ## 2. 主要共识算法
+
 ### 2.1 工作量证明(PoW)
 
 **定义 2.1 (PoW)**：
@@ -37,6 +40,7 @@ $$H(B||nonce) < target$$
 其中 $H$ 是哈希函数，$B$ 是区块内容，$nonce$ 是待寻找的随机数，$target$ 是难度目标。
 
 **算法 2.1 (PoW挖矿)**：
+
 ```rust
 fn mine_block(block_header: &BlockHeader, difficulty: u256) -> Option<u64> {
     let mut nonce = 0;
@@ -66,6 +70,7 @@ $$P(i) = \frac{stake_i}{\sum_{j} stake_j}$$
 其中 $P(i)$ 是节点 $i$ 被选中的概率，$stake_i$ 是节点 $i$ 的质押量。
 
 **算法 2.2 (PoS验证者选择)**：
+
 ```rust
 fn select_validator(validators: &[Validator], random_seed: Hash) -> &Validator {
     let total_stake = validators.iter().map(|v| v.stake).sum();
@@ -93,6 +98,7 @@ fn select_validator(validators: &[Validator], random_seed: Hash) -> &Validator {
 委托权益证明允许代币持有者将权益委托给验证者，通过投票选出固定数量的区块生产者。
 
 **算法 2.3 (DPoS区块生产)**：
+
 ```rust
 fn produce_blocks(producers: &[Producer], time_slot: u64) -> Block {
     // 计算当前时间槽的生产者
@@ -115,7 +121,8 @@ fn produce_blocks(producers: &[Producer], time_slot: u64) -> Block {
 PBFT是一种适用于拜占庭环境的共识协议，包含四个阶段：请求、预准备、准备和确认。
 
 **算法 2.4 (PBFT协议流程)**：
-```
+
+```text
 1. 客户端发送请求到主节点
 2. 主节点广播预准备消息
 3. 所有节点接收预准备消息后广播准备消息
@@ -127,6 +134,7 @@ PBFT是一种适用于拜占庭环境的共识协议，包含四个阶段：请�
 PBFT可以容忍不超过 $\lfloor \frac{n-1}{3} \rfloor$ 个拜占庭节点，其中 $n$ 是总节点数。
 
 ## 3. 共识算法性能分析
+
 ### 3.1 吞吐量分析
 
 | 算法 | 理论吞吐量(TPS) | 影响因素 |
@@ -170,6 +178,7 @@ $$P(revert) \approx e^{-k \cdot \frac{q}{p}}$$
 任何共识算法无法同时在异步网络模型下保证安全性和活性。
 
 ## 4. 创新共识机制
+
 ### 4.1 混合共识
 
 **定义 4.1 (混合共识)**：
@@ -179,7 +188,8 @@ $$P(revert) \approx e^{-k \cdot \frac{q}{p}}$$
 - **BFT+PoS**：利用BFT提供即时性，PoS提供去中心化
 
 **混合共识示例(Casper FFG)**：
-```
+
+```text
 1. PoW负责生成区块候选
 2. PoS验证者每100个区块进行检查点投票
 3. 当检查点获得2/3验证者投票时被视为最终确认
@@ -191,7 +201,8 @@ $$P(revert) \approx e^{-k \cdot \frac{q}{p}}$$
 有向无环图(DAG)共识使用图结构而非线性链，允许并行处理交易。
 
 **算法 4.2 (PHANTOM协议)**：
-```
+
+```text
 1. 每个节点同时生成区块并引用多个父区块
 2. 使用标记算法识别"蓝色区块集合"
 3. 通过拓扑排序将DAG转换为线性序列
@@ -210,6 +221,7 @@ $$y = VRF_{sk}(x), \pi = Proof_{sk}(x)$$
 其中 $y$ 是随机输出，$\pi$ 是证明，$sk$ 是私钥，$x$ 是输入种子。
 
 **算法 4.3 (Algorand VRF选择)**：
+
 ```rust
 fn select_committee(users: &[User], seed: &[u8], threshold: u64) -> Vec<User> {
     users.iter()
@@ -222,12 +234,14 @@ fn select_committee(users: &[User], seed: &[u8], threshold: u64) -> Vec<User> {
 ```
 
 ## 5. 跨链共识
+
 ### 5.1 中继链
 
 **定义 5.1 (中继链)**：
 中继链是连接多个区块链的中间链，提供跨链通信能力。
 
 **算法 5.1 (中继链验证)**：
+
 ```rust
 fn verify_cross_chain_tx(source_header: &Header, tx: &Transaction, proof: &MerkleProof) -> bool {
     // 1. 验证源链区块头
@@ -254,13 +268,15 @@ fn verify_cross_chain_tx(source_header: &Header, tx: &Transaction, proof: &Merkl
 如果公证人集合中的诚实公证人比例超过阈值 $t$，则系统可以安全运行。对于多签名方案，$t > 1/2$；对于拜占庭容错方案，$t > 2/3$。
 
 ## 6. 形式化验证方法
+
 ### 6.1 共识算法形式化验证
 
 **定义 6.1 (形式化验证)**：
 使用数学方法严格证明共识协议满足安全性和活性属性。
 
 **TLA+规范示例(简化版Raft)**：
-```
+
+```text
 ---- MODULE Raft ----
 EXTENDS Naturals, FiniteSets, Sequences
  
@@ -296,6 +312,7 @@ ElectionSafety ==
 共识算法的安全性可以通过构建全局不变式并证明其在所有可能的执行路径下都成立来验证。
 
 ## 7. 未来发展趋势
+
 ### 7.1 可扩展性解决方案
 
 1. **分片技术**：将网络分割为多个子网络，每个子网独立共识
@@ -322,4 +339,4 @@ $$Energy_{PoS} \approx 0.0005 \cdot Energy_{PoW}$$
 2. Buterin, V., & Griffith, V. (2017). Casper the Friendly Finality Gadget.
 3. Larimer, D. (2014). Delegated Proof-of-Stake (DPOS).
 4. Castro, M., & Liskov, B. (1999). Practical Byzantine Fault Tolerance.
-5. Sompolinsky, Y., & Zohar, A. (2018). PHANTOM: A Scalable BlockDAG protocol. 
+5. Sompolinsky, Y., & Zohar, A. (2018). PHANTOM: A Scalable BlockDAG protocol.

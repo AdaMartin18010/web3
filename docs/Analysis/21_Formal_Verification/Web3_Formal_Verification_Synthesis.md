@@ -1,12 +1,14 @@
 # Web3形式化验证综合分析
 
 ## 1. 形式化验证基础
+
 ### 1.1 形式化验证简介
 
 形式化验证是指使用数学方法严格证明系统或程序的正确性。在Web3领域，形式化验证对于确保智能合约安全性和共识协议正确性至关重要。
 
 **定义 1.1 (形式化验证)**：
 形式化验证是一个三元组 $FV = (S, P, V)$，其中：
+
 - $S$ 是系统规范，描述系统行为
 - $P$ 是系统属性，描述预期特性
 - $V$ 是验证方法，证明 $S$ 满足 $P$
@@ -24,12 +26,14 @@ Web3系统验证方法可分为：
 对于智能合约的大多数非平凡语义性质，不存在通用算法能够精确判定所有合约是否满足该性质。
 
 ## 2. 智能合约形式化验证
+
 ### 2.1 合约形式化模型
 
 智能合约可以建模为状态转换系统：
 
 **定义 2.1 (智能合约形式化模型)**：
 智能合约可表示为一个状态转换系统 $C = (S, I, T, L)$，其中：
+
 - $S$ 是状态空间
 - $I \subseteq S$ 是初始状态集
 - $T \subseteq S \times A \times S$ 是转换关系（$A$ 为操作）
@@ -39,7 +43,7 @@ Web3系统验证方法可分为：
 
 EVM操作码形式化表示：
 
-```
+```text
 ⟨PUSH x, μ, ι, σ⟩ → ⟨μ', ι', σ⟩，其中
   μ' = μ 更新栈加入值 x
   ι' = ι 更新程序计数器
@@ -100,7 +104,7 @@ buildStateSpace contract = do
 
 符号执行示例：
 
-```
+```text
 程序：
 1. int x = 0;
 2. int y = INPUT;
@@ -117,10 +121,12 @@ buildStateSpace contract = do
 ```
 
 ## 3. 共识协议验证
+
 ### 3.1 共识协议形式化模型
 
 **定义 3.1 (共识协议形式化模型)**：
 共识协议可以表示为分布式系统模型 $DP = (N, M, F, C)$，其中：
+
 - $N$ 是节点集合
 - $M$ 是消息传递模型
 - $F$ 是故障模型
@@ -128,7 +134,7 @@ buildStateSpace contract = do
 
 **示例 TLA+ 规范**：
 
-```
+```text
 ---- MODULE Consensus ----
 EXTENDS Naturals, FiniteSets, Sequences
 
@@ -175,6 +181,7 @@ Agreement == \A n, m \in Node :
 如果两个诚实节点分别确认值 $v_1$ 和 $v_2$，则 $v_1 = v_2$。
 
 **证明示例（Paxos协议）**：
+
 1. 假设节点1确认值 $v_1$，节点2确认值 $v_2$
 2. 节点1确认 $v_1$ 意味着多数派接受者接受编号为 $n_1$ 的提案 $(n_1, v_1)$
 3. 节点2确认 $v_2$ 意味着多数派接受者接受编号为 $n_2$ 的提案 $(n_2, v_2)$
@@ -189,21 +196,25 @@ Agreement == \A n, m \in Node :
 在部分同步模型中，如果在某个时刻之后系统变得同步，则所有诚实节点最终将就某个值达成共识。
 
 **证明思路**：
+
 1. 在同步时期，消息延迟有上界
 2. 选择一个足够长的超时时间确保领导者可以完成提案过程
 3. 通过领导者选举机制确保最终只有一个领导者
 4. 单一领导者提案必然被确认
 
 ## 4. 零知识证明验证
+
 ### 4.1 零知识证明基础
 
 **定义 4.1 (零知识证明)**：
 零知识证明系统是一个三元组 $ZKP = (P, V, S)$，其中：
+
 - $P$ 是证明者算法
 - $V$ 是验证者算法
 - $S$ 是模拟器算法
 
 满足：
+
 1. **完备性**：如果陈述为真，诚实的证明者能让验证者接受
 2. **可靠性**：如果陈述为假，任何证明者都无法让验证者接受（概率可忽略）
 3. **零知识性**：验证者不获取除陈述真实性之外的任何知识
@@ -212,6 +223,7 @@ Agreement == \A n, m \in Node :
 
 **定义 4.2 (zk-SNARK)**：
 zk-SNARK是一个四元组 $SNARK = (G, P, V, S)$：
+
 - $G$ 是参数生成算法，生成证明密钥 $pk$ 和验证密钥 $vk$
 - $P$ 是证明生成算法，输入 $pk$ 和断言 $(x, w)$，输出证明 $\pi$
 - $V$ 是验证算法，输入 $vk$, $x$ 和 $\pi$，输出接受或拒绝
@@ -238,6 +250,7 @@ ZK-Rollup通过批量处理交易并提供有效性证明来扩展区块链性�
 
 **定义 4.3 (ZK-Rollup)**：
 ZK-Rollup是一个四元组 $ZKR = (B, P, V, S)$，其中：
+
 - $B$ 是批次构建函数
 - $P$ 是证明生成函数
 - $V$ 是证明验证函数
@@ -267,9 +280,11 @@ updateState oldState newState proof =
 ```
 
 ## 5. 形式化验证工具
+
 ### 5.1 智能合约验证工具
 
 1. **Manticore**：符号执行引擎
+
    ```python
    def verify_no_overflow(contract):
        sym_state = SymbolicEVMState()
@@ -287,12 +302,14 @@ updateState oldState newState proof =
    ```
 
 2. **Mythril**：混合符号执行和污点分析
+
    ```bash
-   $ mythril analyze --solidity-file MyContract.sol
+   mythril analyze --solidity-file MyContract.sol
    ```
 
 3. **Certora Prover**：基于SMT求解器的形式化验证
-   ```
+
+   ```text
    rule noChangeToOtherBalances(address a, address b, uint amount) {
        env e;
        require(a != b);
@@ -313,7 +330,8 @@ updateState oldState newState proof =
 ### 5.2 共识协议验证工具
 
 1. **TLA+**：用于验证分布式系统的形式化规范语言
-   ```
+
+   ```text
    CoherenceInvariant ==
        \A n1, n2 \in Node :
            /\ committed[n1] # None
@@ -322,7 +340,8 @@ updateState oldState newState proof =
    ```
 
 2. **Ivy**：用于验证分布式协议的形式化语言
-   ```
+
+   ```text
    protocol consensus {
        relation proposal(node: id, value: value)
        relation decision(node: id, value: value)
@@ -333,6 +352,7 @@ updateState oldState newState proof =
    ```
 
 3. **Coq**：交互式定理证明器
+
    ```coq
    Theorem consensus_agreement :
      forall (n1 n2 : Node) (v1 v2 : Value),
@@ -346,6 +366,7 @@ updateState oldState newState proof =
    ```
 
 ## 6. 实际应用案例
+
 ### 6.1 智能合约验证案例
 
 **ERC20代币合约验证**：
@@ -383,7 +404,7 @@ contract ERC20 {
 
 **Tendermint共识协议验证**：
 
-```
+```text
 属性：
 1. 安全性：不会有两个诚实节点在同一高度确认不同区块
 2. 活性：在通信恢复正常后，系统最终会产生新区块
@@ -394,6 +415,7 @@ contract ERC20 {
 ```
 
 ## 7. 未来研究方向
+
 ### 7.1 形式化验证挑战
 
 1. **状态爆炸问题**：
@@ -429,4 +451,4 @@ contract ERC20 {
 2. Guth, D., & Hathhorn, C. (2018). K-KEVM: A Complete Formal Semantics of the Ethereum Virtual Machine.
 3. Sergey, I., Kumar, A., & Hobor, A. (2018). Scilla: A Smart Contract Intermediate-Level Language.
 4. Atzei, N., Bartoletti, M., & Cimoli, T. (2017). A Survey of Attacks on Ethereum Smart Contracts.
-5. Clarke, E. M., Henzinger, T. A., Veith, H., & Bloem, R. (Eds.). (2018). Handbook of Model Checking. 
+5. Clarke, E. M., Henzinger, T. A., Veith, H., & Bloem, R. (Eds.). (2018). Handbook of Model Checking.

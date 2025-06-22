@@ -13,6 +13,7 @@
 $$E = (T, A, I, G)$$
 
 其中：
+
 - $T$ 是代币集合及其属性
 - $A$ 是参与者集合及其行为函数
 - $I$ 是激励机制集合
@@ -25,16 +26,16 @@ $$E = (T, A, I, G)$$
 
 1. **支付型代币(Payment Tokens)**：
    作为交换媒介和价值存储的代币。
-   
+
 2. **功能型代币(Utility Tokens)**：
    提供特定网络或应用功能访问权的代币。
-   
+
 3. **安全型代币(Security Tokens)**：
    代表对底层资产所有权或收益权的代币。
-   
+
 4. **治理型代币(Governance Tokens)**：
    赋予持有者对协议决策投票权的代币。
-   
+
 5. **非同质化代币(Non-Fungible Tokens)**：
    代表独特资产所有权的不可互换代币。
 
@@ -50,6 +51,7 @@ $$E = (T, A, I, G)$$
 $$V(t) = \frac{U(t) \times D(t)}{S(t)}$$
 
 其中：
+
 - $V(t)$ 是代币 $t$ 的价值
 - $U(t)$ 是代币 $t$ 的效用函数
 - $D(t)$ 是代币 $t$ 的需求函数
@@ -61,6 +63,7 @@ $$V(t) = \frac{U(t) \times D(t)}{S(t)}$$
 $$MV = PQ$$
 
 其中：
+
 - $M$ 是代币供应量
 - $V$ 是代币流通速度
 - $P$ 是网络中服务/商品的平均价格
@@ -82,6 +85,7 @@ $$MV = PQ$$
 $$I: A \times B \rightarrow R$$
 
 其中：
+
 - $A$ 是参与者集合
 - $B$ 是行为空间
 - $R$ 是奖励空间
@@ -118,6 +122,7 @@ $$\arg\max_{b \in B} u_a(b, I(a, b)) = \arg\max_{b \in B} W(b)$$
 $$R_{PoW}(m_i, b) = P_{成功}(m_i, b) \times (BlockReward + \sum_{tx \in b} fee(tx))$$
 
 其中：
+
 - $m_i$ 是矿工 $i$
 - $b$ 是区块
 - $P_{成功}$ 是成功挖出区块的概率，与贡献的计算能力成正比
@@ -132,6 +137,7 @@ $$R_{PoW}(m_i, b) = P_{成功}(m_i, b) \times (BlockReward + \sum_{tx \in b} fee
 $$R_{PoS}(v_i, b) = \frac{stake(v_i)}{\sum_{j} stake(v_j)} \times (BlockReward + \sum_{tx \in b} fee(tx))$$
 
 其中：
+
 - $v_i$ 是验证者 $i$
 - $stake(v_i)$ 是验证者 $i$ 质押的代币数量
 
@@ -145,6 +151,7 @@ $$R_{PoS}(v_i, b) = \frac{stake(v_i)}{\sum_{j} stake(v_j)} \times (BlockReward +
 $$R_{LP}(p_i, t) = \frac{LP(p_i, t)}{\sum_{j} LP(p_j, t)} \times EmissionRate(t) \times \Delta t$$
 
 其中：
+
 - $p_i$ 是提供者 $i$
 - $LP(p_i, t)$ 是提供者 $i$ 在时间 $t$ 提供的流动性
 - $EmissionRate(t)$ 是时间 $t$ 的代币发行率
@@ -160,28 +167,28 @@ $$R_{LP}(p_i, t) = \frac{LP(p_i, t)}{\sum_{j} LP(p_j, t)} \times EmissionRate(t)
 
 1. **固定总量模型**：
    代币总量有上限，发行后不再增发。
-   
+
    $$S(t) = S_{max}, \forall t > t_{完全发行}$$
 
 2. **通胀模型**：
    代币按预定规则持续增发。
-   
+
    $$S(t) = S_0 + \int_{0}^{t} r(\tau) \, d\tau$$
-   
+
    其中 $r(t)$ 是时间 $t$ 的增发率。
 
 3. **通缩模型**：
    代币通过回购、销毁等机制减少总量。
-   
+
    $$S(t) = S_0 - \int_{0}^{t} b(\tau) \, d\tau$$
-   
+
    其中 $b(t)$ 是时间 $t$ 的销毁率。
 
 4. **弹性供应模型**：
    代币供应根据市场需求动态调整。
-   
+
    $$\frac{dS(t)}{dt} = f(P(t), P_{target})$$
-   
+
    其中 $P(t)$ 是当前价格，$P_{target}$ 是目标价格。
 
 ### 3.2 代币分配与解锁机制
@@ -191,7 +198,7 @@ $$R_{LP}(p_i, t) = \frac{LP(p_i, t)}{\sum_{j} LP(p_j, t)} \times EmissionRate(t)
 
 **典型分配方案**：
 
-```
+```text
 代币分配比例:
 - 团队与顾问: 15-20%
 - 基金会储备: 10-15%
@@ -225,18 +232,18 @@ A_g, & t \geq t_{fully\_vested}
 
 1. **工作代币模型**：
    代币作为访问网络服务的必要媒介。
-   
+
 2. **治理代币模型**：
    代币赋予对协议决策的投票权。
-   
+
 3. **价值累积模型**：
    协议收入部分流向代币持有者。
-   
+
    $$V_{token} = \frac{协议收入 \times 分成比例}{代币流通供应量}$$
 
 4. **回购销毁模型**：
    使用协议收入回购并销毁代币，减少流通量。
-   
+
 5. **质押收益模型**：
    代币质押获得网络收入分成。
 
@@ -363,20 +370,20 @@ $$P(s) = f(s)$$
 
 1. **荷兰式拍卖**：
    价格从高到低递减，直到所有代币售出。
-   
+
 2. **英式拍卖**：
    价格从低到高递增，直到达到预设时间。
-   
+
 3. **批量拍卖**：
    所有参与者以同一结算价格购买代币。
-   
+
    $$P_{结算} = \min\{p | \sum_{i: b_i \geq p} q_i(p) \leq Q\}$$
-   
+
    其中 $b_i$ 是参与者 $i$ 的最高出价，$q_i(p)$ 是价格为 $p$ 时参与者 $i$ 的需求量，$Q$ 是总供应量。
 
 4. **二次拍卖**：
    分配与出价的平方根成正比。
-   
+
    $$allocation_i = \frac{\sqrt{bid_i}}{\sum_j \sqrt{bid_j}} \times TotalSupply$$
 
 ## 6. 代币经济模型案例分析
@@ -439,7 +446,7 @@ $$BaseFee_{t+1} = BaseFee_t \times (1 + \frac{1}{8} \times \frac{GasUsed_t - Tar
 
 3. **费用与奖励可持续性**：
    $$S_{fee} = \frac{用户支付费用}{验证者/矿工奖励}$$
-   
+
    长期稳定状态要求 $S_{fee} \geq 1$。
 
 ### 7.2 激励对齐评估
@@ -470,7 +477,7 @@ $$BaseFee_{t+1} = BaseFee_t \times (1 + \frac{1}{8} \times \frac{GasUsed_t - Tar
 
 1. **代币集中风险**：
    $$G_{集中度} = \sum_{i=1}^{n} (持有比例_i)^2$$
-   
+
    其中 $G$ 是基尼系数。
 
 2. **激励攻击风险**：
@@ -513,10 +520,10 @@ $$BaseFee_{t+1} = BaseFee_t \times (1 + \frac{1}{8} \times \frac{GasUsed_t - Tar
 
 1. **代理人模拟**：
    使用AI代理模拟不同参与者行为。
-   
+
 2. **沙盒测试**：
    在隔离环境中测试经济机制。
-   
+
 3. **参数敏感性分析**：
    评估参数变化对系统行为的影响。
 
@@ -529,13 +536,13 @@ $$BaseFee_{t+1} = BaseFee_t \times (1 + \frac{1}{8} \times \frac{GasUsed_t - Tar
 
 1. **证券法规**：
    代币是否构成证券的判定标准。
-   
+
 2. **反洗钱(AML)与了解客户(KYC)**：
    身份验证与交易监控要求。
-   
+
 3. **税务合规**：
    代币交易、质押和挖矿的税务处理。
-   
+
 4. **消费者保护**：
    信息披露和风险提示要求。
 
@@ -545,16 +552,16 @@ $$BaseFee_{t+1} = BaseFee_t \times (1 + \frac{1}{8} \times \frac{GasUsed_t - Tar
 
 1. **明确价值主张**：
    清晰定义代币的功能和价值来源。
-   
+
 2. **长期激励对齐**：
    设计促进长期参与的激励结构。
-   
+
 3. **渐进式去中心化**：
    从集中控制逐步过渡到社区治理。
-   
+
 4. **适应性机制**：
    允许系统参数根据市场条件调整。
-   
+
 5. **形式化验证**：
    使用形式化方法验证经济机制的属性。
 
@@ -562,10 +569,10 @@ $$BaseFee_{t+1} = BaseFee_t \times (1 + \frac{1}{8} \times \frac{GasUsed_t - Tar
 
 1. **理论模型与实际行为差异**：
    实际参与者行为常偏离理性假设。
-   
+
 2. **复杂系统涌现特性**：
    大规模部署时出现的难以预测的系统行为。
-   
+
 3. **跨学科整合挑战**：
    结合经济学、博弈论、密码学和计算机科学的难度。
 
@@ -573,13 +580,13 @@ $$BaseFee_{t+1} = BaseFee_t \times (1 + \frac{1}{8} \times \frac{GasUsed_t - Tar
 
 1. **动态代币经济模型**：
    研究代币经济系统的动态演化。
-   
+
 2. **形式化验证工具**：
    开发专用于代币经济机制验证的工具。
-   
+
 3. **跨链经济互动**：
    研究多链环境下的经济互动模式。
-   
+
 4. **宏观代币经济学**：
    研究大规模代币经济系统的宏观行为和稳定性。
 
@@ -596,4 +603,4 @@ $$BaseFee_{t+1} = BaseFee_t \times (1 + \frac{1}{8} \times \frac{GasUsed_t - Tar
 7. Gudgeon, L., et al. (2020). "DeFi Protocols for Loanable Funds." ACM Conference on Advances in Financial Technologies.
 8. Angeris, G., & Chitra, T. (2020). "Improved Price Oracles: Constant Function Market Makers." arXiv preprint.
 9. Capponi, A., & Jia, R. (2021). "The Adoption of Blockchain-based Decentralized Exchanges." arXiv preprint.
-10. Barreira, L., et al. (2020). "Stablecoins 2.0: Economic Foundations and Risk-based Models." arXiv preprint. 
+10. Barreira, L., et al. (2020). "Stablecoins 2.0: Economic Foundations and Risk-based Models." arXiv preprint.

@@ -13,6 +13,7 @@ DeFi协议可以形式化定义为一个五元组：
 $$\mathcal{DeFi} = (\mathcal{S}, \mathcal{A}, \mathcal{T}, \mathcal{F}, \mathcal{G})$$
 
 其中：
+
 - $\mathcal{S}$ 表示协议状态空间
 - $\mathcal{A}$ 表示参与者集合
 - $\mathcal{T}$ 表示交易集合
@@ -34,6 +35,7 @@ DeFi协议中的参与者可以形式化为：
 $$a = (addr, balance, strategy)$$
 
 其中：
+
 - $addr$ 是参与者的地址
 - $balance$ 是参与者的资产余额映射
 - $strategy: \mathcal{S} \rightarrow \mathcal{T}$ 是参与者的策略函数，决定在给定状态下执行的交易
@@ -77,6 +79,7 @@ $$P_{after} = \frac{x + \Delta x}{y - \Delta y} = \frac{x + \Delta x}{y - \frac{
 $$IL = \frac{V_{HODL} - V_{LP}}{V_{HODL}}$$
 
 其中：
+
 - $V_{HODL}$ 是持有代币的价值
 - $V_{LP}$ 是提供流动性的价值
 
@@ -91,6 +94,7 @@ $$IL = 1 - \frac{2\sqrt{\gamma}}{\gamma + 1}$$
 $$k = \sum_{i=1}^{n} x_i + D = An^n \sum_{i=1}^{n} x_i + \frac{D^{n+1}}{n^n \prod_{i=1}^{n} x_i}$$
 
 其中：
+
 - $x_i$ 是第 $i$ 种代币的储备量
 - $D$ 是恒定和参数
 - $A$ 是放大系数，控制曲线的形状
@@ -115,6 +119,7 @@ $$Cost = \int_{P_0}^{P_1} \frac{k}{P^2} \cdot (1 - \frac{P_0}{P})^2 \cdot (1 + f
 $$\mathcal{L} = (\mathcal{A}, \mathcal{M}, \mathcal{I}, \mathcal{C}, \mathcal{L})$$
 
 其中：
+
 - $\mathcal{A}$ 是资产集合
 - $\mathcal{M}$ 是市场参数
 - $\mathcal{I}$ 是利率模型
@@ -128,6 +133,7 @@ $$\mathcal{L} = (\mathcal{A}, \mathcal{M}, \mathcal{I}, \mathcal{C}, \mathcal{L}
 $$r(U) = r_{base} + \frac{U}{1-U} \cdot r_{slope}$$
 
 其中：
+
 - $U = \frac{Borrows}{Deposits}$ 是资金利用率
 - $r_{base}$ 是基础利率
 - $r_{slope}$ 是斜率参数
@@ -139,6 +145,7 @@ $$r(U) = r_{base} + \frac{U}{1-U} \cdot r_{slope}$$
 $$\sum_{i \in \mathcal{A}} c_i \cdot LTV_i \geq \sum_{j \in \mathcal{A}} b_j$$
 
 其中：
+
 - $c_i$ 是第 $i$ 种资产的抵押品价值
 - $LTV_i$ 是第 $i$ 种资产的贷款价值比
 - $b_j$ 是第 $j$ 种资产的借款价值
@@ -172,6 +179,7 @@ $$b_j' = 0$$
 $$\mathcal{S} = (\mathcal{A}, \mathcal{O}, \mathcal{P}, \mathcal{C})$$
 
 其中：
+
 - $\mathcal{A}$ 是基础资产集合
 - $\mathcal{O}$ 是预言机
 - $\mathcal{P}$ 是价格馈送
@@ -184,6 +192,7 @@ $$\mathcal{S} = (\mathcal{A}, \mathcal{O}, \mathcal{P}, \mathcal{C})$$
 $$C(S, t) = S \cdot N(d_1) - K \cdot e^{-r(T-t)} \cdot N(d_2)$$
 
 其中：
+
 - $C(S, t)$ 是期权价格
 - $S$ 是基础资产价格
 - $K$ 是行权价格
@@ -200,6 +209,7 @@ $$C(S, t) = S \cdot N(d_1) - K \cdot e^{-r(T-t)} \cdot N(d_2)$$
 $$P_{perp} = P_{index} \cdot (1 + \delta)$$
 
 其中：
+
 - $P_{perp}$ 是永续合约价格
 - $P_{index}$ 是指数价格
 - $\delta$ 是基差
@@ -209,6 +219,7 @@ $$P_{perp} = P_{index} \cdot (1 + \delta)$$
 $$f = clamp(P_{premium} \cdot k, -f_{max}, f_{max})$$
 
 其中：
+
 - $P_{premium} = \frac{P_{perp} - P_{index}}{P_{index}}$ 是价格溢价
 - $k$ 是资金费率系数
 - $f_{max}$ 是最大资金费率
@@ -229,6 +240,7 @@ $$f = clamp(P_{premium} \cdot k, -f_{max}, f_{max})$$
 $$\mathcal{Y} = (\mathcal{S}, \mathcal{A}, \mathcal{R}, \mathcal{O})$$
 
 其中：
+
 - $\mathcal{S}$ 是策略集合
 - $\mathcal{A}$ 是资产集合
 - $\mathcal{R}$ 是收益源
@@ -241,6 +253,7 @@ $$\mathcal{Y} = (\mathcal{S}, \mathcal{A}, \mathcal{R}, \mathcal{O})$$
 $$\max_{s \in \mathcal{S}} \sum_{i \in \mathcal{A}} w_i \cdot r_i(s) - c(s)$$
 
 其中：
+
 - $w_i$ 是资产 $i$ 的权重
 - $r_i(s)$ 是策略 $s$ 对资产 $i$ 的收益率
 - $c(s)$ 是策略 $s$ 的成本（如gas费、机会成本等）
@@ -252,6 +265,7 @@ $$\max_{s \in \mathcal{S}} \sum_{i \in \mathcal{A}} w_i \cdot r_i(s) - c(s)$$
 $$V(t) = V_0 \cdot (1 + \frac{r}{n})^{n \cdot t}$$
 
 其中：
+
 - $V(t)$ 是时间 $t$ 的价值
 - $V_0$ 是初始价值
 - $r$ 是年化收益率
@@ -273,6 +287,7 @@ $$V(t) = V_0 \cdot (1 + \frac{r}{n})^{n \cdot t}$$
 $$\mathcal{M} = (\mathcal{P}, \mathcal{R}, \mathcal{D}, \mathcal{T})$$
 
 其中：
+
 - $\mathcal{P}$ 是参与者集合
 - $\mathcal{R}$ 是奖励函数
 - $\mathcal{D}$ 是分配机制
@@ -285,6 +300,7 @@ $$\mathcal{M} = (\mathcal{P}, \mathcal{R}, \mathcal{D}, \mathcal{T})$$
 $$R_i(t) = \frac{S_i(t)}{\sum_{j \in \mathcal{P}} S_j(t)} \cdot R_{total}(t)$$
 
 其中：
+
 - $R_i(t)$ 是参与者 $i$ 在时间 $t$ 获得的奖励
 - $S_i(t)$ 是参与者 $i$ 在时间 $t$ 的份额（如提供的流动性）
 - $R_{total}(t)$ 是时间 $t$ 的总奖励
@@ -296,6 +312,7 @@ $$R_i(t) = \frac{S_i(t)}{\sum_{j \in \mathcal{P}} S_j(t)} \cdot R_{total}(t)$$
 $$V = \frac{GMV \cdot f \cdot \gamma}{r}$$
 
 其中：
+
 - $V$ 是代币总价值
 - $GMV$ 是协议的总交易量
 - $f$ 是费率
@@ -318,6 +335,7 @@ DeFi协议的智能合约风险可以形式化为：
 $$Risk_{contract} = \sum_{v \in \mathcal{V}} P(v) \cdot I(v)$$
 
 其中：
+
 - $\mathcal{V}$ 是漏洞集合
 - $P(v)$ 是漏洞 $v$ 的发生概率
 - $I(v)$ 是漏洞 $v$ 的影响
@@ -329,6 +347,7 @@ DeFi协议的经济风险可以形式化为：
 $$Risk_{economic} = \sum_{s \in \mathcal{S}} P(s) \cdot I(s)$$
 
 其中：
+
 - $\mathcal{S}$ 是经济场景集合
 - $P(s)$ 是场景 $s$ 的发生概率
 - $I(s)$ 是场景 $s$ 的影响
@@ -340,6 +359,7 @@ $$Risk_{economic} = \sum_{s \in \mathcal{S}} P(s) \cdot I(s)$$
 $$Risk_{oracle} = P(manipulation) \cdot I(manipulation) + P(failure) \cdot I(failure)$$
 
 其中：
+
 - $P(manipulation)$ 是预言机被操纵的概率
 - $I(manipulation)$ 是预言机被操纵的影响
 - $P(failure)$ 是预言机失效的概率
@@ -352,6 +372,7 @@ $$Risk_{oracle} = P(manipulation) \cdot I(manipulation) + P(failure) \cdot I(fai
 $$\min_{m \in \mathcal{M}} \sum_{r \in \mathcal{R}} Risk(r|m) + Cost(m)$$
 
 其中：
+
 - $\mathcal{M}$ 是缓解策略集合
 - $\mathcal{R}$ 是风险集合
 - $Risk(r|m)$ 是采用策略 $m$ 后风险 $r$ 的残余风险
@@ -366,6 +387,7 @@ DeFi协议组合可以形式化定义为：
 $$\mathcal{C} = (\mathcal{P}, \mathcal{I}, \mathcal{D}, \mathcal{F})$$
 
 其中：
+
 - $\mathcal{P}$ 是协议集合
 - $\mathcal{I}$ 是接口集合
 - $\mathcal{D}$ 是数据流
@@ -378,6 +400,7 @@ $$\mathcal{C} = (\mathcal{P}, \mathcal{I}, \mathcal{D}, \mathcal{F})$$
 $$G = (V, E)$$
 
 其中：
+
 - $V$ 是协议节点集合
 - $E \subset V \times V$ 是依赖边集合
 
@@ -388,6 +411,7 @@ $$G = (V, E)$$
 $$Risk_{interop} = \sum_{p \in \mathcal{P}} Risk(p) \cdot \sum_{q \in Dep(p)} w_{p,q}$$
 
 其中：
+
 - $Dep(p)$ 是依赖于协议 $p$ 的协议集合
 - $w_{p,q}$ 是协议 $q$ 对协议 $p$ 的依赖权重
 
@@ -398,6 +422,7 @@ $$Risk_{interop} = \sum_{p \in \mathcal{P}} Risk(p) \cdot \sum_{q \in Dep(p)} w_
 $$\max_{I \subset \mathcal{I}} Utility(I) - Cost(I)$$
 
 其中：
+
 - $\mathcal{I}$ 是可能的接口集合
 - $Utility(I)$ 是接口集合 $I$ 的效用
 - $Cost(I)$ 是实现接口集合 $I$ 的成本

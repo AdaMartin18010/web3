@@ -75,12 +75,14 @@ DAO的核心特性包括：
 投票权重函数：$W(v) = \frac{T(v)}{\sum_{i \in M} T(i)}$
 
 其中：
+
 - $T(v)$ 是投票者 $v$ 的代币持有量
 - $M$ 是成员集合
 
 **定理 2.1**（代币加权投票性质）：代币加权投票满足单调性和可加性。
 
 **证明**：
+
 - **单调性**：代币持有量越多，投票权重越大
 - **可加性**：多个投票者的总权重等于各自权重之和
 
@@ -135,6 +137,7 @@ DAO的核心特性包括：
 **定理 3.1**（投票规则选择）：不同的投票规则适用于不同的决策场景。
 
 **证明**：
+
 - **简单多数**：适用于日常决策
 - **绝对多数**：适用于重要决策
 - **超级多数**：适用于关键决策
@@ -305,6 +308,7 @@ impl DAOGovernance {
 声誉函数：$R(v) = \alpha \cdot P(v) + \beta \cdot Q(v) + \gamma \cdot T(v)$
 
 其中：
+
 - $P(v)$ 是提案质量分数
 - $Q(v)$ 是投票质量分数
 - $T(v)$ 是参与时间分数
@@ -660,4 +664,4 @@ DAO治理理论为去中心化组织提供了重要的理论基础。通过形�
 2. Weyl, E. G. (2018). Liberal radicalism: A flexible design for philanthropic matching funds.
 3. Buterin, V., Hitzig, Z., & Weyl, E. G. (2019). A flexible design for funding public goods.
 4. Posner, E. A., & Weyl, E. G. (2018). Radical markets: Uprooting capitalism and democracy for a just society.
-5. Duarte, J., Siegel, S., & Young, L. (2012). Trust and credit: The role of appearance in microfinance. 
+5. Duarte, J., Siegel, S., & Young, L. (2012). Trust and credit: The role of appearance in microfinance.

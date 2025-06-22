@@ -632,4 +632,4 @@ impl CrossChainGovernance {
 2. Poon, J., & Dryja, T. (2016). The bitcoin lightning network: Scalable off-chain instant payments.
 3. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger.
 4. Back, A., et al. (2014). Enabling blockchain innovations with pegged sidechains.
-5. Kwon, J., & Buchman, E. (2019). Cosmos: A network of distributed ledgers. 
+5. Kwon, J., & Buchman, E. (2019). Cosmos: A network of distributed ledgers.

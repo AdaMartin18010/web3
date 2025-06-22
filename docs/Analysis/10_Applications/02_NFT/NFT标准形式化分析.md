@@ -23,6 +23,7 @@
 $$\mathcal{NFT} = (\mathcal{I}, \mathcal{O}, \mathcal{M}, \mathcal{T}, \mathcal{P})$$
 
 其中：
+
 - $\mathcal{I}$ 表示代币标识符集合
 - $\mathcal{O}$ 表示所有者集合
 - $\mathcal{M}$ 表示元数据集合
@@ -56,6 +57,7 @@ ERC-721标准可以形式化定义为：
 $$\mathcal{ERC721} = (\mathcal{I}, \mathcal{O}, \mathcal{M}, \mathcal{T}, \mathcal{A})$$
 
 其中：
+
 - $\mathcal{I} \subset \mathbb{N}$ 是代币ID集合
 - $\mathcal{O} \subset \{0, 1\}^{160}$ 是以太坊地址集合
 - $\mathcal{M}$ 是元数据集合
@@ -100,6 +102,7 @@ $$balanceOf(to, s_{i+1}) = balanceOf(to, s_i) + 1$$
 
 **证明**：
 根据ERC-721规范，`transferFrom`函数只有在以下条件之一满足时才能成功：
+
 1. 调用者是NFT的当前所有者：`msg.sender == ownerOf(tokenId)`
 2. 调用者被授权操作特定NFT：`msg.sender == getApproved(tokenId)`
 3. 调用者被授权操作所有NFT：`isApprovedForAll(ownerOf(tokenId), msg.sender) == true`
@@ -115,6 +118,7 @@ ERC-1155标准可以形式化定义为：
 $$\mathcal{ERC1155} = (\mathcal{I}, \mathcal{O}, \mathcal{B}, \mathcal{T}, \mathcal{A})$$
 
 其中：
+
 - $\mathcal{I} \subset \mathbb{N}$ 是代币ID集合
 - $\mathcal{O} \subset \{0, 1\}^{160}$ 是以太坊地址集合
 - $\mathcal{B}: \mathcal{O} \times \mathcal{I} \rightarrow \mathbb{N}$ 是余额映射

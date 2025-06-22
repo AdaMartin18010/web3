@@ -950,7 +950,7 @@ mod pos_tests {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Lamport, L., et al. (1982). The byzantine generals problem.
 2. Castro, M., & Liskov, B. (1999). Practical byzantine fault tolerance.

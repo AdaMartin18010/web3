@@ -59,7 +59,7 @@ $$\text{BlockchainLayers} = \{L_1, L_2, L_3, L_4, L_5\}$$
 - $L_4$ 是应用层 (Application Layer)
 - $L_5$ 是接口层 (Interface Layer)
 
-**算法 2.1 (分层架构设计)**
+**算法 2.1 (分层架构设计)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -112,7 +112,7 @@ impl BlockchainArchitecture {
 
 $$\text{BlockchainMicroservices} = \{S_1, S_2, \ldots, S_n\}$$
 
-**算法 2.2 (微服务设计)**
+**算法 2.2 (微服务设计)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -183,7 +183,7 @@ $$\text{Consensus} = (N, F, P, S)$$
 **定理 3.1 (拜占庭容错)**
 在 $3f+1$ 个节点中，最多可以容忍 $f$ 个拜占庭节点。
 
-**算法 3.1 (共识机制实现)**
+**算法 3.1 (共识机制实现)**:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -259,7 +259,7 @@ impl ConsensusEngine for PoSConsensus {
 
 $$\text{HybridConsensus} = \text{PoW} \oplus \text{PoS} \oplus \text{BFT}$$
 
-**算法 3.2 (混合共识实现)**
+**算法 3.2 (混合共识实现)**:
 
 ```rust
 pub struct HybridConsensus {
@@ -327,7 +327,7 @@ $$\text{P2PNetwork} = (N, T, R, P)$$
 - $R$ 是路由算法
 - $P$ 是协议集合
 
-**算法 4.1 (P2P网络实现)**
+**算法 4.1 (P2P网络实现)**:
 
 ```rust
 pub struct P2PNetwork {
@@ -394,7 +394,7 @@ $$\text{ProtocolStack} = \{P_1, P_2, P_3, P_4\}$$
 - $P_3$ 是传输层协议
 - $P_4$ 是应用层协议
 
-**算法 4.2 (协议栈实现)**
+**算法 4.2 (协议栈实现)**:
 
 ```rust
 pub struct ProtocolStack {
@@ -455,7 +455,7 @@ $$\text{BlockchainStorage} = (C, I, S, M)$$
 - $S$ 是状态存储
 - $M$ 是内存管理
 
-**算法 5.1 (存储层实现)**
+**算法 5.1 (存储层实现)**:
 
 ```rust
 pub struct BlockchainStorage {
@@ -512,7 +512,7 @@ $$\text{DistributedStorage} = (N, R, C, S)$$
 - $C$ 是一致性协议
 - $S$ 是分片策略
 
-**算法 5.2 (分布式存储实现)**
+**算法 5.2 (分布式存储实现)**:
 
 ```rust
 pub struct DistributedStorage {
@@ -575,7 +575,7 @@ $$\text{SmartContractEngine} = (V, E, S, G)$$
 - $S$ 是状态管理
 - $G$ 是Gas计量
 
-**算法 6.1 (智能合约引擎实现)**
+**算法 6.1 (智能合约引擎实现)**:
 
 ```rust
 pub struct SmartContractEngine {
@@ -642,7 +642,7 @@ $$\text{DApp} = (F, B, I, U)$$
 - $I$ 是接口
 - $U$ 是用户界面
 
-**算法 6.2 (DApp实现)**
+**算法 6.2 (DApp实现)**:
 
 ```rust
 pub struct DApp {
@@ -707,7 +707,7 @@ $$\text{CryptoSecurity} = (H, S, E, V)$$
 - $E$ 是加密算法
 - $V$ 是验证机制
 
-**算法 7.1 (安全机制实现)**
+**算法 7.1 (安全机制实现)**:
 
 ```rust
 pub struct CryptoSecurity {
@@ -756,7 +756,7 @@ $$\text{NetworkSecurity} = (A, E, I, M)$$
 - $I$ 是入侵检测
 - $M$ 是监控系统
 
-**算法 7.2 (网络安全实现)**
+**算法 7.2 (网络安全实现)**:
 
 ```rust
 pub struct NetworkSecurity {
@@ -805,7 +805,7 @@ $$\text{ParallelProcessing} = (T, S, L, C)$$
 - $L$ 是负载均衡
 - $C$ 是缓存机制
 
-**算法 8.1 (并行处理实现)**
+**算法 8.1 (并行处理实现)**:
 
 ```rust
 pub struct ParallelProcessor {
@@ -877,7 +877,7 @@ $$\text{CacheOptimization} = (M, P, E, R)$$
 - $E$ 是过期策略
 - $R$ 是替换策略
 
-**算法 8.2 (缓存优化实现)**
+**算法 8.2 (缓存优化实现)**:
 
 ```rust
 pub struct CacheOptimizer {

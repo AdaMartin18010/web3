@@ -379,4 +379,4 @@ $\forall i,j \in \text{Nodes}, \forall t. \text{State}_i(t) = \text{State}_j(t)$
 5. Zamani, M., Movahedi, M., & Raykova, M. (2018). RapidChain: Scaling Blockchain via Full Sharding. ACM CCS.
 6. Pass, R., & Shi, E. (2017). The Sleepy Model of Consensus. ASIACRYPT.
 7. Dwork, C., Lynch, N., & Stockmeyer, L. (1988). Consensus in the Presence of Partial Synchrony. Journal of the ACM.
-8. Nakamoto, S. (2008). Bitcoin: A Peer-to-Peer Electronic Cash System. 
+8. Nakamoto, S. (2008). Bitcoin: A Peer-to-Peer Electronic Cash System.

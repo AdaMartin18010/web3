@@ -461,4 +461,4 @@ Web3编程模型的关键开放问题：
 1. Antonopoulos, A. M., & Wood, G. (2018). Mastering Ethereum: Building Smart Contracts and DApps. O'Reilly Media.
 2. Wüst, K., & Gervais, A. (2018). Do you need a blockchain? In 2018 Crypto Valley Conference on Blockchain Technology (CVCBT).
 3. Hu, Y., & Krishnamachari, B. (2021). Move: A Language With Programmable Resources.
-4. Atzei, N., Bartoletti, M., & Cimoli, T. (2017). A survey of attacks on Ethereum smart contracts. In International Conference on Principles of Security and Trust. 
+4. Atzei, N., Bartoletti, M., & Cimoli, T. (2017). A survey of attacks on Ethereum smart contracts. In International Conference on Principles of Security and Trust.

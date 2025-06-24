@@ -89,6 +89,7 @@
 # 01_Foundations 理论基础主题分层导航
 
 ## 目录结构
+
 - 形式理论
 - 代数结构
 - 密码学数学
@@ -106,10 +107,12 @@
 - 归档（见 99_Recycle_Bin 或 00-备份）
 
 ## 主题导航
+
 - 返回 [全局索引](../00_Index_and_Classification.md)
 - 交叉引用：[知识图谱](../00_Knowledge_Graph.md)
 
 ## Mermaid知识图谱锚点
+
 ```mermaid
 graph TD
   B[01_Foundations] --> B1[01_Formal_Theory]

@@ -85,3 +85,46 @@
 - 网络协议设计
 - 智能合约形式化
 - 分布式系统理论
+
+# 01_Foundations 理论基础主题分层导航
+
+## 目录结构
+- 形式理论
+- 代数结构
+- 密码学数学
+- 概率与统计
+- 共识理论
+- 数学基础
+- 控制理论
+- 密码学
+- 分布式系统
+- 类型理论
+- 系统理论
+- 形式语言
+- 形式科学
+- 哲学基础
+- 归档（见 99_Recycle_Bin 或 00-备份）
+
+## 主题导航
+- 返回 [全局索引](../00_Index_and_Classification.md)
+- 交叉引用：[知识图谱](../00_Knowledge_Graph.md)
+
+## Mermaid知识图谱锚点
+```mermaid
+graph TD
+  B[01_Foundations] --> B1[01_Formal_Theory]
+  B --> B2[02_Algebraic_Structures]
+  B --> B3[03_Cryptographic_Mathematics]
+  B --> B4[04_Probability_and_Statistics]
+  B --> B5[05_Consensus_Theory]
+  B --> B6[06_Mathematics]
+  B --> B7[07_Control_Theory]
+  B --> B8[08_Cryptography]
+  B --> B9[09_Distributed_Systems]
+  B --> B10[10_Type_Theory]
+  B --> B11[11_System_Theory]
+  B --> B12[12_Formal_Language_Theory]
+  B --> B13[13_Formal_Science]
+  B --> B14[14_Philosophical]
+  B --> B15[99_Recycle_Bin]
+```

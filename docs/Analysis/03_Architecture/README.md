@@ -180,3 +180,40 @@
 - 日志管理
 - 备份恢复
 - 性能调优
+
+# 03_Architecture 架构主题分层导航
+
+## 目录结构
+
+- 区块链架构
+- 软件/企业/系统架构
+- 设计模式与技术栈
+- 业务规范与标准
+- 算法与形式化证明
+- 架构综合总结与参考
+- 各类架构子专题（网络、云、集成、CI/CD等）
+- 归档（见 99_Recycle_Bin 或 00-备份）
+
+## 主题导航
+
+- 返回 [全局索引](../00_Index_and_Classification.md)
+- 交叉引用：[知识图谱](../00_Knowledge_Graph.md)
+
+## Mermaid知识图谱锚点
+
+```mermaid
+graph TD
+  D[03_Architecture] --> D1[01_Web3_Industry_Architecture.md]
+  D --> D2[02_Web3_Software_Enterprise_Architecture.md]
+  D --> D3[03_Web3_Design_Patterns_and_Tech_Stack.md]
+  D --> D4[04_Web3_Business_Specification_and_Standards.md]
+  D --> D5[05_Web3_Algorithms_and_Formal_Proof.md]
+  D --> D6[06_Web3_Architecture_Summary_and_Reference.md]
+  D --> D7[01_Blockchain_Node_Architecture.md]
+  D --> D8[01_Web3_Type_Systems_Architecture.md]
+  D --> D9[Web3_Architecture_Patterns.md]
+  D --> D10[Web3_Architecture_Theory_Synthesis.md]
+  D --> D11[Web3_Architecture_Theory_Foundations.md]
+  D --> D12[Web3_Architecture_Formal_Analysis.md]
+  D --> D13[03_Web3_Modular_Blockchain_Architecture.md]
+```

@@ -1,3 +1,28 @@
+# 07_Advanced_Topics 高级主题分层导航
+
+## 目录结构
+- 量子计算与安全
+- AI与Web3集成
+- 隐私计算与ZK
+- 互操作性
+- 大数据与AI
+- 归档（见 99_Recycle_Bin 或 00-备份）
+
+## 主题导航
+- 返回 [全局索引](../00_Index_and_Classification.md)
+- 交叉引用：[知识图谱](../00_Knowledge_Graph.md)
+
+## Mermaid知识图谱锚点
+```mermaid
+graph TD
+  A[07_Advanced_Topics] --> A1[01_Quantum_Computing]
+  A --> A2[01_Web3_AI_Integration_and_Automation.md]
+  A --> A3[02_AI_Integration]
+  A --> A4[02_Web3_Privacy_Computation_and_ZK.md]
+  A --> A5[03_Interoperability]
+  A --> A6[03_Web3_BigData_and_AI_Integration.md]
+```
+
 # Advanced Topics in Web3
 
 This directory contains in-depth analysis of advanced and emerging topics in Web3 technology, with a focus on formal mathematical models, rigorous proofs, and practical implementations.

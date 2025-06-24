@@ -1,3 +1,33 @@
+# 14_Emerging_Technologies 新兴技术主题分层导航
+
+## 目录结构
+
+- 量子计算与区块链
+- 抗量子密码学
+- 模块化区块链
+- 隐私计算
+- 去中心化社交
+- 高级/深度分析
+- 归档（见 99_Recycle_Bin 或 00-备份）
+
+## 主题导航
+
+- 返回 [全局索引](../00_Index_and_Classification.md)
+- 交叉引用：[知识图谱](../00_Knowledge_Graph.md)
+
+## Mermaid知识图谱锚点
+
+```mermaid
+graph TD
+  ET[14_Emerging_Technologies] --> ET1[01_Web3_Quantum_Computing_Architecture.md]
+  ET --> ET2[01_Web3_Quantum_Security_and_Blockchain.md]
+  ET --> ET3[02_Quantum_Resistant_Cryptography]
+  ET --> ET4[03_Modular_Blockchain_Architecture]
+  ET --> ET5[04_Decentralized_Social_Structures]
+  ET --> ET6[05_Privacy_Preserving_Computation]
+  ET --> ET7[101_Advanced_Web3_Emerging_Technologies_Theory_Formal_Analysis.md]
+```
+
 # 新兴技术与融合
 
 ## 目录概述

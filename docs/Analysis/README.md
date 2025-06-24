@@ -42,7 +42,6 @@
 - [**行业应用 (Industry Applications)**](05_Applications_And_Ecosystem/Industry_Applications/)
 - [**通用应用 (Generic Applications)**](05_Applications_And_Ecosystem/Generic_Applications/)
 
-
 ### 6. 前沿与新兴主题 (Advanced & Emerging Topics)
 
 - [**高级主题 (Advanced Topics)**](06_Advanced_And_Emerging_Topics/Advanced_Topics/)
@@ -52,7 +51,6 @@
 
 - [**进度跟踪 (Progress Tracking)**](99_Project_Management/Progress_Tracking/)
 - [**方法论 (Methodology)**](99_Project_Management/Methodology/)
-
 
 ## 如何使用本文档
 

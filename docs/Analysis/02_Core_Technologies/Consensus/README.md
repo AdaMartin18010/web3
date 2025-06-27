@@ -48,17 +48,17 @@ Consensus/
 
 ### 1. 共识的基本要求
 
-**安全性 (Safety)**
+**安全性 (Safety)**:
 
 - 所有诚实节点对最终状态达成一致
 - 防止双重支付和状态不一致
 
-**活性 (Liveness)**
+**活性 (Liveness)**:
 
 - 网络能够持续处理新交易
 - 在有限时间内达成共识
 
-**容错性 (Fault Tolerance)**
+**容错性 (Fault Tolerance)**:
 
 - 在网络中存在恶意节点时仍能正常工作
 - 支持部分节点故障
@@ -154,34 +154,34 @@ Consensus/
 
 ### 1. 三元悖论 (Blockchain Trilemma)
 
-**去中心化 (Decentralization)**
+**去中心化 (Decentralization)**:
 
 - 节点分布广泛
 - 权力分散
 
-**可扩展性 (Scalability)**
+**可扩展性 (Scalability)**:
 
 - 高交易吞吐量
 - 低延迟
 
-**安全性 (Security)**
+**安全性 (Security)**:
 
 - 抗攻击能力
 - 状态一致性
 
 ### 2. 性能优化
 
-**分片技术 (Sharding)**
+**分片技术 (Sharding)**:
 
 - 水平分割网络
 - 并行处理交易
 
-**状态通道 (State Channels)**
+**状态通道 (State Channels)**:
 
 - 链下交易处理
 - 减少链上负载
 
-**侧链 (Sidechains)**
+**侧链 (Sidechains)**:
 
 - 独立处理能力
 - 主链锚定
@@ -896,7 +896,7 @@ if __name__ == "__main__":
 - 实现适当的故障检测机制
 - 定期进行安全审计
 
-### 2. 性能优化
+### 2. 性能优化1
 
 - 选择合适的共识算法
 - 优化网络通信

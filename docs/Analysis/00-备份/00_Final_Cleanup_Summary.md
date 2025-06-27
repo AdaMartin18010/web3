@@ -43,7 +43,7 @@
 
 ### 3. 保留的核心目录结构
 
-```
+```text
 docs/Analysis/
 ├── 00_Index_and_Classification.md    # 分类索引
 ├── 00_Cleanup_Summary.md             # 清理总结

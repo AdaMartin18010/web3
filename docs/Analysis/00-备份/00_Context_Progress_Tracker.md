@@ -47,7 +47,7 @@
 
 ### Matter目录结构分析
 
-```
+```text
 Matter/
 ├── Theory/ (66个理论文件 + 6个子目录)
 │   ├── Web3_Formal_Theory_Unified_Framework.md

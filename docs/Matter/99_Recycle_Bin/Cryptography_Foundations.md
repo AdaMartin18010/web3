@@ -610,15 +610,15 @@ impl CryptographyEngine {
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Goldwasser, S., et al. (1989). The knowledge complexity of interactive proof systems.
 2. Bellare, M., & Rogaway, P. (1993). Random oracles are practical.
 3. Groth, J. (2010). Short pairing-based non-interactive zero-knowledge arguments.
 4. Ben-Sasson, E., et al. (2014). Succinct non-interactive zero knowledge for a von Neumann architecture.
 
-**相关文档**
+**相关文档**:
 
 - [区块链基础理论](./Blockchain_Theory.md)
 - [共识机制形式化分析](./Consensus_Mechanisms.md)
-- [分布式系统理论](./Distributed_Systems.md) 
+- [分布式系统理论](./Distributed_Systems.md)

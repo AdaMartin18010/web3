@@ -1,8 +1,109 @@
-﻿# 核心技术层 (Core Technologies)
+﻿# Web3核心技术理论：分布式计算与密码学基础
 
-## 概述
+- Core Technologies Theory: Distributed Computing and Cryptographic Foundations for Web3
 
-核心技术层是Web3技术生态的核心实现，包含区块链基础、智能合约、可扩展性技术、跨链技术和隐私技术等关键组件。这些技术为Web3应用提供了基础的技术支撑和实现方案。
+## 理论概述与数学基础 (Theoretical Overview and Mathematical Foundations)
+
+### 1. 核心技术公理化体系 (Axiomatic System for Core Technologies)
+
+Web3核心技术建立在以下形式化公理系统 $\mathcal{CT} = (A, R, I)$ 之上：
+
+**公理CT1 (分布式一致性原理)**:
+
+```math
+\forall nodes\ n_i, n_j \in Network : \lim_{t \rightarrow \infty} state(n_i, t) = state(n_j, t)
+```
+
+**公理CT2 (密码学安全原理)**:
+
+```math
+\forall adversary\ \mathcal{A}, security\_parameter\ \lambda : Adv_{\mathcal{A}}^{security}(\lambda) \leq negl(\lambda)
+```
+
+**公理CT3 (计算完备性原理)**:
+
+```math
+\forall computable\ function\ f : \exists smart\_contract\ C : C \equiv f
+```
+
+**公理CT4 (经济激励相容性)**:
+
+```math
+\forall rational\ agent\ i : utility_i(honest\_strategy) \geq utility_i(deviate\_strategy)
+```
+
+### 2. 分布式系统理论基础 (Theoretical Foundation of Distributed Systems)
+
+#### 2.1 分布式计算模型
+
+**定义 2.1.1 (分布式系统状态机)**:
+分布式系统建模为状态机元组：
+
+```math
+DS = \langle S, M, \delta, s_0, F, \mathcal{N} \rangle
+```
+
+其中：
+
+- $S$: 全局状态空间
+- $M$: 消息空间
+- $\delta: S \times M \rightarrow S$: 状态转移函数
+- $s_0 \in S$: 初始状态
+- $F \subseteq S$: 最终状态集合
+- $\mathcal{N}$: 节点网络拓扑
+
+#### 2.2 拜占庭容错理论
+
+**定理 2.2.1 (拜占庭将军问题解的存在性)**:
+在异步网络中，对于 $n$ 个节点和最多 $f$ 个拜占庭故障节点，当且仅当：
+
+```math
+n \geq 3f + 1
+```
+
+时，存在确定性拜占庭容错共识算法。
+
+**证明思路**: 基于消息复杂度分析和信息论界限。
+
+#### 2.3 CAP定理的量化分析
+
+**定理 2.3.1 (CAP定理的概率扩展)**:
+对于分布式系统，一致性(C)、可用性(A)、分区容忍性(P)的权衡关系：
+
+```math
+P(C \land A \land P) \leq \epsilon(\lambda, \delta, \tau)
+```
+
+其中 $\epsilon$ 是关于网络延迟 $\lambda$、故障率 $\delta$ 和时间窗口 $\tau$ 的可忽略函数。
+
+### 3. 密码学理论基础 (Cryptographic Theory Foundation)
+
+#### 3.1 哈希函数的随机预言模型
+
+**定义 3.1.1 (密码学哈希函数)**:
+哈希函数 $H: \{0,1\}^* \rightarrow \{0,1\}^n$ 在随机预言模型下满足：
+
+- **抗原像性**: $\forall y, \Pr[x \leftarrow \{0,1\}^*: H(x) = y] \leq 2^{-n}$
+- **抗二原像性**: $\forall x, \Pr[x' \neq x: H(x') = H(x)] \leq 2^{-n}$
+- **抗碰撞性**: $\Pr[(x,x') \leftarrow \mathcal{A}: x \neq x' \land H(x) = H(x')] \leq negl(\lambda)$
+
+#### 3.2 数字签名的存在不可伪造性
+
+**定义 3.2.1 (EUF-CMA安全)**:
+数字签名方案 $(Gen, Sign, Verify)$ 是EUF-CMA安全的，当且仅当：
+
+```math
+\Pr[Exp_{EUF-CMA}^{\mathcal{A}}(\lambda) = 1] \leq negl(\lambda)
+```
+
+#### 3.3 零知识证明的知识可靠性
+
+**定理 3.3.1 (零知识证明的完备性和可靠性)**:
+对于NP语言 $L$，零知识证明系统 $(P, V)$ 满足：
+
+- **完备性**: $\forall x \in L, w \in R_L(x): \Pr[\langle P(w), V \rangle(x) = 1] = 1$
+- **可靠性**: $\forall x \notin L, \mathcal{P}^*: \Pr[\langle \mathcal{P}^*, V \rangle(x) = 1] \leq negl(|x|)$
+- **零知识性**: $\exists simulator\ S: \forall x \in L, w \in R_L(x): View_V[\langle P(w), V \rangle(x)] \equiv S(x)$
 
 ## 目录结构
 

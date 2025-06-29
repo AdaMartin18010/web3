@@ -244,15 +244,15 @@ g(s^*) \in \arg\max_{x \in X} \sum_{i=1}^n w_i \cdot U_i(x, 0, \theta_i)
 
 1. **单调性条件**：
 
-```latex
-\frac{\partial g_i(\theta)}{\partial \theta_i^j} \geq 0, \quad \forall j \in \{eff, stake, rep\}
-```
+    ```latex
+    \frac{\partial g_i(\theta)}{\partial \theta_i^j} \geq 0, \quad \forall j \in \{eff, stake, rep\}
+    ```
 
 2. **局部激励兼容**：
 
-```latex
-\frac{\partial U_i}{\partial \theta_i^j} = \frac{\partial g_i(\theta)}{\partial \theta_i^j} \cdot \frac{\partial u_i}{\partial x_i}
-```
+    ```latex
+    \frac{\partial U_i}{\partial \theta_i^j} = \frac{\partial g_i(\theta)}{\partial \theta_i^j} \cdot \frac{\partial u_i}{\partial x_i}
+    ```
 
 3. **全局激励兼容**：需要additional convexity constraints
 

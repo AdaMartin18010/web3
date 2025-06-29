@@ -38,7 +38,7 @@
 
 #### 第一层：基础理论层 (01-03)
 
-```
+```text
 01_Theoretical_Foundations/     # 理论基础（群论、抽象代数等）
 02_Foundational_Theory/         # 基础理论（数学基础、密码学等）
 03_Foundations/                 # 基础体系（Web3基础理论整合）
@@ -46,7 +46,7 @@
 
 #### 第二层：核心技术层 (04-06)
 
-```
+```text
 04_Core_Technologies/           # 核心技术（区块链、智能合约等）
 05_Architecture_Design/         # 架构设计（系统架构、网络架构等）
 06_Mathematical_Foundations/    # 数学基础（从03_Mathematical_Foundations重命名）
@@ -54,7 +54,7 @@
 
 #### 第三层：应用理论层 (07-09)
 
-```
+```text
 07_Application_Theory/          # 应用理论（行业应用等）
 08_Application_Ecosystem/       # 应用生态系统
 09_Industry_Applications/       # 行业应用（细分领域）
@@ -62,7 +62,7 @@
 
 #### 第四层：跨学科整合层 (10-12)
 
-```
+```text
 10_Interdisciplinary_Theory/    # 跨学科理论综合
 11_Interdisciplinary_Research/  # 跨学科研究（从02_Interdisciplinary_Theory重命名）
 12_Complex_Systems/             # 复杂系统理论
@@ -70,7 +70,7 @@
 
 #### 第五层：高级技术层 (13-15)
 
-```
+```text
 13_Advanced_Technologies/       # 高级技术
 14_Emerging_Technologies/       # 新兴技术
 15_Security_And_Verification/   # 安全与验证
@@ -78,7 +78,7 @@
 
 #### 第六层：元理论层 (16-18)
 
-```
+```text
 16_Meta_Theory/                 # 元理论
 17_Mirror_Theory/               # 镜像理论
 18_Philosophical_Foundations/   # 哲学基础
@@ -86,7 +86,7 @@
 
 #### 第七层：工程实践层 (19-21)
 
-```
+```text
 19_Development_Operations/      # 开发运维
 20_Quality_Assurance/          # 质量保证
 21_Project_Management/         # 项目管理
@@ -96,7 +96,7 @@
 
 #### 核心已增强目录（保持前序号）
 
-```
+```text
 01_Theoretical_Foundations/     # 已增强 - 群论基础理论
 02_Application_Theory/          # 已增强 - 行业应用理论  
 03_Architecture_Design/         # 已增强 - 架构设计理论
@@ -108,7 +108,7 @@
 
 #### 其他目录（重新编号）
 
-```
+```text
 08_Mathematical_Foundations/    # 从03_Mathematical_Foundations重命名
 09_Interdisciplinary_Research/  # 从02_Interdisciplinary_Theory重命名
 10_Application_Ecosystem/       # 从04_Application_Ecosystem重命名
@@ -170,7 +170,7 @@ Rename-Item "05_Applications_And_Ecosystem" "18_Applications_And_Ecosystem"
 
 ## 🎯 重组后的目录结构
 
-```
+```text
 docs/Analysis/
 ├── 01_Theoretical_Foundations/     # ✅ 已增强 - 群论基础理论
 ├── 02_Application_Theory/          # ✅ 已增强 - 行业应用理论  

@@ -1,6 +1,6 @@
 # Web3跨学科理论增强报告
 
-# Interdisciplinary Theory Enhancement Report
+- Interdisciplinary Theory Enhancement Report
 
 ## 项目概述
 

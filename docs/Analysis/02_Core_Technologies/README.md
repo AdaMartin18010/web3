@@ -105,47 +105,884 @@ P(C \land A \land P) \leq \epsilon(\lambda, \delta, \tau)
 - **可靠性**: $\forall x \notin L, \mathcal{P}^*: \Pr[\langle \mathcal{P}^*, V \rangle(x) = 1] \leq negl(|x|)$
 - **零知识性**: $\exists simulator\ S: \forall x \in L, w \in R_L(x): View_V[\langle P(w), V \rangle(x)] \equiv S(x)$
 
-## 目录结构
+## 理论框架与技术分层 (Theoretical Framework and Technology Layering)
 
-### 2.1 区块链基础 (Blockchain Fundamentals)
+### 4. 区块链基础理论层 (Blockchain Fundamentals Theory Layer)
 
-- [**区块链架构模型**](01_Blockchain_Fundamentals/01_Blockchain_Architecture_Models/) - 分层架构、模块化设计、共识层设计
-- [**共识机制**](01_Blockchain_Fundamentals/02_Consensus_Mechanisms/) - PoW、PoS、DPoS、BFT、混合共识
-- [**密码学原语**](01_Blockchain_Fundamentals/03_Cryptographic_Primitives/) - 哈希函数、数字签名、密钥管理
-- [**数据结构**](01_Blockchain_Fundamentals/04_Data_Structures/) - 区块结构、交易结构、状态树、UTXO模型
-- [**网络协议**](01_Blockchain_Fundamentals/05_Network_Protocols/) - P2P协议、节点发现、交易传播、区块同步
+#### 4.1 区块链架构的数学建模
 
-### 2.2 智能合约 (Smart Contracts)
+**定义 4.1.1 (区块链系统)**:
+区块链系统是一个时间序列的状态转移系统：
 
-- [**智能合约语言**](02_Smart_Contracts/01_Smart_Contract_Languages/) - Solidity、Vyper、Move、Rust、形式化语言
-- [**执行环境**](02_Smart_Contracts/02_Execution_Environments/) - EVM、WASM、Move VM、自定义虚拟机
-- [**状态管理**](02_Smart_Contracts/03_State_Management/) - 状态存储、状态转换、状态证明、状态同步
-- [**Gas机制**](02_Smart_Contracts/04_Gas_Mechanisms/) - Gas计算、Gas优化、Gas市场、动态Gas调整
-- [**合约升级**](02_Smart_Contracts/05_Contract_Upgrades/) - 代理模式、升级机制、版本管理、向后兼容
+```math
+\mathcal{BC} = \langle \mathcal{B}, \mathcal{T}, \mathcal{S}, \delta, s_0, \mathcal{V} \rangle
+```
 
-### 2.3 可扩展性技术 (Scalability Technologies)
+其中：
 
-- [**分片技术**](03_Scalability_Technologies/01_Sharding_Technologies/) - 网络分片、状态分片、交易分片、跨分片通信
-- [**Layer2解决方案**](03_Scalability_Technologies/02_Layer2_Solutions/) - 状态通道、Plasma、Rollups、侧链
-- [**状态通道**](03_Scalability_Technologies/03_State_Channels/) - 支付通道、状态通道、通道网络、通道管理
-- [**Rollup技术**](03_Scalability_Technologies/04_Rollup_Technologies/) - Optimistic Rollups、ZK Rollups、混合Rollups
-- [**侧链技术**](03_Scalability_Technologies/05_Sidechain_Technologies/) - 侧链设计、双向锚定、跨链通信、侧链安全
+- $\mathcal{B} = \{B_0, B_1, B_2, ...\}$: 区块序列
+- $\mathcal{T}$: 交易空间
+- $\mathcal{S}$: 状态空间
+- $\delta: \mathcal{S} \times \mathcal{T} \rightarrow \mathcal{S}$: 状态转移函数
+- $s_0 \in \mathcal{S}$: 创世状态
+- $\mathcal{V}$: 验证函数集合
 
-### 2.4 跨链技术 (Cross-Chain Technologies)
+**定理 4.1.1 (区块链不变性)**:
+对于诚实多数假设下的区块链系统，存在安全参数 $k$ 使得：
 
-- [**原子交换**](04_Cross_Chain_Technologies/01_Atomic_Swaps/) - HTLC、原子交换协议、跨链交易、流动性提供
-- [**跨链消息传递**](04_Cross_Chain_Technologies/02_Cross_Chain_Message_Passing/) - 消息格式、传递协议、验证机制、重试机制
-- [**跨链桥**](04_Cross_Chain_Technologies/03_Cross_Chain_Bridges/) - 桥接设计、资产映射、验证节点、桥接安全
-- [**多链互操作**](04_Cross_Chain_Technologies/04_Multi_Chain_Interoperability/) - 互操作标准、多链治理、统一接口、跨链应用
-- [**跨链治理**](04_Cross_Chain_Technologies/05_Cross_Chain_Governance/) - 治理模型、投票机制、提案系统、执行机制
+```math
+\Pr[\text{fork\_depth} > k] \leq 2^{-k}
+```
 
-### 2.5 隐私技术 (Privacy Technologies)
+#### 4.2 共识机制的博弈论分析
 
-- [**零知识证明应用**](05_Privacy_Technologies/01_Zero_Knowledge_Proof_Applications/) - 隐私交易、身份验证、凭证证明、可验证计算
-- [**环签名**](05_Privacy_Technologies/02_Ring_Signatures/) - 环签名方案、隐私保护、匿名性、可链接性
-- [**混币技术**](05_Privacy_Technologies/03_Coin_Mixing_Technologies/) - CoinJoin、TumbleBit、混币协议、隐私增强
-- [**同态加密**](05_Privacy_Technologies/04_Homomorphic_Encryption/) - 隐私计算、加密数据处理、安全多方计算
-- [**差分隐私**](05_Privacy_Technologies/05_Differential_Privacy/) - 隐私保护算法、数据发布、隐私预算、隐私审计
+**定义 4.2.1 (共识博弈)**:
+共识机制建模为策略博弈：
+
+```math
+\Gamma = \langle N, S, u, \mathcal{I} \rangle
+```
+
+其中：
+
+- $N = \{1, 2, ..., n\}$: 参与者集合
+- $S = S_1 \times S_2 \times ... \times S_n$: 策略空间
+- $u = (u_1, u_2, ..., u_n)$: 效用函数
+- $\mathcal{I}$: 信息结构
+
+**定理 4.2.1 (PoW共识的纳什均衡)**:
+在工作量证明共识中，诚实挖矿策略构成纳什均衡，当且仅当：
+
+```math
+\frac{reward \cdot (1-\alpha)}{\alpha} > cost\_of\_attack
+```
+
+其中 $\alpha$ 是攻击者的算力占比。
+
+### 5. 智能合约理论层 (Smart Contract Theory Layer)
+
+#### 5.1 智能合约的形式化语义
+
+**定义 5.1.1 (智能合约状态机)**:
+智能合约建模为确定性状态机：
+
+```math
+SC = \langle Q, \Sigma, \delta, q_0, F \rangle
+```
+
+其中：
+
+- $Q$: 状态集合
+- $\Sigma$: 输入字母表（交易类型）
+- $\delta: Q \times \Sigma \rightarrow Q$: 状态转移函数
+- $q_0 \in Q$: 初始状态
+- $F \subseteq Q$: 接受状态集合
+
+**定理 5.1.1 (合约执行的确定性)**:
+对于给定的输入序列 $\sigma \in \Sigma^*$ 和初始状态 $q_0$，智能合约的执行结果是确定的：
+
+```math
+\forall \sigma \in \Sigma^* : \delta^*(q_0, \sigma) \text{ is unique}
+```
+
+#### 5.2 Gas机制的经济学建模
+
+**定义 5.2.1 (Gas拍卖机制)**:
+Gas价格机制建模为密封价格拍卖：
+
+```math
+\text{GasAuction} = \langle N, V, B, \pi, u \rangle
+```
+
+其中：
+
+- $N$: 竞拍者（交易发送者）集合
+- $V$: 价值函数 $v_i: \mathbb{R}_+ \rightarrow \mathbb{R}_+$
+- $B$: 出价空间
+- $\pi$: 分配规则
+- $u$: 支付规则
+
+**定理 5.2.1 (EIP-1559的激励相容性)**:
+在EIP-1559机制下，诚实出价是占优策略：
+
+```math
+\forall i \in N, \forall b_i, b'_i \in B : u_i(v_i, b_{-i}) \geq u_i(b'_i, b_{-i})
+```
+
+#### 5.3 合约升级的安全性分析
+
+**定义 5.3.1 (代理模式的安全性)**:
+代理合约的安全性定义为状态不变性：
+
+```math
+\forall upgrade\ u, state\ s : invariant(s) \Rightarrow invariant(u(s))
+```
+
+**算法 5.3.1 (安全的合约升级机制)**:
+
+```solidity
+// Solidity实现的安全升级代理合约
+pragma solidity ^0.8.19;
+
+import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
+contract SecureUpgradeableProxy is Initializable, AccessControl, ReentrancyGuard {
+    bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
+    bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
+    
+    // 实现合约地址
+    address private _implementation;
+    
+    // 升级时间锁
+    uint256 public constant UPGRADE_DELAY = 2 days;
+    
+    // 待升级的实现
+    struct PendingUpgrade {
+        address newImplementation;
+        uint256 timestamp;
+        bool executed;
+    }
+    
+    mapping(bytes32 => PendingUpgrade) public pendingUpgrades;
+    
+    // 状态不变量检查器
+    mapping(bytes4 => bool) public stateInvariants;
+    
+    event UpgradeProposed(bytes32 indexed upgradeId, address newImplementation, uint256 executeTime);
+    event UpgradeExecuted(bytes32 indexed upgradeId, address oldImplementation, address newImplementation);
+    event UpgradeCancelled(bytes32 indexed upgradeId);
+    
+    modifier onlyAdmin() {
+        require(hasRole(ADMIN_ROLE, msg.sender), "Caller is not admin");
+        _;
+    }
+    
+    modifier onlyUpgrader() {
+        require(hasRole(UPGRADER_ROLE, msg.sender), "Caller is not upgrader");
+        _;
+    }
+    
+    function initialize(address _admin, address _implementation) public initializer {
+        _grantRole(DEFAULT_ADMIN_ROLE, _admin);
+        _grantRole(ADMIN_ROLE, _admin);
+        _implementation = _implementation;
+        
+        // 初始化状态不变量
+        _initializeInvariants();
+    }
+    
+    function proposeUpgrade(address newImplementation) external onlyUpgrader returns (bytes32) {
+        require(newImplementation != address(0), "Invalid implementation address");
+        require(newImplementation != _implementation, "Same implementation");
+        
+        // 生成升级ID
+        bytes32 upgradeId = keccak256(abi.encodePacked(
+            newImplementation,
+            block.timestamp,
+            block.number
+        ));
+        
+        // 记录待升级信息
+        pendingUpgrades[upgradeId] = PendingUpgrade({
+            newImplementation: newImplementation,
+            timestamp: block.timestamp + UPGRADE_DELAY,
+            executed: false
+        });
+        
+        emit UpgradeProposed(upgradeId, newImplementation, block.timestamp + UPGRADE_DELAY);
+        return upgradeId;
+    }
+    
+    function executeUpgrade(bytes32 upgradeId) external onlyAdmin nonReentrant {
+        PendingUpgrade storage upgrade = pendingUpgrades[upgradeId];
+        
+        require(upgrade.newImplementation != address(0), "Upgrade not found");
+        require(!upgrade.executed, "Upgrade already executed");
+        require(block.timestamp >= upgrade.timestamp, "Upgrade delay not met");
+        
+        // 执行升级前的状态检查
+        require(_checkStateInvariants(), "State invariants violated");
+        
+        address oldImplementation = _implementation;
+        _implementation = upgrade.newImplementation;
+        upgrade.executed = true;
+        
+        // 执行升级后的状态检查
+        require(_checkStateInvariants(), "Post-upgrade state invariants violated");
+        
+        emit UpgradeExecuted(upgradeId, oldImplementation, upgrade.newImplementation);
+    }
+    
+    function cancelUpgrade(bytes32 upgradeId) external onlyAdmin {
+        PendingUpgrade storage upgrade = pendingUpgrades[upgradeId];
+        
+        require(upgrade.newImplementation != address(0), "Upgrade not found");
+        require(!upgrade.executed, "Upgrade already executed");
+        
+        delete pendingUpgrades[upgradeId];
+        emit UpgradeCancelled(upgradeId);
+    }
+    
+    function implementation() external view returns (address) {
+        return _implementation;
+    }
+    
+    function _checkStateInvariants() internal view returns (bool) {
+        // 检查关键状态不变量
+        // 这里应该根据具体业务逻辑实现
+        
+        // 示例：检查总供应量不变性
+        if (stateInvariants[bytes4(keccak256("totalSupply()"))]) {
+            (bool success, bytes memory data) = _implementation.staticcall(
+                abi.encodeWithSignature("totalSupply()")
+            );
+            if (!success) return false;
+            
+            uint256 totalSupply = abi.decode(data, (uint256));
+            // 检查总供应量是否在合理范围内
+            if (totalSupply == 0 || totalSupply > type(uint128).max) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    function _initializeInvariants() internal {
+        // 初始化需要检查的状态不变量
+        stateInvariants[bytes4(keccak256("totalSupply()"))] = true;
+        stateInvariants[bytes4(keccak256("balanceOf(address)"))] = true;
+    }
+    
+    function addStateInvariant(bytes4 selector) external onlyAdmin {
+        stateInvariants[selector] = true;
+    }
+    
+    function removeStateInvariant(bytes4 selector) external onlyAdmin {
+        stateInvariants[selector] = false;
+    }
+    
+    // 代理调用
+    fallback() external payable {
+        address impl = _implementation;
+        assembly {
+            calldatacopy(0, 0, calldatasize())
+            let result := delegatecall(gas(), impl, 0, calldatasize(), 0, 0)
+            returndatacopy(0, 0, returndatasize())
+            
+            switch result
+            case 0 { revert(0, returndatasize()) }
+            default { return(0, returndatasize()) }
+        }
+    }
+    
+    receive() external payable {}
+}
+
+// 升级兼容性检查器
+contract UpgradeCompatibilityChecker {
+    struct FunctionSignature {
+        bytes4 selector;
+        string signature;
+        bool isPayable;
+        bool isView;
+        bool isPure;
+    }
+    
+    mapping(address => FunctionSignature[]) public contractFunctions;
+    
+    function checkUpgradeCompatibility(
+        address oldImplementation,
+        address newImplementation
+    ) external view returns (bool compatible, string[] memory issues) {
+        FunctionSignature[] memory oldFunctions = contractFunctions[oldImplementation];
+        FunctionSignature[] memory newFunctions = contractFunctions[newImplementation];
+        
+        string[] memory tempIssues = new string[](100);
+        uint256 issueCount = 0;
+        
+        // 检查函数签名兼容性
+        for (uint256 i = 0; i < oldFunctions.length; i++) {
+            bool found = false;
+            for (uint256 j = 0; j < newFunctions.length; j++) {
+                if (oldFunctions[i].selector == newFunctions[j].selector) {
+                    found = true;
+                    
+                    // 检查状态可变性兼容性
+                    if (oldFunctions[i].isView && !newFunctions[j].isView) {
+                        tempIssues[issueCount] = string(abi.encodePacked(
+                            "Function ", oldFunctions[i].signature, " lost view modifier"
+                        ));
+                        issueCount++;
+                    }
+                    
+                    if (oldFunctions[i].isPure && !newFunctions[j].isPure) {
+                        tempIssues[issueCount] = string(abi.encodePacked(
+                            "Function ", oldFunctions[i].signature, " lost pure modifier"
+                        ));
+                        issueCount++;
+                    }
+                    
+                    break;
+                }
+            }
+            
+            if (!found) {
+                tempIssues[issueCount] = string(abi.encodePacked(
+                    "Function ", oldFunctions[i].signature, " removed in new implementation"
+                ));
+                issueCount++;
+            }
+        }
+        
+        // 复制实际的问题到返回数组
+        issues = new string[](issueCount);
+        for (uint256 i = 0; i < issueCount; i++) {
+            issues[i] = tempIssues[i];
+        }
+        
+        compatible = issueCount == 0;
+    }
+    
+    function registerContract(address contractAddr, FunctionSignature[] calldata functions) external {
+        delete contractFunctions[contractAddr];
+        
+        for (uint256 i = 0; i < functions.length; i++) {
+            contractFunctions[contractAddr].push(functions[i]);
+        }
+    }
+}
+
+### 6. 可扩展性技术理论层 (Scalability Technology Theory Layer)
+
+#### 6.1 分片技术的理论基础
+
+**定义 6.1.1 (分片函数)**:
+分片函数 $\phi: \mathcal{T} \rightarrow \{1, 2, ..., k\}$ 将交易空间映射到 $k$ 个分片：
+
+```math
+\phi(t) = H(t.sender) \bmod k
+```
+
+**定理 6.1.1 (分片负载均衡)**:
+在随机分片策略下，各分片的负载方差：
+
+```math
+Var[Load_i] = \frac{\lambda}{k} \cdot (1 - \frac{1}{k})
+```
+
+其中 $\lambda$ 是总交易率。
+
+#### 6.2 Layer2解决方案的安全性分析
+
+**定义 6.2.1 (Rollup安全性)**:
+Rollup系统的安全性定义为状态根一致性：
+
+```math
+\forall batch\ B : verify(B) \Rightarrow state\_root_{L1} = state\_root_{L2}
+```
+
+**定理 6.2.1 (Optimistic Rollup的挑战期安全性)**:
+在挑战期 $T$ 内，欺诈证明的成功概率：
+
+```math
+P_{fraud\_proof} = 1 - (1 - p_{detect})^{n \cdot T}
+```
+
+其中 $p_{detect}$ 是单次检测概率，$n$ 是验证者数量。
+
+#### 6.3 状态通道的博弈论模型
+
+**算法 6.3.1 (状态通道实现)**:
+
+```rust
+// Rust实现的高级状态通道
+use serde::{Serialize, Deserialize};
+use std::collections::HashMap;
+use tokio::sync::{mpsc, Mutex};
+use std::sync::Arc;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ChannelState {
+    pub channel_id: String,
+    pub participants: Vec<String>,
+    pub balances: HashMap<String, u64>,
+    pub sequence_number: u64,
+    pub timeout: u64,
+    pub is_finalized: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct StateUpdate {
+    pub channel_id: String,
+    pub new_balances: HashMap<String, u64>,
+    pub sequence_number: u64,
+    pub signatures: Vec<String>,
+    pub timestamp: u64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DisputeEvidence {
+    pub channel_id: String,
+    pub disputed_state: ChannelState,
+    pub evidence_type: DisputeType,
+    pub evidence_data: Vec<u8>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum DisputeType {
+    InvalidSignature,
+    DoubleSpending,
+    TimeoutViolation,
+    BalanceInconsistency,
+}
+
+pub struct AdvancedStateChannel {
+    state: Arc<Mutex<ChannelState>>,
+    participants: Vec<String>,
+    update_sender: mpsc::UnboundedSender<StateUpdate>,
+    dispute_sender: mpsc::UnboundedSender<DisputeEvidence>,
+    challenge_period: u64,
+}
+
+impl AdvancedStateChannel {
+    pub fn new(
+        channel_id: String,
+        participants: Vec<String>,
+        initial_balances: HashMap<String, u64>,
+        challenge_period: u64,
+    ) -> Self {
+        let initial_state = ChannelState {
+            channel_id,
+            participants: participants.clone(),
+            balances: initial_balances,
+            sequence_number: 0,
+            timeout: 0,
+            is_finalized: false,
+        };
+
+        let (update_sender, _update_receiver) = mpsc::unbounded_channel();
+        let (dispute_sender, _dispute_receiver) = mpsc::unbounded_channel();
+
+        Self {
+            state: Arc::new(Mutex::new(initial_state)),
+            participants,
+            update_sender,
+            dispute_sender,
+            challenge_period,
+        }
+    }
+
+    pub async fn propose_state_update(
+        &self,
+        new_balances: HashMap<String, u64>,
+        proposer: &str,
+    ) -> Result<StateUpdate, String> {
+        let mut state = self.state.lock().await;
+        
+        if state.is_finalized {
+            return Err("Channel is finalized".to_string());
+        }
+
+        if !self.participants.contains(&proposer.to_string()) {
+            return Err("Proposer is not a participant".to_string());
+        }
+
+        // 验证余额总和不变
+        let old_total: u64 = state.balances.values().sum();
+        let new_total: u64 = new_balances.values().sum();
+        
+        if old_total != new_total {
+            return Err("Balance sum mismatch".to_string());
+        }
+
+        // 验证所有参与者都有余额记录
+        for participant in &self.participants {
+            if !new_balances.contains_key(participant) {
+                return Err(format!("Missing balance for participant: {}", participant));
+            }
+        }
+
+        let update = StateUpdate {
+            channel_id: state.channel_id.clone(),
+            new_balances: new_balances.clone(),
+            sequence_number: state.sequence_number + 1,
+            signatures: Vec::new(),
+            timestamp: current_timestamp(),
+        };
+
+        Ok(update)
+    }
+
+    pub async fn sign_state_update(
+        &self,
+        update: &mut StateUpdate,
+        signer: &str,
+        signature: String,
+    ) -> Result<(), String> {
+        let state = self.state.lock().await;
+        
+        if !self.participants.contains(&signer.to_string()) {
+            return Err("Signer is not a participant".to_string());
+        }
+
+        if update.channel_id != state.channel_id {
+            return Err("Channel ID mismatch".to_string());
+        }
+
+        // 验证签名（简化版本）
+        if !self.verify_signature(&update, &signature, signer) {
+            return Err("Invalid signature".to_string());
+        }
+
+        update.signatures.push(signature);
+        Ok(())
+    }
+
+    pub async fn apply_state_update(&self, update: StateUpdate) -> Result<(), String> {
+        let mut state = self.state.lock().await;
+        
+        if state.is_finalized {
+            return Err("Channel is finalized".to_string());
+        }
+
+        // 验证序列号
+        if update.sequence_number != state.sequence_number + 1 {
+            return Err("Invalid sequence number".to_string());
+        }
+
+        // 验证所有参与者都已签名
+        if update.signatures.len() != self.participants.len() {
+            return Err("Insufficient signatures".to_string());
+        }
+
+        // 验证所有签名
+        for (i, signature) in update.signatures.iter().enumerate() {
+            if !self.verify_signature(&update, signature, &self.participants[i]) {
+                return Err(format!("Invalid signature from participant {}", i));
+            }
+        }
+
+        // 应用状态更新
+        state.balances = update.new_balances;
+        state.sequence_number = update.sequence_number;
+        
+        Ok(())
+    }
+
+    pub async fn initiate_dispute(
+        &self,
+        evidence: DisputeEvidence,
+        challenger: &str,
+    ) -> Result<(), String> {
+        let mut state = self.state.lock().await;
+        
+        if !self.participants.contains(&challenger.to_string()) {
+            return Err("Challenger is not a participant".to_string());
+        }
+
+        if state.is_finalized {
+            return Err("Channel is already finalized".to_string());
+        }
+
+        // 验证争议证据
+        if !self.validate_dispute_evidence(&evidence) {
+            return Err("Invalid dispute evidence".to_string());
+        }
+
+        // 设置挑战期
+        state.timeout = current_timestamp() + self.challenge_period;
+        
+        // 发送争议通知
+        if let Err(_) = self.dispute_sender.send(evidence) {
+            return Err("Failed to send dispute notification".to_string());
+        }
+
+        Ok(())
+    }
+
+    pub async fn resolve_dispute(
+        &self,
+        resolution: DisputeResolution,
+        resolver: &str,
+    ) -> Result<(), String> {
+        let mut state = self.state.lock().await;
+        
+        // 验证解决方案
+        match resolution {
+            DisputeResolution::Slash { malicious_party, penalty } => {
+                if let Some(balance) = state.balances.get_mut(&malicious_party) {
+                    *balance = balance.saturating_sub(penalty);
+                    
+                    // 将罚金分配给其他参与者
+                    let reward_per_participant = penalty / (self.participants.len() as u64 - 1);
+                    for participant in &self.participants {
+                        if participant != &malicious_party {
+                            *state.balances.entry(participant.clone()).or_insert(0) += reward_per_participant;
+                        }
+                    }
+                }
+            }
+            DisputeResolution::Revert { to_sequence } => {
+                if to_sequence < state.sequence_number {
+                    // 这里应该恢复到指定序列号的状态
+                    // 简化实现：重置序列号
+                    state.sequence_number = to_sequence;
+                }
+            }
+            DisputeResolution::ForceClose => {
+                state.is_finalized = true;
+            }
+        }
+
+        state.timeout = 0;
+        Ok(())
+    }
+
+    pub async fn cooperative_close(
+        &self,
+        final_balances: HashMap<String, u64>,
+        signatures: Vec<String>,
+    ) -> Result<(), String> {
+        let mut state = self.state.lock().await;
+        
+        if state.is_finalized {
+            return Err("Channel is already finalized".to_string());
+        }
+
+        // 验证最终余额
+        let current_total: u64 = state.balances.values().sum();
+        let final_total: u64 = final_balances.values().sum();
+        
+        if current_total != final_total {
+            return Err("Final balance sum mismatch".to_string());
+        }
+
+        // 验证所有参与者的签名
+        if signatures.len() != self.participants.len() {
+            return Err("Insufficient signatures for cooperative close".to_string());
+        }
+
+        // 应用最终状态
+        state.balances = final_balances;
+        state.is_finalized = true;
+        
+        Ok(())
+    }
+
+    pub async fn force_close(&self, closer: &str) -> Result<(), String> {
+        let mut state = self.state.lock().await;
+        
+        if !self.participants.contains(&closer.to_string()) {
+            return Err("Closer is not a participant".to_string());
+        }
+
+        if state.is_finalized {
+            return Err("Channel is already finalized".to_string());
+        }
+
+        // 启动挑战期
+        state.timeout = current_timestamp() + self.challenge_period;
+        
+        Ok(())
+    }
+
+    pub async fn get_state(&self) -> ChannelState {
+        self.state.lock().await.clone()
+    }
+
+    fn verify_signature(&self, update: &StateUpdate, signature: &str, signer: &str) -> bool {
+        // 简化的签名验证
+        // 在实际实现中，这里应该使用真正的密码学签名验证
+        let message = format!("{:?}", update);
+        let expected_signature = format!("{}:{}", signer, message.len());
+        signature == expected_signature
+    }
+
+    fn validate_dispute_evidence(&self, evidence: &DisputeEvidence) -> bool {
+        match evidence.evidence_type {
+            DisputeType::InvalidSignature => {
+                // 验证签名确实无效
+                true // 简化实现
+            }
+            DisputeType::DoubleSpending => {
+                // 验证确实存在双花
+                true // 简化实现
+            }
+            DisputeType::TimeoutViolation => {
+                // 验证确实违反了超时
+                true // 简化实现
+            }
+            DisputeType::BalanceInconsistency => {
+                // 验证余额确实不一致
+                true // 简化实现
+            }
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
+pub enum DisputeResolution {
+    Slash { malicious_party: String, penalty: u64 },
+    Revert { to_sequence: u64 },
+    ForceClose,
+}
+
+fn current_timestamp() -> u64 {
+    std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_secs()
+}
+
+// 状态通道网络管理器
+pub struct ChannelNetwork {
+    channels: HashMap<String, AdvancedStateChannel>,
+    routing_table: HashMap<String, Vec<String>>, // 参与者 -> 可达通道列表
+}
+
+impl ChannelNetwork {
+    pub fn new() -> Self {
+        Self {
+            channels: HashMap::new(),
+            routing_table: HashMap::new(),
+        }
+    }
+
+    pub fn add_channel(&mut self, channel: AdvancedStateChannel) {
+        let channel_id = channel.state.try_lock()
+            .map(|state| state.channel_id.clone())
+            .unwrap_or_default();
+        
+        // 更新路由表
+        for participant in &channel.participants {
+            self.routing_table
+                .entry(participant.clone())
+                .or_insert_with(Vec::new)
+                .push(channel_id.clone());
+        }
+
+        self.channels.insert(channel_id, channel);
+    }
+
+    pub fn find_route(&self, from: &str, to: &str) -> Option<Vec<String>> {
+        // 简化的路由查找：BFS搜索
+        use std::collections::{VecDeque, HashSet};
+
+        let mut queue = VecDeque::new();
+        let mut visited = HashSet::new();
+        let mut parent = HashMap::new();
+
+        queue.push_back(from.to_string());
+        visited.insert(from.to_string());
+
+        while let Some(current) = queue.pop_front() {
+            if current == to {
+                // 重构路径
+                let mut path = Vec::new();
+                let mut node = to.to_string();
+                
+                while let Some(prev) = parent.get(&node) {
+                    path.push(node.clone());
+                    node = prev.clone();
+                }
+                path.push(from.to_string());
+                path.reverse();
+                
+                return Some(path);
+            }
+
+            if let Some(channels) = self.routing_table.get(&current) {
+                for channel_id in channels {
+                    if let Some(channel) = self.channels.get(channel_id) {
+                        for participant in &channel.participants {
+                            if !visited.contains(participant) {
+                                visited.insert(participant.clone());
+                                parent.insert(participant.clone(), current.clone());
+                                queue.push_back(participant.clone());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        None
+    }
+
+    pub async fn route_payment(
+        &self,
+        from: &str,
+        to: &str,
+        amount: u64,
+    ) -> Result<Vec<StateUpdate>, String> {
+        let route = self.find_route(from, to)
+            .ok_or("No route found")?;
+
+        if route.len() < 2 {
+            return Err("Invalid route".to_string());
+        }
+
+        let mut updates = Vec::new();
+
+        // 为路径上的每一跳创建状态更新
+        for i in 0..route.len() - 1 {
+            let from_participant = &route[i];
+            let to_participant = &route[i + 1];
+
+            // 找到连接这两个参与者的通道
+            let channel_id = self.find_channel_between(from_participant, to_participant)
+                .ok_or("No direct channel found")?;
+
+            let channel = self.channels.get(&channel_id)
+                .ok_or("Channel not found")?;
+
+            let state = channel.get_state().await;
+            let mut new_balances = state.balances.clone();
+
+            // 更新余额
+            if let Some(from_balance) = new_balances.get_mut(from_participant) {
+                if *from_balance < amount {
+                    return Err("Insufficient balance".to_string());
+                }
+                *from_balance -= amount;
+            }
+
+            if let Some(to_balance) = new_balances.get_mut(to_participant) {
+                *to_balance += amount;
+            }
+
+            let update = StateUpdate {
+                channel_id: channel_id.clone(),
+                new_balances,
+                sequence_number: state.sequence_number + 1,
+                signatures: Vec::new(),
+                timestamp: current_timestamp(),
+            };
+
+            updates.push(update);
+        }
+
+        Ok(updates)
+    }
+
+    fn find_channel_between(&self, participant1: &str, participant2: &str) -> Option<String> {
+        if let Some(channels) = self.routing_table.get(participant1) {
+            for channel_id in channels {
+                if let Some(channel) = self.channels.get(channel_id) {
+                    if channel.participants.contains(&participant1.to_string()) &&
+                       channel.participants.contains(&participant2.to_string()) {
+                        return Some(channel_id.clone());
+                    }
+                }
+            }
+        }
+        None
+    }
+}
+```
 
 ## 核心概念
 

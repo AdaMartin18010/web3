@@ -363,17 +363,20 @@ R(t) = \sum_{i=0}^{k} \binom{n}{i} p(t)^{n-i} (1-p(t))^i
 ### 1. 去中心化原则的数学表达 (Mathematical Expression of Decentralization)
 
 **原则 1.1 (单点故障消除)**:
+
 ```math
 \forall s \in System, \nexists c \in Components : \text{failure}(c) \Rightarrow \text{failure}(s)
 ```
 
 **原则 1.2 (分布式决策算法)**:
 决策函数 $D: Inputs^n \rightarrow Outputs$ 满足：
+
 ```math
 D(x_1, x_2, ..., x_n) = \text{consensus}(\{local\_decide_i(x_i)\}_{i=1}^n)
 ```
 
 **原则 1.3 (节点对等性公理)**:
+
 ```math
 \forall n_i, n_j \in Nodes : capabilities(n_i) \approx capabilities(n_j)
 ```
@@ -382,18 +385,22 @@ D(x_1, x_2, ..., x_n) = \text{consensus}(\{local\_decide_i(x_i)\}_{i=1}^n)
 
 **定理 2.1 (水平扩展定律)**:
 系统吞吐量 $T(n)$ 与节点数 $n$ 的关系：
+
 ```math
 T(n) = \min\left(\alpha \cdot n, \frac{\beta}{\text{communication\_overhead}(n)}\right)
 ```
 
 **定理 2.2 (模块化可扩展性)**:
 模块化系统的复杂度增长：
+
 ```math
 Complexity(n\_modules) = O(n \log n)
 ```
+
 而非单体系统的 $O(n^2)$。
 
 **算法 2.1 (弹性伸缩算法)**:
+
 ```rust
 // 弹性伸缩算法实现
 struct AutoScaler {
@@ -423,11 +430,13 @@ impl AutoScaler {
 
 **定理 3.1 (多层安全定理)**:
 系统安全强度 $S_{total}$ 满足：
+
 ```math
 S_{total} = \min_{i} S_i \cdot \prod_{j \neq i} (1 - (1 - S_j))
 ```
 
 **算法 3.1 (零知识身份验证)**:
+
 ```python
 # 零知识证明身份验证实现
 class ZKIdentityVerifier:
@@ -461,11 +470,13 @@ class ZKIdentityVerifier:
 
 **定理 4.1 (拜占庭容错界限)**:
 在 $n$ 个节点中，最多可容忍 $f$ 个拜占庭故障节点：
+
 ```math
 f < \frac{n}{3}
 ```
 
 **算法 4.1 (PBFT共识算法)**:
+
 ```go
 // 实用拜占庭容错算法实现
 type PBFTConsensus struct {
@@ -517,10 +528,13 @@ func (p *PBFTConsensus) HandlePrepare(prepare *Prepare) error {
 #### 1.1 分布式账本的形式化模型
 
 **定义 1.1.1 (区块链状态机)**:
+
 ```math
 Blockchain = \langle S, T, \delta, s_0, F \rangle
 ```
+
 其中：
+
 - $S$: 状态集合
 - $T$: 交易集合  
 - $\delta: S \times T \rightarrow S$: 状态转移函数
@@ -528,6 +542,7 @@ Blockchain = \langle S, T, \delta, s_0, F \rangle
 - $F \subseteq S$: 最终状态集合
 
 **算法 1.1.1 (Merkle树构造)**:
+
 ```typescript
 // TypeScript实现的Merkle树
 class MerkleTree {
@@ -596,12 +611,15 @@ class MerkleTree {
 
 **定义 1.2.1 (智能合约语义)**:
 智能合约 $C$ 的操作语义定义为：
+
 ```math
 \langle C, \sigma \rangle \rightarrow \langle C', \sigma' \rangle
 ```
+
 其中 $\sigma$ 是区块链状态，$\sigma'$ 是执行后的新状态。
 
 **算法 1.2.1 (Solidity合约验证)**:
+
 ```solidity
 // 形式化验证的智能合约示例
 pragma solidity ^0.8.0;
@@ -654,11 +672,13 @@ contract FormallyVerifiedToken {
 
 **定理 2.1.1 (最优P2P拓扑)**:
 对于 $n$ 个节点的P2P网络，最优连接度 $d^*$ 满足：
+
 ```math
 d^* = \arg\min_{d} \left[ \alpha \cdot d + \beta \cdot \frac{\log n}{d} \right]
 ```
 
 **算法 2.1.1 (Kademlia DHT实现)**:
+
 ```rust
 // Rust实现的Kademlia DHT
 use std::collections::HashMap;
@@ -730,6 +750,7 @@ impl KademliaNode {
 对于参数 $(n, k)$ 的Reed-Solomon码，能够纠正最多 $t = \lfloor \frac{n-k}{2} \rfloor$ 个错误。
 
 **算法 3.1.1 (分布式存储实现)**:
+
 ```python
 # Python实现的分布式存储系统
 import numpy as np
@@ -793,6 +814,7 @@ class DistributedStorage:
 在半诚实模型下，BGW协议能够安全计算任意函数，只要诚实方数量 $t > \frac{n}{2}$。
 
 **算法 4.1.1 (同态加密实现)**:
+
 ```cpp
 // C++实现的Paillier同态加密
 #include <gmp.h>
@@ -897,16 +919,20 @@ public:
 #### 1.1 吞吐量理论模型
 
 **定义 1.1.1 (系统吞吐量)**:
+
 ```math
 TPS(t) = \lim_{\Delta t \rightarrow 0} \frac{N_{transactions}(t, t + \Delta t)}{\Delta t}
 ```
 
 **定理 1.1.1 (吞吐量上界)**:
 对于拜占庭容错系统，吞吐量上界为：
+
 ```math
 TPS_{max} = \frac{B \cdot f_{consensus}}{L_{message} + O_{crypto}}
 ```
+
 其中：
+
 - $B$: 网络带宽
 - $f_{consensus}$: 共识效率因子
 - $L_{message}$: 消息长度
@@ -915,14 +941,17 @@ TPS_{max} = \frac{B \cdot f_{consensus}}{L_{message} + O_{crypto}}
 #### 1.2 延迟分析模型
 
 **定理 1.2.1 (端到端延迟公式)**:
+
 ```math
 Latency_{total} = L_{network} + L_{consensus} + L_{execution} + L_{storage}
 ```
 
 其中每一项都有概率分布：
+
 ```math
 L_{network} \sim \text{Gamma}(\alpha_{net}, \beta_{net})
 ```
+
 ```math
 L_{consensus} \sim \text{Exponential}(\lambda_{consensus})
 ```
@@ -931,14 +960,17 @@ L_{consensus} \sim \text{Exponential}(\lambda_{consensus})
 
 **定理 1.3.1 (系统可用性公式)**:
 对于 $k$ 容错系统：
+
 ```math
 Availability = 1 - \prod_{i=1}^{k+1} (1 - R_i)
 ```
 
 **可用性目标函数**:
+
 ```math
 A_{target} = 1 - 10^{-n} \quad (n = 3, 4, 5, ...)
 ```
+
 对应99.9%, 99.99%, 99.999%等级别。
 
 ### 2. 网络性能的图论分析 (Graph-Theoretic Analysis of Network Performance)
@@ -947,11 +979,13 @@ A_{target} = 1 - 10^{-n} \quad (n = 3, 4, 5, ...)
 
 **定理 2.1.1 (最大流最小割定理应用)**:
 网络最大吞吐量等于最小割容量：
+
 ```math
 \max_{flow} |f| = \min_{cut} c(S, T)
 ```
 
 **算法 2.1.1 (自适应带宽分配)**:
+
 ```python
 # 网络带宽自适应分配算法
 import numpy as np
@@ -1018,9 +1052,11 @@ class BandwidthAllocator:
 
 **定理 2.2.1 (排队论延迟模型)**:
 在M/M/1排队模型下，平均延迟：
+
 ```math
 E[Delay] = \frac{1}{\mu - \lambda}
 ```
+
 其中 $\lambda$ 是到达率，$\mu$ 是服务率。
 
 ### 3. 存储性能的信息理论模型 (Information-Theoretic Model of Storage Performance)
@@ -1028,11 +1064,13 @@ E[Delay] = \frac{1}{\mu - \lambda}
 #### 3.1 存储I/O性能模型
 
 **定理 3.1.1 (存储IOPS上界)**:
+
 ```math
 IOPS_{max} = \min\left(\frac{BW}{Block\_Size}, \frac{1}{Seek\_Time + Rotation\_Delay}\right)
 ```
 
 **算法 3.1.1 (存储性能监控)**:
+
 ```java
 // Java实现的存储性能监控系统
 import java.util.concurrent.atomic.AtomicLong;
@@ -1114,20 +1152,24 @@ public class StoragePerformanceMonitor {
 
 **定义 4.1.1 (安全熵)**:
 加密算法的安全强度用安全熵衡量：
+
 ```math
 H_{security} = \log_2(|KeySpace|) - \log_2(AdvantageRatio)
 ```
 
 **定理 4.1.1 (密码学操作性能界限)**:
 对于椭圆曲线加密，标量乘法的复杂度：
+
 ```math
 Complexity = O(\log p) \text{ bit operations}
 ```
+
 其中 $p$ 是椭圆曲线的阶。
 
 #### 4.2 认证性能模型
 
 **算法 4.2.1 (高性能数字签名)**:
+
 ```rust
 // Rust实现的BLS签名聚合
 use bls12_381::{G1Projective, G2Projective, Scalar, pairing};
@@ -1249,12 +1291,14 @@ mod tests {
 #### 5.1 多维性能向量
 
 **定义 5.1.1 (性能向量空间)**:
+
 ```math
 \vec{P} = (TPS, Latency, Availability, Security, Scalability) \in \mathbb{R}^5
 ```
 
 **定理 5.1.1 (性能优化的帕累托最优性)**:
 性能配置 $\vec{P}^*$ 是帕累托最优的，当且仅当：
+
 ```math
 \nexists \vec{P}' : \vec{P}' \geq \vec{P}^* \land \vec{P}' \neq \vec{P}^*
 ```
@@ -1262,6 +1306,7 @@ mod tests {
 #### 5.2 性能基准测试
 
 **标准基准指标**:
+
 - **TPS基准**: Bitcoin: ~7, Ethereum: ~15, Visa: ~65,000
 - **延迟基准**: 区块确认: 10分钟-12秒, 支付网络: <100ms
 - **可用性基准**: 传统银行: 99.95%, 区块链网络: >99.9%
@@ -1271,17 +1316,20 @@ mod tests {
 ### 1. 相关国际标准 (Related International Standards)
 
 #### 1.1 架构设计标准
+
 - **ISO/IEC 42010**: 系统和软件工程-架构描述
 - **IEEE 1471**: 软件架构描述推荐实践
 - **TOGAF 9.2**: 开放群组架构框架
 - **NIST Cybersecurity Framework**: 网络安全框架
 
 #### 1.2 分布式系统标准
+
 - **ISO/IEC 23053**: 区块链和分布式账本技术框架
 - **ITU-T X.1401**: 分布式账本技术安全指南
 - **IEEE 2857**: 私有区块链技术标准
 
 #### 1.3 密码学标准
+
 - **FIPS 140-3**: 密码模块安全要求
 - **NIST SP 800-185**: SHA-3衍生函数
 - **RFC 8446**: TLS 1.3协议规范
@@ -1289,16 +1337,19 @@ mod tests {
 ### 2. 理论研究前沿 (Theoretical Research Frontiers)
 
 #### 2.1 拜占庭容错理论新进展
+
 - **HotStuff共识**: O(n)消息复杂度的PBFT改进
 - **FBFT**: 快速拜占庭容错算法
 - **Stellar共识**: 联邦拜占庭协议
 
 #### 2.2 分片理论研究
+
 - **Ethereum 2.0 Sharding**: 信标链与执行链
 - **OmniLedger**: 安全的分片区块链
 - **RapidChain**: 快速跨分片处理
 
 #### 2.3 跨链理论框架
+
 - **Cosmos IBC**: 区块链间通信协议
 - **Polkadot XCMP**: 跨链消息传递
 - **Interledger Protocol**: 通用支付协议
@@ -1306,11 +1357,13 @@ mod tests {
 ### 3. 工程实践标准 (Engineering Practice Standards)
 
 #### 3.1 云原生架构标准
+
 - **CNCF Landscape**: 云原生计算生态
 - **12-Factor App**: 现代应用设计原则
 - **Kubernetes**: 容器编排标准
 
 #### 3.2 微服务架构最佳实践
+
 - **Martin Fowler微服务模式**: 微服务架构设计模式
 - **Netflix微服务栈**: 生产级微服务实践
 - **Spring Cloud**: 微服务开发框架
@@ -1320,16 +1373,19 @@ mod tests {
 ### 1. 理论发展方向 (Theoretical Development Directions)
 
 #### 1.1 后量子密码学架构
+
 ```math
 PostQuantum\_Security = \bigcap_{i=1}^{n} Resistant\_to(QuantumAlgorithm_i)
 ```
 
 #### 1.2 自适应共识机制
+
 ```math
 Consensus_{adaptive}(t) = \arg\max_{c \in Consensus\_Set} Utility(c, Environment(t))
 ```
 
 #### 1.3 零知识证明系统优化
+
 ```math
 ZK\_Efficiency = \frac{Verification\_Cost}{Proof\_Size \times Generation\_Time}
 ```
@@ -1337,16 +1393,19 @@ ZK\_Efficiency = \frac{Verification\_Cost}{Proof\_Size \times Generation\_Time}
 ### 2. 技术融合趋势 (Technology Integration Trends)
 
 #### 2.1 AI驱动的架构优化
+
 - 机器学习驱动的负载预测
 - 强化学习优化的资源分配
 - 神经网络加速的密码学运算
 
 #### 2.2 边缘计算与区块链融合
+
 - 边缘节点的轻量级共识
 - IoT设备的去中心化身份
 - 分层区块链架构
 
 #### 2.3 绿色计算与可持续性
+
 - 低功耗共识算法
 - 碳中和的区块链网络
 - 可再生能源驱动的挖矿
@@ -1354,19 +1413,23 @@ ZK\_Efficiency = \frac{Verification\_Cost}{Proof\_Size \times Generation\_Time}
 ## 相关链接与资源 (Related Links and Resources)
 
 ### 学术资源
+
 - [理论基础](../01_Theoretical_Foundations/) - 数学与密码学理论基础
 - [核心技术](../02_Core_Technologies/) - 区块链与分布式系统核心技术
 - [跨学科理论](../02_Interdisciplinary_Theory/) - 经济学、博弈论等跨学科理论
 
 ### 应用实践
+
 - [应用生态](../04_Application_Ecosystem/) - DeFi、NFT等应用层设计
 - [前沿技术](../05_Advanced_Technologies/) - 新兴技术集成与前沿研究
 - [开发运维](../06_Development_Operations/) - 开发工具链与运维实践
 
 ### 管理协调
+
 - [项目管理](../07_Project_Management/) - 项目协调管理与流程优化
 
 ### 外部资源
+
 - [Awesome Blockchain](https://github.com/yjjnls/awesome-blockchain) - 区块链资源集合
 - [Papers We Love](https://paperswelove.org/) - 学术论文社区
 - [Cryptology ePrint Archive](https://eprint.iacr.org/) - 密码学预印本
@@ -1378,6 +1441,7 @@ ZK\_Efficiency = \frac{Verification\_Cost}{Proof\_Size \times Generation\_Time}
 **架构设计理论**作为Web3系统的核心支撑，建立了从数学基础到工程实践的完整理论体系。通过形式化建模、性能分析、安全验证等多维度的理论框架，为构建高性能、高安全性、高可扩展性的Web3系统提供了科学指导。
 
 **核心贡献**：
+
 1. **理论创新**：建立了Web3架构设计的公理化体系
 2. **实践指导**：提供了完整的算法实现和性能优化方案  
 3. **标准制定**：参照国际标准建立了评估基准

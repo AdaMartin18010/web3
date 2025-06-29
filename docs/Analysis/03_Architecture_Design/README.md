@@ -1,6 +1,6 @@
 ﻿# Web3系统架构设计理论：形式化建模与验证框架
 
-# Architecture Design Theory: Formal Modeling and Verification Framework for Web3 Systems
+- Architecture Design Theory: Formal Modeling and Verification Framework for Web3 Systems
 
 ## 理论概述与公理化基础 (Theoretical Overview and Axiomatic Foundation)
 
@@ -128,7 +128,7 @@ L(\mathcal{A}, \lambda, \mu) = f(\mathcal{A}) - \sum_{j=1}^{m} \lambda_j g_j(\ma
 
 **算法 4.2.1 (分布式架构模型检验)**:
 
-```
+```text
 Input: 架构模型 M, CTL* 公式 φ
 Output: M ⊨ φ 或反例
 
@@ -235,20 +235,24 @@ n^*(t) = \arg\min_{n} \left[ C(n) + \alpha \cdot max(0, \lambda(t) - \mu \cdot n
 
 **定义 2.1.1 (P2P网络图)**:
 P2P网络建模为动态图 $G(t) = (V(t), E(t))$，其中：
+
 - $V(t)$: 时刻 $t$ 的节点集合
 - $E(t)$: 时刻 $t$ 的连接关系
 
 **定理 2.1.1 (P2P网络连通性)**:
 对于随机P2P网络，连通概率：
+
 ```math
 P(connected) = 1 - exp\left(-\frac{n(n-1)p}{2}\right)
 ```
+
 其中 $n$ 是节点数，$p$ 是连接概率。
 
 #### 2.2 网络协议栈的层次化理论
 
 **定义 2.2.1 (协议栈同态)**:
 协议层间存在同态映射 $\phi_i: Layer_i \rightarrow Layer_{i+1}$，满足：
+
 ```math
 \phi_i(m_1 \oplus m_2) = \phi_i(m_1) \oplus \phi_i(m_2)
 ```
@@ -257,6 +261,7 @@ P(connected) = 1 - exp\left(-\frac{n(n-1)p}{2}\right)
 
 **定理 2.3.1 (负载均衡Nash均衡)**:
 在负载均衡博弈中，存在唯一Nash均衡，其社会成本为：
+
 ```math
 SC(NE) = \sum_{i=1}^{n} c_i(f_i^*)
 ```
@@ -267,12 +272,14 @@ SC(NE) = \sum_{i=1}^{n} c_i(f_i^*)
 
 **定义 3.1.1 (存储熵)**:
 分布式存储系统的信息熵：
+
 ```math
 H(Storage) = -\sum_{i=1}^{n} p_i \log_2 p_i
 ```
 
 **定理 3.1.1 (存储冗余优化)**:
 最优冗余度满足：
+
 ```math
 R^* = \arg\min_{R} \left[ C_{storage}(R) + C_{failure}(R) \right]
 ```
@@ -281,6 +288,7 @@ R^* = \arg\min_{R} \left[ C_{storage}(R) + C_{failure}(R) \right]
 
 **定义 3.2.1 (一致性逻辑)**:
 数据一致性建模为时态逻辑公式：
+
 ```math
 Consistency = \mathsf{AG}(\forall x : read(x) = last\_write(x))
 ```
@@ -289,6 +297,7 @@ Consistency = \mathsf{AG}(\forall x : read(x) = last\_write(x))
 
 **定义 3.3.1 (流代数)**:
 数据流构成代数结构 $(Stream, \cup, \cap, \circ)$，满足：
+
 - 结合律：$(s_1 \circ s_2) \circ s_3 = s_1 \circ (s_2 \circ s_3)$
 - 分配律：$s_1 \circ (s_2 \cup s_3) = (s_1 \circ s_2) \cup (s_1 \circ s_3)$
 
@@ -298,6 +307,7 @@ Consistency = \mathsf{AG}(\forall x : read(x) = last\_write(x))
 
 **定义 4.1.1 (信息论安全)**:
 加密方案 $(Gen, Enc, Dec)$ 是信息论安全的，当且仅当：
+
 ```math
 \forall m_0, m_1, c : P(C = c | M = m_0) = P(C = c | M = m_1)
 ```
@@ -306,6 +316,7 @@ Consistency = \mathsf{AG}(\forall x : read(x) = last\_write(x))
 
 **定义 4.2.1 (访问控制逻辑)**:
 访问控制建模为动态逻辑：
+
 ```math
 Access(s, o, a) \equiv \exists policy : policy \vdash (s, o, a)
 ```
@@ -314,6 +325,7 @@ Access(s, o, a) \equiv \exists policy : policy \vdash (s, o, a)
 
 **定理 4.3.1 (协议安全性)**:
 安全协议 $\Pi$ 满足安全性，当且仅当：
+
 ```math
 \forall adversary\ \mathcal{A} : Adv_{\Pi}^{security}(\mathcal{A}) \leq negl(\lambda)
 ```
@@ -324,6 +336,7 @@ Access(s, o, a) \equiv \exists policy : policy \vdash (s, o, a)
 
 **定义 5.1.1 (模式范畴)**:
 设计模式构成范畴 $\mathcal{P}$，其中：
+
 - 对象：问题域 $\{Problem_i\}$
 - 态射：解决方案 $\{Solution: Problem_i \rightarrow Problem_j\}$
 
@@ -331,6 +344,7 @@ Access(s, o, a) \equiv \exists policy : policy \vdash (s, o, a)
 
 **定义 5.2.1 (并发进程代数)**:
 并发模式建模为CCS进程：
+
 ```math
 P ::= 0 | \alpha.P | P + Q | P | Q | P \setminus L | P[f]
 ```
@@ -339,6 +353,7 @@ P ::= 0 | \alpha.P | P + Q | P | Q | P \setminus L | P[f]
 
 **定理 5.3.1 (容错可靠性)**:
 k-容错系统的可靠性：
+
 ```math
 R(t) = \sum_{i=0}^{k} \binom{n}{i} p(t)^{n-i} (1-p(t))^i
 ```

@@ -101,35 +101,35 @@
 
 #### 2.1 经济学理论
 
-11. **代币经济学理论** (`Token_Economics_Theory.md`)
+1. **代币经济学理论** (`Token_Economics_Theory.md`)
     - 代币价值理论和激励设计
     - 市场动力学和货币理论
     - DeFi应用和风险分析
 
 #### 2.2 社会学理论
 
-12. **数字社区理论** (`Digital_Communities.md`)
+1. **数字社区理论** (`Digital_Communities.md`)
     - 去中心化社区的形成机制
     - 治理理论和文化演化
     - 冲突协调和社会心理
 
 #### 2.3 认知科学理论
 
-13. **分布式认知理论** (`Distributed_Cognition_Web3.md`)
+1. **分布式认知理论** (`Distributed_Cognition_Web3.md`)
     - 分布式认知架构和推理机制
     - 集体智能和人机协作
     - 认知安全和网络理论
 
 #### 2.4 博弈论
 
-14. **Web3机制设计理论** (`Mechanism_Design_Web3.md`)
+1. **Web3机制设计理论** (`Mechanism_Design_Web3.md`)
     - 去中心化激励机制设计
     - 拍卖理论和治理机制
     - 安全性防护和形式验证
 
 #### 2.5 复杂系统理论
 
-15. **Web3网络动力学理论** (`Network_Dynamics_Web3.md`)
+1. **Web3网络动力学理论** (`Network_Dynamics_Web3.md`)
     - 复杂网络的动力学分析
     - 涌现行为和稳定性理论
     - 控制理论应用

@@ -1417,10 +1417,13 @@ impl StateChannel {
 
 **定义 7.1.1 (哈希时间锁合约)**:
 HTLC协议建模为条件支付合约：
+
 ```math
 HTLC = \langle H, t, A, B, amount \rangle
 ```
+
 其中：
+
 - $H$: 哈希锁 $H = hash(secret)$
 - $t$: 时间锁
 - $A, B$: 交易双方
@@ -1428,6 +1431,7 @@ HTLC = \langle H, t, A, B, amount \rangle
 
 **定理 7.1.1 (原子性保证)**:
 在HTLC协议中，要么两个交易都成功，要么都失败：
+
 ```math
 \Pr[tx_A \land \neg tx_B] = \Pr[\neg tx_A \land tx_B] = 0
 ```
@@ -1436,12 +1440,14 @@ HTLC = \langle H, t, A, B, amount \rangle
 
 **定义 7.2.1 (桥接安全性)**:
 跨链桥的安全性定义为资产守恒：
+
 ```math
 \forall t : \sum_{chain_i} balance_i(t) = constant
 ```
 
 **定理 7.2.1 (多签验证器的安全阈值)**:
 对于 $n$ 个验证器的多签桥，安全阈值为：
+
 ```math
 threshold = \lfloor \frac{2n}{3} \rfloor + 1
 ```
@@ -1452,12 +1458,14 @@ threshold = \lfloor \frac{2n}{3} \rfloor + 1
 
 **定义 8.1.1 (zk-SNARK系统)**:
 zk-SNARK系统 $(Setup, Prove, Verify)$ 满足：
+
 - **完备性**: $\Pr[Verify(vk, x, Prove(pk, x, w)) = 1] = 1$ 对所有 $(x, w) \in R$
 - **可靠性**: $\forall \mathcal{P}^*, x \notin L: \Pr[Verify(vk, x, \mathcal{P}^*(pk, x)) = 1] \leq negl(\lambda)$
 - **零知识性**: $\exists Sim: \{Sim(vk, x)\} \equiv \{Prove(pk, x, w)\}$
 
 **定理 8.1.1 (Groth16的简洁性)**:
 Groth16证明的大小为常数，具体为3个群元素：
+
 ```math
 |proof| = 3 \cdot |G_1| = 3 \cdot 32 = 96 \text{ bytes}
 ```
@@ -1466,6 +1474,7 @@ Groth16证明的大小为常数，具体为3个群元素：
 
 **定义 8.2.1 (环签名匿名性)**:
 环签名方案的匿名性定义为不可区分性：
+
 ```math
 \Pr[Exp_{anon}^{\mathcal{A}}(\lambda) = 1] \leq \frac{1}{2} + negl(\lambda)
 ```
@@ -1474,6 +1483,7 @@ Groth16证明的大小为常数，具体为3个群元素：
 
 **定理 8.3.1 (BGV方案的噪声增长)**:
 在BGV同态加密中，乘法操作后的噪声增长为：
+
 ```math
 noise_{mult} \leq noise_1 \cdot noise_2 \cdot poly(\lambda)
 ```
@@ -1484,12 +1494,14 @@ noise_{mult} \leq noise_1 \cdot noise_2 \cdot poly(\lambda)
 
 **定义 9.1.1 (系统吞吐量)**:
 区块链系统的理论吞吐量上界：
+
 ```math
 TPS_{max} = \frac{Block\_Size}{Tx\_Size \cdot Block\_Time}
 ```
 
 **定理 9.1.1 (分片系统的线性扩展性)**:
 对于 $k$ 个分片的系统，理论吞吐量：
+
 ```math
 TPS_{sharded} = k \cdot TPS_{single} \cdot (1 - \epsilon_{overhead})
 ```
@@ -1498,20 +1510,24 @@ TPS_{sharded} = k \cdot TPS_{single} \cdot (1 - \epsilon_{overhead})
 
 **定义 9.2.1 (端到端延迟)**:
 交易确认的端到端延迟：
+
 ```math
 Latency = T_{propagation} + T_{consensus} + T_{finality}
 ```
 
 **定理 9.2.1 (网络延迟下界)**:
 在直径为 $D$ 的网络中，共识延迟下界：
+
 ```math
 T_{consensus} \geq D \cdot \frac{c}{2}
 ```
+
 其中 $c$ 是光速。
 
 #### 9.3 存储优化理论
 
 **算法 9.3.1 (状态压缩技术)**:
+
 ```python
 # Python实现的高级状态压缩
 import hashlib
@@ -1842,12 +1858,14 @@ if __name__ == "__main__":
 
 **定义 10.1.1 (合约不变量)**:
 智能合约的安全不变量 $I$ 满足：
+
 ```math
 \forall state\ s, transaction\ tx : I(s) \land valid(tx) \Rightarrow I(execute(s, tx))
 ```
 
 **定理 10.1.1 (重入攻击的形式化条件)**:
 重入攻击成功的充要条件：
+
 ```math
 \exists call\_sequence\ C : balance_{before}(attacker) < balance_{after}(attacker) \land \neg authorized(C)
 ```
@@ -1856,9 +1874,11 @@ if __name__ == "__main__":
 
 **定理 10.2.1 (PBFT的安全性)**:
 在异步网络中，PBFT算法保证安全性，当且仅当：
+
 ```math
 f < \frac{n}{3}
 ```
+
 其中 $f$ 是拜占庭节点数，$n$ 是总节点数。
 
 **证明思路**:
@@ -1875,22 +1895,27 @@ f < \frac{n}{3}
 
 **定义 11.1.1 (代币价值函数)**:
 代币价值建模为效用函数：
+
 ```math
 V(t) = \sum_{i=1}^{n} w_i \cdot U_i(t)
 ```
+
 其中 $w_i$ 是权重，$U_i(t)$ 是第 $i$ 种效用。
 
 **定理 11.1.1 (网络效应的价值增长)**:
 在网络效应下，代币价值增长满足：
+
 ```math
 \frac{dV}{dt} = \alpha \cdot N(t) \cdot \frac{dN}{dt}
 ```
+
 其中 $N(t)$ 是网络用户数，$\alpha$ 是网络效应系数。
 
 #### 11.2 激励机制设计
 
 **定义 11.2.1 (激励相容性)**:
 激励机制 $M$ 是激励相容的，当且仅当：
+
 ```math
 \forall agent\ i : \arg\max_{s_i} E[u_i(s_i, s_{-i}^*)] = s_i^*
 ```
@@ -1903,11 +1928,13 @@ V(t) = \sum_{i=1}^{n} w_i \cdot U_i(t)
 #### 12.1 技术标准对接
 
 **ISO/IEC 23053 (区块链和分布式账本技术)**:
+
 - 术语和概念标准化
 - 参考架构定义
 - 互操作性要求
 
 **IEEE 2418.2 (区块链系统数据格式)**:
+
 - 数据结构标准化
 - 交互协议规范
 - 安全要求定义
@@ -1915,11 +1942,13 @@ V(t) = \sum_{i=1}^{n} w_i \cdot U_i(t)
 #### 12.2 监管合规框架
 
 **FATF虚拟资产指导原则**:
+
 - 反洗钱(AML)要求
 - 了解客户(KYC)义务
 - 旅行规则实施
 
 **MiCA法规(欧盟)**:
+
 - 加密资产分类
 - 发行方义务
 - 市场诚信要求
@@ -1930,11 +1959,13 @@ V(t) = \sum_{i=1}^{n} w_i \cdot U_i(t)
 
 **定理 13.1.1 (Shor算法的复杂度)**:
 Shor算法在量子计算机上分解 $n$ 位整数的时间复杂度：
+
 ```math
 T_{Shor}(n) = O(n^3)
 ```
 
 **后量子密码学迁移**:
+
 - 基于格的密码学
 - 基于编码的密码学
 - 多变量密码学
@@ -1944,6 +1975,7 @@ T_{Shor}(n) = O(n^3)
 
 **定义 13.2.1 (AI增强共识)**:
 使用机器学习优化的共识算法：
+
 ```math
 consensus_{AI}(state, transactions) = ML_{model}(historical\_data, current\_state)
 ```
@@ -1952,6 +1984,7 @@ consensus_{AI}(state, transactions) = ML_{model}(historical\_data, current\_stat
 
 **定理 13.3.1 (能耗优化界限)**:
 对于安全参数 $\lambda$，最优能耗下界：
+
 ```math
 Energy_{min} \geq \frac{\lambda \cdot log_2(n)}{efficiency_{max}}
 ```
@@ -1959,6 +1992,7 @@ Energy_{min} \geq \frac{\lambda \cdot log_2(n)}{efficiency_{max}}
 ## 理论贡献与学术价值 (Theoretical Contributions and Academic Value)
 
 ### 原创理论框架
+
 1. **分布式系统状态机的公理化体系**
 2. **智能合约形式化语义模型**
 3. **跨链协议的密码学安全性分析**
@@ -1966,6 +2000,7 @@ Energy_{min} \geq \frac{\lambda \cdot log_2(n)}{efficiency_{max}}
 5. **经济激励机制的博弈论建模**
 
 ### 技术创新点
+
 1. **高效Merkle树并行构造算法**
 2. **自适应P2P网络协议**
 3. **状态通道网络路由优化**
@@ -1973,6 +2008,7 @@ Energy_{min} \geq \frac{\lambda \cdot log_2(n)}{efficiency_{max}}
 5. **BGV同态加密的批处理优化**
 
 ### 实践指导意义
+
 1. **为Web3系统设计提供理论基础**
 2. **指导区块链技术的安全实现**
 3. **优化系统性能和资源利用**

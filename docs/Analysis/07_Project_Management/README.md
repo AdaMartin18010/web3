@@ -1749,18 +1749,21 @@ mod agile_tests {
 ### 2. 常见风险及应对策略
 
 **智能合约风险**:
+
 - 多轮代码审查
 - 外部安全审计
 - 渐进式部署
 - 应急暂停机制
 
 **监管风险**:
+
 - 及时跟踪监管动态
 - 建立合规框架
 - 法律咨询支持
 - 多司法管辖准备
 
 **市场风险**:
+
 - 多元化策略
 - 灵活的商业模式
 - 社区建设投入
@@ -1769,24 +1772,28 @@ mod agile_tests {
 ### 3. 工具和平台推荐
 
 **项目管理工具**:
+
 - Jira + Confluence
 - Monday.com
 - Notion
 - Linear
 
 **代码管理**:
+
 - GitHub + GitHub Actions
 - GitLab CI/CD
 - Hardhat + Truffle
 - Foundry
 
 **协作沟通**:
+
 - Discord
 - Telegram
 - Slack
 - Zoom
 
 **监控分析**:
+
 - Dune Analytics
 - Grafana
 - Sentry

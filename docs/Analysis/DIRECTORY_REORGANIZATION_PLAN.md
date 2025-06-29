@@ -10,7 +10,7 @@
 
 **保持现状** - 已完成
 
-```
+```text
 05_Mirror_Theory_Layer/
 └── 04_Mirror_Theory/
     ├── Web3_Mirror_Reality_Theory.md
@@ -26,7 +26,7 @@
 
 **重新组织后**：
 
-```
+```text
 04_Meta_Theory_Layer/
 ├── 01_Philosophical_Foundations/          # 已有
 ├── 02_Formal_Systems_Theory/              # 已有  
@@ -49,7 +49,7 @@
 
 **重新组织后**：
 
-```
+```text
 03_Mathematical_Foundations/
 ├── 01_Mathematical_Foundations/           # 已有+合并
 ├── 02_Cryptographic_Foundations/          # 已有+合并
@@ -72,7 +72,7 @@
 
 **重新组织后**：
 
-```
+```text
 02_Interdisciplinary_Theory/
 ├── 01_Web3_Economics/                     # 已有
 ├── 02_Web3_Sociology/                     # 已有
@@ -99,7 +99,7 @@
 
 **重新组织后**：
 
-```
+```text
 01_Application_Theory/
 ├── 01_Core_Technologies/                  # 从02_Core_Technologies移入
 ├── 02_Architecture_Design/                # 从03_Architecture_Design移入
@@ -112,7 +112,7 @@
 
 **单独保留**：
 
-```
+```text
 docs/Analysis/
 ├── 07_Project_Management/                 # 项目管理（独立保留）
 ├── 99_Project_Management/                 # 项目管理备份（独立保留）

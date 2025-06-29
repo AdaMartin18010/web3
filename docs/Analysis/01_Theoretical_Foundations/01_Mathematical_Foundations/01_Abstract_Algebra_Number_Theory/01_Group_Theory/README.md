@@ -209,7 +209,7 @@ $$f(x) = s + a_1x + \cdots + a_{t-1}x^{t-1} \pmod{p}$$
 
 **实现架构**：
 
-```
+```text
 输入秘密 → 群元素编码 → 安全计算协议 → 输出重构
     ↓           ↓              ↓            ↓
   秘密分享   群运算实现    配对计算优化   错误检测
@@ -401,7 +401,7 @@ impl JacobianPoint {
 
 1. **超奇异同源图**：
 
-   ```
+   ```text
    图顶点: 超奇异椭圆曲线 E/𝔽_p²
    边: 度数为ℓ的同源映射
    困难问题: 同源路径查找
@@ -409,7 +409,7 @@ impl JacobianPoint {
 
 2. **格基群**：
 
-   ```
+   ```text
    定义: Λ = {∑ᵢ zᵢbᵢ : zᵢ ∈ ℤ}
    困难问题: 最短向量问题 (SVP)
    应用: NTRU, Ring-LWE
@@ -417,7 +417,7 @@ impl JacobianPoint {
 
 3. **多变量多项式群**：
 
-   ```
+   ```text
    公钥: P: 𝔽ⁿ → 𝔽ᵐ (多变量多项式系统)
    私钥: P = S ∘ F ∘ T (可逆变换分解)
    困难问题: 多变量二次方程求解
@@ -454,7 +454,7 @@ $$\text{LWE}_{n,q,\chi} \leq_{\text{quantum}} \text{GapSVP}_{\gamma}$$
 
 **BGV方案的群结构**：
 
-```
+```text
 明文空间: ℤ_t[X]/(X^n + 1)
 密文空间: ℤ_q[X]/(X^n + 1) × ℤ_q[X]/(X^n + 1)
 噪声增长: 多项式环中的范数估计
@@ -551,7 +551,7 @@ $$\text{安全性} \iff \forall s \in \mathcal{S}, g \in \mathcal{G}: g \cdot s 
 
 1. **门限签名**：$(t, n)$-门限方案的群构造
 
-   ```
+   ```text
    密钥生成: 分布式生成 sk = ∑ᵢ skᵢ
    签名过程: σ = ∑ᵢ∈S σᵢ (|S| ≥ t)
    验证: e(σ, g) = e(H(m), pk)
@@ -559,14 +559,14 @@ $$\text{安全性} \iff \forall s \in \mathcal{S}, g \in \mathcal{G}: g \cdot s 
 
 2. **可验证随机函数**：基于配对群的VRF
 
-   ```
+   ```text
    VRF_sk(x) = e(H(x), sk)^r
    证明: π = (γ, s) where γ = sk·H(x), s = r + c·sk
    ```
 
 3. **分布式密钥生成**：非交互式DKG协议
 
-   ```
+   ```text
    Feldman VSS: 承诺 cᵢ = g^aᵢ,j mod p
    密钥重构: sk = ∑ᵢ λᵢ · skᵢ (拉格朗日插值)
    ```
@@ -659,7 +659,7 @@ PBFT协议的安全性等价于诚实节点集合在状态转换群作用下的�
 
 **数学表述**：
 
-```
+```text
 状态空间: S = {(view, phase, round) | view ∈ Views, phase ∈ {pre-prepare, prepare, commit}}
 群作用: G × S → S, (g, s) ↦ g·s
 不变量: ∀g ∈ Honest, s ∈ Safe: g·s ∈ Safe
@@ -745,7 +745,7 @@ ECDSA签名方案在随机预言机模型下，其安全性归约到椭圆曲线
 
 **具体归约**：
 
-```
+```text
 游戏 0: 真实ECDSA签名
 游戏 1: 替换哈希函数为随机预言机  
 游戏 2: 知晓签名中的随机数k
@@ -756,7 +756,7 @@ ECDSA签名方案在随机预言机模型下，其安全性归约到椭圆曲线
 
 **Schnorr协议**的正确性和零知识性：
 
-```
+```text
 公共输入: 群G, 生成元g, 公钥h = g^x
 秘密输入: 私钥x
 
@@ -1056,7 +1056,7 @@ impl BGWProtocol {
 
 1. **secp256k1** (Bitcoin):
 
-   ```
+   ```text
    y² = x³ + 7 over F_p
    p = 2²⁵⁶ - 2³² - 2⁹ - 2⁸ - 2⁷ - 2⁶ - 2⁴ - 1
    优点: 高效模运算, Koblitz曲线结构
@@ -1064,7 +1064,7 @@ impl BGWProtocol {
 
 2. **Curve25519** (EdDSA):
 
-   ```
+   ```text
    Montgomery形式: By² = x³ + Ax² + x
    Edwards形式: x² + y² = 1 + dx²y²
    优点: 完备加法公式, 抗侧信道攻击
@@ -1072,7 +1072,7 @@ impl BGWProtocol {
 
 3. **BLS12-381** (配对友好):
 
-   ```
+   ```text
    嵌入度k = 12, 安全级别128位
    支持高效配对计算
    用于zk-SNARKs和共识协议

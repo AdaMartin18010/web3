@@ -77,9 +77,9 @@
 
 ### ⚡ 01_Application_Theory/ (应用理论层)
 
-**具体技术领域的理论应用**
+**具体技术领域的理论应用**:
 
-```
+```text
 01_Application_Theory/
 ├── 01_Core_Technologies/                  # 核心技术 ✅ 新归类
 │   ├── 01_Blockchain_Fundamentals/
@@ -116,7 +116,7 @@
 
 ### 理论依赖关系
 
-```
+```text
 镜像理论层 (05) ← 统一抽象
      ↑
 元科学理论层 (04) ← 哲学基础
@@ -132,7 +132,7 @@
 
 **保留不动的管理目录**：
 
-```
+```text
 docs/Analysis/
 ├── 07_Project_Management/                 # 项目管理（独立保留）
 ├── 99_Project_Management/                 # 项目管理备份（独立保留）
@@ -145,7 +145,7 @@ docs/Analysis/
 
 **历史遗留目录（可供参考但已归类）**：
 
-```
+```text
 旧目录结构：
 ├── 00_Meta_Theory/ → 已迁移至 04_Meta_Theory_Layer/
 ├── 01_Foundational_Theory/ → 已分散至 03_Mathematical_Foundations/

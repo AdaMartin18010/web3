@@ -9,26 +9,31 @@
 区块链技术的理论基础可以抽象为五个层次的架构体系：
 
 **层次5：共识理论层**
+
 - 分布式共识协议的理论基础
 - 拜占庭容错机制的数学模型
 - 博弈论均衡分析
 
 **层次4：密码学理论层**
+
 - 哈希函数的密码学性质
 - 数字签名的安全性证明
 - 零知识证明的理论基础
 
 **层次3：数据结构层**
+
 - Merkle树的数学性质
 - 区块链数据结构的形式化
 - 状态转换的代数模型
 
 **层次2：网络协议层**
+
 - 点对点网络的图论模型
 - 分布式账本的一致性理论
 - 网络拓扑的安全性分析
 
 **层次1：应用语义层**
+
 - 智能合约的形式语义
 - 代币经济学的数学模型
 - 治理机制的博弈分析
@@ -43,6 +48,7 @@
 $$B_i = (H_{i-1}, \text{Txs}_i, \text{Nonce}_i, \text{Meta}_i)$$
 
 满足以下性质：
+
 1. **链式结构**：$H_i = H(B_i)$，且 $B_{i+1}$ 包含 $H_i$
 2. **不可篡改性**：对于任意 $j < i$，修改 $B_j$ 需要重新计算 $\{H_k\}_{k=j}^{i}$
 3. **共识有效性**：每个区块 $B_i$ 满足共识规则 $\mathcal{R}$
@@ -56,6 +62,7 @@ $$B_i = (H_{i-1}, \text{Txs}_i, \text{Nonce}_i, \text{Meta}_i)$$
 
 **定义 1.2** (分布式账本)
 分布式账本是一个元组 $\mathcal{L} = (\mathcal{N}, \mathcal{S}, \mathcal{T}, \delta, \mathcal{V})$，其中：
+
 - $\mathcal{N}$：节点集合
 - $\mathcal{S}$：全局状态空间
 - $\mathcal{T}$：交易空间
@@ -63,6 +70,7 @@ $$B_i = (H_{i-1}, \text{Txs}_i, \text{Nonce}_i, \text{Meta}_i)$$
 - $\mathcal{V}: \mathcal{T} \to \{0, 1\}$：交易验证函数
 
 **一致性性质**：
+
 - **Safety**：$\forall n_i, n_j \in \mathcal{N}, \forall t: \text{prefix}(\text{view}_i(t)) = \text{prefix}(\text{view}_j(t))$
 - **Liveness**：$\forall tx \in \mathcal{T}, \exists t: tx \in \bigcup_{n \in \mathcal{N}} \text{view}_n(t)$
 
@@ -155,6 +163,7 @@ fn sha256_compression(state: &[u32; 8], block: &[u32; 16]) -> [u32; 8] {
 - $\text{Verify}(pk, m, \sigma) \to \{0, 1\}$：验证算法
 
 满足：
+
 1. **正确性**：$\Pr[\text{Verify}(pk, m, \text{Sign}(sk, m)) = 1] = 1$
 2. **存在不可伪造性**：对于任意PPT算法 $\mathcal{A}$：
    $$\Pr[\text{Verify}(pk, m^*, \sigma^*) = 1 \land m^* \notin \mathcal{Q}] \leq \text{negl}(\lambda)$$
@@ -164,10 +173,12 @@ fn sha256_compression(state: &[u32; 8], block: &[u32; 16]) -> [u32; 8] {
 设椭圆曲线 $E(\mathbb{F}_p): y^2 = x^3 + ax + b$，基点 $G$，阶 $n$。
 
 **密钥生成**：
+
 - 私钥：$d \leftarrow_R [1, n-1]$
 - 公钥：$Q = dG$
 
 **签名过程**：
+
 ```rust
 fn ecdsa_sign(private_key: &Scalar, message: &[u8]) -> (Scalar, Scalar) {
     let z = hash_to_scalar(message);
@@ -211,6 +222,7 @@ fn ecdsa_verify(public_key: &Point, message: &[u8], signature: (Scalar, Scalar))
 
 **定义 1.5** (Merkle树)
 给定数据块集合 $\{m_1, m_2, \ldots, m_{2^k}\}$，Merkle树 $\mathcal{MT}$ 是一个完全二叉树，其中：
+
 - 叶节点：$\text{leaf}_i = H(m_i)$
 - 内部节点：$\text{node}_{i,j} = H(\text{node}_{i-1,2j} \| \text{node}_{i-1,2j+1})$
 - 根节点：$\text{root} = \text{node}_{k,0}$
@@ -299,6 +311,7 @@ impl MerkleTree {
 ## 目录结构与理论映射 (Directory Structure and Theoretical Mapping)
 
 ### 核心概念文档
+
 - [01 Blockchain Definition](01_Blockchain_Definition.md/README.md) - 区块链的形式化定义和数学模型
 - [02 Distributed Ledger](02_Distributed_Ledger.md/README.md) - 分布式账本的理论基础和一致性分析  
 - [03 Cryptographic Hash](03_Cryptographic_Hash.md/README.md) - 密码学哈希函数的安全性证明
@@ -335,21 +348,24 @@ impl MerkleTree {
 **主要攻击向量**：
 
 1. **51%攻击**：
-   ```
+
+   ```text
    攻击条件: 控制超过50%的算力/质押
    攻击效果: 双花、审查交易、回滚历史
    防护机制: 检查点机制、社会共识
    ```
 
 2. **女巫攻击**：
-   ```
+
+   ```text
    攻击方式: 创建大量虚假身份
    影响范围: P2P网络、声誉系统
    防护措施: 工作量证明、质押机制
    ```
 
 3. **Eclipse攻击**：
-   ```
+
+   ```text
    攻击目标: 隔离特定节点
    实现方法: 控制目标节点的所有连接
    防护策略: 多样化连接、随机连接
@@ -373,6 +389,7 @@ $$P_{\text{double-spend}}(\alpha, k) = \sum_{i=0}^{k} \binom{k}{i} \alpha^i (1-\
 $$\langle \mathcal{S}, \mathcal{T}, \to, s_0, \mathcal{P} \rangle$$
 
 其中：
+
 - $\to \subseteq \mathcal{S} \times \mathcal{T} \times \mathcal{S}$ 是转换关系
 - $s_0 \in \mathcal{S}$ 是初始状态
 - $\mathcal{P}$ 是原子命题集合
@@ -380,6 +397,7 @@ $$\langle \mathcal{S}, \mathcal{T}, \to, s_0, \mathcal{P} \rangle$$
 **时序逻辑规范**：
 
 使用线性时序逻辑(LTL)表达安全性质：
+
 - **安全性**：$\square(\neg \text{BadState})$
 - **活性**：$\diamond \text{GoodState}$
 - **公平性**：$\square\diamond \text{Fair} \rightarrow \square\diamond \text{Progress}$
@@ -432,6 +450,7 @@ contract BankAccount {
 **区块验证复杂度**：
 
 设区块包含 $m$ 个交易，每个交易包含 $k$ 个输入和 $l$ 个输出，则：
+
 - **签名验证**：$O(mk \log p)$
 - **UTXO查找**：$O(mk \log |\text{UTXO}|)$
 - **总复杂度**：$O(mk(\log p + \log |\text{UTXO}|))$
@@ -441,14 +460,16 @@ contract BankAccount {
 **分层架构**：
 
 1. **Layer 1 优化**：
-   ```
+
+   ```text
    分片技术: 水平分割区块链状态
    并行处理: 利用多核CPU并行验证
    状态压缩: 使用Merkle树压缩状态
    ```
 
 2. **Layer 2 解决方案**：
-   ```
+
+   ```text
    状态通道: 链下交易，链上结算
    侧链技术: 独立的区块链，双向锚定
    Rollup技术: 链下计算，链上数据可用性
@@ -516,14 +537,16 @@ impl PrunedBlockchain {
 **压缩技术**：
 
 1. **交易压缩**：
-   ```
+
+   ```text
    地址复用: 使用索引表示常用地址
    数值压缩: 变长编码表示金额
    签名聚合: BLS签名的批量验证
    ```
 
 2. **状态压缩**：
-   ```
+
+   ```text
    Merkle-Patricia Trie: 稀疏状态的高效存储
    状态差异: 只存储状态变化
    零知识证明: 状态转换的简洁证明
@@ -773,6 +796,7 @@ contract HTLC {
 $$\text{Message}: C_i \xrightarrow{\text{proof}} R \xrightarrow{\text{verification}} C_j$$
 
 **安全性分析**：
+
 - **完整性**：消息在传输过程中不被篡改
 - **真实性**：验证消息确实来自源链
 - **原子性**：跨链交易要么全部成功要么全部失败
@@ -851,6 +875,7 @@ graph TD
 ---
 
 **版本信息**：
+
 - **当前版本**：v2.0.0 (2024年12月)  
 - **核心更新**：大幅扩展理论内容，增加数学模型和实现细节
 - **文档类别**：区块链基础理论 | **维护状态**：持续更新

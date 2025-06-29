@@ -98,6 +98,7 @@ class 01BlockchainDefinition {
 ### 实际案例
 
 **案例1**: 01 Blockchain Definition在以太坊中的应用
+
 - **背景**: (待添加具体背景)
 - **实现**: (待添加技术实现细节)
 - **效果**: (待添加应用效果分析)

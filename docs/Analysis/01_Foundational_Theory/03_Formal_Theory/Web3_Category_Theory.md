@@ -12,6 +12,7 @@
 $$\mathcal{C}_{Web3} = \langle Ob(\mathcal{C}), Mor(\mathcal{C}), \circ, id \rangle$$
 
 **对象集合**：
+
 ```haskell
 data Web3Object = 
   | Account Address             -- 账户地址
@@ -32,10 +33,12 @@ $$Mor(A, B) = \{f: A \rightarrow B \mid f \text{ preserves Web3 semantics}\}$$
 $$F: \mathcal{C}_{Web3} \rightarrow \mathcal{D}_{Web3}$$
 
 满足：
+
 - $F(id_A) = id_{F(A)}$
 - $F(g \circ f) = F(g) \circ F(f)$
 
 **重要函子**：
+
 - **状态转换函子**: $State: Transaction \rightarrow StateChange$
 - **价值转移函子**: $Value: Transaction \rightarrow ValueTransfer$
 - **验证函子**: $Verify: Proof \rightarrow Boolean$
@@ -68,6 +71,7 @@ $$\mathcal{B}lockchain = \langle Blocks, Transitions, \circ, Genesis \rangle$$
 $$Consensus: \mathcal{P}roposal \rightarrow \mathcal{A}greement$$
 
 **函子性质**：
+
 - 保持提案的有效性
 - 保持决策的一致性
 - 保持时序关系
@@ -98,6 +102,7 @@ $$Contract_C = Contract_A \circ Contract_B$$
 $$Execute: \mathcal{S}martContract \rightarrow \mathcal{S}tateChange$$
 
 **属性保持**：
+
 - 确定性执行
 - 状态一致性
 - Gas消费线性性
@@ -127,6 +132,7 @@ $$\mathcal{L}iquidity = \langle Pools, Swaps, \circ, EmptyPool \rangle$$
 $$Yield: \mathcal{A}ssets \rightarrow \mathcal{R}eturns$$
 
 **函子性质**：
+
 - 风险-收益保持
 - 流动性保持
 - 可组合性
@@ -203,6 +209,7 @@ $$Connect: \mathcal{N}etwork \rightarrow \mathcal{G}raph$$
 $$Propagate: \mathcal{M}essages \rightarrow \mathcal{D}istribution$$
 
 **传播性质**：
+
 - 可达性保持
 - 时序保持
 - 完整性保持
@@ -294,6 +301,7 @@ $$Stability_n = H_n(\mathcal{S}ystem, \mathcal{P}erturbation)$$
 $$\mathcal{T}opos_{Web3} = Sheaves(\mathcal{S}ite_{Web3})$$
 
 **层条件**：
+
 - 局部性：本地验证
 - 粘合性：全局一致性
 
@@ -345,4 +353,4 @@ Web3范畴论基础为Web3系统提供了强大的数学抽象工具：
 7. **高阶结构**: 支持复杂的高阶数学结构
 8. **形式验证**: 为形式化验证提供数学基础
 
-这个范畴论框架为构建更高级的Web3理论模型（如同伦类型论模型）奠定了坚实的数学基础。 
+这个范畴论框架为构建更高级的Web3理论模型（如同伦类型论模型）奠定了坚实的数学基础。

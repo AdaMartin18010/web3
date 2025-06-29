@@ -31,6 +31,7 @@ S_{project} = \frac{Q_{quality} \cdot T_{timeline} \cdot B_{budget} \cdot R_{req
 \]
 
 其中：
+
 - \( Q_{quality} \): 质量达成度，\( Q_{quality} \in [0, 1] \)
 - \( T_{timeline} \): 时间达成度，\( T_{timeline} \in [0, 1] \)
 - \( B_{budget} \): 预算控制度，\( B_{budget} \in [0, 1] \)
@@ -69,6 +70,7 @@ E_{risk}(r_i) = P(r_i) \cdot I(r_i) \cdot \prod_{j=1}^{m} (1 - M_j(r_i))
 \]
 
 其中：
+
 - \( P(r_i) \): 风险发生概率
 - \( I(r_i) \): 风险影响程度  
 - \( M_j(r_i) \): 第 \( j \) 个缓解措施的有效性
@@ -139,37 +141,45 @@ graph TD
 - **[精益管理](01_Project_Management_Methodology/04_Lean_Management/)** - 精益原则、价值流映射
 - **[DevOps管理](01_Project_Management_Methodology/05_DevOps_Management/)** - DevOps文化、自动化管理
 
-### 7.2 进度跟踪 (Progress Tracking)
+### [7.2 进度跟踪](02_Progress_Tracking/README.md)
 
-- [**项目计划**](02_Progress_Tracking/01_Project_Planning/) - 工作分解结构、甘特图、关键路径、资源分配
-- [**里程碑管理**](02_Progress_Tracking/02_Milestone_Management/) - 里程碑定义、进度监控、里程碑报告、偏差分析
-- [**任务管理**](02_Progress_Tracking/03_Task_Management/) - 任务分解、任务分配、任务跟踪、任务依赖
-- [**时间管理**](02_Progress_Tracking/04_Time_Management/) - 时间估算、进度控制、时间优化、时间报告
-- [**资源管理**](02_Progress_Tracking/05_Resource_Management/) - 人力资源、技术资源、财务资源、资源优化
+项目进度监控与管理：
 
-### 7.3 风险管理 (Risk Management)
+- **[项目计划](02_Progress_Tracking/01_Project_Planning/)** - WBS、甘特图、关键路径
+- **[里程碑管理](02_Progress_Tracking/02_Milestone_Management/)** - 里程碑定义、进度监控
+- **[任务管理](02_Progress_Tracking/03_Task_Management/)** - 任务分解、任务跟踪
+- **[时间管理](02_Progress_Tracking/04_Time_Management/)** - 时间估算、进度控制
+- **[资源管理](02_Progress_Tracking/05_Resource_Management/)** - 人力资源、技术资源优化
 
-- [**风险识别**](03_Risk_Management/01_Risk_Identification/) - 风险清单、风险分类、风险来源、风险触发因素
-- [**风险评估**](03_Risk_Management/02_Risk_Assessment/) - 风险概率、风险影响、风险矩阵、风险优先级
-- [**风险应对**](03_Risk_Management/03_Risk_Response/) - 风险规避、风险转移、风险缓解、风险接受
-- [**风险监控**](03_Risk_Management/04_Risk_Monitoring/) - 风险跟踪、风险报告、风险预警、风险更新
-- [**应急管理**](03_Risk_Management/05_Emergency_Management/) - 应急预案、应急响应、危机管理、恢复计划
+### [7.3 风险管理](03_Risk_Management/README.md)
 
-### 7.4 团队协作 (Team Collaboration)
+全面风险识别与控制：
 
-- [**团队建设**](04_Team_Collaboration/01_Team_Building/) - 团队组建、角色定义、团队文化、团队发展
-- [**沟通管理**](04_Team_Collaboration/02_Communication_Management/) - 沟通计划、沟通渠道、沟通工具、沟通效果
-- [**冲突管理**](04_Team_Collaboration/03_Conflict_Management/) - 冲突识别、冲突分析、冲突解决、冲突预防
-- [**知识管理**](04_Team_Collaboration/04_Knowledge_Management/) - 知识共享、知识库、最佳实践、经验教训
-- [**远程协作**](04_Team_Collaboration/05_Remote_Collaboration/) - 远程团队、虚拟协作、在线工具、远程管理
+- **[风险识别](03_Risk_Management/01_Risk_Identification/)** - 风险清单、风险分类
+- **[风险评估](03_Risk_Management/02_Risk_Assessment/)** - 风险概率、风险矩阵
+- **[风险应对](03_Risk_Management/03_Risk_Response/)** - 风险规避、风险缓解
+- **[风险监控](03_Risk_Management/04_Risk_Monitoring/)** - 风险跟踪、风险预警
+- **[应急管理](03_Risk_Management/05_Emergency_Management/)** - 应急预案、危机管理
 
-### 7.5 质量管理 (Quality Management)
+### [7.4 团队协作](04_Team_Collaboration/README.md)
 
-- [**质量规划**](05_Quality_Management/01_Quality_Planning/) - 质量目标、质量标准、质量指标、质量计划
-- [**质量保证**](05_Quality_Management/02_Quality_Assurance/) - 质量审计、质量检查、质量评估、质量改进
-- [**质量控制**](05_Quality_Management/03_Quality_Control/) - 质量监控、质量测试、质量验证、质量报告
-- [**持续改进**](05_Quality_Management/04_Continuous_Improvement/) - 改进循环、改进方法、改进工具、改进文化
-- [**质量文化**](05_Quality_Management/05_Quality_Culture/) - 质量意识、质量责任、质量激励、质量培训
+高效团队建设与协作：
+
+- **[团队建设](04_Team_Collaboration/01_Team_Building/)** - 团队组建、角色定义
+- **[沟通管理](04_Team_Collaboration/02_Communication_Management/)** - 沟通计划、沟通工具
+- **[冲突管理](04_Team_Collaboration/03_Conflict_Management/)** - 冲突识别、冲突解决
+- **[知识管理](04_Team_Collaboration/04_Knowledge_Management/)** - 知识共享、最佳实践
+- **[远程协作](04_Team_Collaboration/05_Remote_Collaboration/)** - 远程团队、虚拟协作
+
+### [7.5 质量管理](05_Quality_Management/README.md)
+
+项目质量保证体系：
+
+- **[质量规划](05_Quality_Management/01_Quality_Planning/)** - 质量目标、质量标准
+- **[质量保证](05_Quality_Management/02_Quality_Assurance/)** - 质量审计、质量评估
+- **[质量控制](05_Quality_Management/03_Quality_Control/)** - 质量监控、质量验证
+- **[持续改进](05_Quality_Management/04_Continuous_Improvement/)** - 改进循环、改进方法
+- **[质量文化](05_Quality_Management/05_Quality_Culture/)** - 质量意识、质量培训
 
 ## 核心概念
 
@@ -785,247 +795,1011 @@ pub struct BurndownPoint {
 }
 ```
 
-### 风险管理系统
+### 敏捷开发风险管理系统
 
 ```rust
-use std::collections::HashMap;
+use std::collections::{HashMap, VecDeque};
 use serde::{Serialize, Deserialize};
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, Utc, Duration};
+use tokio::sync::{RwLock, Mutex};
+use std::sync::Arc;
+use uuid::Uuid;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Risk {
-    pub id: String,
-    pub name: String,
-    pub description: String,
-    pub category: RiskCategory,
-    pub probability: f64, // 0.0 - 1.0
-    pub impact: f64, // 0.0 - 1.0
-    pub severity: RiskSeverity,
-    pub status: RiskStatus,
-    pub owner: Option<String>,
-    pub mitigation_plan: String,
-    pub contingency_plan: String,
-    pub created_date: DateTime<Utc>,
-    pub updated_date: DateTime<Utc>,
-    pub due_date: Option<DateTime<Utc>>,
+/// Sprint状态
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub enum SprintStatus {
+    Planning,
+    Active,
+    Review,
+    Retrospective,
+    Completed,
+    Cancelled,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum RiskCategory {
-    Technical,
-    Business,
-    Operational,
-    Financial,
-    Legal,
-    Security,
-    Environmental,
+/// 用户故事状态
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub enum StoryStatus {
+    Backlog,
+    Selected,
+    InProgress,
+    Review,
+    Done,
+    Removed,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum RiskSeverity {
+/// 用户故事优先级
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub enum StoryPriority {
     Low,
     Medium,
     High,
     Critical,
 }
 
+/// 用户故事
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum RiskStatus {
-    Identified,
-    Assessed,
-    Mitigated,
-    Monitored,
-    Closed,
+pub struct UserStory {
+    pub id: String,
+    pub title: String,
+    pub description: String,
+    pub acceptance_criteria: Vec<String>,
+    pub story_points: u32,
+    pub priority: StoryPriority,
+    pub status: StoryStatus,
+    pub assignee: Option<String>,
+    pub epic_id: Option<String>,
+    pub tags: Vec<String>,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
+    pub completed_at: Option<DateTime<Utc>>,
 }
 
+/// Epic史诗
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct RiskMitigation {
-    pub risk_id: String,
-    pub action: String,
-    pub responsible: String,
-    pub due_date: DateTime<Utc>,
-    pub status: MitigationStatus,
-    pub cost: f64,
-    pub effectiveness: f64, // 0.0 - 1.0
+pub struct Epic {
+    pub id: String,
+    pub title: String,
+    pub description: String,
+    pub status: EpicStatus,
+    pub stories: Vec<String>,
+    pub business_value: u32,
+    pub created_at: DateTime<Utc>,
+    pub target_completion: Option<DateTime<Utc>>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum MitigationStatus {
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub enum EpicStatus {
     Planned,
     InProgress,
     Completed,
     Cancelled,
 }
 
-pub struct RiskManager {
-    risks: HashMap<String, Risk>,
-    mitigations: HashMap<String, Vec<RiskMitigation>>,
-    risk_owners: HashMap<String, String>,
+/// Sprint冲刺
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Sprint {
+    pub id: String,
+    pub name: String,
+    pub goal: String,
+    pub status: SprintStatus,
+    pub start_date: DateTime<Utc>,
+    pub end_date: DateTime<Utc>,
+    pub capacity: u32, // 团队容量（故事点）
+    pub committed_points: u32,
+    pub completed_points: u32,
+    pub stories: Vec<String>,
+    pub velocity: Option<f64>, // 完成后计算
+    pub burndown_data: Vec<BurndownPoint>,
+    pub retrospective_notes: Vec<String>,
 }
 
-impl RiskManager {
+/// 燃尽图数据点
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BurndownPoint {
+    pub date: DateTime<Utc>,
+    pub remaining_points: u32,
+    pub completed_points: u32,
+    pub ideal_remaining: u32,
+}
+
+/// 团队速度历史
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VelocityHistory {
+    pub sprint_id: String,
+    pub sprint_name: String,
+    pub planned_points: u32,
+    pub completed_points: u32,
+    pub velocity: f64,
+    pub completion_date: DateTime<Utc>,
+}
+
+/// 风险类别（敏捷特有）
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum AgileRisk {
+    ScopeCreep,        // 范围蔓延
+    TeamVelocity,      // 团队速度不稳定
+    TechnicalDebt,     // 技术债务
+    StakeholderEngagement, // 利益相关者参与度
+    QualityIssues,     // 质量问题
+    DependencyBlocking, // 依赖阻塞
+    TeamDynamics,      // 团队动态
+    ChangeResistance,  // 变更阻力
+}
+
+/// 敏捷项目风险
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AgileProjectRisk {
+    pub id: String,
+    pub risk_type: AgileRisk,
+    pub description: String,
+    pub impact_on_velocity: f64, // -1.0 到 1.0
+    pub probability: f64, // 0.0 到 1.0
+    pub severity: RiskSeverity,
+    pub detection_date: DateTime<Utc>,
+    pub mitigation_actions: Vec<String>,
+    pub owner: Option<String>,
+    pub status: RiskStatus,
+}
+
+/// 敏捷开发管理系统
+pub struct AgileManager {
+    epics: Arc<RwLock<HashMap<String, Epic>>>,
+    sprints: Arc<RwLock<HashMap<String, Sprint>>>,
+    user_stories: Arc<RwLock<HashMap<String, UserStory>>>,
+    product_backlog: Arc<RwLock<VecDeque<String>>>,
+    velocity_history: Arc<RwLock<Vec<VelocityHistory>>>,
+    risks: Arc<RwLock<HashMap<String, AgileProjectRisk>>>,
+    team_capacity: Arc<Mutex<u32>>,
+    current_sprint: Arc<RwLock<Option<String>>>,
+}
+
+impl AgileManager {
     pub fn new() -> Self {
-        RiskManager {
-            risks: HashMap::new(),
-            mitigations: HashMap::new(),
-            risk_owners: HashMap::new(),
+        Self {
+            epics: Arc::new(RwLock::new(HashMap::new())),
+            sprints: Arc::new(RwLock::new(HashMap::new())),
+            user_stories: Arc::new(RwLock::new(HashMap::new())),
+            product_backlog: Arc::new(RwLock::new(VecDeque::new())),
+            velocity_history: Arc::new(RwLock::new(Vec::new())),
+            risks: Arc::new(RwLock::new(HashMap::new())),
+            team_capacity: Arc::new(Mutex::new(40)), // 默认40故事点/Sprint
+            current_sprint: Arc::new(RwLock::new(None)),
         }
     }
-    
-    pub fn add_risk(&mut self, risk: Risk) -> Result<(), String> {
-        if self.risks.contains_key(&risk.id) {
-            return Err("Risk ID already exists".to_string());
-        }
+
+    /// 创建用户故事
+    pub async fn create_user_story(&self, mut story: UserStory) -> Result<(), String> {
+        story.id = Uuid::new_v4().to_string();
+        story.created_at = Utc::now();
+        story.updated_at = Utc::now();
         
-        self.risks.insert(risk.id.clone(), risk);
-        Ok(())
-    }
-    
-    pub fn update_risk(&mut self, risk_id: &str, risk: Risk) -> Result<(), String> {
-        if !self.risks.contains_key(risk_id) {
-            return Err("Risk not found".to_string());
-        }
+        let story_id = story.id.clone();
         
-        self.risks.insert(risk_id.to_string(), risk);
-        Ok(())
-    }
-    
-    pub fn add_mitigation(&mut self, mitigation: RiskMitigation) -> Result<(), String> {
-        if !self.risks.contains_key(&mitigation.risk_id) {
-            return Err("Risk not found".to_string());
-        }
+        // 添加到用户故事集合
+        let mut stories = self.user_stories.write().await;
+        stories.insert(story_id.clone(), story);
         
-        self.mitigations.entry(mitigation.risk_id.clone())
-            .or_insert_with(Vec::new)
-            .push(mitigation);
+        // 添加到产品待办事项列表
+        let mut backlog = self.product_backlog.write().await;
+        backlog.push_back(story_id);
         
         Ok(())
     }
-    
-    pub fn calculate_risk_exposure(&self, risk_id: &str) -> Result<f64, String> {
-        let risk = self.risks.get(risk_id)
-            .ok_or("Risk not found")?;
+
+    /// 创建Sprint
+    pub async fn create_sprint(&self, mut sprint: Sprint) -> Result<(), String> {
+        sprint.id = Uuid::new_v4().to_string();
         
-        let base_exposure = risk.probability * risk.impact;
+        // 验证Sprint时间
+        if sprint.start_date >= sprint.end_date {
+            return Err("Sprint start date must be before end date".to_string());
+        }
         
-        // 考虑缓解措施的效果
-        let mitigation_effectiveness = if let Some(mitigations) = self.mitigations.get(risk_id) {
-            let total_effectiveness: f64 = mitigations.iter()
-                .filter(|m| matches!(m.status, MitigationStatus::Completed))
-                .map(|m| m.effectiveness)
-                .sum();
-            total_effectiveness.min(1.0)
+        let sprint_id = sprint.id.clone();
+        
+        let mut sprints = self.sprints.write().await;
+        sprints.insert(sprint_id.clone(), sprint);
+        
+        // 设置为当前Sprint
+        let mut current_sprint = self.current_sprint.write().await;
+        *current_sprint = Some(sprint_id);
+        
+        Ok(())
+    }
+
+    /// 计划Sprint（选择用户故事）
+    pub async fn plan_sprint(&self, sprint_id: &str, story_ids: Vec<String>) -> Result<(), String> {
+        let mut sprints = self.sprints.write().await;
+        let sprint = sprints.get_mut(sprint_id)
+            .ok_or("Sprint not found")?;
+        
+        if !matches!(sprint.status, SprintStatus::Planning) {
+            return Err("Sprint is not in planning status".to_string());
+        }
+        
+        let stories = self.user_stories.read().await;
+        let mut total_points = 0;
+        
+        // 验证故事存在并计算总点数
+        for story_id in &story_ids {
+            let story = stories.get(story_id)
+                .ok_or(format!("Story {} not found", story_id))?;
+            
+            if !matches!(story.status, StoryStatus::Backlog) {
+                return Err(format!("Story {} is not in backlog", story_id));
+            }
+            
+            total_points += story.story_points;
+        }
+        
+        let capacity = *self.team_capacity.lock().await;
+        if total_points > capacity {
+            return Err(format!("Total story points ({}) exceed team capacity ({})", total_points, capacity));
+        }
+        
+        // 更新Sprint
+        sprint.stories = story_ids.clone();
+        sprint.committed_points = total_points;
+        
+        // 更新故事状态
+        drop(stories);
+        let mut stories = self.user_stories.write().await;
+        for story_id in &story_ids {
+            if let Some(story) = stories.get_mut(story_id) {
+                story.status = StoryStatus::Selected;
+                story.updated_at = Utc::now();
+            }
+        }
+        
+        Ok(())
+    }
+
+    /// 开始Sprint
+    pub async fn start_sprint(&self, sprint_id: &str) -> Result<(), String> {
+        let mut sprints = self.sprints.write().await;
+        let sprint = sprints.get_mut(sprint_id)
+            .ok_or("Sprint not found")?;
+        
+        if !matches!(sprint.status, SprintStatus::Planning) {
+            return Err("Sprint must be in planning status to start".to_string());
+        }
+        
+        sprint.status = SprintStatus::Active;
+        sprint.start_date = Utc::now();
+        
+        // 初始化燃尽图数据
+        sprint.burndown_data.push(BurndownPoint {
+            date: Utc::now(),
+            remaining_points: sprint.committed_points,
+            completed_points: 0,
+            ideal_remaining: sprint.committed_points,
+        });
+        
+        Ok(())
+    }
+
+    /// 更新Sprint燃尽图
+    pub async fn update_burndown(&self, sprint_id: &str) -> Result<(), String> {
+        let mut sprints = self.sprints.write().await;
+        let sprint = sprints.get_mut(sprint_id)
+            .ok_or("Sprint not found")?;
+        
+        if !matches!(sprint.status, SprintStatus::Active) {
+            return Err("Sprint is not active".to_string());
+        }
+        
+        let stories = self.user_stories.read().await;
+        let completed_points: u32 = sprint.stories.iter()
+            .filter_map(|story_id| stories.get(story_id))
+            .filter(|story| matches!(story.status, StoryStatus::Done))
+            .map(|story| story.story_points)
+            .sum();
+        
+        let remaining_points = sprint.committed_points - completed_points;
+        
+        // 计算理想剩余点数
+        let sprint_duration = sprint.end_date.signed_duration_since(sprint.start_date);
+        let elapsed_duration = Utc::now().signed_duration_since(sprint.start_date);
+        let progress_ratio = elapsed_duration.num_seconds() as f64 / sprint_duration.num_seconds() as f64;
+        let ideal_remaining = ((1.0 - progress_ratio) * sprint.committed_points as f64).max(0.0) as u32;
+        
+        sprint.burndown_data.push(BurndownPoint {
+            date: Utc::now(),
+            remaining_points,
+            completed_points,
+            ideal_remaining,
+        });
+        
+        Ok(())
+    }
+
+    /// 完成Sprint
+    pub async fn complete_sprint(&self, sprint_id: &str) -> Result<SprintMetrics, String> {
+        let mut sprints = self.sprints.write().await;
+        let sprint = sprints.get_mut(sprint_id)
+            .ok_or("Sprint not found")?;
+        
+        sprint.status = SprintStatus::Completed;
+        
+        let stories = self.user_stories.read().await;
+        let completed_points: u32 = sprint.stories.iter()
+            .filter_map(|story_id| stories.get(story_id))
+            .filter(|story| matches!(story.status, StoryStatus::Done))
+            .map(|story| story.story_points)
+            .sum();
+        
+        sprint.completed_points = completed_points;
+        
+        // 计算速度
+        let sprint_duration = sprint.end_date.signed_duration_since(sprint.start_date).num_days() as f64;
+        let velocity = completed_points as f64 / (sprint_duration / 7.0); // 每周故事点
+        sprint.velocity = Some(velocity);
+        
+        // 添加到速度历史
+        let mut velocity_history = self.velocity_history.write().await;
+        velocity_history.push(VelocityHistory {
+            sprint_id: sprint_id.to_string(),
+            sprint_name: sprint.name.clone(),
+            planned_points: sprint.committed_points,
+            completed_points,
+            velocity,
+            completion_date: Utc::now(),
+        });
+        
+        // 计算Sprint指标
+        let completion_rate = completed_points as f64 / sprint.committed_points as f64;
+        let scope_change = self.calculate_scope_change(sprint)?;
+        let quality_metrics = self.calculate_quality_metrics(sprint, &stories)?;
+        
+        Ok(SprintMetrics {
+            sprint_id: sprint_id.to_string(),
+            committed_points: sprint.committed_points,
+            completed_points,
+            completion_rate,
+            velocity,
+            scope_change,
+            quality_metrics,
+            team_satisfaction: None, // 需要手动输入
+        })
+    }
+
+    /// 计算范围变更
+    fn calculate_scope_change(&self, sprint: &Sprint) -> Result<f64, String> {
+        // 简化实现：比较最初承诺和最终故事数量
+        let initial_stories = sprint.stories.len();
+        let scope_change_ratio = if initial_stories > 0 {
+            (sprint.stories.len() as f64 - initial_stories as f64) / initial_stories as f64
         } else {
             0.0
         };
         
-        let adjusted_exposure = base_exposure * (1.0 - mitigation_effectiveness);
-        Ok(adjusted_exposure)
+        Ok(scope_change_ratio)
     }
-    
-    pub fn get_risk_matrix(&self) -> RiskMatrix {
-        let mut matrix = RiskMatrix {
-            low: 0,
-            medium: 0,
-            high: 0,
-            critical: 0,
+
+    /// 计算质量指标
+    fn calculate_quality_metrics(&self, _sprint: &Sprint, _stories: &HashMap<String, UserStory>) -> Result<QualityMetrics, String> {
+        // 简化实现：实际应用中需要集成缺陷跟踪系统
+        Ok(QualityMetrics {
+            defect_count: 0,
+            defect_density: 0.0,
+            test_coverage: 0.85,
+            code_quality_score: 0.8,
+        })
+    }
+
+    /// 预测未来Sprint容量
+    pub async fn predict_capacity(&self, future_sprints: usize) -> Result<Vec<CapacityPrediction>, String> {
+        let velocity_history = self.velocity_history.read().await;
+        
+        if velocity_history.len() < 3 {
+            return Err("Need at least 3 sprint history for prediction".to_string());
+        }
+        
+        // 计算平均速度（最近3个Sprint）
+        let recent_velocities: Vec<f64> = velocity_history.iter()
+            .rev()
+            .take(3)
+            .map(|v| v.velocity)
+            .collect();
+        
+        let avg_velocity = recent_velocities.iter().sum::<f64>() / recent_velocities.len() as f64;
+        
+        // 计算速度标准差
+        let variance = recent_velocities.iter()
+            .map(|v| (v - avg_velocity).powi(2))
+            .sum::<f64>() / recent_velocities.len() as f64;
+        let std_dev = variance.sqrt();
+        
+        let mut predictions = Vec::new();
+        
+        for i in 1..=future_sprints {
+            predictions.push(CapacityPrediction {
+                sprint_number: i,
+                predicted_velocity: avg_velocity,
+                confidence_interval: (avg_velocity - std_dev, avg_velocity + std_dev),
+                risk_factors: self.assess_velocity_risks().await?,
+            });
+        }
+        
+        Ok(predictions)
+    }
+
+    /// 评估速度风险因素
+    async fn assess_velocity_risks(&self) -> Result<Vec<String>, String> {
+        let risks = self.risks.read().await;
+        let velocity_risks: Vec<String> = risks.values()
+            .filter(|risk| matches!(risk.risk_type, AgileRisk::TeamVelocity | AgileRisk::TechnicalDebt))
+            .filter(|risk| risk.impact_on_velocity.abs() > 0.1)
+            .map(|risk| format!("{}: {}", risk.risk_type.to_string(), risk.description))
+            .collect();
+        
+        Ok(velocity_risks)
+    }
+
+    /// 添加敏捷风险
+    pub async fn add_risk(&self, risk: AgileProjectRisk) -> Result<(), String> {
+        let mut risks = self.risks.write().await;
+        risks.insert(risk.id.clone(), risk);
+        Ok(())
+    }
+
+    /// 风险评估报告
+    pub async fn generate_risk_report(&self) -> Result<AgileRiskReport, String> {
+        let risks = self.risks.read().await;
+        let velocity_history = self.velocity_history.read().await;
+        
+        let active_risks: Vec<_> = risks.values()
+            .filter(|r| !matches!(r.status, RiskStatus::Closed))
+            .collect();
+        
+        let high_impact_risks: Vec<_> = active_risks.iter()
+            .filter(|r| r.impact_on_velocity.abs() > 0.2)
+            .collect();
+        
+        let velocity_trend = if velocity_history.len() >= 2 {
+            let recent = velocity_history.last().unwrap().velocity;
+            let previous = velocity_history[velocity_history.len() - 2].velocity;
+            (recent - previous) / previous
+        } else {
+            0.0
         };
         
-        for risk in self.risks.values() {
-            match risk.severity {
-                RiskSeverity::Low => matrix.low += 1,
-                RiskSeverity::Medium => matrix.medium += 1,
-                RiskSeverity::High => matrix.high += 1,
-                RiskSeverity::Critical => matrix.critical += 1,
+        Ok(AgileRiskReport {
+            total_risks: risks.len(),
+            active_risks: active_risks.len(),
+            high_impact_risks: high_impact_risks.len(),
+            velocity_trend,
+            risk_impact_summary: self.calculate_risk_impact(&active_risks)?,
+            recommendations: self.generate_risk_recommendations(&active_risks)?,
+        })
+    }
+
+    fn calculate_risk_impact(&self, risks: &[&AgileProjectRisk]) -> Result<f64, String> {
+        let total_impact: f64 = risks.iter()
+            .map(|r| r.impact_on_velocity * r.probability)
+            .sum();
+        
+        Ok(total_impact)
+    }
+
+    fn generate_risk_recommendations(&self, risks: &[&AgileProjectRisk]) -> Result<Vec<String>, String> {
+        let mut recommendations = Vec::new();
+        
+        for risk in risks {
+            match risk.risk_type {
+                AgileRisk::TechnicalDebt => {
+                    recommendations.push("安排技术债务偿还Sprint".to_string());
+                }
+                AgileRisk::TeamVelocity => {
+                    recommendations.push("进行团队回顾会议，识别速度障碍".to_string());
+                }
+                AgileRisk::ScopeCreep => {
+                    recommendations.push("加强Product Owner培训，严格管理需求变更".to_string());
+                }
+                _ => {
+                    recommendations.push(format!("关注{}风险，制定相应缓解措施", risk.risk_type.to_string()));
+                }
             }
         }
         
-        matrix
+        Ok(recommendations)
     }
-    
-    pub fn get_high_priority_risks(&self) -> Vec<&Risk> {
-        self.risks.values()
-            .filter(|risk| {
-                matches!(risk.severity, RiskSeverity::High | RiskSeverity::Critical) &&
-                matches!(risk.status, RiskStatus::Identified | RiskStatus::Assessed)
-            })
-            .collect()
-    }
-    
-    pub fn get_overdue_risks(&self) -> Vec<&Risk> {
-        let now = Utc::now();
+
+    /// 获取团队速度趋势
+    pub async fn get_velocity_trend(&self) -> Result<VelocityTrend, String> {
+        let velocity_history = self.velocity_history.read().await;
         
-        self.risks.values()
-            .filter(|risk| {
-                if let Some(due_date) = risk.due_date {
-                    due_date < now && matches!(risk.status, RiskStatus::Identified | RiskStatus::Assessed)
-                } else {
-                    false
-                }
-            })
-            .collect()
-    }
-    
-    pub fn get_risk_report(&self) -> RiskReport {
-        let total_risks = self.risks.len();
-        let active_risks = self.risks.values()
-            .filter(|risk| matches!(risk.status, RiskStatus::Identified | RiskStatus::Assessed | RiskStatus::Mitigated))
-            .count();
-        
-        let total_exposure: f64 = self.risks.keys()
-            .filter_map(|risk_id| self.calculate_risk_exposure(risk_id).ok())
-            .sum();
-        
-        let matrix = self.get_risk_matrix();
-        
-        RiskReport {
-            total_risks,
-            active_risks,
-            total_exposure,
-            risk_matrix: matrix,
-            high_priority_risks: self.get_high_priority_risks().len(),
-            overdue_risks: self.get_overdue_risks().len(),
+        if velocity_history.is_empty() {
+            return Ok(VelocityTrend {
+                average_velocity: 0.0,
+                trend_direction: TrendDirection::Stable,
+                confidence_level: 0.0,
+                recent_velocities: Vec::new(),
+            });
         }
-    }
-    
-    pub fn get_risk(&self, risk_id: &str) -> Option<&Risk> {
-        self.risks.get(risk_id)
-    }
-    
-    pub fn get_mitigations(&self, risk_id: &str) -> Option<&Vec<RiskMitigation>> {
-        self.mitigations.get(risk_id)
-    }
-    
-    pub fn list_risks(&self) -> Vec<&Risk> {
-        self.risks.values().collect()
+        
+        let recent_velocities: Vec<f64> = velocity_history.iter()
+            .rev()
+            .take(5)
+            .map(|v| v.velocity)
+            .collect();
+        
+        let average_velocity = recent_velocities.iter().sum::<f64>() / recent_velocities.len() as f64;
+        
+        let trend_direction = if recent_velocities.len() >= 2 {
+            let recent = recent_velocities[0];
+            let older = recent_velocities[recent_velocities.len() - 1];
+            let change_rate = (recent - older) / older;
+            
+            if change_rate > 0.05 {
+                TrendDirection::Improving
+            } else if change_rate < -0.05 {
+                TrendDirection::Declining
+            } else {
+                TrendDirection::Stable
+            }
+        } else {
+            TrendDirection::Stable
+        };
+        
+        // 计算置信度（基于速度稳定性）
+        let variance = recent_velocities.iter()
+            .map(|v| (v - average_velocity).powi(2))
+            .sum::<f64>() / recent_velocities.len() as f64;
+        let cv = variance.sqrt() / average_velocity; // 变异系数
+        let confidence_level = (1.0 - cv).max(0.0).min(1.0);
+        
+        Ok(VelocityTrend {
+            average_velocity,
+            trend_direction,
+            confidence_level,
+            recent_velocities,
+        })
     }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct RiskMatrix {
-    pub low: usize,
-    pub medium: usize,
-    pub high: usize,
-    pub critical: usize,
+pub struct SprintMetrics {
+    pub sprint_id: String,
+    pub committed_points: u32,
+    pub completed_points: u32,
+    pub completion_rate: f64,
+    pub velocity: f64,
+    pub scope_change: f64,
+    pub quality_metrics: QualityMetrics,
+    pub team_satisfaction: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct RiskReport {
+pub struct QualityMetrics {
+    pub defect_count: u32,
+    pub defect_density: f64,
+    pub test_coverage: f64,
+    pub code_quality_score: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CapacityPrediction {
+    pub sprint_number: usize,
+    pub predicted_velocity: f64,
+    pub confidence_interval: (f64, f64),
+    pub risk_factors: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AgileRiskReport {
     pub total_risks: usize,
     pub active_risks: usize,
-    pub total_exposure: f64,
-    pub risk_matrix: RiskMatrix,
-    pub high_priority_risks: usize,
-    pub overdue_risks: usize,
+    pub high_impact_risks: usize,
+    pub velocity_trend: f64,
+    pub risk_impact_summary: f64,
+    pub recommendations: Vec<String>,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VelocityTrend {
+    pub average_velocity: f64,
+    pub trend_direction: TrendDirection,
+    pub confidence_level: f64,
+    pub recent_velocities: Vec<f64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub enum TrendDirection {
+    Improving,
+    Stable,
+    Declining,
+}
+
+impl AgileRisk {
+    fn to_string(&self) -> &'static str {
+        match self {
+            AgileRisk::ScopeCreep => "范围蔓延",
+            AgileRisk::TeamVelocity => "团队速度",
+            AgileRisk::TechnicalDebt => "技术债务",
+            AgileRisk::StakeholderEngagement => "利益相关者参与",
+            AgileRisk::QualityIssues => "质量问题",
+            AgileRisk::DependencyBlocking => "依赖阻塞",
+            AgileRisk::TeamDynamics => "团队动态",
+            AgileRisk::ChangeResistance => "变更阻力",
+        }
+    }
+}
+
+## 测试示例
+
+### 项目管理系统测试
+
+```rust
+#[cfg(test)]
+mod project_tests {
+    use super::*;
+    use tokio;
+
+    #[tokio::test]
+    async fn test_project_creation_and_management() {
+        let manager = ProjectManager::new();
+        
+        // 创建项目
+        let project = Project {
+            id: "web3-defi-protocol".to_string(),
+            name: "DeFi协议开发".to_string(),
+            description: "开发去中心化借贷协议".to_string(),
+            status: ProjectStatus::Planning,
+            start_date: Utc::now(),
+            end_date: Some(Utc::now() + Duration::days(90)),
+            budget: 100000.0,
+            team_members: vec!["alice".to_string(), "bob".to_string()],
+            tasks: HashMap::new(),
+            risks: Vec::new(),
+            milestones: Vec::new(),
+        };
+        
+        assert!(manager.create_project(project).await.is_ok());
+        
+        // 添加任务
+        let task = Task {
+            id: "smart-contract-dev".to_string(),
+            name: "智能合约开发".to_string(),
+            description: "开发借贷智能合约".to_string(),
+            status: TaskStatus::NotStarted,
+            assignee: Some("alice".to_string()),
+            priority: Priority::High,
+            estimated_hours: 80.0,
+            actual_hours: 0.0,
+            start_date: Some(Utc::now()),
+            due_date: Some(Utc::now() + Duration::days(14)),
+            dependencies: Vec::new(),
+        };
+        
+        assert!(manager.add_task("web3-defi-protocol", task).await.is_ok());
+        
+        // 更新任务状态
+        assert!(manager.update_task_status(
+            "web3-defi-protocol", 
+            "smart-contract-dev", 
+            TaskStatus::InProgress
+        ).await.is_ok());
+        
+        // 计算项目进度
+        let progress = manager.calculate_project_progress("web3-defi-protocol").await;
+        assert!(progress.is_ok());
+        
+        let progress = progress.unwrap();
+        assert_eq!(progress.total_tasks, 1);
+        assert_eq!(progress.in_progress_tasks, 1);
+    }
+
+    #[tokio::test]
+    async fn test_risk_management() {
+        let manager = ProjectManager::new();
+        
+        // 创建基础项目
+        let project = Project {
+            id: "nft-marketplace".to_string(),
+            name: "NFT市场平台".to_string(),
+            description: "开发NFT交易平台".to_string(),
+            status: ProjectStatus::InProgress,
+            start_date: Utc::now() - Duration::days(30),
+            end_date: Some(Utc::now() + Duration::days(60)),
+            budget: 150000.0,
+            team_members: vec!["dev1".to_string(), "dev2".to_string(), "designer".to_string()],
+            tasks: HashMap::new(),
+            risks: Vec::new(),
+            milestones: Vec::new(),
+        };
+        
+        manager.create_project(project).await.unwrap();
+        
+        // 验证项目创建成功
+        let retrieved = manager.get_project("nft-marketplace").await;
+        assert!(retrieved.is_some());
+        assert_eq!(retrieved.unwrap().name, "NFT市场平台");
+    }
+}
+
+#[cfg(test)]
+mod agile_tests {
+    use super::*;
+    use tokio;
+
+    #[tokio::test]
+    async fn test_sprint_management() {
+        let manager = AgileManager::new();
+        
+        // 创建用户故事
+        let story1 = UserStory {
+            id: String::new(), // 将由系统生成
+            title: "用户注册功能".to_string(),
+            description: "作为用户，我希望能够注册账户".to_string(),
+            acceptance_criteria: vec![
+                "用户能输入邮箱和密码".to_string(),
+                "系统验证邮箱格式".to_string(),
+                "成功注册后跳转到主页".to_string(),
+            ],
+            story_points: 5,
+            priority: StoryPriority::High,
+            status: StoryStatus::Backlog,
+            assignee: None,
+            epic_id: None,
+            tags: vec!["authentication".to_string()],
+            created_at: Utc::now(),
+            updated_at: Utc::now(),
+            completed_at: None,
+        };
+        
+        let story2 = UserStory {
+            id: String::new(),
+            title: "钱包连接功能".to_string(),
+            description: "作为用户，我希望能够连接Web3钱包".to_string(),
+            acceptance_criteria: vec![
+                "支持MetaMask连接".to_string(),
+                "显示钱包地址".to_string(),
+                "处理连接错误".to_string(),
+            ],
+            story_points: 8,
+            priority: StoryPriority::High,
+            status: StoryStatus::Backlog,
+            assignee: None,
+            epic_id: None,
+            tags: vec!["web3".to_string(), "wallet".to_string()],
+            created_at: Utc::now(),
+            updated_at: Utc::now(),
+            completed_at: None,
+        };
+        
+        // 创建用户故事
+        manager.create_user_story(story1).await.unwrap();
+        manager.create_user_story(story2).await.unwrap();
+        
+        // 创建Sprint
+        let sprint = Sprint {
+            id: String::new(), // 将由系统生成
+            name: "Sprint 1 - 基础功能".to_string(),
+            goal: "实现用户认证和钱包连接功能".to_string(),
+            status: SprintStatus::Planning,
+            start_date: Utc::now(),
+            end_date: Utc::now() + Duration::days(14),
+            capacity: 40,
+            committed_points: 0,
+            completed_points: 0,
+            stories: Vec::new(),
+            velocity: None,
+            burndown_data: Vec::new(),
+            retrospective_notes: Vec::new(),
+        };
+        
+        manager.create_sprint(sprint).await.unwrap();
+        
+        // 验证Sprint创建成功
+        let current_sprint = manager.current_sprint.read().await;
+        assert!(current_sprint.is_some());
+    }
+
+    #[tokio::test]
+    async fn test_velocity_prediction() {
+        let manager = AgileManager::new();
+        
+        // 模拟历史速度数据
+        let mut velocity_history = manager.velocity_history.write().await;
+        velocity_history.extend(vec![
+            VelocityHistory {
+                sprint_id: "sprint1".to_string(),
+                sprint_name: "Sprint 1".to_string(),
+                planned_points: 25,
+                completed_points: 23,
+                velocity: 16.1, // 23点/14天*7 ≈ 11.5点/周
+                completion_date: Utc::now() - Duration::days(28),
+            },
+            VelocityHistory {
+                sprint_id: "sprint2".to_string(),
+                sprint_name: "Sprint 2".to_string(),
+                planned_points: 30,
+                completed_points: 28,
+                velocity: 14.0,
+                completion_date: Utc::now() - Duration::days(14),
+            },
+            VelocityHistory {
+                sprint_id: "sprint3".to_string(),
+                sprint_name: "Sprint 3".to_string(),
+                planned_points: 32,
+                completed_points: 30,
+                velocity: 15.0,
+                completion_date: Utc::now(),
+            },
+        ]);
+        drop(velocity_history);
+        
+        // 预测未来容量
+        let predictions = manager.predict_capacity(3).await.unwrap();
+        
+        assert_eq!(predictions.len(), 3);
+        assert!(predictions[0].predicted_velocity > 0.0);
+        
+        // 获取速度趋势
+        let trend = manager.get_velocity_trend().await.unwrap();
+        assert!(trend.average_velocity > 0.0);
+        assert!(trend.confidence_level >= 0.0 && trend.confidence_level <= 1.0);
+    }
+}
+
+## Web3应用场景
+
+### 1. DeFi协议开发项目
+
+```yaml
+项目特点:
+  - 高安全要求
+  - 复杂的经济模型
+  - 多智能合约协作
+  - 严格的审计流程
+
+管理策略:
+  - 采用V模型确保安全性
+  - 设置多个安全检查点
+  - 实施严格的代码审查
+  - 建立应急响应机制
+
+关键里程碑:
+  - 智能合约设计完成
+  - 内部安全测试通过
+  - 外部安全审计完成
+  - 主网部署成功
+  - 流动性挖矿启动
 ```
 
-## 贡献指南
+### 2. Layer2扩容方案项目
 
-欢迎对项目管理层内容进行贡献。请确保：
+```yaml
+项目特点:
+  - 复杂的技术架构
+  - 多团队协作
+  - 高性能要求
+  - 兼容性挑战
 
-1. 所有管理方法和流程都有详细的说明和示例
-2. 包含最佳实践和常见问题解决方案
-3. 提供Rust代码实现示例
-4. 说明在Web3中的具体应用场景
-5. 关注最新的管理方法和最佳实践
+管理策略:
+  - 采用敏捷开发方法
+  - 建立跨团队协作机制
+  - 实施持续集成/部署
+  - 重视性能监控
+
+风险管理:
+  - 技术可行性风险
+  - 性能达标风险
+  - 兼容性风险
+  - 竞争对手风险
+```
+
+### 3. NFT市场平台项目
+
+```yaml
+项目特点:
+  - 用户体验要求高
+  - 市场变化快
+  - 多元化需求
+  - 社区驱动
+
+管理策略:
+  - 采用Scrum敏捷方法
+  - 快速迭代开发
+  - 重视用户反馈
+  - 数据驱动决策
+
+团队配置:
+  - Product Owner: 1人
+  - Scrum Master: 1人
+  - 前端开发: 2人
+  - 智能合约开发: 2人
+  - UI/UX设计: 1人
+  - 测试工程师: 1人
+```
+
+### 4. DAO治理系统项目
+
+```yaml
+项目特点:
+  - 去中心化决策
+  - 社区参与度高
+  - 治理机制复杂
+  - 透明度要求
+
+管理策略:
+  - 建立DAO治理流程
+  - 实施社区投票机制
+  - 公开开发进度
+  - 重视社区反馈
+
+治理代币经济:
+  - 代币分配机制
+  - 投票权重设计
+  - 激励机制设置
+  - 治理参数调整
+```
+
+## 行业最佳实践
+
+### 1. Web3项目管理原则
+
+- **透明性**: 所有决策和进度公开透明
+- **去中心化**: 避免单点决策和控制
+- **社区驱动**: 重视社区参与和反馈
+- **安全第一**: 安全性是最高优先级
+- **快速迭代**: 适应快速变化的市场环境
+
+### 2. 常见风险及应对策略
+
+**智能合约风险**:
+- 多轮代码审查
+- 外部安全审计
+- 渐进式部署
+- 应急暂停机制
+
+**监管风险**:
+- 及时跟踪监管动态
+- 建立合规框架
+- 法律咨询支持
+- 多司法管辖准备
+
+**市场风险**:
+- 多元化策略
+- 灵活的商业模式
+- 社区建设投入
+- 数据驱动决策
+
+### 3. 工具和平台推荐
+
+**项目管理工具**:
+- Jira + Confluence
+- Monday.com
+- Notion
+- Linear
+
+**代码管理**:
+- GitHub + GitHub Actions
+- GitLab CI/CD
+- Hardhat + Truffle
+- Foundry
+
+**协作沟通**:
+- Discord
+- Telegram
+- Slack
+- Zoom
+
+**监控分析**:
+- Dune Analytics
+- Grafana
+- Sentry
+- Mixpanel
+
+## 总结
+
+项目管理层作为Web3技术栈的最高层级，承担着统筹协调各技术层级、确保项目成功交付的重要职责。通过本层提供的理论基础、管理方法、实用工具和最佳实践，Web3项目团队能够：
+
+1. **建立科学的管理体系**: 结合传统项目管理和敏捷开发方法
+2. **实现有效的风险控制**: 识别、评估和缓解Web3特有风险
+3. **提升团队协作效率**: 建立高效的沟通和协作机制
+4. **保证项目质量**: 建立完整的质量保证体系
+5. **适应行业特点**: 满足Web3项目的特殊需求
+
+随着Web3技术的不断发展，项目管理层也将持续演进，整合更多创新的管理理念和工具，为Web3项目的成功提供更强有力的支撑。

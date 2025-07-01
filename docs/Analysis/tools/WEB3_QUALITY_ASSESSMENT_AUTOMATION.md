@@ -3,12 +3,14 @@
 ## 1. 工具概述
 
 ### 1.1 功能目标
+
 - 自动化理论质量评估流程
 - 多维度评估指标计算
 - 智能改进建议生成
 - 评估结果可视化展示
 
 ### 1.2 技术架构
+
 ```
 评估引擎: 指标计算 + 规则引擎
 数据层: 评估数据 + 基准数据
@@ -19,6 +21,7 @@
 ## 2. 评估引擎
 
 ### 2.1 指标计算器
+
 ```python
 class MetricCalculator:
     def __init__(self):
@@ -72,6 +75,7 @@ class MetricCalculator:
 ```
 
 ### 2.2 评估规则引擎
+
 ```python
 class AssessmentRuleEngine:
     def __init__(self):
@@ -161,6 +165,7 @@ class AssessmentRuleEngine:
 ## 3. 数据收集模块
 
 ### 3.1 评估数据收集器
+
 ```python
 class AssessmentDataCollector:
     def __init__(self):
@@ -218,6 +223,7 @@ class AssessmentDataCollector:
 ```
 
 ### 3.2 文档分析器
+
 ```python
 class DocumentAnalyzer:
     def collect(self, document_path):
@@ -276,6 +282,7 @@ class DocumentAnalyzer:
 ## 4. 可视化模块
 
 ### 4.1 评估结果可视化
+
 ```python
 class AssessmentVisualizer:
     def __init__(self):
@@ -347,6 +354,7 @@ class AssessmentVisualizer:
 ## 5. 报告生成模块
 
 ### 5.1 评估报告生成器
+
 ```python
 class AssessmentReportGenerator:
     def __init__(self):
@@ -431,6 +439,7 @@ class AssessmentReportGenerator:
 ## 6. 使用示例
 
 ### 6.1 基本使用流程
+
 ```python
 # 创建评估工具实例
 assessment_tool = QualityAssessmentAutomation()
@@ -458,6 +467,7 @@ assessment_tool.save_report(report, "assessment_report.html")
 ```
 
 ### 6.2 批量评估
+
 ```python
 # 批量评估多个目标
 targets = ["doc1.pdf", "doc2.pdf", "doc3.pdf"]
@@ -469,4 +479,4 @@ for target in targets:
 
 # 生成对比报告
 comparison_report = assessment_tool.generate_comparison_report(batch_results)
-``` 
+```

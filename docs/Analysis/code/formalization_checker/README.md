@@ -174,4 +174,4 @@ fixed_document = fixer.fix(document, issues)
 
 ## 许可证
 
-MIT License 
+MIT License

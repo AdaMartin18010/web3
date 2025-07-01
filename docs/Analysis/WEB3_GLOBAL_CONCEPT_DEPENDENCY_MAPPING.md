@@ -87,11 +87,13 @@ class ConceptDependencyMapping:
 ### ⚠️ 发现的概念冲突
 
 **冲突1: 群的定义不一致**
+
 - 位置: docs/Matter/Mathematics/Abstract_Algebra.md vs docs/Analysis/01_Theoretical_Foundations/01_Mathematical_Foundations/Group_Theory.md
 - 问题: 群的结合律表述方式不同
 - 解决方案: 统一使用标准数学表述 $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
 
 **冲突2: 图论符号混用**
+
 - 位置: 多个网络架构文档
 - 问题: 有向图和无向图符号混用
 - 解决方案: 建立统一符号约定，有向图用 $G = (V, E)$，无向图用 $G = (V, E')$
@@ -780,4 +782,4 @@ class ConceptConsistencyMetrics:
    - 实现实时冲突预警
    - 建立持续改进流程
 
-通过这个全局概念依赖图谱的建立，我们成功地将理论一致性评分从8.5提升到了9.7，为建立世界级的Web3理论体系奠定了坚实基础。 
+通过这个全局概念依赖图谱的建立，我们成功地将理论一致性评分从8.5提升到了9.7，为建立世界级的Web3理论体系奠定了坚实基础。

@@ -1080,15 +1080,13 @@ mod tests {{
                 self.process_directory_recursively(subdir)
     
     def run_enhancement(self) -> None:
-        """运行内容增强流程"""
-        logger.info("开始Web3文档内容增强流程")
-        
-        for target_dir in self.target_directories:
-            dir_path = self.base_dir / target_dir
-            self.process_directory_recursively(dir_path)
-        
+        """运行内容增强流程（自动递归所有实际存在的子目录）"""
+        logger.info("开始Web3文档内容增强流程（自动递归所有实际存在的子目录）")
+        # 自动递归 base_dir 下所有一级子目录
+        for subdir in self.base_dir.iterdir():
+            if subdir.is_dir() and not subdir.name.startswith('.'):
+                self.process_directory_recursively(subdir)
         logger.info(f"内容增强完成，共处理 {len(self.processed_files)} 个文件")
-        
         # 生成处理报告
         self.generate_enhancement_report()
     

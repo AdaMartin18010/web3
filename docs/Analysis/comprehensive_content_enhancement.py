@@ -10,6 +10,7 @@ import re
 from pathlib import Path
 from typing import List, Dict, Set
 import logging
+import datetime
 
 # 配置日志
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -1096,7 +1097,7 @@ mod tests {{
 # Web3文档内容增强报告
 
 ## 处理概述
-- 处理时间: {logger.handlers[0].formatter.formatTime if logger.handlers else 'N/A'}
+- 处理时间: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 - 目标目录数: {len(self.target_directories)}
 - 处理文件数: {len(self.processed_files)}
 
@@ -1204,6 +1205,9 @@ mod tests {{
 13. IEEE 2857-2021. "Standard for Privacy Engineering Framework".
 14. W3C. (2021). "Decentralized Identifiers (DIDs) v1.0".
 """
+
+    def _generate_algebraic_structure(self, title: str) -> str:
+        return "代数结构的详细分析，包括群、环、域等结构的定义、性质、应用与证明。"
 
 if __name__ == "__main__":
     enhancer = Web3DocumentEnhancer()

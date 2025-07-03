@@ -1,45 +1,61 @@
-# 1. Web3行业应用
 
-## 1.1 金融科技（DeFi）
+# {title}
 
-- 去中心化交易所、借贷、稳定币、支付清算、合规监管
-- 架构模式：分层架构、智能合约、链上治理、跨链资产
-- Rust/Golang代码示例、业务流程图
+## 1. 架构设计原则
 
-## 1.2 物联网（IoT）
+### 1.1 设计理念
+{design_philosophy}
 
-- 设备身份、数据上链、可信采集、分布式控制
-- 架构模式：边缘节点、区块链网关、数据溯源
-- 典型应用：智能家居、工业物联网
+### 1.2 架构模式
+{architectural_patterns}
 
-## 1.3 供应链与物流
+### 1.3 设计约束
+{design_constraints}
 
-- 资产追踪、溯源、防伪、自动结算、智能合约驱动的供应链协作
-- 架构模式：多方节点、联盟链、数据共享
+## 2. 系统架构
 
-## 1.4 游戏与数字娱乐
+### 2.1 层次架构
+{layered_architecture}
 
-- NFT资产、链上道具、去中心化游戏经济、链游治理
-- 架构模式：NFT合约、游戏资产链上化、DAO治理
+### 2.2 组件设计
+{component_design}
 
-## 1.5 社交与内容平台
+### 2.3 接口规范
+{interface_specifications}
 
-- 去中心化身份、内容激励、数据主权、社交DAO
-- 架构模式：分布式存储、内容激励合约、社交协议
+## 3. 技术实现
 
-## 1.6 医疗健康
+### 3.1 核心技术
+{core_technologies}
 
-- 健康数据上链、隐私保护、医疗数据互操作、保险理赔自动化
-- 架构模式：隐私计算、数据授权、区块链电子病历
+### 3.2 实现方案
+{implementation_approaches}
 
-## 1.7 典型业务流程与技术栈
+### 3.3 性能优化
+{performance_optimization}
 
-- 业务流程建模、智能合约驱动、跨链与互操作、数据一致性
-- Rust/Golang代码片段、流程图、表格
+## 4. 安全架构
 
-## 1.8 参考文献与外部链接
+### 4.1 安全模型
+{security_model}
 
-- [DeFi Pulse](https://defipulse.com/)
-- [IoTeX物联网区块链](https://iotex.io/)
-- [NFT标准](https://eips.ethereum.org/EIPS/eip-721)
-- [MedRec医疗区块链](https://medrec.media.mit.edu/)
+### 4.2 威胁分析
+{threat_analysis}
+
+### 4.3 防护机制
+{protection_mechanisms}
+
+## 5. 扩展性设计
+
+### 5.1 可扩展性
+{scalability}
+
+### 5.2 互操作性
+{interoperability}
+
+### 5.3 兼容性
+{compatibility}
+
+## 6. 参考文献
+
+{references}

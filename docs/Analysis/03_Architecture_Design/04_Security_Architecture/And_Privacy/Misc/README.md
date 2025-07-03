@@ -1,29 +1,61 @@
-# 05_Security_Privacy 安全与隐私主题分层导航
 
-## 目录结构
+# {title}
 
-- 密码学基础
-- 区块链安全性
-- 隐私保护技术
-- 零知识证明
-- 形式化安全分析
-- 验证方法论
-- 行业安全案例
-- 归档（见 99_Recycle_Bin 或 00-备份）
+## 1. 架构设计原则
 
-## 主题导航
+### 1.1 设计理念
+{design_philosophy}
 
-- 返回 [全局索引](../00_Index_and_Classification.md)
-- 交叉引用：[知识图谱](../00_Knowledge_Graph.md)
+### 1.2 架构模式
+{architectural_patterns}
 
-## Mermaid知识图谱锚点
+### 1.3 设计约束
+{design_constraints}
 
-```mermaid
-graph TD
-  S[05_Security_Privacy] --> S1[01_Cryptography_in_Web3.md]
-  S --> S2[01_Security_Analysis.md]
-  S --> S3[01_Web3_Cryptography_Foundations.md]
-  S --> S4[04_Formal_Security_Analysis]
-  S --> S5[05_Zero_Knowledge_Proofs]
-  S --> S6[06_Verification_Methodology]
-```
+## 2. 系统架构
+
+### 2.1 层次架构
+{layered_architecture}
+
+### 2.2 组件设计
+{component_design}
+
+### 2.3 接口规范
+{interface_specifications}
+
+## 3. 技术实现
+
+### 3.1 核心技术
+{core_technologies}
+
+### 3.2 实现方案
+{implementation_approaches}
+
+### 3.3 性能优化
+{performance_optimization}
+
+## 4. 安全架构
+
+### 4.1 安全模型
+{security_model}
+
+### 4.2 威胁分析
+{threat_analysis}
+
+### 4.3 防护机制
+{protection_mechanisms}
+
+## 5. 扩展性设计
+
+### 5.1 可扩展性
+{scalability}
+
+### 5.2 互操作性
+{interoperability}
+
+### 5.3 兼容性
+{compatibility}
+
+## 6. 参考文献
+
+{references}

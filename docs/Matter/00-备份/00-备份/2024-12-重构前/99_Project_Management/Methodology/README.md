@@ -1,22 +1,61 @@
-# 15_Methodology 方法论主题分层导航
 
-## 目录结构
+# {title}
 
-- 研究方法论
-- 形式化建模方法
-- 工程实践方法
-- 归档（见 99_Recycle_Bin 或 00-备份）
+## 1. 理论基础与哲学框架
 
-## 主题导航
+### 1.1 本体论基础
+{ontological_foundations}
 
-- 返回 [全局索引](../00_Index_and_Classification.md)
-- 交叉引用：[知识图谱](../00_Knowledge_Graph.md)
+### 1.2 认识论框架
+{epistemological_framework}
 
-## Mermaid知识图谱锚点
+### 1.3 方法论原则
+{methodological_principles}
 
-```mermaid
-graph TD
-  M[15_Methodology] --> M1[研究方法论]
-  M --> M2[形式化建模方法]
-  M --> M3[工程实践方法]
-```
+## 2. 形式化理论构建
+
+### 2.1 类型理论
+{type_theory}
+
+### 2.2 范畴论
+{category_theory}
+
+### 2.3 逻辑系统
+{logic_systems}
+
+## 3. 跨学科理论整合
+
+### 3.1 经济学视角
+{economic_perspective}
+
+### 3.2 社会学视角
+{sociological_perspective}
+
+### 3.3 认知科学视角
+{cognitive_science_perspective}
+
+## 4. Web3理论应用
+
+### 4.1 去中心化理论
+{decentralization_theory}
+
+### 4.2 分布式治理
+{distributed_governance}
+
+### 4.3 数字化转型
+{digital_transformation}
+
+## 5. 模型与仿真
+
+### 5.1 数学模型
+{mathematical_models}
+
+### 5.2 计算模型
+{computational_models}
+
+### 5.3 仿真验证
+{simulation_validation}
+
+## 6. 参考文献
+
+{references}

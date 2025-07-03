@@ -1,177 +1,61 @@
-# Web3理论形式化检查器
 
-## 项目概述
+# {title}
 
-Web3理论形式化检查器是一个自动化工具，用于检查Web3理论文档中的数学符号使用、定理证明格式和假设条件的规范性。该工具帮助研究人员和开发者确保理论文档的一致性、完整性和准确性。
+## 1. 理论基础与哲学框架
 
-## 功能特性
+### 1.1 本体论基础
+{ontological_foundations}
 
-- **符号检查**: 验证数学符号的定义和使用是否符合规范
-- **证明验证**: 检查定理证明的结构完整性和逻辑正确性
-- **假设分析**: 验证假设条件的明确性和分类正确性
-- **改进建议**: 提供具体的改进建议和修正方案
+### 1.2 认识论框架
+{epistemological_framework}
 
-## 安装指南
+### 1.3 方法论原则
+{methodological_principles}
 
-### 前提条件
+## 2. 形式化理论构建
 
-- Python 3.8+
-- pip 包管理器
+### 2.1 类型理论
+{type_theory}
 
-### 安装步骤
+### 2.2 范畴论
+{category_theory}
 
-```bash
-# 克隆仓库
-git clone https://github.com/yourusername/web3-formalization-checker.git
-cd web3-formalization-checker
+### 2.3 逻辑系统
+{logic_systems}
 
-# 创建虚拟环境
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# 或
-venv\Scripts\activate  # Windows
+## 3. 跨学科理论整合
 
-# 安装依赖
-pip install -r requirements.txt
-```
+### 3.1 经济学视角
+{economic_perspective}
 
-## 使用方法
+### 3.2 社会学视角
+{sociological_perspective}
 
-### 命令行使用
+### 3.3 认知科学视角
+{cognitive_science_perspective}
 
-```bash
-# 检查单个文档
-python checker.py check --file document.md
+## 4. Web3理论应用
 
-# 检查整个目录
-python checker.py check-dir --dir ./docs
+### 4.1 去中心化理论
+{decentralization_theory}
 
-# 生成详细报告
-python checker.py check --file document.md --report detailed
+### 4.2 分布式治理
+{distributed_governance}
 
-# 自动修正
-python checker.py check --file document.md --auto-fix
-```
+### 4.3 数字化转型
+{digital_transformation}
 
-### 配置文件
+## 5. 模型与仿真
 
-在项目根目录创建 `.web3-checker.yml` 文件:
+### 5.1 数学模型
+{mathematical_models}
 
-```yaml
-rules:
-  enable_all: true
-  exclude_rules: ["SYM_003"]
-  
-output:
-  format: "json"
-  include_suggestions: true
-  
-severity:
-  min_level: "WARNING"
-```
+### 5.2 计算模型
+{computational_models}
 
-## 项目结构
+### 5.3 仿真验证
+{simulation_validation}
 
-```
-web3-formalization-checker/
-├── checker.py               # 主程序入口
-├── requirements.txt         # 项目依赖
-├── .web3-checker.yml        # 默认配置文件
-├── docs/                    # 文档
-└── src/
-    ├── __init__.py
-    ├── parser/              # 解析器模块
-    │   ├── __init__.py
-    │   ├── markdown_parser.py
-    │   └── latex_parser.py
-    ├── rules/               # 规则引擎
-    │   ├── __init__.py
-    │   ├── symbol_rules.py
-    │   ├── proof_rules.py
-    │   └── assumption_rules.py
-    ├── reporter/            # 报告生成器
-    │   ├── __init__.py
-    │   ├── json_reporter.py
-    │   ├── markdown_reporter.py
-    │   └── html_reporter.py
-    └── utils/               # 工具函数
-        ├── __init__.py
-        └── helpers.py
-```
+## 6. 参考文献
 
-## 开发指南
-
-### 设置开发环境
-
-```bash
-# 安装开发依赖
-pip install -r requirements-dev.txt
-
-# 运行测试
-pytest
-```
-
-### 添加新规则
-
-1. 在 `src/rules/` 目录下创建规则文件
-2. 实现 `Rule` 接口
-3. 在规则注册表中注册新规则
-
-示例:
-
-```python
-from src.rules.base import Rule
-
-class NewSymbolRule(Rule):
-    def __init__(self):
-        self.id = "SYM_004"
-        self.name = "新符号规则"
-        self.severity = "WARNING"
-    
-    def check(self, document):
-        # 实现检查逻辑
-        issues = []
-        # ...
-        return issues
-```
-
-## API参考
-
-### 主要类
-
-- `DocumentParser`: 解析文档内容
-- `RuleEngine`: 执行规则检查
-- `Reporter`: 生成检查报告
-- `Fixer`: 自动修正问题
-
-### 关键方法
-
-```python
-# 解析文档
-parser = DocumentParser()
-document = parser.parse("document.md")
-
-# 执行规则检查
-engine = RuleEngine()
-issues = engine.check(document)
-
-# 生成报告
-reporter = Reporter()
-report = reporter.generate(issues)
-
-# 自动修正
-fixer = Fixer()
-fixed_document = fixer.fix(document, issues)
-```
-
-## 贡献指南
-
-1. Fork 仓库
-2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
-3. 提交更改 (`git commit -m 'Add amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 创建 Pull Request
-
-## 许可证
-
-MIT License
+{references}

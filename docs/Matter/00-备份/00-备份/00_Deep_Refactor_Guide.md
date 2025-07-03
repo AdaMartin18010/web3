@@ -1,38 +1,61 @@
-# Web3 知识体系内容深度重构与批量导出指南
 
-## 一、内容深度重构原则
+# {title}
 
-- 严格分层编号，主题递归细化，避免重复。
-- 采用多表征（定义、定理、证明、图表、代码、流程图等）。
-- 论证与证明过程完整，符合学术规范。
-- 优先采用 Rust/Golang 代码示例。
-- 所有数学表达式用 LaTeX 规范。
-- Markdown 语义注释清晰。
+## 1. 理论基础与哲学框架
 
-## 二、批量导出方法
+### 1.1 本体论基础
+{ontological_foundations}
 
-- 推荐使用自动化脚本（如 00_Auto_Archive_Script.py）批量整理、归档、导出。
-- 可结合 Pandoc、Typora、LaTeX 工具链批量导出 PDF/HTML/Word。
-- 导出时保留分层结构与编号，支持交叉引用。
+### 1.2 认识论框架
+{epistemological_framework}
 
-## 三、自动化工具链
+### 1.3 方法论原则
+{methodological_principles}
 
-- 归档/重命名/整理脚本
-- Mermaid/Graphviz 知识图谱自动生成
-- 全局索引与导航自动生成
-- 持续集成（CI）自动校验分层与编号一致性
+## 2. 形式化理论构建
 
-## 四、内容规范
+### 2.1 类型理论
+{type_theory}
 
-- 主题文件结构：目录、定义、定理、证明、代码、图表、表格、参考文献
-- 交叉引用采用相对路径，便于本地与远程一致
-- 归档材料统一迁移至 00-备份 或 99_Recycle_Bin
+### 2.2 范畴论
+{category_theory}
 
-## 五、持续集成建议
+### 2.3 逻辑系统
+{logic_systems}
 
-- 建议结合 GitHub Actions/CI 工具，自动校验分层编号、交叉引用、内容规范性
-- 变更自动归档，历史可追溯
+## 3. 跨学科理论整合
 
----
+### 3.1 经济学视角
+{economic_perspective}
 
-如需批量重构、导出、归档、导航、知识网络可视化，直接运行相关脚本或按本指南操作。
+### 3.2 社会学视角
+{sociological_perspective}
+
+### 3.3 认知科学视角
+{cognitive_science_perspective}
+
+## 4. Web3理论应用
+
+### 4.1 去中心化理论
+{decentralization_theory}
+
+### 4.2 分布式治理
+{distributed_governance}
+
+### 4.3 数字化转型
+{digital_transformation}
+
+## 5. 模型与仿真
+
+### 5.1 数学模型
+{mathematical_models}
+
+### 5.2 计算模型
+{computational_models}
+
+### 5.3 仿真验证
+{simulation_validation}
+
+## 6. 参考文献
+
+{references}

@@ -5,6 +5,7 @@
 ### 1.1 逻辑验证
 
 **命题逻辑验证器**:
+
 ```python
 class PropositionalLogicVerifier:
     def __init__(self):
@@ -42,6 +43,7 @@ class PropositionalLogicVerifier:
 ### 1.2 模态逻辑验证
 
 **模态逻辑检查器**:
+
 ```python
 class ModalLogicChecker:
     def __init__(self, accessibility_relation):
@@ -76,6 +78,7 @@ class ModalLogicChecker:
 ### 2.1 CTL模型检查
 
 **CTL模型检查器**:
+
 ```python
 class CTLModelChecker:
     def __init__(self, transition_system):
@@ -126,6 +129,7 @@ class CTLModelChecker:
 ### 2.2 LTL模型检查
 
 **LTL模型检查器**:
+
 ```python
 class LTLModelChecker:
     def __init__(self, transition_system):
@@ -179,6 +183,7 @@ class LTLModelChecker:
 ### 3.1 自然演绎系统
 
 **自然演绎证明器**:
+
 ```python
 class NaturalDeductionProver:
     def __init__(self):
@@ -223,6 +228,7 @@ class NaturalDeductionProver:
 ### 3.2 归结证明
 
 **归结证明器**:
+
 ```python
 class ResolutionProver:
     def __init__(self):
@@ -281,6 +287,7 @@ class ResolutionProver:
 ### 4.1 蒙特卡洛仿真
 
 **蒙特卡洛验证器**:
+
 ```python
 class MonteCarloVerifier:
     def __init__(self, system_model, num_samples=10000):
@@ -332,6 +339,7 @@ class MonteCarloVerifier:
 ### 4.2 统计模型检查
 
 **统计模型检查器**:
+
 ```python
 class StatisticalModelChecker:
     def __init__(self, system_model):
@@ -367,6 +375,7 @@ class StatisticalModelChecker:
 ### 5.1 复杂度分析
 
 **复杂度分析器**:
+
 ```python
 class ComplexityAnalyzer:
     def __init__(self):
@@ -427,6 +436,7 @@ class ComplexityAnalyzer:
 ### 5.2 资源使用验证
 
 **资源验证器**:
+
 ```python
 class ResourceVerifier:
     def __init__(self):
@@ -491,6 +501,7 @@ class ResourceVerifier:
 ## 6. 验证报告生成
 
 **验证报告生成器**:
+
 ```python
 class VerificationReportGenerator:
     def __init__(self):
@@ -535,4 +546,4 @@ class VerificationReportGenerator:
         return recommendations
 ```
 
-这个验证框架提供了全面的AI理论验证能力，包括形式化验证、模型检查、定理证明、仿真验证和性能验证等多个方面。 
+这个验证框架提供了全面的AI理论验证能力，包括形式化验证、模型检查、定理证明、仿真验证和性能验证等多个方面。

@@ -5,6 +5,7 @@
 ### 1.1 实验管理器
 
 **实验管理器核心**:
+
 ```python
 class ExperimentManager:
     def __init__(self, config_path=None):
@@ -67,6 +68,7 @@ class ExperimentManager:
 ### 1.2 实验配置系统
 
 **配置管理器**:
+
 ```python
 class ExperimentConfigManager:
     def __init__(self):
@@ -114,6 +116,7 @@ class ExperimentConfigManager:
 ### 2.1 形式化验证实验
 
 **形式化验证实验器**:
+
 ```python
 class FormalVerificationExperimenter:
     def __init__(self, verification_tools):
@@ -182,6 +185,7 @@ class FormalVerificationExperimenter:
 ### 2.2 定理证明实验
 
 **定理证明实验器**:
+
 ```python
 class TheoremProvingExperimenter:
     def __init__(self, proof_systems):
@@ -262,6 +266,7 @@ class TheoremProvingExperimenter:
 ### 3.1 算法性能测试
 
 **算法性能测试器**:
+
 ```python
 class AlgorithmPerformanceTester:
     def __init__(self, benchmark_suites):
@@ -353,6 +358,7 @@ class AlgorithmPerformanceTester:
 ### 3.2 资源使用测试
 
 **资源使用测试器**:
+
 ```python
 class ResourceUsageTester:
     def __init__(self):
@@ -436,6 +442,7 @@ class ResourceUsageTester:
 ### 4.1 K折交叉验证
 
 **K折交叉验证器**:
+
 ```python
 class KFoldCrossValidator:
     def __init__(self, k=5):
@@ -515,6 +522,7 @@ class KFoldCrossValidator:
 ### 4.2 蒙特卡洛交叉验证
 
 **蒙特卡洛交叉验证器**:
+
 ```python
 class MonteCarloCrossValidator:
     def __init__(self, num_iterations=100, train_ratio=0.8):
@@ -581,6 +589,7 @@ class MonteCarloCrossValidator:
 ### 5.1 报告生成器
 
 **实验报告生成器**:
+
 ```python
 class ExperimentReportGenerator:
     def __init__(self, template_path=None):
@@ -638,6 +647,7 @@ class ExperimentReportGenerator:
 ### 5.2 数据导出器
 
 **数据导出器**:
+
 ```python
 class ExperimentDataExporter:
     def __init__(self):
@@ -680,6 +690,7 @@ class ExperimentDataExporter:
 ## 6. 实验自动化脚本
 
 **主实验自动化脚本**:
+
 ```python
 #!/usr/bin/env python3
 """
@@ -749,4 +760,4 @@ if __name__ == '__main__':
     main()
 ```
 
-这个实验自动化工具提供了完整的AI理论实验框架，包括实验管理、理论验证、性能测试、交叉验证、报告生成和数据导出等功能。 
+这个实验自动化工具提供了完整的AI理论实验框架，包括实验管理、理论验证、性能测试、交叉验证、报告生成和数据导出等功能。

@@ -1031,4 +1031,4 @@ describe('DApp Integration', () => {
 2. "Ethers.js Documentation" - Ethers.js Team
 3. "Hardhat Documentation" - Nomic Labs
 4. "React Web3 Development" - MetaMask Team
-5. "TypeScript Web3 Development" - Microsoft 
+5. "TypeScript Web3 Development" - Microsoft

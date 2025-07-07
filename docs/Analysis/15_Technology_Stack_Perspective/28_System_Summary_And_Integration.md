@@ -301,7 +301,7 @@ class EventStore {
 
 **性能定理证明**:
 
-```
+```text
 Theorem: 内存安全语言性能优势
 Proof: 通过渐近分析
 - T_manual = O(n) * C_runtime
@@ -312,7 +312,7 @@ Proof: 通过渐近分析
 
 **安全定理证明**:
 
-```
+```text
 Theorem: 类型安全防止运行时错误
 Proof: 通过类型系统证明
 - Type checking: 编译时类型检查
@@ -324,7 +324,7 @@ Proof: 通过类型系统证明
 
 **演绎推理**:
 
-```
+```text
 Premise 1: 高性能要求 → 选择编译型语言
 Premise 2: 项目需要高性能
 Conclusion: 选择编译型语言
@@ -332,7 +332,7 @@ Conclusion: 选择编译型语言
 
 **归纳推理**:
 
-```
+```text
 Pattern: Rust adoption increasing
 Evidence: GitHub stars, job market, community growth
 Prediction: Rust will continue to grow
@@ -340,7 +340,7 @@ Prediction: Rust will continue to grow
 
 **类比推理**:
 
-```
+```text
 Mapping: Rust-C++ performance comparison
 Similarity: High performance, system-level programming
 Difference: Rust adds memory safety

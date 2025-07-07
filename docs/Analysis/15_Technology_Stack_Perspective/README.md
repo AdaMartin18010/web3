@@ -215,14 +215,14 @@ class RustWeb3Stack:
 
 ### Go技术栈生态
 
-#### 核心优势
+#### 核心优势1
 
 - **并发原语** - goroutines和channels
 - **快速编译** - 编译速度快
 - **标准库丰富** - 内置网络和并发支持
 - **部署简单** - 单二进制文件部署
 
-#### Web3应用场景
+#### Web3应用场景1
 
 ```python
 class GoWeb3Stack:

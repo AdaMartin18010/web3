@@ -149,7 +149,7 @@
 
 **执行效率评估**:
 
-```
+```text
 编译型语言: O(1) 编译时间 + O(n) 执行时间
 解释型语言: O(n) 解释时间 + O(n) 执行时间
 JIT编译: O(1) 编译时间 + O(n) 执行时间 + O(1) 优化时间
@@ -157,7 +157,7 @@ JIT编译: O(1) 编译时间 + O(n) 执行时间 + O(1) 优化时间
 
 **内存管理评估**:
 
-```
+```text
 手动管理: 精确控制，但容易出错
 自动管理: 安全可靠，但有GC开销
 智能管理: 结合两者优势
@@ -165,7 +165,7 @@ JIT编译: O(1) 编译时间 + O(n) 执行时间 + O(1) 优化时间
 
 **并发性能评估**:
 
-```
+```text
 线程模型: 高并发，但资源消耗大
 协程模型: 轻量级，适合IO密集型
 事件模型: 非阻塞，适合高并发
@@ -175,7 +175,7 @@ JIT编译: O(1) 编译时间 + O(n) 执行时间 + O(1) 优化时间
 
 **内存安全评估**:
 
-```
+```text
 边界检查: 防止缓冲区溢出
 类型安全: 防止类型错误
 所有权系统: 防止内存泄漏
@@ -183,7 +183,7 @@ JIT编译: O(1) 编译时间 + O(n) 执行时间 + O(1) 优化时间
 
 **网络安全评估**:
 
-```
+```text
 认证机制: 身份验证、多因素认证
 授权机制: 权限控制、角色管理
 加密传输: TLS/SSL、端到端加密
@@ -191,7 +191,7 @@ JIT编译: O(1) 编译时间 + O(n) 执行时间 + O(1) 优化时间
 
 **应用安全评估**:
 
-```
+```text
 输入验证: 防止注入攻击
 输出编码: 防止XSS攻击
 安全模式: 最小权限原则
@@ -201,7 +201,7 @@ JIT编译: O(1) 编译时间 + O(n) 执行时间 + O(1) 优化时间
 
 **学习曲线评估**:
 
-```
+```text
 语言复杂度: 语法简洁性、概念清晰度
 文档质量: 完整性、准确性、更新频率
 社区支持: 活跃度、响应速度、资源丰富度
@@ -209,7 +209,7 @@ JIT编译: O(1) 编译时间 + O(n) 执行时间 + O(1) 优化时间
 
 **开发工具评估**:
 
-```
+```text
 IDE支持: 智能提示、调试工具、重构支持
 自动化工具: 构建工具、测试工具、部署工具
 开发体验: 开发效率、调试便利性、错误提示
@@ -219,7 +219,7 @@ IDE支持: 智能提示、调试工具、重构支持
 
 **水平扩展评估**:
 
-```
+```text
 负载均衡: 请求分发、健康检查、故障转移
 服务发现: 动态注册、服务发现、负载均衡
 自动扩缩容: 基于指标、预测性扩缩容
@@ -227,7 +227,7 @@ IDE支持: 智能提示、调试工具、重构支持
 
 **垂直扩展评估**:
 
-```
+```text
 资源优化: CPU、内存、存储优化
 性能调优: 算法优化、缓存策略、数据库优化
 架构重构: 模块化、微服务化、容器化
@@ -239,7 +239,7 @@ IDE支持: 智能提示、调试工具、重构支持
 
 **性能定理证明**:
 
-```
+```text
 Theorem: 内存安全语言性能优势
 Given: C_compile < C_runtime
 Proof: T_manual = O(n) * C_runtime
@@ -249,7 +249,7 @@ Proof: T_manual = O(n) * C_runtime
 
 **安全定理证明**:
 
-```
+```text
 Theorem: 类型安全防止运行时错误
 Given: Type checking at compile time
 Proof: Type safety guarantees runtime safety
@@ -258,7 +258,7 @@ Proof: Type safety guarantees runtime safety
 
 **架构定理证明**:
 
-```
+```text
 Theorem: 微服务架构提高可扩展性
 Given: Service independence and data isolation
 Proof: Independent scaling and deployment
@@ -269,7 +269,7 @@ Proof: Independent scaling and deployment
 
 **演绎推理**:
 
-```
+```text
 Premise 1: 高性能要求 → 选择编译型语言
 Premise 2: 项目需要高性能
 Conclusion: 选择编译型语言
@@ -277,7 +277,7 @@ Conclusion: 选择编译型语言
 
 **归纳推理**:
 
-```
+```text
 Pattern: Rust adoption increasing
 Evidence: GitHub stars, job market, community growth
 Prediction: Rust will continue to grow
@@ -285,7 +285,7 @@ Prediction: Rust will continue to grow
 
 **类比推理**:
 
-```
+```text
 Mapping: Rust-C++ performance comparison
 Similarity: High performance, system-level programming
 Difference: Rust adds memory safety
@@ -296,7 +296,7 @@ Inference: Rust will succeed like C++
 
 **模型检查**:
 
-```
+```text
 SPIN: 并发系统验证
 NuSMV: 符号模型检查
 UPPAAL: 实时系统验证
@@ -304,7 +304,7 @@ UPPAAL: 实时系统验证
 
 **定理证明**:
 
-```
+```text
 Coq: 类型安全证明
 Isabelle: 密码学协议证明
 Lean: 数学定理证明
@@ -370,7 +370,7 @@ class TechnologySelector {
 
 **技术风险评估**:
 
-```
+```text
 成熟度风险: 技术成熟度、社区支持、文档质量
 性能风险: 性能瓶颈、扩展性限制、资源消耗
 安全风险: 安全漏洞、隐私问题、合规风险
@@ -379,7 +379,7 @@ class TechnologySelector {
 
 **项目风险评估**:
 
-```
+```text
 团队风险: 技能匹配、学习成本、人员流动
 时间风险: 开发周期、交付压力、变更影响
 成本风险: 开发成本、运维成本、许可费用

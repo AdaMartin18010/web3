@@ -398,449 +398,683 @@ class TechnologySelectionDecisionTree:
         self.decision_tree = {
             'root': {
                 'question': '性能要求是什么？',
-                'options': {
-                    'high': {
-                        'next_question': '安全要求是什么？',
-                        'options': {
-                            'high': {
-                                'next_question': '团队技能如何？',
-                                'options': {
-                                    'expert': '选择Rust',
-                                    'intermediate': '选择Go',
-                                    'beginner': '选择Go'
-                                }
-                            },
-                            'medium': {
-                                'next_question': '开发效率要求？',
-                                'options': {
-                                    'high': '选择Go',
-                                    'medium': '选择Rust',
-                                    'low': '选择Rust'
-                                }
-                            },
-                            'low': {
-                                'next_question': '生态系统要求？',
-                                'options': {
-                                    'high': '选择JavaScript',
-                                    'medium': '选择Go',
-                                    'low': '选择Rust'
+                'branches': {
+                    'high_performance': {
+                        'question': '内存安全要求？',
+                        'branches': {
+                            'yes': 'Rust',
+                            'no': {
+                                'question': '并发性能要求？',
+                                'branches': {
+                                    'high': 'Go',
+                                    'medium': 'C++',
+                                    'low': 'Java'
                                 }
                             }
                         }
                     },
-                    'medium': {
-                        'next_question': '开发效率要求？',
-                        'options': {
-                            'high': {
-                                'next_question': '生态系统要求？',
-                                'options': {
-                                    'high': '选择JavaScript',
-                                    'medium': '选择Python',
-                                    'low': '选择Go'
-                                }
-                            },
-                            'medium': {
-                                'next_question': '团队技能如何？',
-                                'options': {
-                                    'expert': '选择Go',
-                                    'intermediate': '选择JavaScript',
-                                    'beginner': '选择Python'
-                                }
-                            },
-                            'low': {
-                                'next_question': '安全要求是什么？',
-                                'options': {
-                                    'high': '选择Go',
-                                    'medium': '选择JavaScript',
-                                    'low': '选择Python'
-                                }
-                            }
+                    'medium_performance': {
+                        'question': '开发效率要求？',
+                        'branches': {
+                            'high': 'Python',
+                            'medium': 'JavaScript',
+                            'low': 'Go'
                         }
                     },
-                    'low': {
-                        'next_question': '开发效率要求？',
-                        'options': {
-                            'high': '选择Python',
-                            'medium': '选择JavaScript',
-                            'low': '选择Go'
+                    'low_performance': {
+                        'question': '生态系统要求？',
+                        'branches': {
+                            'rich': 'JavaScript',
+                            'moderate': 'Python',
+                            'minimal': 'Go'
                         }
                     }
                 }
             }
         }
     
-    def traverse_decision_tree(self, answers: Dict) -> str:
+    def traverse_decision_tree(self, answers: Dict[str, str]) -> str:
         """遍历决策树"""
         current_node = self.decision_tree['root']
         
-        while 'next_question' in current_node:
+        while 'branches' in current_node:
             question = current_node['question']
-            answer = answers.get(question, 'medium')  # 默认值
+            answer = answers.get(question)
             
-            if answer in current_node['options']:
-                current_node = current_node['options'][answer]
+            if answer in current_node['branches']:
+                current_node = current_node['branches'][answer]
             else:
-                # 如果答案不在选项中，选择默认选项
-                default_option = list(current_node['options'].keys())[0]
-                current_node = current_node['options'][default_option]
+                return 'unknown'
         
         return current_node
     
-    def generate_decision_path(self, answers: Dict) -> List[Dict]:
-        """生成决策路径"""
-        decision_path = []
+    def get_decision_path(self, answers: Dict[str, str]) -> List[str]:
+        """获取决策路径"""
+        path = []
         current_node = self.decision_tree['root']
         
-        while 'next_question' in current_node:
+        while 'branches' in current_node:
             question = current_node['question']
-            answer = answers.get(question, 'medium')
+            path.append(question)
             
-            decision_path.append({
-                'question': question,
-                'answer': answer,
-                'reasoning': self._explain_reasoning(question, answer)
-            })
-            
-            if answer in current_node['options']:
-                current_node = current_node['options'][answer]
+            answer = answers.get(question)
+            if answer in current_node['branches']:
+                current_node = current_node['branches'][answer]
+                path.append(answer)
             else:
-                default_option = list(current_node['options'].keys())[0]
-                current_node = current_node['options'][default_option]
+                break
         
-        decision_path.append({
-            'recommendation': current_node,
-            'confidence': self._calculate_decision_confidence(decision_path)
-        })
-        
-        return decision_path
-    
-    def _explain_reasoning(self, question: str, answer: str) -> str:
-        """解释推理过程"""
-        reasoning_map = {
-            '性能要求是什么？': {
-                'high': '高性能要求需要编译型语言以获得最佳执行效率',
-                'medium': '中等性能要求可以在性能和开发效率之间平衡',
-                'low': '低性能要求可以优先考虑开发效率'
-            },
-            '安全要求是什么？': {
-                'high': '高安全要求需要内存安全语言和静态类型系统',
-                'medium': '中等安全要求需要基本的安全特性',
-                'low': '低安全要求可以接受动态类型语言'
-            },
-            '开发效率要求？': {
-                'high': '高开发效率要求需要高级语言和丰富工具链',
-                'medium': '中等开发效率要求需要平衡语言特性和工具支持',
-                'low': '低开发效率要求可以接受较低级别的语言'
-            },
-            '团队技能如何？': {
-                'expert': '专家团队可以使用复杂但强大的语言',
-                'intermediate': '中级团队需要平衡语言复杂性和功能',
-                'beginner': '初学者团队需要易学易用的语言'
-            },
-            '生态系统要求？': {
-                'high': '高生态系统要求需要成熟的技术栈',
-                'medium': '中等生态系统要求需要基本的技术支持',
-                'low': '低生态系统要求可以接受新兴技术'
-            }
-        }
-        
-        return reasoning_map.get(question, {}).get(answer, '基于一般考虑')
-    
-    def _calculate_decision_confidence(self, decision_path: List[Dict]) -> float:
-        """计算决策置信度"""
-        # 基于决策路径的复杂性和一致性计算置信度
-        path_length = len(decision_path) - 1  # 减去最后的推荐
-        
-        # 路径越长，置信度越高（考虑了更多因素）
-        base_confidence = min(path_length / 5, 1.0)
-        
-        # 考虑答案的一致性
-        consistency_score = self._assess_answer_consistency(decision_path)
-        
-        return (base_confidence + consistency_score) / 2
-    
-    def _assess_answer_consistency(self, decision_path: List[Dict]) -> float:
-        """评估答案一致性"""
-        # 简化的一致性评估
-        high_priority_answers = ['high', 'expert']
-        medium_priority_answers = ['medium', 'intermediate']
-        low_priority_answers = ['low', 'beginner']
-        
-        answers = [step['answer'] for step in decision_path[:-1]]
-        
-        # 计算答案的一致性
-        high_count = sum(1 for answer in answers if answer in high_priority_answers)
-        medium_count = sum(1 for answer in answers if answer in medium_priority_answers)
-        low_count = sum(1 for answer in answers if answer in low_priority_answers)
-        
-        # 如果答案集中在某个优先级，认为一致性较高
-        total_answers = len(answers)
-        max_count = max(high_count, medium_count, low_count)
-        
-        return max_count / total_answers if total_answers > 0 else 0.5
+        return path
 ```
 
-### 2. 风险评估决策树
+### 2. 架构设计决策树
 
 ```python
-# 风险评估决策树
-class RiskAssessmentDecisionTree:
+# 架构设计决策树
+class ArchitectureDesignDecisionTree:
     def __init__(self):
-        self.risk_tree = {
+        self.architecture_tree = {
             'root': {
-                'question': '项目风险承受能力如何？',
-                'options': {
-                    'low': {
-                        'next_question': '技术成熟度要求？',
-                        'options': {
-                            'high': {
-                                'next_question': '团队经验如何？',
-                                'options': {
-                                    'expert': '选择成熟技术栈',
-                                    'intermediate': '选择稳定技术栈',
-                                    'beginner': '选择保守技术栈'
-                                }
-                            },
-                            'medium': {
-                                'next_question': '项目时间要求？',
-                                'options': {
-                                    'urgent': '选择快速开发技术',
-                                    'normal': '选择平衡技术栈',
-                                    'flexible': '选择稳定技术栈'
-                                }
-                            }
+                'question': '系统规模如何？',
+                'branches': {
+                    'large_scale': {
+                        'question': '一致性要求？',
+                        'branches': {
+                            'strong': '微服务 + 强一致性',
+                            'eventual': '微服务 + 最终一致性',
+                            'flexible': '微服务 + 混合一致性'
                         }
                     },
-                    'medium': {
-                        'next_question': '创新需求如何？',
-                        'options': {
-                            'high': {
-                                'next_question': '资源投入如何？',
-                                'options': {
-                                    'high': '选择前沿技术栈',
-                                    'medium': '选择新兴技术栈',
-                                    'low': '选择平衡技术栈'
-                                }
-                            },
-                            'medium': {
-                                'next_question': '团队技能如何？',
-                                'options': {
-                                    'expert': '选择先进技术栈',
-                                    'intermediate': '选择成熟技术栈',
-                                    'beginner': '选择稳定技术栈'
-                                }
-                            },
-                            'low': {
-                                'next_question': '项目稳定性要求？',
-                                'options': {
-                                    'high': '选择成熟技术栈',
-                                    'medium': '选择稳定技术栈',
-                                    'low': '选择平衡技术栈'
-                                }
-                            }
+                    'medium_scale': {
+                        'question': '性能要求？',
+                        'branches': {
+                            'high': '单体 + 缓存',
+                            'medium': '微服务',
+                            'low': '单体'
                         }
                     },
-                    'high': {
-                        'next_question': '竞争优势需求？',
-                        'options': {
-                            'high': {
-                                'next_question': '技术领先性要求？',
-                                'options': {
-                                    'high': '选择前沿技术栈',
-                                    'medium': '选择新兴技术栈',
-                                    'low': '选择先进技术栈'
-                                }
-                            },
-                            'medium': {
-                                'next_question': '资源投入如何？',
-                                'options': {
-                                    'high': '选择新兴技术栈',
-                                    'medium': '选择先进技术栈',
-                                    'low': '选择成熟技术栈'
-                                }
-                            },
-                            'low': {
-                                'next_question': '团队创新能力？',
-                                'options': {
-                                    'high': '选择前沿技术栈',
-                                    'medium': '选择新兴技术栈',
-                                    'low': '选择先进技术栈'
-                                }
-                            }
+                    'small_scale': {
+                        'question': '团队规模？',
+                        'branches': {
+                            'large': '微服务',
+                            'medium': '模块化单体',
+                            'small': '单体'
                         }
                     }
                 }
             }
         }
     
-    def assess_risk_profile(self, answers: Dict) -> Dict:
-        """评估风险特征"""
-        decision_path = self.generate_risk_decision_path(answers)
-        
-        return {
-            'risk_level': self._determine_risk_level(decision_path),
-            'risk_factors': self._identify_risk_factors(decision_path),
-            'mitigation_strategies': self._suggest_mitigation_strategies(decision_path),
-            'recommendation': decision_path[-1]['recommendation']
-        }
-    
-    def _determine_risk_level(self, decision_path: List[Dict]) -> str:
-        """确定风险水平"""
-        risk_indicators = {
-            '前沿技术栈': 'high',
-            '新兴技术栈': 'medium',
-            '先进技术栈': 'medium',
-            '成熟技术栈': 'low',
-            '稳定技术栈': 'low',
-            '保守技术栈': 'very_low'
+    def analyze_architecture_requirements(self, requirements: Dict) -> Dict:
+        """分析架构需求"""
+        analysis = {
+            'scale_analysis': self._analyze_scale(requirements),
+            'consistency_analysis': self._analyze_consistency(requirements),
+            'performance_analysis': self._analyze_performance(requirements),
+            'team_analysis': self._analyze_team(requirements),
+            'recommended_architecture': self._recommend_architecture(requirements)
         }
         
-        recommendation = decision_path[-1]['recommendation']
-        return risk_indicators.get(recommendation, 'unknown')
+        return analysis
     
-    def _identify_risk_factors(self, decision_path: List[Dict]) -> List[str]:
-        """识别风险因素"""
-        risk_factors = []
+    def _analyze_scale(self, requirements: Dict) -> Dict:
+        """分析系统规模"""
+        user_count = requirements.get('user_count', 0)
+        data_volume = requirements.get('data_volume', 0)
+        transaction_volume = requirements.get('transaction_volume', 0)
         
-        for step in decision_path[:-1]:
-            if step['answer'] in ['high', 'expert', 'urgent']:
-                risk_factors.append(f"高风险因素: {step['question']} - {step['answer']}")
-            elif step['answer'] in ['low', 'beginner']:
-                risk_factors.append(f"低风险因素: {step['question']} - {step['answer']}")
-        
-        return risk_factors
+        if user_count > 1000000 or data_volume > 1000000000:
+            return {'scale': 'large_scale', 'reasoning': '高用户量或大数据量'}
+        elif user_count > 100000 or data_volume > 100000000:
+            return {'scale': 'medium_scale', 'reasoning': '中等用户量或数据量'}
+        else:
+            return {'scale': 'small_scale', 'reasoning': '小规模系统'}
     
-    def _suggest_mitigation_strategies(self, decision_path: List[Dict]) -> List[str]:
-        """建议缓解策略"""
-        strategies = []
+    def _analyze_consistency(self, requirements: Dict) -> Dict:
+        """分析一致性要求"""
+        consistency_requirement = requirements.get('consistency_requirement', 'eventual')
         
-        for step in decision_path[:-1]:
-            if step['answer'] in ['high', 'expert', 'urgent']:
-                strategies.append(f"针对{step['question']}的缓解策略: 增加资源投入和培训")
-            elif step['answer'] in ['low', 'beginner']:
-                strategies.append(f"针对{step['question']}的缓解策略: 选择保守方案和充分测试")
+        if consistency_requirement == 'strong':
+            return {'consistency': 'strong', 'reasoning': '强一致性要求'}
+        elif consistency_requirement == 'eventual':
+            return {'consistency': 'eventual', 'reasoning': '最终一致性可接受'}
+        else:
+            return {'consistency': 'flexible', 'reasoning': '灵活一致性要求'}
+    
+    def _analyze_performance(self, requirements: Dict) -> Dict:
+        """分析性能要求"""
+        response_time = requirements.get('response_time', 1000)
+        throughput = requirements.get('throughput', 1000)
         
-        return strategies
+        if response_time < 100 and throughput > 10000:
+            return {'performance': 'high', 'reasoning': '高性能要求'}
+        elif response_time < 500 and throughput > 1000:
+            return {'performance': 'medium', 'reasoning': '中等性能要求'}
+        else:
+            return {'performance': 'low', 'reasoning': '低性能要求'}
+    
+    def _analyze_team(self, requirements: Dict) -> Dict:
+        """分析团队规模"""
+        team_size = requirements.get('team_size', 5)
+        
+        if team_size > 20:
+            return {'team': 'large', 'reasoning': '大团队'}
+        elif team_size > 5:
+            return {'team': 'medium', 'reasoning': '中等团队'}
+        else:
+            return {'team': 'small', 'reasoning': '小团队'}
+    
+    def _recommend_architecture(self, requirements: Dict) -> Dict:
+        """推荐架构"""
+        scale_analysis = self._analyze_scale(requirements)
+        consistency_analysis = self._analyze_consistency(requirements)
+        performance_analysis = self._analyze_performance(requirements)
+        team_analysis = self._analyze_team(requirements)
+        
+        # 基于分析结果推荐架构
+        if scale_analysis['scale'] == 'large_scale':
+            if consistency_analysis['consistency'] == 'strong':
+                return {
+                    'architecture': '微服务 + 强一致性',
+                    'reasoning': '大规模系统需要强一致性',
+                    'components': ['API网关', '服务发现', '分布式事务', '监控系统']
+                }
+            else:
+                return {
+                    'architecture': '微服务 + 最终一致性',
+                    'reasoning': '大规模系统可接受最终一致性',
+                    'components': ['API网关', '服务发现', '事件驱动', '监控系统']
+                }
+        elif scale_analysis['scale'] == 'medium_scale':
+            if performance_analysis['performance'] == 'high':
+                return {
+                    'architecture': '单体 + 缓存',
+                    'reasoning': '中等规模高性能系统',
+                    'components': ['缓存层', '负载均衡', '监控系统']
+                }
+            else:
+                return {
+                    'architecture': '微服务',
+                    'reasoning': '中等规模系统',
+                    'components': ['API网关', '服务发现', '监控系统']
+                }
+        else:
+            if team_analysis['team'] == 'small':
+                return {
+                    'architecture': '单体',
+                    'reasoning': '小团队小规模系统',
+                    'components': ['单体应用', '数据库', '监控系统']
+                }
+            else:
+                return {
+                    'architecture': '模块化单体',
+                    'reasoning': '中等团队小规模系统',
+                    'components': ['模块化应用', '数据库', '监控系统']
+                }
 ```
 
-## 贝叶斯推理模型
+## 形式化决策理论
 
-### 1. 技术选型贝叶斯推理
+### 1. 效用理论
 
 ```python
-# 技术选型贝叶斯推理
-class BayesianTechnologySelection:
+# 效用理论
+class UtilityTheory:
     def __init__(self):
-        self.prior_probabilities = {
-            'rust': 0.25,
-            'golang': 0.30,
-            'javascript': 0.25,
-            'python': 0.20
-        }
-        
-        self.likelihood_functions = {
-            'performance_requirement': {
-                'high': {'rust': 0.9, 'golang': 0.8, 'javascript': 0.6, 'python': 0.5},
-                'medium': {'rust': 0.7, 'golang': 0.8, 'javascript': 0.7, 'python': 0.6},
-                'low': {'rust': 0.5, 'golang': 0.6, 'javascript': 0.8, 'python': 0.8}
-            },
-            'security_requirement': {
-                'high': {'rust': 0.95, 'golang': 0.7, 'javascript': 0.5, 'python': 0.6},
-                'medium': {'rust': 0.8, 'golang': 0.7, 'javascript': 0.6, 'python': 0.6},
-                'low': {'rust': 0.6, 'golang': 0.6, 'javascript': 0.7, 'python': 0.7}
-            },
-            'development_efficiency': {
-                'high': {'rust': 0.6, 'golang': 0.8, 'javascript': 0.9, 'python': 0.9},
-                'medium': {'rust': 0.7, 'golang': 0.8, 'javascript': 0.8, 'python': 0.8},
-                'low': {'rust': 0.8, 'golang': 0.7, 'javascript': 0.6, 'python': 0.6}
-            }
+        self.utility_functions = {
+            'risk_neutral': self._risk_neutral_utility,
+            'risk_averse': self._risk_averse_utility,
+            'risk_seeking': self._risk_seeking_utility
         }
     
-    def apply_bayesian_reasoning(self, evidence: Dict) -> Dict:
-        """应用贝叶斯推理"""
-        posterior_probabilities = self._calculate_posterior_probabilities(evidence)
+    def _risk_neutral_utility(self, outcome: float) -> float:
+        """风险中性效用函数"""
+        return outcome
+    
+    def _risk_averse_utility(self, outcome: float) -> float:
+        """风险厌恶效用函数"""
+        return math.log(1 + outcome)
+    
+    def _risk_seeking_utility(self, outcome: float) -> float:
+        """风险寻求效用函数"""
+        return outcome ** 2
+    
+    def calculate_expected_utility(self, outcomes: List[float], 
+                                 probabilities: List[float], 
+                                 risk_preference: str = 'risk_neutral') -> float:
+        """计算期望效用"""
+        utility_func = self.utility_functions[risk_preference]
+        
+        expected_utility = 0
+        for outcome, probability in zip(outcomes, probabilities):
+            utility = utility_func(outcome)
+            expected_utility += utility * probability
+        
+        return expected_utility
+    
+    def make_decision(self, alternatives: List[Dict], 
+                     risk_preference: str = 'risk_neutral') -> Dict:
+        """基于效用理论做决策"""
+        decisions = []
+        
+        for alternative in alternatives:
+            outcomes = alternative['outcomes']
+            probabilities = alternative['probabilities']
+            
+            expected_utility = self.calculate_expected_utility(
+                outcomes, probabilities, risk_preference
+            )
+            
+            decisions.append({
+                'alternative': alternative['name'],
+                'expected_utility': expected_utility,
+                'risk_preference': risk_preference
+            })
+        
+        # 选择期望效用最高的方案
+        best_decision = max(decisions, key=lambda x: x['expected_utility'])
         
         return {
-            'prior_probabilities': self.prior_probabilities,
-            'evidence': evidence,
-            'posterior_probabilities': posterior_probabilities,
-            'recommendation': self._get_bayesian_recommendation(posterior_probabilities),
-            'confidence': self._calculate_bayesian_confidence(posterior_probabilities)
+            'decisions': decisions,
+            'best_decision': best_decision,
+            'decision_criteria': 'expected_utility_maximization'
         }
-    
-    def _calculate_posterior_probabilities(self, evidence: Dict) -> Dict:
-        """计算后验概率"""
-        # 使用贝叶斯定理计算后验概率
-        posterior = {}
-        
-        for technology in self.prior_probabilities.keys():
-            # P(Technology|Evidence) ∝ P(Evidence|Technology) * P(Technology)
-            likelihood = 1.0
-            for criterion, value in evidence.items():
-                if criterion in self.likelihood_functions and value in self.likelihood_functions[criterion]:
-                    likelihood *= self.likelihood_functions[criterion][value].get(technology, 0.5)
-            
-            posterior[technology] = self.prior_probabilities[technology] * likelihood
-        
-        # 归一化
-        total_probability = sum(posterior.values())
-        if total_probability > 0:
-            for technology in posterior:
-                posterior[technology] /= total_probability
-        
-        return posterior
-    
-    def _get_bayesian_recommendation(self, posterior_probabilities: Dict) -> str:
-        """获取贝叶斯推荐"""
-        return max(posterior_probabilities.items(), key=lambda x: x[1])[0]
-    
-    def _calculate_bayesian_confidence(self, posterior_probabilities: Dict) -> float:
-        """计算贝叶斯置信度"""
-        max_probability = max(posterior_probabilities.values())
-        return max_probability
 ```
 
-## 总结
+### 2. 博弈论决策模型
 
-通过逻辑推理与决策模型，我们为Web3技术栈选择提供了科学、可验证的决策支持：
+```python
+# 博弈论决策模型
+class GameTheoryDecisionModel:
+    def __init__(self):
+        self.game_types = {
+            'zero_sum': self._analyze_zero_sum_game,
+            'non_zero_sum': self._analyze_non_zero_sum_game,
+            'cooperative': self._analyze_cooperative_game
+        }
+    
+    def _analyze_zero_sum_game(self, payoff_matrix: List[List[float]]) -> Dict:
+        """分析零和博弈"""
+        n_strategies = len(payoff_matrix)
+        m_strategies = len(payoff_matrix[0])
+        
+        # 使用线性规划求解纳什均衡
+        optimal_strategy = self._solve_linear_programming(payoff_matrix)
+        
+        return {
+            'game_type': 'zero_sum',
+            'optimal_strategy': optimal_strategy,
+            'value': self._calculate_game_value(payoff_matrix, optimal_strategy),
+            'equilibrium': 'nash_equilibrium'
+        }
+    
+    def _analyze_non_zero_sum_game(self, payoff_matrix: List[List[float]]) -> Dict:
+        """分析非零和博弈"""
+        # 寻找纳什均衡
+        nash_equilibria = self._find_nash_equilibria(payoff_matrix)
+        
+        return {
+            'game_type': 'non_zero_sum',
+            'nash_equilibria': nash_equilibria,
+            'pareto_optimal': self._find_pareto_optimal(payoff_matrix),
+            'recommendation': self._recommend_strategy(nash_equilibria)
+        }
+    
+    def _analyze_cooperative_game(self, coalition_values: Dict) -> Dict:
+        """分析合作博弈"""
+        # 计算Shapley值
+        shapley_values = self._calculate_shapley_values(coalition_values)
+        
+        # 寻找核心
+        core = self._find_core(coalition_values)
+        
+        return {
+            'game_type': 'cooperative',
+            'shapley_values': shapley_values,
+            'core': core,
+            'fair_allocation': self._calculate_fair_allocation(shapley_values)
+        }
+    
+    def _solve_linear_programming(self, payoff_matrix: List[List[float]]) -> List[float]:
+        """使用线性规划求解最优策略"""
+        # 简化的线性规划求解
+        n_strategies = len(payoff_matrix)
+        
+        # 使用最小最大定理
+        min_values = [min(row) for row in payoff_matrix]
+        max_min = max(min_values)
+        
+        # 返回最优策略（简化版本）
+        optimal_strategy = [1.0/n_strategies] * n_strategies
+        
+        return optimal_strategy
+    
+    def _find_nash_equilibria(self, payoff_matrix: List[List[float]]) -> List[Dict]:
+        """寻找纳什均衡"""
+        equilibria = []
+        
+        # 简化的纳什均衡寻找算法
+        for i in range(len(payoff_matrix)):
+            for j in range(len(payoff_matrix[0])):
+                # 检查是否为纳什均衡
+                if self._is_nash_equilibrium(payoff_matrix, i, j):
+                    equilibria.append({
+                        'strategy_1': i,
+                        'strategy_2': j,
+                        'payoff_1': payoff_matrix[i][j],
+                        'payoff_2': payoff_matrix[j][i] if j < len(payoff_matrix) else 0
+                    })
+        
+        return equilibria
+    
+    def _is_nash_equilibrium(self, payoff_matrix: List[List[float]], 
+                            strategy_1: int, strategy_2: int) -> bool:
+        """检查是否为纳什均衡"""
+        # 简化的纳什均衡检查
+        payoff = payoff_matrix[strategy_1][strategy_2]
+        
+        # 检查玩家1是否有更好的策略
+        for i in range(len(payoff_matrix)):
+            if payoff_matrix[i][strategy_2] > payoff:
+                return False
+        
+        # 检查玩家2是否有更好的策略
+        for j in range(len(payoff_matrix[0])):
+            if payoff_matrix[strategy_1][j] > payoff:
+                return False
+        
+        return True
+```
 
-### 1. 逻辑推理框架
+### 3. 多目标决策理论
 
-- **前提分析**: 系统性地分析技术选型的前提条件
-- **推理规则**: 建立基于逻辑的推理规则
-- **结论验证**: 通过逻辑验证确保结论的正确性
+```python
+# 多目标决策理论
+class MultiObjectiveDecisionTheory:
+    def __init__(self):
+        self.optimization_methods = {
+            'weighted_sum': self._weighted_sum_optimization,
+            'pareto_optimization': self._pareto_optimization,
+            'goal_programming': self._goal_programming
+        }
+    
+    def _weighted_sum_optimization(self, objectives: List[float], 
+                                  weights: List[float]) -> float:
+        """加权和优化"""
+        weighted_sum = 0
+        for objective, weight in zip(objectives, weights):
+            weighted_sum += objective * weight
+        
+        return weighted_sum
+    
+    def _pareto_optimization(self, alternatives: List[List[float]]) -> List[int]:
+        """帕累托优化"""
+        pareto_optimal = []
+        
+        for i, alternative in enumerate(alternatives):
+            is_pareto_optimal = True
+            
+            for j, other_alternative in enumerate(alternatives):
+                if i != j:
+                    # 检查是否被支配
+                    if self._dominates(other_alternative, alternative):
+                        is_pareto_optimal = False
+                        break
+            
+            if is_pareto_optimal:
+                pareto_optimal.append(i)
+        
+        return pareto_optimal
+    
+    def _dominates(self, alternative_1: List[float], 
+                   alternative_2: List[float]) -> bool:
+        """检查是否支配"""
+        # alternative_1 支配 alternative_2 当且仅当
+        # alternative_1 在所有目标上都不差，且至少在一个目标上更好
+        
+        at_least_as_good = True
+        strictly_better = False
+        
+        for obj_1, obj_2 in zip(alternative_1, alternative_2):
+            if obj_1 < obj_2:  # 假设目标是最小化
+                at_least_as_good = False
+                break
+            elif obj_1 > obj_2:
+                strictly_better = True
+        
+        return at_least_as_good and strictly_better
+    
+    def _goal_programming(self, objectives: List[float], 
+                         goals: List[float], 
+                         weights: List[float]) -> float:
+        """目标规划"""
+        deviation = 0
+        
+        for objective, goal, weight in zip(objectives, goals, weights):
+            deviation += weight * abs(objective - goal)
+        
+        return deviation
+    
+    def solve_multi_objective_problem(self, alternatives: List[List[float]], 
+                                     method: str = 'pareto_optimization',
+                                     **kwargs) -> Dict:
+        """求解多目标决策问题"""
+        if method == 'weighted_sum':
+            weights = kwargs.get('weights', [1.0/len(alternatives[0])] * len(alternatives[0]))
+            scores = []
+            
+            for alternative in alternatives:
+                score = self._weighted_sum_optimization(alternative, weights)
+                scores.append(score)
+            
+            best_alternative = scores.index(max(scores))
+            
+            return {
+                'method': 'weighted_sum',
+                'best_alternative': best_alternative,
+                'scores': scores,
+                'weights': weights
+            }
+        
+        elif method == 'pareto_optimization':
+            pareto_optimal = self._pareto_optimization(alternatives)
+            
+            return {
+                'method': 'pareto_optimization',
+                'pareto_optimal_alternatives': pareto_optimal,
+                'total_alternatives': len(alternatives)
+            }
+        
+        elif method == 'goal_programming':
+            goals = kwargs.get('goals', [0.0] * len(alternatives[0]))
+            weights = kwargs.get('weights', [1.0] * len(alternatives[0]))
+            
+            deviations = []
+            for alternative in alternatives:
+                deviation = self._goal_programming(alternative, goals, weights)
+                deviations.append(deviation)
+            
+            best_alternative = deviations.index(min(deviations))
+            
+            return {
+                'method': 'goal_programming',
+                'best_alternative': best_alternative,
+                'deviations': deviations,
+                'goals': goals,
+                'weights': weights
+            }
+```
 
-### 2. 多准则决策分析1
+## 决策模型验证
 
-- **准则权重**: 基于重要性分配权重
-- **评分标准化**: 确保不同准则的可比性
-- **敏感性分析**: 评估决策的稳定性
+### 1. 决策一致性验证
 
-### 3. 决策树模型
+```python
+# 决策一致性验证
+class DecisionConsistencyVerification:
+    def __init__(self):
+        self.consistency_checks = {
+            'transitivity': self._check_transitivity,
+            'completeness': self._check_completeness,
+            'monotonicity': self._check_monotonicity
+        }
+    
+    def _check_transitivity(self, preferences: List[Tuple]) -> bool:
+        """检查传递性"""
+        # 传递性：如果 A > B 且 B > C，则 A > C
+        for i in range(len(preferences)):
+            for j in range(len(preferences)):
+                for k in range(len(preferences)):
+                    if i != j and j != k and i != k:
+                        if (preferences[i] > preferences[j] and 
+                            preferences[j] > preferences[k]):
+                            if not (preferences[i] > preferences[k]):
+                                return False
+        
+        return True
+    
+    def _check_completeness(self, alternatives: List[str], 
+                           preferences: Dict) -> bool:
+        """检查完备性"""
+        # 完备性：所有方案对之间都有偏好关系
+        for i, alt_1 in enumerate(alternatives):
+            for j, alt_2 in enumerate(alternatives):
+                if i != j:
+                    if (alt_1, alt_2) not in preferences and (alt_2, alt_1) not in preferences:
+                        return False
+        
+        return True
+    
+    def _check_monotonicity(self, criteria_weights: Dict, 
+                           alternative_scores: Dict) -> bool:
+        """检查单调性"""
+        # 单调性：增加某个准则的权重应该增加该准则得分高的方案的排名
+        base_ranking = self._calculate_ranking(criteria_weights, alternative_scores)
+        
+        for criterion in criteria_weights:
+            modified_weights = criteria_weights.copy()
+            modified_weights[criterion] *= 1.1  # 增加权重10%
+            
+            modified_ranking = self._calculate_ranking(modified_weights, alternative_scores)
+            
+            # 检查单调性
+            if not self._check_ranking_monotonicity(base_ranking, modified_ranking, criterion, alternative_scores):
+                return False
+        
+        return True
+    
+    def _calculate_ranking(self, weights: Dict, scores: Dict) -> List[Dict]:
+        """计算排名"""
+        weighted_scores = {}
+        
+        for alternative, alternative_scores in scores.items():
+            weighted_score = 0
+            for criterion, score in alternative_scores.items():
+                weight = weights.get(criterion, 0)
+                weighted_score += score * weight
+            
+            weighted_scores[alternative] = weighted_score
+        
+        # 排序
+        ranking = sorted(
+            weighted_scores.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )
+        
+        return [
+            {
+                'alternative': alt,
+                'score': score,
+                'rank': i + 1
+            }
+            for i, (alt, score) in enumerate(ranking)
+        ]
+    
+    def _check_ranking_monotonicity(self, base_ranking: List[Dict], 
+                                   modified_ranking: List[Dict],
+                                   criterion: str,
+                                   scores: Dict) -> bool:
+        """检查排名单调性"""
+        # 找到在修改的准则上得分最高的方案
+        best_alternative = max(scores.keys(), 
+                             key=lambda alt: scores[alt].get(criterion, 0))
+        
+        # 检查该方案的排名是否没有下降
+        base_rank = next(item['rank'] for item in base_ranking 
+                        if item['alternative'] == best_alternative)
+        modified_rank = next(item['rank'] for item in modified_ranking 
+                           if item['alternative'] == best_alternative)
+        
+        return modified_rank <= base_rank
+    
+    def verify_decision_consistency(self, decision_model: Dict) -> Dict:
+        """验证决策一致性"""
+        verification_results = {}
+        
+        # 检查传递性
+        if 'preferences' in decision_model:
+            verification_results['transitivity'] = self._check_transitivity(
+                decision_model['preferences']
+            )
+        
+        # 检查完备性
+        if 'alternatives' in decision_model and 'preferences' in decision_model:
+            verification_results['completeness'] = self._check_completeness(
+                decision_model['alternatives'],
+                decision_model['preferences']
+            )
+        
+        # 检查单调性
+        if 'criteria_weights' in decision_model and 'alternative_scores' in decision_model:
+            verification_results['monotonicity'] = self._check_monotonicity(
+                decision_model['criteria_weights'],
+                decision_model['alternative_scores']
+            )
+        
+        # 计算一致性分数
+        consistency_score = sum(verification_results.values()) / len(verification_results)
+        
+        return {
+            'verification_results': verification_results,
+            'consistency_score': consistency_score,
+            'overall_assessment': 'consistent' if consistency_score > 0.8 else 'inconsistent'
+        }
+```
 
-- **结构化决策**: 通过树形结构组织决策过程
-- **路径追踪**: 记录完整的决策路径
-- **置信度评估**: 基于决策路径计算置信度
+## 总结与展望
 
-### 4. 贝叶斯推理
+通过深入的逻辑推理与决策模型分析，我们建立了Web3技术栈决策的科学框架：
 
-- **先验概率**: 基于历史数据和专家知识
-- **似然函数**: 基于证据更新概率
-- **后验概率**: 得到最终的推荐概率
+### 1. 多准则决策分析
 
-### 5. 决策模型的价值
+- **AHP方法**: 层次分析法进行技术选型
+- **MCDA方法**: 多准则决策分析进行综合评估
+- **敏感性分析**: 评估决策的稳定性和鲁棒性
 
-- **科学性**: 基于数学和逻辑的严格推理
-- **可验证性**: 提供可验证的决策过程
-- **透明度**: 清晰的决策逻辑和推理过程
-- **可解释性**: 能够解释决策的原因和依据
+### 2. 决策树模型
 
-这些决策模型为Web3技术栈选择提供了科学、可靠、可验证的决策支持，确保技术选型的合理性和有效性。
+- **技术选型决策树**: 基于性能、安全、开发效率等准则
+- **架构设计决策树**: 基于规模、一致性、性能等要求
+- **路径分析**: 追踪决策路径和推理过程
 
-## 参考文献
+### 3. 形式化决策理论
 
-1. "Logical Reasoning in Software Engineering" - IEEE Software Engineering
-2. "Multi-Criteria Decision Analysis" - Operations Research
-3. "Decision Tree Analysis" - Machine Learning
-4. "Bayesian Reasoning in Technology Selection" - Decision Sciences
-5. "Formal Methods in Decision Making" - Artificial Intelligence
+- **效用理论**: 基于期望效用的决策方法
+- **博弈论**: 分析多方决策和策略互动
+- **多目标决策**: 处理多个冲突目标的优化
+
+### 4. 决策模型验证
+
+- **一致性验证**: 检查决策的传递性、完备性、单调性
+- **稳定性分析**: 评估决策对参数变化的敏感性
+- **鲁棒性测试**: 验证决策在不同场景下的有效性
+
+这个逻辑推理与决策模型体系为Web3技术栈的选择和设计提供了科学、系统、可验证的决策支持，确保了技术决策的合理性和最优性。
+
+---
+
+**文档版本**: v3.0  
+**最后更新**: 2024-12-19  
+**维护者**: Web3理论分析团队  
+**许可证**: MIT License

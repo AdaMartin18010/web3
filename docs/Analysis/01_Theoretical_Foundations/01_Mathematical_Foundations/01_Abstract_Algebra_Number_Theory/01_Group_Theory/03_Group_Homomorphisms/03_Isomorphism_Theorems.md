@@ -466,24 +466,24 @@ ISO国际标准...
 2. Mac Lane, S. (1971). "Categories for the Working Mathematician". Springer-Verlag.
 3. Awodey, S. (2010). "Category Theory". Oxford University Press.
 
-### 密码学文献
+    *密码学文献*
 
 4. Katz, J., & Lindell, Y. (2014). "Introduction to Modern Cryptography". CRC Press.
 5. Boneh, D., & Shoup, V. (2020). "A Graduate Course in Applied Cryptography".
 6. NIST SP 800-57. (2020). "Recommendation for Key Management".
 
-### 区块链文献
+    *区块链文献*
 
 7. Nakamoto, S. (2008). "Bitcoin: A Peer-to-Peer Electronic Cash System".
 8. Buterin, V. (2014). "Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform".
 9. Lamport, L., Shostak, R., & Pease, M. (1982). "The Byzantine Generals Problem". ACM TOPLAS.
 
-### Web3理论文献
+   *Web3理论文献*
 
 10. Berners-Lee, T. (2019). "The Decentralized Web: A Primer". MIT Technology Review.
 11. Zuckerman, E. (2020). "The Case for Digital Public Infrastructure". Knight First Amendment Institute.
 
-### 国际标准文档
+    *国际标准文档*
 
 12. ISO/TC 307. (2020). "Blockchain and distributed ledger technologies".
 13. IEEE 2857-2021. "Standard for Privacy Engineering Framework".

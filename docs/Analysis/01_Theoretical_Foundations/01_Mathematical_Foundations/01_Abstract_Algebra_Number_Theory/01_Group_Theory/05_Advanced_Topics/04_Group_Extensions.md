@@ -5,57 +5,66 @@
 
 ### 1.1 基础概念定义
 
-**定义 1.1** (04 Group Extensions的基本概念): 
+**定义 1.1** (04 Group Extensions的基本概念):
 设 $\mathcal{S}$ 为一个集合，$\circ$ 为二元运算，则称 $(\mathcal{S}, \circ)$ 为代数结构，当且仅当：
+
 ```latex
 \forall a, b \in \mathcal{S}: a \circ b \in \mathcal{S} \quad \text{(封闭性)}
 ```
 
 **定义 1.2** (运算的结合性):
 运算 $\circ$ 满足结合性，当且仅当：
+
 ```latex
 \forall a, b, c \in \mathcal{S}: (a \circ b) \circ c = a \circ (b \circ c)
 ```
 
 **定义 1.3** (单位元):
 元素 $e \in \mathcal{S}$ 称为单位元，当且仅当：
+
 ```latex
 \forall a \in \mathcal{S}: e \circ a = a \circ e = a
 ```
 
 **定义 1.4** (逆元):
 对于元素 $a \in \mathcal{S}$，如果存在 $a^{-1} \in \mathcal{S}$ 使得：
+
 ```latex
 a \circ a^{-1} = a^{-1} \circ a = e
 ```
-则称 $a^{-1}$ 为 $a$ 的逆元。
 
+则称 $a^{-1}$ 为 $a$ 的逆元。
 
 ### 1.2 公理系统
 
 **公理系统A** (04 Group Extensions的公理化表述):
 
-**A1. 存在性公理**: 
+**A1. 存在性公理**:
+
 ```latex
 \exists \mathcal{S} \neq \emptyset \land \exists \circ: \mathcal{S} \times \mathcal{S} \to \mathcal{S}
 ```
 
 **A2. 封闭性公理**:
+
 ```latex
 \forall a, b \in \mathcal{S}: a \circ b \in \mathcal{S}
 ```
 
 **A3. 结合性公理**:
+
 ```latex
 \forall a, b, c \in \mathcal{S}: (a \circ b) \circ c = a \circ (b \circ c)
 ```
 
 **A4. 单位元公理**:
+
 ```latex
 \exists e \in \mathcal{S} \text{ s.t. } \forall a \in \mathcal{S}: e \circ a = a \circ e = a
 ```
 
 **A5. 逆元公理**:
+
 ```latex
 \forall a \in \mathcal{S}, \exists a^{-1} \in \mathcal{S} \text{ s.t. } a \circ a^{-1} = a^{-1} \circ a = e
 ```
@@ -64,8 +73,8 @@ a \circ a^{-1} = a^{-1} \circ a = e
 **证明**: 假设存在两个单位元 $e_1, e_2$，则：
 $e_1 = e_1 \circ e_2 = e_2$，故单位元唯一。□
 
-
 ### 1.3 形式化表示
+
 ```latex
 
 % 04 Group Extensions的形式化表示
@@ -105,39 +114,49 @@ $$|\struct{G}| = |\struct{H}| \cdot [\struct{G}:\struct{H}]$$
 ## 2. 理论基础与数学结构
 
 ### 2.1 代数结构分析
+
 代数结构的详细分析，包括群、环、域等结构的定义、性质、应用与证明。
 
 ### 2.2 拓扑性质
+
 拓扑性质的详细分析...
 
 ### 2.3 范畴论视角
+
 范畴论视角的深入探讨...
 
 ## 3. 核心定理与证明
 
 ### 3.1 基本定理
+
 基本定理及其证明...
 
 ### 3.2 证明技术
+
 证明技术和方法...
 
 ### 3.3 应用实例
+
 应用实例和案例分析...
 
 ## 4. Web3应用映射
 
 ### 4.1 加密学应用
+
 加密学应用场景...
 
 ### 4.2 共识机制
+
 共识机制的理论分析...
 
 ### 4.3 智能合约
+
 智能合约应用案例...
 
 ## 5. 实现与优化
 
 ### 5.1 算法实现
+
 ```rust
 
 // 04 Group Extensions - Rust实现
@@ -402,59 +421,70 @@ mod tests {
 ```
 
 ### 5.2 性能分析
+
 性能分析和优化...
 
 ### 5.3 安全考虑
+
 安全考虑和威胁分析...
 
 ## 6. 国际标准与规范
 
 ### 6.1 NIST标准
+
 NIST标准规范...
 
 ### 6.2 IEEE规范
+
 IEEE技术规范...
 
 ### 6.3 ISO标准
+
 ISO国际标准...
 
 ## 7. 前沿研究方向
 
 ### 7.1 后量子密码学
+
 后量子密码学研究...
 
 ### 7.2 同态加密
+
 同态加密理论...
 
 ### 7.3 零知识证明
+
 零知识证明协议...
 
 ## 8. 参考文献与延伸阅读
 
-
 ## 参考文献
 
 ### 核心理论文献
+
 1. Galois, E. (1830). "Sur la théorie des nombres". Journal de mathématiques pures et appliquées.
 2. Mac Lane, S. (1971). "Categories for the Working Mathematician". Springer-Verlag.
 3. Awodey, S. (2010). "Category Theory". Oxford University Press.
 
-### 密码学文献
+    *密码学文献*
+
 4. Katz, J., & Lindell, Y. (2014). "Introduction to Modern Cryptography". CRC Press.
 5. Boneh, D., & Shoup, V. (2020). "A Graduate Course in Applied Cryptography".
 6. NIST SP 800-57. (2020). "Recommendation for Key Management".
 
-### 区块链文献
+    *区块链文献*
+
 7. Nakamoto, S. (2008). "Bitcoin: A Peer-to-Peer Electronic Cash System".
 8. Buterin, V. (2014). "Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform".
 9. Lamport, L., Shostak, R., & Pease, M. (1982). "The Byzantine Generals Problem". ACM TOPLAS.
 
-### Web3理论文献
+    *Web3理论文献*
+
 10. Berners-Lee, T. (2019). "The Decentralized Web: A Primer". MIT Technology Review.
 11. Zuckerman, E. (2020). "The Case for Digital Public Infrastructure". Knight First Amendment Institute.
 
-### 国际标准文档
+    *国际标准文档*
+
 12. ISO/TC 307. (2020). "Blockchain and distributed ledger technologies".
 13. IEEE 2857-2021. "Standard for Privacy Engineering Framework".
 14. W3C. (2021). "Decentralized Identifiers (DIDs) v1.0".
-

@@ -1,460 +1,656 @@
-
 # 概率论与统计学
 
-## 1. 严格数学定义与公理化
+## 概述
 
-### 1.1 基础概念定义
+概率论与统计学为Web3技术提供了重要的数学工具，包括随机过程、统计推断、信息论等。本文档建立了完整的概率统计理论体系，为共识机制、网络分析、风险评估等Web3核心技术提供数学支撑。
 
-**定义 1.1** (概率论与统计学的基本概念): 
-设 $\mathcal{S}$ 为一个集合，$\circ$ 为二元运算，则称 $(\mathcal{S}, \circ)$ 为代数结构，当且仅当：
-```latex
-\forall a, b \in \mathcal{S}: a \circ b \in \mathcal{S} \quad \text{(封闭性)}
-```
+## 目录
 
-**定义 1.2** (运算的结合性):
-运算 $\circ$ 满足结合性，当且仅当：
-```latex
-\forall a, b, c \in \mathcal{S}: (a \circ b) \circ c = a \circ (b \circ c)
-```
+1. [概率论基础](#1-概率论基础)
+2. [随机过程理论](#2-随机过程理论)
+3. [统计推断理论](#3-统计推断理论)
+4. [信息论基础](#4-信息论基础)
+5. [在共识机制中的应用](#5-在共识机制中的应用)
+6. [在网络分析中的应用](#6-在网络分析中的应用)
 
-**定义 1.3** (单位元):
-元素 $e \in \mathcal{S}$ 称为单位元，当且仅当：
-```latex
-\forall a \in \mathcal{S}: e \circ a = a \circ e = a
-```
+## 1. 概率论基础
 
-**定义 1.4** (逆元):
-对于元素 $a \in \mathcal{S}$，如果存在 $a^{-1} \in \mathcal{S}$ 使得：
-```latex
-a \circ a^{-1} = a^{-1} \circ a = e
-```
-则称 $a^{-1}$ 为 $a$ 的逆元。
+### 1.1 概率空间
 
+**定义 1.1 (概率空间)**
+概率空间是一个三元组 $(\Omega, \mathcal{F}, P)$，其中：
 
-### 1.2 公理系统
+- $\Omega$ 是样本空间
+- $\mathcal{F}$ 是事件集合（$\sigma$-代数）
+- $P$ 是概率测度
 
-**公理系统A** (概率论与统计学的公理化表述):
+**定义 1.2 (随机变量)**
+随机变量 $X$ 是从概率空间 $(\Omega, \mathcal{F}, P)$ 到实数集的函数，使得对于任意实数 $a$，$\{X \leq a\} \in \mathcal{F}$。
 
-**A1. 存在性公理**: 
-```latex
-\exists \mathcal{S} \neq \emptyset \land \exists \circ: \mathcal{S} \times \mathcal{S} \to \mathcal{S}
-```
+**定义 1.3 (期望值)**
+随机变量 $X$ 的期望值定义为：
+$$E[X] = \int_{-\infty}^{\infty} x f_X(x) dx$$
 
-**A2. 封闭性公理**:
-```latex
-\forall a, b \in \mathcal{S}: a \circ b \in \mathcal{S}
-```
+其中 $f_X(x)$ 是 $X$ 的概率密度函数。
 
-**A3. 结合性公理**:
-```latex
-\forall a, b, c \in \mathcal{S}: (a \circ b) \circ c = a \circ (b \circ c)
-```
+### 1.2 重要分布
 
-**A4. 单位元公理**:
-```latex
-\exists e \in \mathcal{S} \text{ s.t. } \forall a \in \mathcal{S}: e \circ a = a \circ e = a
-```
+**定义 1.4 (二项分布)**
+随机变量 $X$ 服从参数为 $(n, p)$ 的二项分布，记作 $X \sim B(n, p)$，其概率质量函数为：
+$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 
-**A5. 逆元公理**:
-```latex
-\forall a \in \mathcal{S}, \exists a^{-1} \in \mathcal{S} \text{ s.t. } a \circ a^{-1} = a^{-1} \circ a = e
-```
+**定义 1.5 (泊松分布)**
+随机变量 $X$ 服从参数为 $\lambda$ 的泊松分布，记作 $X \sim \text{Poisson}(\lambda)$，其概率质量函数为：
+$$P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}$$
 
-**定理1**: 单位元的唯一性
-**证明**: 假设存在两个单位元 $e_1, e_2$，则：
-$e_1 = e_1 \circ e_2 = e_2$，故单位元唯一。□
+**定义 1.6 (指数分布)**
+随机变量 $X$ 服从参数为 $\lambda$ 的指数分布，记作 $X \sim \text{Exp}(\lambda)$，其概率密度函数为：
+$$f_X(x) = \lambda e^{-\lambda x}, x \geq 0$$
 
+### 1.3 大数定律
 
-### 1.3 形式化表示
-```latex
+**定理 1.1 (弱大数定律)**
+设 $X_1, X_2, \ldots$ 是独立同分布的随机变量，期望为 $\mu$，则：
+$$\frac{1}{n} \sum_{i=1}^n X_i \xrightarrow{P} \mu$$
 
-% 概率论与统计学的形式化表示
+**定理 1.2 (强大数定律)**
+设 $X_1, X_2, \ldots$ 是独立同分布的随机变量，期望为 $\mu$，则：
+$$\frac{1}{n} \sum_{i=1}^n X_i \xrightarrow{a.s.} \mu$$
 
-% 基本结构定义
-\newcommand{\struct}[1]{\mathcal{#1}}
-\newcommand{\op}{\circ}
-\newcommand{\identity}{e}
+## 2. 随机过程理论
 
-% 代数结构的范畴论表示
-\begin{tikzcd}
-\struct{S} \arrow[r, "\op"] \arrow[d, "f"'] & \struct{S} \arrow[d, "f"] \\
-\struct{T} \arrow[r, "\star"'] & \struct{T}
-\end{tikzcd}
+### 2.1 马尔可夫链
 
-% 群同态的核与像
-\begin{align}
-\ker(f) &= \{a \in \struct{S} \mid f(a) = \identity_{\struct{T}}\} \\
-\text{Im}(f) &= \{f(a) \mid a \in \struct{S}\} \\
-\end{align}
+**定义 2.1 (马尔可夫链)**
+随机过程 $\{X_n\}$ 是马尔可夫链，当且仅当：
+$$P(X_{n+1} = j | X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0) = P(X_{n+1} = j | X_n = i)$$
 
-% 同构定理
-\begin{theorem}[第一同构定理]
-设 $f: \struct{S} \to \struct{T}$ 为群同态，则：
-$$\struct{S}/\ker(f) \cong \text{Im}(f)$$
-\end{theorem}
+**定义 2.2 (转移概率)**
+马尔可夫链的转移概率定义为：
+$$P_{ij} = P(X_{n+1} = j | X_n = i)$$
 
-% 拉格朗日定理的形式化
-\begin{theorem}[拉格朗日定理]
-设 $\struct{G}$ 为有限群，$\struct{H}$ 为 $\struct{G}$ 的子群，则：
-$$|\struct{G}| = |\struct{H}| \cdot [\struct{G}:\struct{H}]$$
-其中 $[\struct{G}:\struct{H}]$ 为指数。
-\end{theorem}
+**定理 2.1 (平稳分布)**
+如果马尔可夫链是不可约且非周期的，则存在唯一的平稳分布 $\pi$，满足：
+$$\pi_j = \sum_i \pi_i P_{ij}$$
 
-```
+### 2.2 泊松过程
 
-## 2. 理论基础与数学结构
+**定义 2.3 (泊松过程)**
+计数过程 $\{N(t)\}$ 是泊松过程，当且仅当：
 
-### 2.1 代数结构分析
-代数结构的详细分析，包括群、环、域等结构的定义、性质、应用与证明。
+1. $N(0) = 0$
+2. 具有独立增量
+3. 对于任意 $s < t$，$N(t) - N(s) \sim \text{Poisson}(\lambda(t-s))$
 
-### 2.2 拓扑性质
-拓扑性质的详细分析...
+**定理 2.2 (泊松过程的性质)**
+泊松过程的到达间隔时间服从指数分布。
 
-### 2.3 范畴论视角
-范畴论视角的深入探讨...
+### 2.3 随机游走
 
-## 3. 核心定理与证明
+**定义 2.4 (简单随机游走)**
+简单随机游走是马尔可夫链，其转移概率为：
+$$P_{i,i+1} = p, P_{i,i-1} = 1-p$$
 
-### 3.1 基本定理
-基本定理及其证明...
+**算法 2.1 (随机游走模拟)**:
 
-### 3.2 证明技术
-证明技术和方法...
-
-### 3.3 应用实例
-应用实例和案例分析...
-
-## 4. Web3应用映射
-
-### 4.1 加密学应用
-加密学应用场景...
-
-### 4.2 共识机制
-共识机制的理论分析...
-
-### 4.3 智能合约
-智能合约应用案例...
-
-## 5. 实现与优化
-
-### 5.1 算法实现
 ```rust
-
-// 概率论与统计学 - Rust实现
-use std::collections::HashMap;
-use std::hash::Hash;
-use serde::{Serialize, Deserialize};
-
-/// 抽象代数结构trait
-pub trait AlgebraicStructure<T> {
-    fn operation(&self, a: &T, b: &T) -> Result<T, AlgebraicError>;
-    fn identity(&self) -> &T;
-    fn inverse(&self, element: &T) -> Result<T, AlgebraicError>;
-    fn is_valid(&self, element: &T) -> bool;
+pub struct RandomWalk {
+    position: i32,
+    step_probability: f64,
 }
 
-/// 群结构实现
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Group<T> {
-    elements: Vec<T>,
-    operation_table: HashMap<(usize, usize), usize>,
-    identity_index: usize,
-}
-
-impl<T: Clone + Eq + Hash> Group<T> {
-    pub fn new(elements: Vec<T>, operation_table: HashMap<(usize, usize), usize>, identity_index: usize) -> Result<Self, AlgebraicError> {
-        let group = Group {
-            elements,
-            operation_table,
-            identity_index,
-        };
-        
-        if group.verify_group_axioms()? {
-            Ok(group)
+impl RandomWalk {
+    pub fn new(initial_position: i32, step_probability: f64) -> Self {
+        Self {
+            position: initial_position,
+            step_probability,
+        }
+    }
+    
+    pub fn step(&mut self) {
+        let random_value = rand::random::<f64>();
+        if random_value < self.step_probability {
+            self.position += 1;
         } else {
-            Err(AlgebraicError::InvalidGroupStructure)
+            self.position -= 1;
         }
     }
     
-    fn verify_group_axioms(&self) -> Result<bool, AlgebraicError> {
-        // 验证封闭性
-        for i in 0..self.elements.len() {
-            for j in 0..self.elements.len() {
-                if !self.operation_table.contains_key(&(i, j)) {
-                    return Ok(false);
-                }
-            }
+    pub fn simulate(&mut self, steps: usize) -> Vec<i32> {
+        let mut positions = Vec::with_capacity(steps + 1);
+        positions.push(self.position);
+        
+        for _ in 0..steps {
+            self.step();
+            positions.push(self.position);
         }
         
-        // 验证结合性
-        for i in 0..self.elements.len() {
-            for j in 0..self.elements.len() {
-                for k in 0..self.elements.len() {
-                    let ab = self.operation_table[&(i, j)];
-                    let bc = self.operation_table[&(j, k)];
-                    let ab_c = self.operation_table[&(ab, k)];
-                    let a_bc = self.operation_table[&(i, bc)];
-                    
-                    if ab_c != a_bc {
-                        return Ok(false);
-                    }
-                }
-            }
-        }
+        positions
+    }
+    
+    pub fn expected_position(&self, steps: usize) -> f64 {
+        let expected_step = 2.0 * self.step_probability - 1.0;
+        self.position as f64 + expected_step * steps as f64
+    }
+    
+    pub fn variance(&self, steps: usize) -> f64 {
+        4.0 * self.step_probability * (1.0 - self.step_probability) * steps as f64
+    }
+}
+```
+
+## 3. 统计推断理论
+
+### 3.1 参数估计
+
+**定义 3.1 (点估计)**
+设 $X_1, X_2, \ldots, X_n$ 是来自分布 $F_\theta$ 的样本，点估计 $\hat{\theta}$ 是 $\theta$ 的估计量。
+
+**定义 3.2 (无偏估计)**
+估计量 $\hat{\theta}$ 是无偏的，当且仅当 $E[\hat{\theta}] = \theta$。
+
+**定义 3.3 (最大似然估计)**
+最大似然估计 $\hat{\theta}_{MLE}$ 是使似然函数 $L(\theta) = \prod_{i=1}^n f(x_i; \theta)$ 最大的 $\theta$ 值。
+
+### 3.2 假设检验
+
+**定义 3.4 (假设检验)**
+假设检验是检验原假设 $H_0$ 与备择假设 $H_1$ 的过程。
+
+**定义 3.5 (显著性水平)**
+显著性水平 $\alpha$ 是第一类错误的概率：
+$$\alpha = P(\text{拒绝 } H_0 | H_0 \text{ 为真})$$
+
+**算法 3.1 (假设检验)**:
+
+```rust
+pub struct HypothesisTest {
+    significance_level: f64,
+}
+
+impl HypothesisTest {
+    pub fn z_test(&self, sample_mean: f64, population_mean: f64, 
+                  population_std: f64, sample_size: usize) -> TestResult {
+        let standard_error = population_std / (sample_size as f64).sqrt();
+        let z_statistic = (sample_mean - population_mean) / standard_error;
+        let p_value = 2.0 * (1.0 - self.normal_cdf(z_statistic.abs()));
         
-        // 验证单位元性质
-        for i in 0..self.elements.len() {
-            if self.operation_table[&(self.identity_index, i)] != i ||
-               self.operation_table[&(i, self.identity_index)] != i {
-                return Ok(false);
-            }
+        TestResult {
+            statistic: z_statistic,
+            p_value,
+            reject_null: p_value < self.significance_level,
         }
+    }
+    
+    pub fn t_test(&self, sample_mean: f64, population_mean: f64, 
+                  sample_std: f64, sample_size: usize) -> TestResult {
+        let standard_error = sample_std / (sample_size as f64).sqrt();
+        let t_statistic = (sample_mean - population_mean) / standard_error;
+        let degrees_of_freedom = sample_size - 1;
+        let p_value = 2.0 * (1.0 - self.t_cdf(t_statistic.abs(), degrees_of_freedom));
         
-        // 验证逆元存在性
-        for i in 0..self.elements.len() {
-            let mut has_inverse = false;
-            for j in 0..self.elements.len() {
-                if self.operation_table[&(i, j)] == self.identity_index &&
-                   self.operation_table[&(j, i)] == self.identity_index {
-                    has_inverse = true;
-                    break;
-                }
-            }
-            if !has_inverse {
-                return Ok(false);
-            }
+        TestResult {
+            statistic: t_statistic,
+            p_value,
+            reject_null: p_value < self.significance_level,
         }
-        
-        Ok(true)
+    }
+    
+    fn normal_cdf(&self, x: f64) -> f64 {
+        // 标准正态分布的累积分布函数
+        0.5 * (1.0 + libm::erf(x / 2.0_f64.sqrt()))
+    }
+    
+    fn t_cdf(&self, x: f64, df: usize) -> f64 {
+        // t分布的累积分布函数（简化实现）
+        // 实际应用中应使用专门的统计库
+        self.normal_cdf(x)
     }
 }
 
-impl<T: Clone + Eq + Hash> AlgebraicStructure<T> for Group<T> {
-    fn operation(&self, a: &T, b: &T) -> Result<T, AlgebraicError> {
-        let a_index = self.elements.iter().position(|x| x == a)
-            .ok_or(AlgebraicError::ElementNotFound)?;
-        let b_index = self.elements.iter().position(|x| x == b)
-            .ok_or(AlgebraicError::ElementNotFound)?;
-        
-        let result_index = self.operation_table[&(a_index, b_index)];
-        Ok(self.elements[result_index].clone())
-    }
-    
-    fn identity(&self) -> &T {
-        &self.elements[self.identity_index]
-    }
-    
-    fn inverse(&self, element: &T) -> Result<T, AlgebraicError> {
-        let element_index = self.elements.iter().position(|x| x == element)
-            .ok_or(AlgebraicError::ElementNotFound)?;
-        
-        for i in 0..self.elements.len() {
-            if self.operation_table[&(element_index, i)] == self.identity_index {
-                return Ok(self.elements[i].clone());
-            }
-        }
-        
-        Err(AlgebraicError::InverseNotFound)
-    }
-    
-    fn is_valid(&self, element: &T) -> bool {
-        self.elements.contains(element)
-    }
+pub struct TestResult {
+    statistic: f64,
+    p_value: f64,
+    reject_null: bool,
 }
+```
 
-/// 椭圆曲线群实现（用于Web3加密学）
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct EllipticCurveGroup {
-    p: u64,  // 素数模
-    a: u64,  // 曲线参数a
-    b: u64,  // 曲线参数b
-}
+## 4. 信息论基础
 
-impl EllipticCurveGroup {
-    pub fn new(p: u64, a: u64, b: u64) -> Result<Self, AlgebraicError> {
-        // 验证曲线非奇异性: 4a³ + 27b² ≠ 0 (mod p)
-        let discriminant = (4 * a.pow(3) + 27 * b.pow(2)) % p;
-        if discriminant == 0 {
-            return Err(AlgebraicError::SingularCurve);
-        }
-        
-        Ok(EllipticCurveGroup { p, a, b })
-    }
-    
-    pub fn point_addition(&self, p1: &ECPoint, p2: &ECPoint) -> Result<ECPoint, AlgebraicError> {
-        match (p1, p2) {
-            (ECPoint::Infinity, p) | (p, ECPoint::Infinity) => Ok(p.clone()),
-            (ECPoint::Point(x1, y1), ECPoint::Point(x2, y2)) => {
-                if x1 == x2 {
-                    if y1 == y2 {
-                        // 点倍乘
-                        self.point_doubling(&ECPoint::Point(*x1, *y1))
-                    } else {
-                        // 互为逆元
-                        Ok(ECPoint::Infinity)
-                    }
-                } else {
-                    // 一般点加法
-                    let slope = ((*y2 as i64 - *y1 as i64) * 
-                                mod_inverse((*x2 as i64 - *x1 as i64) as u64, self.p) as i64) % self.p as i64;
-                    let x3 = (slope * slope - *x1 as i64 - *x2 as i64) % self.p as i64;
-                    let y3 = (slope * (*x1 as i64 - x3) - *y1 as i64) % self.p as i64;
-                    
-                    Ok(ECPoint::Point(
-                        ((x3 % self.p as i64 + self.p as i64) % self.p as i64) as u64,
-                        ((y3 % self.p as i64 + self.p as i64) % self.p as i64) as u64
-                    ))
-                }
-            }
-        }
-    }
-    
-    fn point_doubling(&self, point: &ECPoint) -> Result<ECPoint, AlgebraicError> {
-        match point {
-            ECPoint::Infinity => Ok(ECPoint::Infinity),
-            ECPoint::Point(x, y) => {
-                if *y == 0 {
-                    return Ok(ECPoint::Infinity);
-                }
-                
-                let slope = ((3 * x * x + self.a) * mod_inverse(2 * y, self.p)) % self.p;
-                let x3 = (slope * slope - 2 * x) % self.p;
-                let y3 = (slope * (x - x3) - y) % self.p;
-                
-                Ok(ECPoint::Point(x3, y3))
-            }
-        }
-    }
-}
+### 4.1 信息熵
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub enum ECPoint {
-    Infinity,
-    Point(u64, u64),
-}
+**定义 4.1 (信息熵)**
+离散随机变量 $X$ 的信息熵定义为：
+$$H(X) = -\sum_{x} P(X = x) \log P(X = x)$$
+
+**定义 4.2 (条件熵)**
+条件熵定义为：
+$$H(X|Y) = -\sum_{x,y} P(X = x, Y = y) \log P(X = x | Y = y)$$
+
+**定义 4.3 (互信息)**
+互信息定义为：
+$$I(X; Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)$$
+
+### 4.2 信道容量
+
+**定义 4.4 (信道容量)**
+信道容量定义为：
+$$C = \max_{P(X)} I(X; Y)$$
+
+**定理 4.1 (香农信道编码定理)**
+对于任意 $\epsilon > 0$，存在编码方案使得错误概率小于 $\epsilon$，当且仅当传输速率小于信道容量。
+
+### 4.3 数据压缩
+
+**算法 4.1 (霍夫曼编码)**:
+
+```rust
+use std::collections::BinaryHeap;
+use std::cmp::Ordering;
 
 #[derive(Debug, Clone)]
-pub enum AlgebraicError {
-    ElementNotFound,
-    InverseNotFound,
-    InvalidGroupStructure,
-    SingularCurve,
-    ComputationError,
+pub struct HuffmanNode {
+    symbol: Option<char>,
+    frequency: u32,
+    left: Option<Box<HuffmanNode>>,
+    right: Option<Box<HuffmanNode>>,
 }
 
-// 模逆函数实现（扩展欧几里得算法）
-fn mod_inverse(a: u64, m: u64) -> u64 {
-    fn extended_gcd(a: i64, b: i64) -> (i64, i64, i64) {
-        if a == 0 {
-            (b, 0, 1)
-        } else {
-            let (gcd, x1, y1) = extended_gcd(b % a, a);
-            let x = y1 - (b / a) * x1;
-            let y = x1;
-            (gcd, x, y)
-        }
+impl PartialEq for HuffmanNode {
+    fn eq(&self, other: &Self) -> bool {
+        self.frequency == other.frequency
+    }
+}
+
+impl Eq for HuffmanNode {}
+
+impl PartialOrd for HuffmanNode {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for HuffmanNode {
+    fn cmp(&self, other: &Self) -> Ordering {
+        other.frequency.cmp(&self.frequency)
+    }
+}
+
+pub struct HuffmanCode {
+    root: HuffmanNode,
+    codes: HashMap<char, String>,
+}
+
+impl HuffmanCode {
+    pub fn new(text: &str) -> Self {
+        let frequencies = Self::calculate_frequencies(text);
+        let root = Self::build_tree(&frequencies);
+        let codes = Self::generate_codes(&root);
+        
+        Self { root, codes }
     }
     
-    let (gcd, x, _) = extended_gcd(a as i64, m as i64);
-    assert_eq!(gcd, 1, "Modular inverse does not exist");
+    pub fn encode(&self, text: &str) -> String {
+        text.chars()
+            .map(|c| self.codes.get(&c).unwrap_or(&String::new()))
+            .collect()
+    }
     
-    ((x % m as i64 + m as i64) % m as i64) as u64
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    
-    #[test]
-    fn test_cyclic_group_z5() {
-        // 创建模5的加法群
-        let elements = vec![0, 1, 2, 3, 4];
-        let mut operation_table = HashMap::new();
+    pub fn decode(&self, encoded: &str) -> String {
+        let mut result = String::new();
+        let mut current = &self.root;
         
-        for i in 0..5 {
-            for j in 0..5 {
-                operation_table.insert((i, j), (i + j) % 5);
+        for bit in encoded.chars() {
+            match bit {
+                '0' => {
+                    if let Some(ref left) = current.left {
+                        current = left;
+                    }
+                }
+                '1' => {
+                    if let Some(ref right) = current.right {
+                        current = right;
+                    }
+                }
+                _ => continue,
+            }
+            
+            if let Some(symbol) = current.symbol {
+                result.push(symbol);
+                current = &self.root;
             }
         }
         
-        let group = Group::new(elements, operation_table, 0).unwrap();
-        
-        // 测试群运算
-        assert_eq!(group.operation(&2, &3).unwrap(), 0);
-        assert_eq!(group.identity(), &0);
-        assert_eq!(group.inverse(&3).unwrap(), 2);
+        result
     }
     
-    #[test]
-    fn test_elliptic_curve_secp256k1() {
-        // secp256k1曲线参数 (简化版本)
-        let curve = EllipticCurveGroup::new(97, 0, 7).unwrap();
+    fn calculate_frequencies(text: &str) -> HashMap<char, u32> {
+        let mut frequencies = HashMap::new();
+        for c in text.chars() {
+            *frequencies.entry(c).or_insert(0) += 1;
+        }
+        frequencies
+    }
+    
+    fn build_tree(frequencies: &HashMap<char, u32>) -> HuffmanNode {
+        let mut heap = BinaryHeap::new();
         
-        let p1 = ECPoint::Point(3, 6);
-        let p2 = ECPoint::Point(3, 6);
+        for (&symbol, &frequency) in frequencies {
+            heap.push(HuffmanNode {
+                symbol: Some(symbol),
+                frequency,
+                left: None,
+                right: None,
+            });
+        }
         
-        let result = curve.point_addition(&p1, &p2).unwrap();
-        // 验证点倍乘结果
-        assert!(matches!(result, ECPoint::Point(_, _)));
+        while heap.len() > 1 {
+            let left = heap.pop().unwrap();
+            let right = heap.pop().unwrap();
+            
+            let parent = HuffmanNode {
+                symbol: None,
+                frequency: left.frequency + right.frequency,
+                left: Some(Box::new(left)),
+                right: Some(Box::new(right)),
+            };
+            
+            heap.push(parent);
+        }
+        
+        heap.pop().unwrap()
+    }
+    
+    fn generate_codes(root: &HuffmanNode) -> HashMap<char, String> {
+        let mut codes = HashMap::new();
+        Self::generate_codes_recursive(root, String::new(), &mut codes);
+        codes
+    }
+    
+    fn generate_codes_recursive(node: &HuffmanNode, code: String, codes: &mut HashMap<char, String>) {
+        if let Some(symbol) = node.symbol {
+            codes.insert(symbol, code);
+        } else {
+            if let Some(ref left) = node.left {
+                Self::generate_codes_recursive(left, code.clone() + "0", codes);
+            }
+            if let Some(ref right) = node.right {
+                Self::generate_codes_recursive(right, code + "1", codes);
+            }
+        }
     }
 }
-
 ```
 
-### 5.2 性能分析
-性能分析和优化...
+## 5. 在共识机制中的应用
 
-### 5.3 安全考虑
-安全考虑和威胁分析...
+### 5.1 PoW共识分析
 
-## 6. 国际标准与规范
+**定理 5.1 (PoW出块时间)**
+PoW的出块时间服从指数分布，期望值为 $T = \frac{D \cdot 2^{256}}{H}$。
 
-### 6.1 NIST标准
-NIST标准规范...
+**证明**：
+每次哈希计算成功的概率为 $p = \frac{D}{2^{256}}$，因此需要尝试次数服从几何分布，期望值为 $\frac{1}{p} = \frac{2^{256}}{D}$。
 
-### 6.2 IEEE规范
-IEEE技术规范...
+由于网络算力为 $H$，每秒可以进行 $H$ 次哈希计算，因此期望出块时间为：
+$$T = \frac{2^{256}}{D \cdot H} = \frac{D \cdot 2^{256}}{H}$$■
 
-### 6.3 ISO标准
-ISO国际标准...
+**算法 5.1 (PoW概率分析)**:
 
-## 7. 前沿研究方向
+```rust
+pub struct PoWAnalysis {
+    difficulty: f64,
+    hash_rate: f64,
+}
 
-### 7.1 后量子密码学
-后量子密码学研究...
+impl PoWAnalysis {
+    pub fn expected_block_time(&self) -> f64 {
+        let target = self.difficulty / (2.0_f64.powi(256));
+        (2.0_f64.powi(256) / target) / self.hash_rate
+    }
+    
+    pub fn block_time_distribution(&self, time: f64) -> f64 {
+        let lambda = 1.0 / self.expected_block_time();
+        lambda * (-lambda * time).exp()
+    }
+    
+    pub fn probability_of_attack_success(&self, attacker_hash_rate: f64, confirmations: u32) -> f64 {
+        let q = attacker_hash_rate / self.hash_rate;
+        let p = 1.0 - q;
+        
+        if q >= p {
+            1.0
+        } else {
+            (q / p).powi(confirmations as i32)
+        }
+    }
+    
+    pub fn double_spend_probability(&self, attacker_hash_rate: f64, confirmations: u32) -> f64 {
+        self.probability_of_attack_success(attacker_hash_rate, confirmations)
+    }
+}
+```
 
-### 7.2 同态加密
-同态加密理论...
+### 5.2 PoS共识分析
 
-### 7.3 零知识证明
-零知识证明协议...
+**定理 5.2 (PoS安全性)**
+在诚实节点控制超过2/3权益的条件下，PoS机制是安全的。
 
-## 8. 参考文献与延伸阅读
+**证明**：
+假设攻击者控制 $q < \frac{1}{3}$ 的权益，诚实节点控制 $p = 1 - q > \frac{2}{3}$ 的权益。
 
+攻击者成功进行攻击的概率为：
+$$P_{attack} = \sum_{k=\lceil n/2 \rceil}^n \binom{n}{k} q^k p^{n-k}$$
 
-## 参考文献
+由于 $q < \frac{1}{3} < \frac{2}{3} < p$，当 $n$ 足够大时，$P_{attack}$ 趋近于0。■
 
-### 核心理论文献
-1. Galois, E. (1830). "Sur la théorie des nombres". Journal de mathématiques pures et appliquées.
-2. Mac Lane, S. (1971). "Categories for the Working Mathematician". Springer-Verlag.
-3. Awodey, S. (2010). "Category Theory". Oxford University Press.
+## 6. 在网络分析中的应用
 
-### 密码学文献
-4. Katz, J., & Lindell, Y. (2014). "Introduction to Modern Cryptography". CRC Press.
-5. Boneh, D., & Shoup, V. (2020). "A Graduate Course in Applied Cryptography".
-6. NIST SP 800-57. (2020). "Recommendation for Key Management".
+### 6.1 网络拓扑分析
 
-### 区块链文献
-7. Nakamoto, S. (2008). "Bitcoin: A Peer-to-Peer Electronic Cash System".
-8. Buterin, V. (2014). "Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform".
-9. Lamport, L., Shostak, R., & Pease, M. (1982). "The Byzantine Generals Problem". ACM TOPLAS.
+**定义 6.1 (度分布)**
+网络中节点的度分布定义为：
+$$P(k) = \frac{N_k}{N}$$
 
-### Web3理论文献
-10. Berners-Lee, T. (2019). "The Decentralized Web: A Primer". MIT Technology Review.
-11. Zuckerman, E. (2020). "The Case for Digital Public Infrastructure". Knight First Amendment Institute.
+其中 $N_k$ 是度为 $k$ 的节点数量，$N$ 是总节点数量。
 
-### 国际标准文档
-12. ISO/TC 307. (2020). "Blockchain and distributed ledger technologies".
-13. IEEE 2857-2021. "Standard for Privacy Engineering Framework".
-14. W3C. (2021). "Decentralized Identifiers (DIDs) v1.0".
+**定义 6.2 (聚类系数)**
+节点 $i$ 的聚类系数定义为：
+$$C_i = \frac{2E_i}{k_i(k_i-1)}$$
 
+其中 $E_i$ 是节点 $i$ 的邻居之间的边数，$k_i$ 是节点 $i$ 的度。
+
+**算法 6.1 (网络分析)**:
+
+```rust
+pub struct NetworkAnalysis {
+    adjacency_matrix: Vec<Vec<bool>>,
+    node_count: usize,
+}
+
+impl NetworkAnalysis {
+    pub fn new(adjacency_matrix: Vec<Vec<bool>>) -> Self {
+        let node_count = adjacency_matrix.len();
+        Self { adjacency_matrix, node_count }
+    }
+    
+    pub fn degree_distribution(&self) -> HashMap<usize, usize> {
+        let mut distribution = HashMap::new();
+        
+        for i in 0..self.node_count {
+            let degree = self.adjacency_matrix[i].iter().filter(|&&x| x).count();
+            *distribution.entry(degree).or_insert(0) += 1;
+        }
+        
+        distribution
+    }
+    
+    pub fn clustering_coefficient(&self, node: usize) -> f64 {
+        let neighbors: Vec<usize> = (0..self.node_count)
+            .filter(|&j| self.adjacency_matrix[node][j])
+            .collect();
+        
+        let k = neighbors.len();
+        if k < 2 {
+            return 0.0;
+        }
+        
+        let mut edges = 0;
+        for &i in &neighbors {
+            for &j in &neighbors {
+                if i < j && self.adjacency_matrix[i][j] {
+                    edges += 1;
+                }
+            }
+        }
+        
+        (2.0 * edges as f64) / (k * (k - 1)) as f64
+    }
+    
+    pub fn average_clustering_coefficient(&self) -> f64 {
+        let total: f64 = (0..self.node_count)
+            .map(|i| self.clustering_coefficient(i))
+            .sum();
+        
+        total / self.node_count as f64
+    }
+    
+    pub fn shortest_path_length(&self, start: usize, end: usize) -> Option<usize> {
+        let mut distances = vec![usize::MAX; self.node_count];
+        let mut visited = vec![false; self.node_count];
+        
+        distances[start] = 0;
+        
+        for _ in 0..self.node_count {
+            let current = (0..self.node_count)
+                .filter(|&i| !visited[i])
+                .min_by_key(|&i| distances[i])?;
+            
+            if current == end {
+                return Some(distances[current]);
+            }
+            
+            visited[current] = true;
+            
+            for neighbor in 0..self.node_count {
+                if self.adjacency_matrix[current][neighbor] && !visited[neighbor] {
+                    let new_distance = distances[current] + 1;
+                    if new_distance < distances[neighbor] {
+                        distances[neighbor] = new_distance;
+                    }
+                }
+            }
+        }
+        
+        None
+    }
+    
+    pub fn average_path_length(&self) -> f64 {
+        let mut total_length = 0;
+        let mut path_count = 0;
+        
+        for i in 0..self.node_count {
+            for j in (i + 1)..self.node_count {
+                if let Some(length) = self.shortest_path_length(i, j) {
+                    total_length += length;
+                    path_count += 1;
+                }
+            }
+        }
+        
+        if path_count > 0 {
+            total_length as f64 / path_count as f64
+        } else {
+            0.0
+        }
+    }
+}
+```
+
+### 6.2 网络可靠性分析
+
+**定义 6.3 (网络连通性)**
+网络是连通的，当且仅当任意两个节点之间存在路径。
+
+**定义 6.4 (网络可靠性)**
+网络可靠性是网络保持连通性的概率。
+
+**算法 6.2 (网络可靠性计算)**:
+
+```rust
+pub struct NetworkReliability {
+    network: NetworkAnalysis,
+    edge_failure_probability: f64,
+}
+
+impl NetworkReliability {
+    pub fn new(network: NetworkAnalysis, edge_failure_probability: f64) -> Self {
+        Self { network, edge_failure_probability }
+    }
+    
+    pub fn monte_carlo_reliability(&self, iterations: usize) -> f64 {
+        let mut connected_count = 0;
+        
+        for _ in 0..iterations {
+            let working_network = self.generate_working_network();
+            if self.is_connected(&working_network) {
+                connected_count += 1;
+            }
+        }
+        
+        connected_count as f64 / iterations as f64
+    }
+    
+    fn generate_working_network(&self) -> Vec<Vec<bool>> {
+        let mut working_network = vec![vec![false; self.network.node_count]; self.network.node_count];
+        
+        for i in 0..self.network.node_count {
+            for j in (i + 1)..self.network.node_count {
+                if self.network.adjacency_matrix[i][j] {
+                    if rand::random::<f64>() > self.edge_failure_probability {
+                        working_network[i][j] = true;
+                        working_network[j][i] = true;
+                    }
+                }
+            }
+        }
+        
+        working_network
+    }
+    
+    fn is_connected(&self, adjacency_matrix: &[Vec<bool>]) -> bool {
+        let mut visited = vec![false; self.network.node_count];
+        self.dfs(0, adjacency_matrix, &mut visited);
+        
+        visited.iter().all(|&x| x)
+    }
+    
+    fn dfs(&self, node: usize, adjacency_matrix: &[Vec<bool>], visited: &mut [bool]) {
+        visited[node] = true;
+        
+        for neighbor in 0..self.network.node_count {
+            if adjacency_matrix[node][neighbor] && !visited[neighbor] {
+                self.dfs(neighbor, adjacency_matrix, visited);
+            }
+        }
+    }
+}
+```
+
+## 总结
+
+概率论与统计学为Web3技术提供了重要的数学工具：
+
+1. **概率论基础**：为随机事件建模提供理论基础
+2. **随机过程**：为网络动态和共识机制提供分析工具
+3. **统计推断**：为数据分析和决策提供方法
+4. **信息论**：为数据压缩和传输提供理论支撑
+5. **网络分析**：为P2P网络和分布式系统提供分析工具
+
+这些理论基础确保了Web3系统的可靠性和效率，为共识机制、网络协议、数据分析等提供了可靠的技术支撑。
+
+---
+
+**最后更新**: 2024-12-19
+**版本**: 1.0
+**状态**: 初始构建完成

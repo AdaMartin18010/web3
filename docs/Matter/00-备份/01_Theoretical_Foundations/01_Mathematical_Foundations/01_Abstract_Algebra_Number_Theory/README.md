@@ -1,460 +1,845 @@
-
 # 抽象代数与数论 (Abstract Algebra & Number Theory)
 
-## 1. 严格数学定义与公理化
+## 概述
 
-### 1.1 基础概念定义
+抽象代数与数论是Web3技术的数学基础，为密码学、区块链共识机制、零知识证明等提供严格的数学支撑。本目录涵盖群论、环论、域论、椭圆曲线理论、素数理论和格理论等关键数学分支。
 
-**定义 1.1** (抽象代数与数论 (Abstract Algebra & Number Theory)的基本概念): 
-设 $\mathcal{S}$ 为一个集合，$\circ$ 为二元运算，则称 $(\mathcal{S}, \circ)$ 为代数结构，当且仅当：
-```latex
-\forall a, b \in \mathcal{S}: a \circ b \in \mathcal{S} \quad \text{(封闭性)}
-```
+## 目录结构
 
-**定义 1.2** (运算的结合性):
-运算 $\circ$ 满足结合性，当且仅当：
-```latex
-\forall a, b, c \in \mathcal{S}: (a \circ b) \circ c = a \circ (b \circ c)
-```
+### 1.1 群论基础 (Group Theory)
 
-**定义 1.3** (单位元):
-元素 $e \in \mathcal{S}$ 称为单位元，当且仅当：
-```latex
-\forall a \in \mathcal{S}: e \circ a = a \circ e = a
-```
+- [**群的定义与性质**](01_Group_Theory/01_Group_Definition_Properties/) - 群的定义、子群、同态、循环群
+- [**有限群**](01_Group_Theory/02_Finite_Groups/) - 有限群结构、拉格朗日定理、西罗定理
+- [**置换群**](01_Group_Theory/03_Permutation_Groups/) - 对称群、交替群、置换表示
+- [**阿贝尔群**](01_Group_Theory/04_Abelian_Groups/) - 阿贝尔群结构、有限生成阿贝尔群
+- [**群表示论**](01_Group_Theory/05_Group_Representation_Theory/) - 线性表示、不可约表示、特征标
 
-**定义 1.4** (逆元):
-对于元素 $a \in \mathcal{S}$，如果存在 $a^{-1} \in \mathcal{S}$ 使得：
-```latex
-a \circ a^{-1} = a^{-1} \circ a = e
-```
-则称 $a^{-1}$ 为 $a$ 的逆元。
+### 1.2 环论与域论 (Ring & Field Theory)
 
+- [**环的定义与性质**](02_Ring_Field_Theory/01_Ring_Definition_Properties/) - 环的定义、理想、商环、环同态
+- [**整环与域**](02_Ring_Field_Theory/02_Integral_Domains_Fields/) - 整环、域、特征、素域
+- [**有限域**](02_Ring_Field_Theory/03_Finite_Fields/) - 有限域构造、本原元、有限域上的多项式
+- [**多项式环**](02_Ring_Field_Theory/04_Polynomial_Rings/) - 多项式环、欧几里得算法、唯一分解
+- [**代数数论**](02_Ring_Field_Theory/05_Algebraic_Number_Theory/) - 代数整数、理想类群、戴德金整环
 
-### 1.2 公理系统
+### 1.3 椭圆曲线理论 (Elliptic Curve Theory)
 
-**公理系统A** (抽象代数与数论 (Abstract Algebra & Number Theory)的公理化表述):
+- [**椭圆曲线基础**](03_Elliptic_Curve_Theory/01_Elliptic_Curve_Basics/) - 椭圆曲线定义、点运算、群结构
+- [**有限域上的椭圆曲线**](03_Elliptic_Curve_Theory/02_Elliptic_Curves_over_Finite_Fields/) - 有限域上的椭圆曲线、点的阶
+- [**椭圆曲线密码学**](03_Elliptic_Curve_Theory/03_Elliptic_Curve_Cryptography/) - ECDLP、椭圆曲线数字签名
+- [**配对密码学**](03_Elliptic_Curve_Theory/04_Pairing_Cryptography/) - 双线性配对、Weil配对、Tate配对
+- [**超奇异椭圆曲线**](03_Elliptic_Curve_Theory/05_Supersingular_Elliptic_Curves/) - 超奇异曲线、同源映射
 
-**A1. 存在性公理**: 
-```latex
-\exists \mathcal{S} \neq \emptyset \land \exists \circ: \mathcal{S} \times \mathcal{S} \to \mathcal{S}
-```
+### 1.4 素数理论 (Prime Number Theory)
 
-**A2. 封闭性公理**:
-```latex
-\forall a, b \in \mathcal{S}: a \circ b \in \mathcal{S}
-```
+- [**素数分布**](04_Prime_Number_Theory/01_Prime_Distribution/) - 素数定理、黎曼猜想、素数分布规律
+- [**素性测试**](04_Prime_Number_Theory/02_Primality_Testing/) - 费马测试、米勒-拉宾测试、AKS算法
+- [**RSA安全性**](04_Prime_Number_Theory/03_RSA_Security/) - RSA算法、大整数分解、RSA安全性分析
+- [**素数生成**](04_Prime_Number_Theory/04_Prime_Generation/) - 安全素数生成、随机素数生成
+- [**素数应用**](04_Prime_Number_Theory/05_Prime_Applications/) - 密码学应用、数论应用
 
-**A3. 结合性公理**:
-```latex
-\forall a, b, c \in \mathcal{S}: (a \circ b) \circ c = a \circ (b \circ c)
-```
+### 1.5 格理论 (Lattice Theory)
 
-**A4. 单位元公理**:
-```latex
-\exists e \in \mathcal{S} \text{ s.t. } \forall a \in \mathcal{S}: e \circ a = a \circ e = a
-```
+- [**格的定义与性质**](05_Lattice_Theory/01_Lattice_Definition_Properties/) - 格的定义、格基、格的行列式
+- [**最短向量问题**](05_Lattice_Theory/02_Shortest_Vector_Problem/) - SVP、LLL算法、格约简
+- [**最近向量问题**](05_Lattice_Theory/03_Closest_Vector_Problem/) - CVP、Babai算法、格解码
+- [**格密码学**](05_Lattice_Theory/04_Lattice_Cryptography/) - 格基密码、NTRU、格签名
+- [**后量子密码学**](05_Lattice_Theory/05_Post_Quantum_Cryptography/) - 后量子密码学、格基后量子方案
 
-**A5. 逆元公理**:
-```latex
-\forall a \in \mathcal{S}, \exists a^{-1} \in \mathcal{S} \text{ s.t. } a \circ a^{-1} = a^{-1} \circ a = e
-```
+## 核心概念
 
-**定理1**: 单位元的唯一性
-**证明**: 假设存在两个单位元 $e_1, e_2$，则：
-$e_1 = e_1 \circ e_2 = e_2$，故单位元唯一。□
+### 群论在Web3中的应用
 
+群论为Web3技术提供了重要的数学基础：
 
-### 1.3 形式化表示
-```latex
+**椭圆曲线群**：
 
-% 抽象代数与数论 (Abstract Algebra & Number Theory)的形式化表示
+- 椭圆曲线上的点形成阿贝尔群
+- 为椭圆曲线密码学提供数学基础
+- 支持双线性配对和同态加密
 
-% 基本结构定义
-\newcommand{\struct}[1]{\mathcal{#1}}
-\newcommand{\op}{\circ}
-\newcommand{\identity}{e}
+**置换群**：
 
-% 代数结构的范畴论表示
-\begin{tikzcd}
-\struct{S} \arrow[r, "\op"] \arrow[d, "f"'] & \struct{S} \arrow[d, "f"] \\
-\struct{T} \arrow[r, "\star"'] & \struct{T}
-\end{tikzcd}
+- 在零知识证明中用于构造证明系统
+- 支持匿名性和隐私保护
+- 用于构造可验证随机函数
 
-% 群同态的核与像
-\begin{align}
-\ker(f) &= \{a \in \struct{S} \mid f(a) = \identity_{\struct{T}}\} \\
-\text{Im}(f) &= \{f(a) \mid a \in \struct{S}\} \\
-\end{align}
+### 有限域的重要性
 
-% 同构定理
-\begin{theorem}[第一同构定理]
-设 $f: \struct{S} \to \struct{T}$ 为群同态，则：
-$$\struct{S}/\ker(f) \cong \text{Im}(f)$$
-\end{theorem}
+有限域是密码学的核心数学结构：
 
-% 拉格朗日定理的形式化
-\begin{theorem}[拉格朗日定理]
-设 $\struct{G}$ 为有限群，$\struct{H}$ 为 $\struct{G}$ 的子群，则：
-$$|\struct{G}| = |\struct{H}| \cdot [\struct{G}:\struct{H}]$$
-其中 $[\struct{G}:\struct{H}]$ 为指数。
-\end{theorem}
+**有限域运算**：
 
-```
+- 支持高效的模运算
+- 为密码学算法提供数学基础
+- 支持多项式运算和编码理论
 
-## 2. 理论基础与数学结构
+**有限域上的椭圆曲线**：
 
-### 2.1 代数结构分析
-代数结构的详细分析，包括群、环、域等结构的定义、性质、应用与证明。
+- 提供安全的密码学原语
+- 支持高效的密钥生成和签名
+- 为区块链共识提供数学基础
 
-### 2.2 拓扑性质
-拓扑性质的详细分析...
+### 格理论的前沿应用
 
-### 2.3 范畴论视角
-范畴论视角的深入探讨...
+格理论是后量子密码学的基础：
 
-## 3. 核心定理与证明
+**格基密码学**：
 
-### 3.1 基本定理
-基本定理及其证明...
+- 抵抗量子计算攻击
+- 提供高效的加密和签名方案
+- 支持同态加密和函数加密
 
-### 3.2 证明技术
-证明技术和方法...
+**格约简算法**：
 
-### 3.3 应用实例
-应用实例和案例分析...
+- LLL算法用于格基约简
+- 支持格问题的求解
+- 为格密码学提供算法基础
 
-## 4. Web3应用映射
+## 在Web3中的应用
 
-### 4.1 加密学应用
-加密学应用场景...
+### 1. 椭圆曲线密码学
 
-### 4.2 共识机制
-共识机制的理论分析...
+- **密钥生成**：基于椭圆曲线离散对数问题
+- **数字签名**：ECDSA、EdDSA、Schnorr签名
+- **密钥交换**：ECDH、X25519、X448
+- **零知识证明**：椭圆曲线上的零知识证明系统
 
-### 4.3 智能合约
-智能合约应用案例...
+### 2. 有限域密码学
 
-## 5. 实现与优化
+- **RSA密码系统**：基于大整数分解问题
+- **离散对数密码**：基于有限域上的离散对数
+- **哈希函数**：基于有限域运算的哈希函数
+- **伪随机数生成**：基于有限域的PRNG
 
-### 5.1 算法实现
+### 3. 格密码学
+
+- **后量子加密**：NTRU、LWE、RLWE
+- **同态加密**：基于格的FHE方案
+- **函数加密**：基于格的函数加密
+- **格签名**：基于格的数字签名
+
+### 4. 零知识证明
+
+- **群论基础**：置换群、椭圆曲线群
+- **证明系统**：基于群论的零知识证明
+- **匿名性**：基于群论的匿名协议
+- **隐私保护**：基于群论的隐私技术
+
+## 学习资源
+
+### 推荐教材
+
+1. **抽象代数**：《Abstract Algebra》- David S. Dummit
+2. **数论**：《A Classical Introduction to Modern Number Theory》- Kenneth Ireland
+3. **椭圆曲线**：《The Arithmetic of Elliptic Curves》- Joseph H. Silverman
+4. **格理论**：《An Introduction to Mathematical Cryptography》- Jeffrey Hoffstein
+
+### 在线资源
+
+- [抽象代数教程](https://abstract.ups.edu/)
+- [椭圆曲线密码学](https://www.math.uwaterloo.ca/~ajmeneze/publications/papers/guide.pdf)
+- [格密码学基础](https://cims.nyu.edu/~regev/papers/lwesurvey.pdf)
+
+## Rust实现示例
+
+### 椭圆曲线实现
+
 ```rust
-
-// 抽象代数与数论 (Abstract Algebra & Number Theory) - Rust实现
-use std::collections::HashMap;
-use std::hash::Hash;
+use std::ops::{Add, Mul, Neg};
 use serde::{Serialize, Deserialize};
 
-/// 抽象代数结构trait
-pub trait AlgebraicStructure<T> {
-    fn operation(&self, a: &T, b: &T) -> Result<T, AlgebraicError>;
-    fn identity(&self) -> &T;
-    fn inverse(&self, element: &T) -> Result<T, AlgebraicError>;
-    fn is_valid(&self, element: &T) -> bool;
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+pub struct FieldElement {
+    pub value: u64,
+    pub modulus: u64,
 }
 
-/// 群结构实现
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Group<T> {
-    elements: Vec<T>,
-    operation_table: HashMap<(usize, usize), usize>,
-    identity_index: usize,
-}
-
-impl<T: Clone + Eq + Hash> Group<T> {
-    pub fn new(elements: Vec<T>, operation_table: HashMap<(usize, usize), usize>, identity_index: usize) -> Result<Self, AlgebraicError> {
-        let group = Group {
-            elements,
-            operation_table,
-            identity_index,
-        };
+impl FieldElement {
+    pub fn new(value: u64, modulus: u64) -> Self {
+        FieldElement {
+            value: value % modulus,
+            modulus,
+        }
+    }
+    
+    pub fn pow(&self, exponent: u64) -> Self {
+        let mut result = FieldElement::new(1, self.modulus);
+        let mut base = *self;
+        let mut exp = exponent;
         
-        if group.verify_group_axioms()? {
-            Ok(group)
+        while exp > 0 {
+            if exp % 2 == 1 {
+                result = result * base;
+            }
+            base = base * base;
+            exp /= 2;
+        }
+        
+        result
+    }
+    
+    pub fn inverse(&self) -> Option<Self> {
+        // 扩展欧几里得算法求逆元
+        let mut a = self.value as i64;
+        let mut b = self.modulus as i64;
+        let mut x = 1i64;
+        let mut y = 0i64;
+        
+        while b != 0 {
+            let q = a / b;
+            let temp = b;
+            b = a % b;
+            a = temp;
+            let temp = y;
+            y = x - q * y;
+            x = temp;
+        }
+        
+        if a == 1 {
+            Some(FieldElement::new(
+                ((x % self.modulus as i64) + self.modulus as i64) as u64 % self.modulus,
+                self.modulus,
+            ))
         } else {
-            Err(AlgebraicError::InvalidGroupStructure)
-        }
-    }
-    
-    fn verify_group_axioms(&self) -> Result<bool, AlgebraicError> {
-        // 验证封闭性
-        for i in 0..self.elements.len() {
-            for j in 0..self.elements.len() {
-                if !self.operation_table.contains_key(&(i, j)) {
-                    return Ok(false);
-                }
-            }
-        }
-        
-        // 验证结合性
-        for i in 0..self.elements.len() {
-            for j in 0..self.elements.len() {
-                for k in 0..self.elements.len() {
-                    let ab = self.operation_table[&(i, j)];
-                    let bc = self.operation_table[&(j, k)];
-                    let ab_c = self.operation_table[&(ab, k)];
-                    let a_bc = self.operation_table[&(i, bc)];
-                    
-                    if ab_c != a_bc {
-                        return Ok(false);
-                    }
-                }
-            }
-        }
-        
-        // 验证单位元性质
-        for i in 0..self.elements.len() {
-            if self.operation_table[&(self.identity_index, i)] != i ||
-               self.operation_table[&(i, self.identity_index)] != i {
-                return Ok(false);
-            }
-        }
-        
-        // 验证逆元存在性
-        for i in 0..self.elements.len() {
-            let mut has_inverse = false;
-            for j in 0..self.elements.len() {
-                if self.operation_table[&(i, j)] == self.identity_index &&
-                   self.operation_table[&(j, i)] == self.identity_index {
-                    has_inverse = true;
-                    break;
-                }
-            }
-            if !has_inverse {
-                return Ok(false);
-            }
-        }
-        
-        Ok(true)
-    }
-}
-
-impl<T: Clone + Eq + Hash> AlgebraicStructure<T> for Group<T> {
-    fn operation(&self, a: &T, b: &T) -> Result<T, AlgebraicError> {
-        let a_index = self.elements.iter().position(|x| x == a)
-            .ok_or(AlgebraicError::ElementNotFound)?;
-        let b_index = self.elements.iter().position(|x| x == b)
-            .ok_or(AlgebraicError::ElementNotFound)?;
-        
-        let result_index = self.operation_table[&(a_index, b_index)];
-        Ok(self.elements[result_index].clone())
-    }
-    
-    fn identity(&self) -> &T {
-        &self.elements[self.identity_index]
-    }
-    
-    fn inverse(&self, element: &T) -> Result<T, AlgebraicError> {
-        let element_index = self.elements.iter().position(|x| x == element)
-            .ok_or(AlgebraicError::ElementNotFound)?;
-        
-        for i in 0..self.elements.len() {
-            if self.operation_table[&(element_index, i)] == self.identity_index {
-                return Ok(self.elements[i].clone());
-            }
-        }
-        
-        Err(AlgebraicError::InverseNotFound)
-    }
-    
-    fn is_valid(&self, element: &T) -> bool {
-        self.elements.contains(element)
-    }
-}
-
-/// 椭圆曲线群实现（用于Web3加密学）
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct EllipticCurveGroup {
-    p: u64,  // 素数模
-    a: u64,  // 曲线参数a
-    b: u64,  // 曲线参数b
-}
-
-impl EllipticCurveGroup {
-    pub fn new(p: u64, a: u64, b: u64) -> Result<Self, AlgebraicError> {
-        // 验证曲线非奇异性: 4a³ + 27b² ≠ 0 (mod p)
-        let discriminant = (4 * a.pow(3) + 27 * b.pow(2)) % p;
-        if discriminant == 0 {
-            return Err(AlgebraicError::SingularCurve);
-        }
-        
-        Ok(EllipticCurveGroup { p, a, b })
-    }
-    
-    pub fn point_addition(&self, p1: &ECPoint, p2: &ECPoint) -> Result<ECPoint, AlgebraicError> {
-        match (p1, p2) {
-            (ECPoint::Infinity, p) | (p, ECPoint::Infinity) => Ok(p.clone()),
-            (ECPoint::Point(x1, y1), ECPoint::Point(x2, y2)) => {
-                if x1 == x2 {
-                    if y1 == y2 {
-                        // 点倍乘
-                        self.point_doubling(&ECPoint::Point(*x1, *y1))
-                    } else {
-                        // 互为逆元
-                        Ok(ECPoint::Infinity)
-                    }
-                } else {
-                    // 一般点加法
-                    let slope = ((*y2 as i64 - *y1 as i64) * 
-                                mod_inverse((*x2 as i64 - *x1 as i64) as u64, self.p) as i64) % self.p as i64;
-                    let x3 = (slope * slope - *x1 as i64 - *x2 as i64) % self.p as i64;
-                    let y3 = (slope * (*x1 as i64 - x3) - *y1 as i64) % self.p as i64;
-                    
-                    Ok(ECPoint::Point(
-                        ((x3 % self.p as i64 + self.p as i64) % self.p as i64) as u64,
-                        ((y3 % self.p as i64 + self.p as i64) % self.p as i64) as u64
-                    ))
-                }
-            }
-        }
-    }
-    
-    fn point_doubling(&self, point: &ECPoint) -> Result<ECPoint, AlgebraicError> {
-        match point {
-            ECPoint::Infinity => Ok(ECPoint::Infinity),
-            ECPoint::Point(x, y) => {
-                if *y == 0 {
-                    return Ok(ECPoint::Infinity);
-                }
-                
-                let slope = ((3 * x * x + self.a) * mod_inverse(2 * y, self.p)) % self.p;
-                let x3 = (slope * slope - 2 * x) % self.p;
-                let y3 = (slope * (x - x3) - y) % self.p;
-                
-                Ok(ECPoint::Point(x3, y3))
-            }
+            None
         }
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub enum ECPoint {
-    Infinity,
-    Point(u64, u64),
+impl Add for FieldElement {
+    type Output = Self;
+    
+    fn add(self, other: Self) -> Self {
+        assert_eq!(self.modulus, other.modulus);
+        FieldElement::new(self.value + other.value, self.modulus)
+    }
 }
 
-#[derive(Debug, Clone)]
-pub enum AlgebraicError {
-    ElementNotFound,
-    InverseNotFound,
-    InvalidGroupStructure,
-    SingularCurve,
-    ComputationError,
+impl Mul for FieldElement {
+    type Output = Self;
+    
+    fn mul(self, other: Self) -> Self {
+        assert_eq!(self.modulus, other.modulus);
+        FieldElement::new(self.value * other.value, self.modulus)
+    }
 }
 
-// 模逆函数实现（扩展欧几里得算法）
-fn mod_inverse(a: u64, m: u64) -> u64 {
-    fn extended_gcd(a: i64, b: i64) -> (i64, i64, i64) {
-        if a == 0 {
-            (b, 0, 1)
+impl Neg for FieldElement {
+    type Output = Self;
+    
+    fn neg(self) -> Self {
+        FieldElement::new(self.modulus - self.value, self.modulus)
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+pub struct EllipticCurvePoint {
+    pub x: Option<FieldElement>,
+    pub y: Option<FieldElement>,
+    pub curve: EllipticCurve,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+pub struct EllipticCurve {
+    pub a: FieldElement,
+    pub b: FieldElement,
+}
+
+impl EllipticCurve {
+    pub fn new(a: FieldElement, b: FieldElement) -> Self {
+        EllipticCurve { a, b }
+    }
+    
+    pub fn infinity_point(&self) -> EllipticCurvePoint {
+        EllipticCurvePoint {
+            x: None,
+            y: None,
+            curve: *self,
+        }
+    }
+    
+    pub fn point(&self, x: FieldElement, y: FieldElement) -> Option<EllipticCurvePoint> {
+        // 检查点是否在曲线上
+        let left = y * y;
+        let right = x * x * x + self.a * x + self.b;
+        
+        if left == right {
+            Some(EllipticCurvePoint {
+                x: Some(x),
+                y: Some(y),
+                curve: *self,
+            })
         } else {
-            let (gcd, x1, y1) = extended_gcd(b % a, a);
-            let x = y1 - (b / a) * x1;
-            let y = x1;
-            (gcd, x, y)
+            None
         }
     }
-    
-    let (gcd, x, _) = extended_gcd(a as i64, m as i64);
-    assert_eq!(gcd, 1, "Modular inverse does not exist");
-    
-    ((x % m as i64 + m as i64) % m as i64) as u64
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+impl Add for EllipticCurvePoint {
+    type Output = Self;
     
-    #[test]
-    fn test_cyclic_group_z5() {
-        // 创建模5的加法群
-        let elements = vec![0, 1, 2, 3, 4];
-        let mut operation_table = HashMap::new();
+    fn add(self, other: Self) -> Self {
+        assert_eq!(self.curve, other.curve);
         
-        for i in 0..5 {
-            for j in 0..5 {
-                operation_table.insert((i, j), (i + j) % 5);
+        // 无穷远点的情况
+        if self.x.is_none() {
+            return other;
+        }
+        if other.x.is_none() {
+            return self;
+        }
+        
+        let x1 = self.x.unwrap();
+        let y1 = self.y.unwrap();
+        let x2 = other.x.unwrap();
+        let y2 = other.y.unwrap();
+        
+        // 相同点的情况
+        if x1 == x2 {
+            if y1 == -y2 {
+                return self.curve.infinity_point();
+            }
+            
+            // 切线斜率
+            let slope = (FieldElement::new(3, x1.modulus) * x1 * x1 + self.curve.a) 
+                * (FieldElement::new(2, y1.modulus) * y1).inverse().unwrap();
+            
+            let x3 = slope * slope - x1 - x2;
+            let y3 = slope * (x1 - x3) - y1;
+            
+            EllipticCurvePoint {
+                x: Some(x3),
+                y: Some(y3),
+                curve: self.curve,
+            }
+        } else {
+            // 不同点的情况
+            let slope = (y2 - y1) * (x2 - x1).inverse().unwrap();
+            
+            let x3 = slope * slope - x1 - x2;
+            let y3 = slope * (x1 - x3) - y1;
+            
+            EllipticCurvePoint {
+                x: Some(x3),
+                y: Some(y3),
+                curve: self.curve,
             }
         }
-        
-        let group = Group::new(elements, operation_table, 0).unwrap();
-        
-        // 测试群运算
-        assert_eq!(group.operation(&2, &3).unwrap(), 0);
-        assert_eq!(group.identity(), &0);
-        assert_eq!(group.inverse(&3).unwrap(), 2);
-    }
-    
-    #[test]
-    fn test_elliptic_curve_secp256k1() {
-        // secp256k1曲线参数 (简化版本)
-        let curve = EllipticCurveGroup::new(97, 0, 7).unwrap();
-        
-        let p1 = ECPoint::Point(3, 6);
-        let p2 = ECPoint::Point(3, 6);
-        
-        let result = curve.point_addition(&p1, &p2).unwrap();
-        // 验证点倍乘结果
-        assert!(matches!(result, ECPoint::Point(_, _)));
     }
 }
 
+impl Mul<u64> for EllipticCurvePoint {
+    type Output = Self;
+    
+    fn mul(self, scalar: u64) -> Self {
+        let mut result = self.curve.infinity_point();
+        let mut point = self;
+        let mut exp = scalar;
+        
+        while exp > 0 {
+            if exp % 2 == 1 {
+                result = result + point;
+            }
+            point = point + point;
+            exp /= 2;
+        }
+        
+        result
+    }
+}
+
+pub struct EllipticCurveCrypto {
+    curve: EllipticCurve,
+    generator: EllipticCurvePoint,
+    order: u64,
+}
+
+impl EllipticCurveCrypto {
+    pub fn new(curve: EllipticCurve, generator: EllipticCurvePoint, order: u64) -> Self {
+        EllipticCurveCrypto {
+            curve,
+            generator,
+            order,
+        }
+    }
+    
+    pub fn generate_keypair(&self) -> (u64, EllipticCurvePoint) {
+        use rand::Rng;
+        let mut rng = rand::thread_rng();
+        
+        let private_key = rng.gen_range(1..self.order);
+        let public_key = self.generator * private_key;
+        
+        (private_key, public_key)
+    }
+    
+    pub fn sign(&self, private_key: u64, message_hash: u64) -> (u64, u64) {
+        use rand::Rng;
+        let mut rng = rand::thread_rng();
+        
+        loop {
+            let k = rng.gen_range(1..self.order);
+            let r_point = self.generator * k;
+            
+            if r_point.x.is_none() {
+                continue;
+            }
+            
+            let r = r_point.x.unwrap().value;
+            if r == 0 {
+                continue;
+            }
+            
+            let k_inv = FieldElement::new(k, self.order).inverse().unwrap();
+            let s = k_inv * FieldElement::new(message_hash + private_key * r, self.order);
+            
+            if s.value != 0 {
+                return (r, s.value);
+            }
+        }
+    }
+    
+    pub fn verify(&self, public_key: &EllipticCurvePoint, message_hash: u64, signature: (u64, u64)) -> bool {
+        let (r, s) = signature;
+        
+        if r == 0 || s == 0 || r >= self.order || s >= self.order {
+            return false;
+        }
+        
+        let w = FieldElement::new(s, self.order).inverse().unwrap();
+        let u1 = FieldElement::new(message_hash * w.value, self.order);
+        let u2 = FieldElement::new(r * w.value, self.order);
+        
+        let point1 = self.generator * u1.value;
+        let point2 = *public_key * u2.value;
+        let sum_point = point1 + point2;
+        
+        if sum_point.x.is_none() {
+            return false;
+        }
+        
+        sum_point.x.unwrap().value == r
+    }
+}
 ```
 
-### 5.2 性能分析
-性能分析和优化...
+### 有限域实现
 
-### 5.3 安全考虑
-安全考虑和威胁分析...
+```rust
+use std::ops::{Add, Sub, Mul, Div, Neg};
+use serde::{Serialize, Deserialize};
 
-## 6. 国际标准与规范
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+pub struct FiniteField {
+    pub value: u64,
+    pub modulus: u64,
+}
 
-### 6.1 NIST标准
-NIST标准规范...
+impl FiniteField {
+    pub fn new(value: u64, modulus: u64) -> Self {
+        FiniteField {
+            value: value % modulus,
+            modulus,
+        }
+    }
+    
+    pub fn pow(&self, exponent: u64) -> Self {
+        let mut result = FiniteField::new(1, self.modulus);
+        let mut base = *self;
+        let mut exp = exponent;
+        
+        while exp > 0 {
+            if exp % 2 == 1 {
+                result = result * base;
+            }
+            base = base * base;
+            exp /= 2;
+        }
+        
+        result
+    }
+    
+    pub fn inverse(&self) -> Option<Self> {
+        if self.value == 0 {
+            return None;
+        }
+        
+        // 扩展欧几里得算法
+        let mut a = self.value as i64;
+        let mut b = self.modulus as i64;
+        let mut x = 1i64;
+        let mut y = 0i64;
+        
+        while b != 0 {
+            let q = a / b;
+            let temp = b;
+            b = a % b;
+            a = temp;
+            let temp = y;
+            y = x - q * y;
+            x = temp;
+        }
+        
+        if a == 1 {
+            Some(FiniteField::new(
+                ((x % self.modulus as i64) + self.modulus as i64) as u64 % self.modulus,
+                self.modulus,
+            ))
+        } else {
+            None
+        }
+    }
+    
+    pub fn is_primitive_root(&self) -> bool {
+        if self.value == 0 {
+            return false;
+        }
+        
+        let phi = self.modulus - 1;
+        let factors = self.prime_factors(phi);
+        
+        for factor in factors {
+            if self.pow(phi / factor) == FiniteField::new(1, self.modulus) {
+                return false;
+            }
+        }
+        
+        true
+    }
+    
+    fn prime_factors(&self, n: u64) -> Vec<u64> {
+        let mut factors = Vec::new();
+        let mut n = n;
+        let mut d = 2;
+        
+        while d * d <= n {
+            while n % d == 0 {
+                if !factors.contains(&d) {
+                    factors.push(d);
+                }
+                n /= d;
+            }
+            d += 1;
+        }
+        
+        if n > 1 && !factors.contains(&n) {
+            factors.push(n);
+        }
+        
+        factors
+    }
+}
 
-### 6.2 IEEE规范
-IEEE技术规范...
+impl Add for FiniteField {
+    type Output = Self;
+    
+    fn add(self, other: Self) -> Self {
+        assert_eq!(self.modulus, other.modulus);
+        FiniteField::new(self.value + other.value, self.modulus)
+    }
+}
 
-### 6.3 ISO标准
-ISO国际标准...
+impl Sub for FiniteField {
+    type Output = Self;
+    
+    fn sub(self, other: Self) -> Self {
+        assert_eq!(self.modulus, other.modulus);
+        FiniteField::new(
+            if self.value >= other.value {
+                self.value - other.value
+            } else {
+                self.modulus - (other.value - self.value)
+            },
+            self.modulus,
+        )
+    }
+}
 
-## 7. 前沿研究方向
+impl Mul for FiniteField {
+    type Output = Self;
+    
+    fn mul(self, other: Self) -> Self {
+        assert_eq!(self.modulus, other.modulus);
+        FiniteField::new(self.value * other.value, self.modulus)
+    }
+}
 
-### 7.1 后量子密码学
-后量子密码学研究...
+impl Div for FiniteField {
+    type Output = Self;
+    
+    fn div(self, other: Self) -> Self {
+        assert_eq!(self.modulus, other.modulus);
+        let other_inv = other.inverse().expect("Division by zero");
+        self * other_inv
+    }
+}
 
-### 7.2 同态加密
-同态加密理论...
+impl Neg for FiniteField {
+    type Output = Self;
+    
+    fn neg(self) -> Self {
+        FiniteField::new(self.modulus - self.value, self.modulus)
+    }
+}
 
-### 7.3 零知识证明
-零知识证明协议...
+pub struct FiniteFieldCrypto {
+    field: u64,
+    generator: FiniteField,
+}
 
-## 8. 参考文献与延伸阅读
+impl FiniteFieldCrypto {
+    pub fn new(field: u64, generator: FiniteField) -> Self {
+        FiniteFieldCrypto { field, generator }
+    }
+    
+    pub fn generate_keypair(&self) -> (u64, FiniteField) {
+        use rand::Rng;
+        let mut rng = rand::thread_rng();
+        
+        let private_key = rng.gen_range(1..self.field);
+        let public_key = self.generator.pow(private_key);
+        
+        (private_key, public_key)
+    }
+    
+    pub fn diffie_hellman(&self, private_key: u64, public_key: FiniteField) -> FiniteField {
+        public_key.pow(private_key)
+    }
+    
+    pub fn elgamal_encrypt(&self, public_key: FiniteField, message: u64) -> (FiniteField, FiniteField) {
+        use rand::Rng;
+        let mut rng = rand::thread_rng();
+        
+        let k = rng.gen_range(1..self.field);
+        let c1 = self.generator.pow(k);
+        let c2 = FiniteField::new(message, self.field) * public_key.pow(k);
+        
+        (c1, c2)
+    }
+    
+    pub fn elgamal_decrypt(&self, private_key: u64, ciphertext: (FiniteField, FiniteField)) -> u64 {
+        let (c1, c2) = ciphertext;
+        let s = c1.pow(private_key);
+        let s_inv = s.inverse().unwrap();
+        let message = c2 * s_inv;
+        
+        message.value
+    }
+}
+```
 
+### 格理论实现
 
-## 参考文献
+```rust
+use std::ops::{Add, Sub, Mul};
+use serde::{Serialize, Deserialize};
 
-### 核心理论文献
-1. Galois, E. (1830). "Sur la théorie des nombres". Journal de mathématiques pures et appliquées.
-2. Mac Lane, S. (1971). "Categories for the Working Mathematician". Springer-Verlag.
-3. Awodey, S. (2010). "Category Theory". Oxford University Press.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Lattice {
+    pub basis: Vec<Vec<i64>>,
+    pub dimension: usize,
+}
 
-### 密码学文献
-4. Katz, J., & Lindell, Y. (2014). "Introduction to Modern Cryptography". CRC Press.
-5. Boneh, D., & Shoup, V. (2020). "A Graduate Course in Applied Cryptography".
-6. NIST SP 800-57. (2020). "Recommendation for Key Management".
+impl Lattice {
+    pub fn new(basis: Vec<Vec<i64>>) -> Self {
+        let dimension = basis.len();
+        assert!(dimension > 0);
+        assert!(basis.iter().all(|row| row.len() == dimension));
+        
+        Lattice { basis, dimension }
+    }
+    
+    pub fn determinant(&self) -> f64 {
+        // 计算格的行列式
+        let mut det = 1.0;
+        let mut matrix = self.basis.clone();
+        
+        for i in 0..self.dimension {
+            // 找到主元
+            let mut max_row = i;
+            for j in (i + 1)..self.dimension {
+                if matrix[j][i].abs() > matrix[max_row][i].abs() {
+                    max_row = j;
+                }
+            }
+            
+            if matrix[max_row][i] == 0 {
+                return 0.0; // 奇异矩阵
+            }
+            
+            // 交换行
+            if max_row != i {
+                matrix.swap(i, max_row);
+                det = -det;
+            }
+            
+            // 消元
+            for j in (i + 1)..self.dimension {
+                let factor = matrix[j][i] as f64 / matrix[i][i] as f64;
+                for k in i..self.dimension {
+                    matrix[j][k] -= (factor * matrix[i][k] as f64) as i64;
+                }
+            }
+            
+            det *= matrix[i][i] as f64;
+        }
+        
+        det.abs()
+    }
+    
+    pub fn shortest_vector(&self) -> Option<Vec<i64>> {
+        // 简化的最短向量算法
+        let mut shortest = None;
+        let mut min_norm = f64::INFINITY;
+        
+        // 检查所有可能的短向量
+        for i in 0..self.dimension {
+            let norm = self.vector_norm(&self.basis[i]);
+            if norm < min_norm {
+                min_norm = norm;
+                shortest = Some(self.basis[i].clone());
+            }
+        }
+        
+        shortest
+    }
+    
+    pub fn vector_norm(&self, vector: &[i64]) -> f64 {
+        vector.iter().map(|&x| (x * x) as f64).sum::<f64>().sqrt()
+    }
+    
+    pub fn lll_reduction(&mut self, delta: f64) {
+        // LLL格约简算法
+        assert!(0.25 < delta && delta < 1.0);
+        
+        let mut k = 1;
+        while k < self.dimension {
+            // Gram-Schmidt正交化
+            for j in (0..k).rev() {
+                let mu = self.gram_schmidt_coefficient(k, j);
+                if mu.abs() > 0.5 {
+                    for i in 0..self.dimension {
+                        self.basis[k][i] -= (mu * self.basis[j][i] as f64) as i64;
+                    }
+                }
+            }
+            
+            // Lovász条件
+            let norm_k = self.vector_norm(&self.basis[k]);
+            let norm_k_minus_1 = self.vector_norm(&self.basis[k - 1]);
+            
+            if norm_k * norm_k >= (delta - self.gram_schmidt_coefficient(k, k - 1).powi(2)) * norm_k_minus_1 * norm_k_minus_1 {
+                k += 1;
+            } else {
+                self.basis.swap(k, k - 1);
+                k = (k - 1).max(1);
+            }
+        }
+    }
+    
+    fn gram_schmidt_coefficient(&self, i: usize, j: usize) -> f64 {
+        let mut numerator = 0.0;
+        let mut denominator = 0.0;
+        
+        for k in 0..self.dimension {
+            numerator += self.basis[i][k] as f64 * self.basis[j][k] as f64;
+            denominator += self.basis[j][k] as f64 * self.basis[j][k] as f64;
+        }
+        
+        if denominator == 0.0 {
+            0.0
+        } else {
+            numerator / denominator
+        }
+    }
+}
 
-### 区块链文献
-7. Nakamoto, S. (2008). "Bitcoin: A Peer-to-Peer Electronic Cash System".
-8. Buterin, V. (2014). "Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform".
-9. Lamport, L., Shostak, R., & Pease, M. (1982). "The Byzantine Generals Problem". ACM TOPLAS.
+pub struct LatticeCrypto {
+    lattice: Lattice,
+    modulus: u64,
+}
 
-### Web3理论文献
-10. Berners-Lee, T. (2019). "The Decentralized Web: A Primer". MIT Technology Review.
-11. Zuckerman, E. (2020). "The Case for Digital Public Infrastructure". Knight First Amendment Institute.
+impl LatticeCrypto {
+    pub fn new(lattice: Lattice, modulus: u64) -> Self {
+        LatticeCrypto { lattice, modulus }
+    }
+    
+    pub fn generate_keypair(&self) -> (Vec<i64>, Vec<i64>) {
+        use rand::Rng;
+        let mut rng = rand::thread_rng();
+        
+        // 生成私钥（短向量）
+        let mut private_key = vec![0i64; self.lattice.dimension];
+        for i in 0..self.lattice.dimension {
+            private_key[i] = rng.gen_range(-1..=1);
+        }
+        
+        // 生成公钥（格上的点）
+        let mut public_key = vec![0i64; self.lattice.dimension];
+        for i in 0..self.lattice.dimension {
+            for j in 0..self.lattice.dimension {
+                public_key[i] += self.lattice.basis[j][i] * private_key[j];
+            }
+            public_key[i] = public_key[i].rem_euclid(self.modulus as i64);
+        }
+        
+        (private_key, public_key)
+    }
+    
+    pub fn encrypt(&self, public_key: &[i64], message: u64) -> (Vec<i64>, u64) {
+        use rand::Rng;
+        let mut rng = rand::thread_rng();
+        
+        // 生成随机向量
+        let mut r = vec![0i64; self.lattice.dimension];
+        for i in 0..self.lattice.dimension {
+            r[i] = rng.gen_range(-1..=1);
+        }
+        
+        // 计算密文
+        let mut c1 = vec![0i64; self.lattice.dimension];
+        for i in 0..self.lattice.dimension {
+            for j in 0..self.lattice.dimension {
+                c1[i] += self.lattice.basis[j][i] * r[j];
+            }
+            c1[i] = c1[i].rem_euclid(self.modulus as i64);
+        }
+        
+        let mut c2 = 0u64;
+        for i in 0..self.lattice.dimension {
+            c2 = (c2 + (public_key[i] as u64 * r[i] as u64)) % self.modulus;
+        }
+        c2 = (c2 + message) % self.modulus;
+        
+        (c1, c2)
+    }
+    
+    pub fn decrypt(&self, private_key: &[i64], ciphertext: (Vec<i64>, u64)) -> u64 {
+        let (c1, c2) = ciphertext;
+        
+        // 计算内积
+        let mut inner_product = 0i64;
+        for i in 0..self.lattice.dimension {
+            inner_product += private_key[i] * c1[i];
+        }
+        inner_product = inner_product.rem_euclid(self.modulus as i64);
+        
+        // 解密
+        let mut message = c2 as i64 - inner_product;
+        message = message.rem_euclid(self.modulus as i64);
+        
+        message as u64
+    }
+}
+```
 
-### 国际标准文档
-12. ISO/TC 307. (2020). "Blockchain and distributed ledger technologies".
-13. IEEE 2857-2021. "Standard for Privacy Engineering Framework".
-14. W3C. (2021). "Decentralized Identifiers (DIDs) v1.0".
+## 贡献指南
 
+欢迎对抽象代数与数论内容进行贡献。请确保：
+
+1. 所有数学概念都有严格的数学定义
+2. 包含在Web3中的具体应用场景
+3. 提供Rust代码实现示例
+4. 说明算法的复杂度和安全性
+5. 关注最新的数学研究成果

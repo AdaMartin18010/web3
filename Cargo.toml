@@ -1,0 +1,30 @@
+[package]
+name = "web3-semantics-api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4.3"
+actix-rt = "2.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+sqlx = { version = "0.6", features = ["runtime-tokio-rustls", "postgres"] }
+redis = { version = "0.23", features = ["tokio-comp"] }
+elasticsearch = "8.8"
+neo4rs = "0.6"
+uuid = { version = "1.0", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+log = "0.4"
+env_logger = "0.10"
+dotenv = "0.15"
+anyhow = "1.0"
+thiserror = "1.0"
+validator = { version = "0.16", features = ["derive"] }
+bcrypt = "0.15"
+jsonwebtoken = "8.3"
+reqwest = { version = "0.11", features = ["json"] }
+futures = "0.3"
+async-trait = "0.1"
+tracing = "0.1"
+tracing-subscriber = "0.3" 

@@ -25,12 +25,14 @@ $$d(c_1, c_2) = 1 - \text{sim}(c_1, c_2)$$
 
 **定理1.1** (语义距离性质)
 语义距离函数 $d: \mathcal{S} \times \mathcal{S} \rightarrow [0,1]$ 满足：
+
 1. **非负性**: $d(c_1, c_2) \geq 0$
 2. **对称性**: $d(c_1, c_2) = d(c_2, c_1)$
 3. **自反性**: $d(c, c) = 0$
 4. **三角不等式**: $d(c_1, c_2) \leq d(c_1, c_3) + d(c_3, c_2)$
 
 **证明**:
+
 1. 非负性：由于 $\text{sim}(c_1, c_2) \in [0,1]$，所以 $d(c_1, c_2) = 1 - \text{sim}(c_1, c_2) \geq 0$
 2. 对称性：由于 $\text{sim}(c_1, c_2) = \text{sim}(c_2, c_1)$，所以 $d(c_1, c_2) = d(c_2, c_1)$
 3. 自反性：由于 $\text{sim}(c, c) = 1$，所以 $d(c, c) = 0$
@@ -59,6 +61,7 @@ $$\text{sim}(\phi(c_1), \phi(c_2)) > \theta'$$
 
 **定义1.5** (知识层次结构)
 知识层次结构是一个有向无环图 $H = (V, E)$，其中：
+
 - $V = \{L_1, L_2, ..., L_{10}\}$ 是10个知识层级
 - $E \subseteq V \times V$ 是层级间的关系
 
@@ -215,6 +218,7 @@ Web3语义空间对于Web3知识领域是完备的：
 $$\forall k \in \mathcal{K}, \exists c \in \mathcal{S} \text{ such that } \text{sim}(k, c) \geq \theta$$
 
 **证明**:
+
 1. 假设存在知识 $k \in \mathcal{K}$ 在语义空间中没有对应概念
 2. 根据概念提取的完整性，所有重要概念都已被提取
 3. 因此 $k$ 必须与某个概念 $c \in \mathcal{S}$ 相似
@@ -225,6 +229,7 @@ $$\forall k \in \mathcal{K}, \exists c \in \mathcal{S} \text{ such that } \text{
 $$\forall \text{premises}, \text{if } \text{valid}(\text{premises}) \text{ then } \text{valid}(\text{infer}(\text{premises}))$$
 
 **证明**:
+
 1. 对于逻辑推理：基于逻辑规则，有效前提必然产生有效结论
 2. 对于语义推理：基于相似性阈值，确保推理结果的相关性
 3. 对于层次推理：基于层级关系，确保推理的层次一致性
@@ -236,6 +241,7 @@ $$\forall \text{premises}, \text{if } \text{valid}(\text{premises}) \text{ then 
 $$\text{sim}(c_1, c_2) \in [0,1] \text{ and } \text{sim}(c_1, c_2) = \text{sim}(c_2, c_1)$$
 
 **证明**:
+
 1. 文本相似性：基于余弦相似性，结果在[0,1]范围内且对称
 2. 属性相似性：基于Jaccard相似性，结果在[0,1]范围内且对称
 3. 关系相似性：基于图结构分析，结果在[0,1]范围内且对称
@@ -246,6 +252,7 @@ $$\text{sim}(c_1, c_2) \in [0,1] \text{ and } \text{sim}(c_1, c_2) = \text{sim}(
 $$G = (V, E) \text{ where } E \subseteq V \times V \text{ and } |V| = n$$
 
 **证明**:
+
 1. 节点集合：包含所有概念，$|V| = n$
 2. 边集合：基于关系推断，$E \subseteq V \times V$
 3. 图结构：有向加权图，支持关系类型和权重
@@ -502,12 +509,14 @@ def validate_reasoning_correctness(model, test_cases):
 ### 6.1 模型性能评估 / Model Performance Evaluation
 
 **推理性能**:
+
 - 逻辑推理: 平均0.1秒/推理
 - 语义推理: 平均0.3秒/推理
 - 层次推理: 平均0.2秒/推理
 - 综合推理: 平均0.5秒/推理
 
 **准确性评估**:
+
 - 逻辑一致性: 98%
 - 语义完整性: 95%
 - 推理正确性: 92%
@@ -516,11 +525,13 @@ def validate_reasoning_correctness(model, test_cases):
 ### 6.2 算法复杂度分析 / Algorithm Complexity Analysis
 
 **时间复杂度**:
+
 - 概念映射: O(n²)
 - 推理路径: O(n^k)，其中k是最大路径长度
 - 知识推理: O(n log n)
 
 **空间复杂度**:
+
 - 语义空间: O(n²)
 - 关系网络: O(n + m)，其中m是边数
 - 推理引擎: O(n)
@@ -545,4 +556,4 @@ Through systematic theoretical model construction, we have successfully establis
 
 这些理论模型为知识验证和应用提供了坚实的理论基础。
 
-These theoretical models provide a solid theoretical foundation for knowledge validation and applications. 
+These theoretical models provide a solid theoretical foundation for knowledge validation and applications.

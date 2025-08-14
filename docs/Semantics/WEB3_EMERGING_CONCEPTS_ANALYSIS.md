@@ -375,7 +375,7 @@ This document analyzes the latest developments in the Web3 field, identifies eme
 
 ### 3.1 按层级分类 / Classification by Layer
 
-**L2: 核心技术层 (Core Technology Layer)**
+**L2: 核心技术层 (Core Technology Layer)**:
 
 - 零知识Rollup
 - 乐观Rollup
@@ -384,7 +384,7 @@ This document analyzes the latest developments in the Web3 field, identifies eme
 - 结算层
 - 执行层
 
-**L3: 应用协议层 (Application Protocol Layer)**
+**L3: 应用协议层 (Application Protocol Layer)**:
 
 - ERC-4337标准
 - 智能合约钱包
@@ -393,19 +393,19 @@ This document analyzes the latest developments in the Web3 field, identifies eme
 - MEV-Boost
 - 公平排序
 
-**L4: 隐私保护层 (Privacy Protection Layer)**
+**L4: 隐私保护层 (Privacy Protection Layer)**:
 
 - 去中心化标识符
 - 可验证凭证
 - 身份钱包
 
-**L5: 跨链互操作层 (Cross-chain Interoperability Layer)**
+**L5: 跨链互操作层 (Cross-chain Interoperability Layer)**:
 
 - 跨链消息传递
 - 跨链状态验证
 - 跨链资产桥
 
-**L6: 基础设施层 (Infrastructure Layer)**
+**L6: 基础设施层 (Infrastructure Layer)**:
 
 - 内容寻址存储
 - 存储证明

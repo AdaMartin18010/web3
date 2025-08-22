@@ -370,6 +370,7 @@ func (s *Web3APIServer) Start(addr string) error {
 ### 1. 区块链节点实现
 
 #### 以太坊Go客户端
+
 Go语言在以太坊生态系统中扮演重要角色，如Go-Ethereum (geth)客户端。
 
 ```go
@@ -485,6 +486,7 @@ func (ec *EthereumClient) Close() {
 ### 2. 智能合约交互
 
 #### 智能合约调用
+
 Go语言提供了强大的智能合约交互能力。
 
 ```go

@@ -586,49 +586,6 @@ volumes:
   redis_data:
 ```
 
-```dockerfile
-# api-gateway/Dockerfile
-FROM golang:1.21-alpine
-
-WORKDIR /app
-COPY go.mod go.sum ./
-RUN go mod download
-
-COPY . .
-RUN go build -o main .
-
-EXPOSE 8080
-CMD ["./main"]
-```
-
-```dockerfile
-# blockchain-service/Dockerfile
-FROM rust:1.70-alpine
-
-WORKDIR /app
-COPY Cargo.toml Cargo.lock ./
-RUN cargo fetch
-
-COPY . .
-RUN cargo build --release
-
-EXPOSE 8081
-CMD ["./target/release/blockchain-service"]
-```
-
-```dockerfile
-# analytics-service/Dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-
-COPY . .
-EXPOSE 8082
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8082"]
-```
-
 ## 性能优化策略
 
 ### 1. 服务间通信优化

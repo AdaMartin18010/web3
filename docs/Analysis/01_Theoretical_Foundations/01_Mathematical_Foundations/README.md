@@ -468,23 +468,23 @@ ISO国际标准...
 
 ### 密码学文献
 
-4. Katz, J., & Lindell, Y. (2014). "Introduction to Modern Cryptography". CRC Press.
-5. Boneh, D., & Shoup, V. (2020). "A Graduate Course in Applied Cryptography".
-6. NIST SP 800-57. (2020). "Recommendation for Key Management".
+ 1. Katz, J., & Lindell, Y. (2014). "Introduction to Modern Cryptography". CRC Press.
+ 2. Boneh, D., & Shoup, V. (2020). "A Graduate Course in Applied Cryptography".
+ 3. NIST SP 800-57. (2020). "Recommendation for Key Management".
 
 ### 区块链文献
 
-7. Nakamoto, S. (2008). "Bitcoin: A Peer-to-Peer Electronic Cash System".
-8. Buterin, V. (2014). "Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform".
-9. Lamport, L., Shostak, R., & Pease, M. (1982). "The Byzantine Generals Problem". ACM TOPLAS.
+ 1. Nakamoto, S. (2008). "Bitcoin: A Peer-to-Peer Electronic Cash System".
+ 2. Buterin, V. (2014). "Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform".
+ 3. Lamport, L., Shostak, R., & Pease, M. (1982). "The Byzantine Generals Problem". ACM TOPLAS.
 
 ### Web3理论文献
 
-10. Berners-Lee, T. (2019). "The Decentralized Web: A Primer". MIT Technology Review.
-11. Zuckerman, E. (2020). "The Case for Digital Public Infrastructure". Knight First Amendment Institute.
+ 1. Berners-Lee, T. (2019). "The Decentralized Web: A Primer". MIT Technology Review.
+ 2. Zuckerman, E. (2020). "The Case for Digital Public Infrastructure". Knight First Amendment Institute.
 
 ### 国际标准文档
 
-12. ISO/TC 307. (2020). "Blockchain and distributed ledger technologies".
-13. IEEE 2857-2021. "Standard for Privacy Engineering Framework".
-14. W3C. (2021). "Decentralized Identifiers (DIDs) v1.0".
+1. ISO/TC 307. (2020). "Blockchain and distributed ledger technologies".
+2. IEEE 2857-2021. "Standard for Privacy Engineering Framework".
+3. W3C. (2021). "Decentralized Identifiers (DIDs) v1.0".

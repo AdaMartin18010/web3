@@ -2,491 +2,773 @@
 
 ## 概述
 
-开发者社区平台是Phase 3第4个月"社区建设"阶段的核心应用，提供技术论坛、开发者文档和代码示例库。
+开发者社区平台是一个专为Web3开发者设计的综合性社区平台，提供技术交流、资源共享、项目协作等功能，促进Web3生态系统的健康发展。
 
 ## 核心功能
 
 ### 1. 技术论坛系统
 
-#### TypeScript - 论坛前端应用
 ```typescript
-import React, { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-
-interface ForumPost {
-  id: string;
-  title: string;
-  content: string;
-  author: {
-    name: string;
-    avatar: string;
-    reputation: number;
+interface ForumSystem {
+  categories: {
+    blockchain: string[];
+    defi: string[];
+    nft: string[];
+    security: string[];
+    tools: string[];
   };
-  category: string;
-  tags: string[];
-  createdAt: string;
-  viewCount: number;
-  replyCount: number;
-  likes: number;
+  
+  posts: {
+    createPost(data: PostData): Promise<Post>;
+    updatePost(id: string, data: Partial<PostData>): Promise<Post>;
+    deletePost(id: string): Promise<boolean>;
+    getPosts(filters: PostFilters): Promise<Post[]>;
+  };
+  
+  comments: {
+    addComment(postId: string, comment: CommentData): Promise<Comment>;
+    replyToComment(commentId: string, reply: CommentData): Promise<Comment>;
+    getComments(postId: string): Promise<Comment[]>;
+  };
 }
-
-const ForumApp: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-
-  const { data: posts, isLoading } = useQuery({
-    queryKey: ['forum-posts', selectedCategory, searchQuery],
-    queryFn: async () => {
-      const response = await fetch(`/api/forum/posts?category=${selectedCategory}&search=${searchQuery}`);
-      return response.json();
-    },
-  });
-
-  const categories = [
-    { id: 'all', name: '全部', icon: '📚' },
-    { id: 'solidity', name: 'Solidity开发', icon: '🔷' },
-    { id: 'react', name: 'React前端', icon: '⚛️' },
-    { id: 'defi', name: 'DeFi协议', icon: '💰' },
-    { id: 'layer2', name: 'Layer2技术', icon: '⚡' },
-    { id: 'security', name: '安全审计', icon: '🔒' },
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <header className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold text-gray-900">Web3开发者论坛</h1>
-            <input
-              type="text"
-              placeholder="搜索帖子..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
-            />
-          </div>
-        </header>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">分类</h2>
-              <nav className="space-y-2">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left ${
-                      selectedCategory === category.id
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'hover:bg-gray-100 text-gray-700'
-                    }`}
-                  >
-                    <span className="text-lg">{category.icon}</span>
-                    <span>{category.name}</span>
-                  </button>
-                ))}
-              </nav>
-            </div>
-          </div>
-
-          <div className="lg:col-span-3">
-            <div className="bg-white rounded-lg shadow-sm">
-              {isLoading ? (
-                <div className="p-8 text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-                </div>
-              ) : (
-                <div className="divide-y divide-gray-200">
-                  {posts?.map((post: ForumPost) => (
-                    <article key={post.id} className="p-6 hover:bg-gray-50">
-                      <div className="flex items-start space-x-4">
-                        <img
-                          src={post.author.avatar}
-                          alt={post.author.name}
-                          className="w-12 h-12 rounded-full"
-                        />
-                        <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                            {post.title}
-                          </h3>
-                          <p className="text-gray-600 text-sm mb-3">{post.content}</p>
-                          <div className="flex items-center justify-between text-sm text-gray-500">
-                            <span>作者: {post.author.name}</span>
-                            <div className="flex items-center space-x-4">
-                              <span>👁️ {post.viewCount}</span>
-                              <span>💬 {post.replyCount}</span>
-                              <span>👍 {post.likes}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default ForumApp;
 ```
 
-### 2. 开发者文档系统
+### 2. 代码分享平台
 
-#### TypeScript - 文档管理系统
+```python
+class CodeSharingPlatform:
+    def __init__(self):
+        self.snippets = {}
+        self.reviews = {}
+    
+    def create_code_snippet(self, snippet_data: dict) -> dict:
+        snippet_id = self.generate_id()
+        snippet = {
+            'id': snippet_id,
+            'title': snippet_data['title'],
+            'description': snippet_data['description'],
+            'code': snippet_data['code'],
+            'language': snippet_data['language'],
+            'tags': snippet_data['tags'],
+            'author_id': snippet_data['author_id'],
+            'created_at': datetime.now(),
+            'likes': 0,
+            'views': 0
+        }
+        
+        self.snippets[snippet_id] = snippet
+        return snippet
+    
+    def search_snippets(self, query: str, filters: dict = None) -> list:
+        results = []
+        for snippet in self.snippets.values():
+            if self.matches_search(snippet, query, filters):
+                results.append(snippet)
+        
+        return sorted(results, key=lambda x: x['likes'], reverse=True)
+```
+
+### 3. 项目协作工具
+
+```rust
+#[derive(Debug, Clone)]
+pub struct ProjectCollaboration {
+    pub projects: HashMap<String, Project>,
+    pub tasks: HashMap<String, Task>,
+}
+
+#[derive(Debug, Clone)]
+pub struct Project {
+    pub id: String,
+    pub name: String,
+    pub description: String,
+    pub owner_id: String,
+    pub team_id: String,
+    pub status: ProjectStatus,
+    pub created_at: DateTime<Utc>,
+    pub repository_url: Option<String>,
+}
+
+impl ProjectCollaboration {
+    pub fn create_project(&mut self, project_data: ProjectData) -> Result<Project, String> {
+        let project = Project {
+            id: self.generate_id(),
+            name: project_data.name,
+            description: project_data.description,
+            owner_id: project_data.owner_id,
+            team_id: project_data.team_id,
+            status: ProjectStatus::Planning,
+            created_at: Utc::now(),
+            repository_url: project_data.repository_url,
+        };
+        
+        self.projects.insert(project.id.clone(), project.clone());
+        Ok(project)
+    }
+}
+```
+
+### 4. 学习资源中心
+
+```javascript
+class LearningResourceCenter {
+    constructor() {
+        this.courses = new Map();
+        this.tutorials = new Map();
+    }
+    
+    createCourse(courseData) {
+        const course = {
+            id: this.generateId(),
+            title: courseData.title,
+            description: courseData.description,
+            instructor: courseData.instructor,
+            level: courseData.level,
+            duration: courseData.duration,
+            price: courseData.price,
+            isFree: courseData.isFree || false,
+            rating: 0,
+            enrolledStudents: 0,
+            createdAt: new Date()
+        };
+        
+        this.courses.set(course.id, course);
+        return course;
+    }
+    
+    searchResources(query, filters = {}) {
+        const results = {
+            courses: [],
+            tutorials: []
+        };
+        
+        for (const course of this.courses.values()) {
+            if (this.matchesSearch(course, query, filters)) {
+                results.courses.push(course);
+            }
+        }
+        
+        return results;
+    }
+}
+```
+
+### 5. 开发者认证系统
+
+```solidity
+contract DeveloperCertification is ERC721, Ownable {
+    using Counters for Counters.Counter;
+    
+    Counters.Counter private _tokenIds;
+    
+    struct Certification {
+        uint256 tokenId;
+        string title;
+        string description;
+        string issuer;
+        uint256 issuedAt;
+        bool isValid;
+    }
+    
+    struct Skill {
+        string name;
+        uint256 level;
+        uint256 experience;
+        uint256 lastUpdated;
+    }
+    
+    mapping(uint256 => Certification) public certifications;
+    mapping(address => uint256[]) public userCertifications;
+    mapping(address => mapping(string => Skill)) public userSkills;
+    mapping(address => uint256) public userReputation;
+    
+    function issueCertification(
+        address user,
+        string memory title,
+        string memory description,
+        string memory issuer
+    ) external onlyOwner returns (uint256) {
+        _tokenIds.increment();
+        uint256 newTokenId = _tokenIds.current();
+        
+        _mint(user, newTokenId);
+        
+        certifications[newTokenId] = Certification({
+            tokenId: newTokenId,
+            title: title,
+            description: description,
+            issuer: issuer,
+            issuedAt: block.timestamp,
+            isValid: true
+        });
+        
+        userCertifications[user].push(newTokenId);
+        userReputation[user] += 100;
+        
+        return newTokenId;
+    }
+    
+    function updateSkill(
+        address user,
+        string memory skillName,
+        uint256 level,
+        uint256 experience
+    ) external {
+        require(msg.sender == user || msg.sender == owner(), "Not authorized");
+        require(level >= 1 && level <= 5, "Invalid level");
+        
+        userSkills[user][skillName] = Skill({
+            name: skillName,
+            level: level,
+            experience: experience,
+            lastUpdated: block.timestamp
+        });
+    }
+}
+```
+
+## 技术架构
+
+### 1. 前端架构
+
 ```typescript
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { marked } from 'marked';
-
-interface Documentation {
-  id: string;
-  title: string;
-  content: string;
-  category: string;
-  author: string;
-  version: string;
-  viewCount: number;
-  rating: number;
-}
-
-const DocumentationApp: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('getting-started');
-  const [selectedDoc, setSelectedDoc] = useState<string>('');
-
-  const { data: docs } = useQuery({
-    queryKey: ['documentation', selectedCategory],
-    queryFn: async () => {
-      const response = await fetch(`/api/documentation/docs?category=${selectedCategory}`);
-      return response.json();
-    },
-  });
-
-  const { data: currentDoc } = useQuery({
-    queryKey: ['documentation-doc', selectedDoc],
-    queryFn: async () => {
-      const response = await fetch(`/api/documentation/docs/${selectedDoc}`);
-      return response.json();
-    },
-    enabled: !!selectedDoc,
-  });
-
-  const categories = [
-    { id: 'getting-started', name: '快速开始', icon: '🚀' },
-    { id: 'smart-contracts', name: '智能合约', icon: '🔷' },
-    { id: 'frontend', name: '前端开发', icon: '⚛️' },
-    { id: 'defi-protocols', name: 'DeFi协议', icon: '💰' },
-    { id: 'layer2', name: 'Layer2技术', icon: '⚡' },
-    { id: 'security', name: '安全指南', icon: '🔒' },
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <header className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Web3开发者文档</h1>
-        </header>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">文档分类</h2>
-              <nav className="space-y-2">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left ${
-                      selectedCategory === category.id
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'hover:bg-gray-100 text-gray-700'
-                    }`}
-                  >
-                    <span className="text-lg">{category.icon}</span>
-                    <span>{category.name}</span>
-                  </button>
-                ))}
-              </nav>
-            </div>
-
-            {docs && (
-              <div className="bg-white rounded-lg shadow-sm p-6 mt-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">文档列表</h3>
-                <div className="space-y-2">
-                  {docs.map((doc: Documentation) => (
-                    <button
-                      key={doc.id}
-                      onClick={() => setSelectedDoc(doc.id)}
-                      className={`w-full text-left p-3 rounded-lg ${
-                        selectedDoc === doc.id
-                          ? 'bg-blue-100 text-blue-700'
-                          : 'hover:bg-gray-100 text-gray-700'
-                      }`}
-                    >
-                      <h4 className="font-medium">{doc.title}</h4>
-                      <p className="text-sm text-gray-500 mt-1">
-                        版本: {doc.version} | 查看: {doc.viewCount}
-                      </p>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="lg:col-span-3">
-            {currentDoc ? (
-              <div className="bg-white rounded-lg shadow-sm p-8">
-                <h1 className="text-3xl font-bold text-gray-900 mb-4">{currentDoc.title}</h1>
-                <div className="prose prose-lg max-w-none">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: marked(currentDoc.content),
-                    }}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-                <div className="text-6xl mb-4">📚</div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-2">选择文档</h2>
-                <p className="text-gray-600">请从左侧选择一个文档开始阅读</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+const frontendStack = {
+  framework: 'Next.js 14',
+  language: 'TypeScript',
+  styling: 'Tailwind CSS',
+  stateManagement: 'Zustand',
+  uiComponents: 'Radix UI',
+  authentication: 'NextAuth.js',
+  realtime: 'Socket.io',
+  testing: 'Jest + React Testing Library'
 };
 
-export default DocumentationApp;
+const pageStructure = {
+  home: '/',
+  forum: '/forum',
+  codeSharing: '/code',
+  projects: '/projects',
+  learning: '/learning',
+  certifications: '/certifications',
+  profile: '/profile',
+  settings: '/settings'
+};
 ```
 
-### 3. 代码示例库
+### 2. 后端架构
 
-#### TypeScript - 代码示例管理系统
-```typescript
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
-
-interface CodeExample {
-  id: string;
-  title: string;
-  description: string;
-  code: string;
-  language: string;
-  category: string;
-  author: string;
-  viewCount: number;
-  likeCount: number;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+```go
+type BackendStack struct {
+    Language    string   `json:"language"`
+    Framework   string   `json:"framework"`
+    Database    string   `json:"database"`
+    Cache       string   `json:"cache"`
+    MessageQueue string  `json:"message_queue"`
+    Search      string   `json:"search"`
 }
 
-const CodeExamplesApp: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [selectedLanguage, setSelectedLanguage] = useState<string>('all');
+var backendStack = BackendStack{
+    Language:      "Go",
+    Framework:     "Gin",
+    Database:      "PostgreSQL",
+    Cache:         "Redis",
+    MessageQueue:  "RabbitMQ",
+    Search:        "Elasticsearch",
+}
 
-  const { data: examples, isLoading } = useQuery({
-    queryKey: ['code-examples', selectedCategory, selectedLanguage],
-    queryFn: async () => {
-      const response = await fetch(
-        `/api/code-examples?category=${selectedCategory}&language=${selectedLanguage}`
-      );
-      return response.json();
+type MicroserviceArchitecture struct {
+    Services map[string]Service
+}
+
+type Service struct {
+    Name        string
+    Port        int
+    Dependencies []string
+    Endpoints   []Endpoint
+}
+
+var services = map[string]Service{
+    "user-service": {
+        Name: "user-service",
+        Port: 8081,
+        Dependencies: []string{"postgres", "redis"},
+        Endpoints: []Endpoint{
+            {Path: "/api/users", Method: "GET"},
+            {Path: "/api/users", Method: "POST"},
+            {Path: "/api/users/:id", Method: "PUT"},
+            {Path: "/api/users/:id", Method: "DELETE"},
+        },
     },
-  });
-
-  const categories = [
-    { id: 'all', name: '全部', icon: '📚' },
-    { id: 'smart-contracts', name: '智能合约', icon: '🔷' },
-    { id: 'frontend', name: '前端开发', icon: '⚛️' },
-    { id: 'backend', name: '后端开发', icon: '⚙️' },
-    { id: 'defi', name: 'DeFi协议', icon: '💰' },
-  ];
-
-  const languages = [
-    { id: 'all', name: '全部语言', icon: '🌐' },
-    { id: 'javascript', name: 'JavaScript', icon: '🟨' },
-    { id: 'typescript', name: 'TypeScript', icon: '🔷' },
-    { id: 'solidity', name: 'Solidity', icon: '🔷' },
-    { id: 'rust', name: 'Rust', icon: '🦀' },
-    { id: 'python', name: 'Python', icon: '🐍' },
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <header className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">代码示例库</h1>
-        </header>
-
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">分类</label>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              >
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.icon} {category.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">编程语言</label>
-              <select
-                value={selectedLanguage}
-                onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              >
-                {languages.map((language) => (
-                  <option key={language.id} value={language.id}>
-                    {language.icon} {language.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-          {isLoading ? (
-            <div className="col-span-full text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-            </div>
-          ) : (
-            examples?.map((example: CodeExample) => (
-              <div key={example.id} className="bg-white rounded-lg shadow-sm overflow-hidden">
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900">{example.title}</h3>
-                    <span
-                      className={`px-2 py-1 text-xs rounded-full ${
-                        example.difficulty === 'beginner'
-                          ? 'bg-green-100 text-green-800'
-                          : example.difficulty === 'intermediate'
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-red-100 text-red-800'
-                      }`}
-                    >
-                      {example.difficulty}
-                    </span>
-                  </div>
-
-                  <p className="text-gray-600 text-sm mb-4">{example.description}</p>
-
-                  <div className="bg-gray-900 rounded-lg p-4 mb-4">
-                    <SyntaxHighlighter
-                      language={example.language}
-                      style={tomorrow}
-                      customStyle={{ margin: 0, fontSize: '12px' }}
-                      showLineNumbers
-                    >
-                      {example.code.substring(0, 200)}
-                      {example.code.length > 200 && '...'}
-                    </SyntaxHighlighter>
-                  </div>
-
-                  <div className="flex items-center justify-between text-sm text-gray-500">
-                    <div className="flex items-center space-x-4">
-                      <span>👁️ {example.viewCount}</span>
-                      <span>👍 {example.likeCount}</span>
-                    </div>
-                    <button className="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                      查看详情
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default CodeExamplesApp;
+    "forum-service": {
+        Name: "forum-service",
+        Port: 8082,
+        Dependencies: []string{"postgres", "redis", "elasticsearch"},
+        Endpoints: []Endpoint{
+            {Path: "/api/posts", Method: "GET"},
+            {Path: "/api/posts", Method: "POST"},
+            {Path: "/api/comments", Method: "POST"},
+        },
+    },
+    "code-service": {
+        Name: "code-service",
+        Port: 8083,
+        Dependencies: []string{"postgres", "redis", "elasticsearch"},
+        Endpoints: []Endpoint{
+            {Path: "/api/snippets", Method: "GET"},
+            {Path: "/api/snippets", Method: "POST"},
+            {Path: "/api/reviews", Method: "POST"},
+        },
+    },
+    "project-service": {
+        Name: "project-service",
+        Port: 8084,
+        Dependencies: []string{"postgres", "redis"},
+        Endpoints: []Endpoint{
+            {Path: "/api/projects", Method: "GET"},
+            {Path: "/api/projects", Method: "POST"},
+            {Path: "/api/tasks", Method: "POST"},
+        },
+    },
+    "learning-service": {
+        Name: "learning-service",
+        Port: 8085,
+        Dependencies: []string{"postgres", "redis", "elasticsearch"},
+        Endpoints: []Endpoint{
+            {Path: "/api/courses", Method: "GET"},
+            {Path: "/api/tutorials", Method: "GET"},
+            {Path: "/api/enrollments", Method: "POST"},
+        },
+    },
+}
 ```
 
-### 4. 部署配置
+### 3. 数据库设计
 
-#### Docker Compose配置
+```sql
+-- 用户表
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    avatar_url VARCHAR(500),
+    bio TEXT,
+    reputation INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 论坛分类表
+CREATE TABLE forum_categories (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    parent_id UUID REFERENCES forum_categories(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 论坛帖子表
+CREATE TABLE forum_posts (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    author_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    category_id UUID REFERENCES forum_categories(id),
+    tags TEXT[],
+    is_pinned BOOLEAN DEFAULT FALSE,
+    is_locked BOOLEAN DEFAULT FALSE,
+    views_count INTEGER DEFAULT 0,
+    likes_count INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 代码片段表
+CREATE TABLE code_snippets (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    code TEXT NOT NULL,
+    language VARCHAR(50) NOT NULL,
+    author_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    tags TEXT[],
+    likes_count INTEGER DEFAULT 0,
+    views_count INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 项目表
+CREATE TABLE projects (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    owner_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    team_id UUID REFERENCES teams(id),
+    status VARCHAR(50) DEFAULT 'planning',
+    repository_url VARCHAR(500),
+    documentation_url VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 任务表
+CREATE TABLE tasks (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    assignee_id UUID REFERENCES users(id),
+    status VARCHAR(50) DEFAULT 'todo',
+    priority VARCHAR(20) DEFAULT 'medium',
+    due_date TIMESTAMP,
+    tags TEXT[],
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 课程表
+CREATE TABLE courses (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    instructor_id UUID REFERENCES users(id),
+    level VARCHAR(20) NOT NULL,
+    duration INTEGER,
+    price DECIMAL(10,2) DEFAULT 0,
+    is_free BOOLEAN DEFAULT TRUE,
+    rating DECIMAL(3,2) DEFAULT 0,
+    enrolled_students INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 认证表
+CREATE TABLE certifications (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    issuer VARCHAR(255) NOT NULL,
+    issued_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_valid BOOLEAN DEFAULT TRUE,
+    metadata JSONB
+);
+```
+
+## 部署配置
+
+### 1. Docker Compose配置
+
 ```yaml
 version: '3.8'
 
 services:
-  # 开发者社区前端
-  community-frontend:
+  # 前端应用
+  frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8080
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://api:8080
     depends_on:
-      - community-backend
+      - api
     networks:
-      - community-network
+      - web3-community
 
-  # 开发者社区后端
-  community-backend:
+  # API网关
+  api:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=postgresql://user:password@postgres:5432/community
+      - DATABASE_URL=postgresql://user:password@postgres:5432/web3community
+      - REDIS_URL=redis://redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - postgres
+      - redis
+      - elasticsearch
+    networks:
+      - web3-community
+
+  # 用户服务
+  user-service:
+    build:
+      context: ./services/user-service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres:5432/web3community
       - REDIS_URL=redis://redis:6379
     depends_on:
       - postgres
       - redis
     networks:
-      - community-network
+      - web3-community
+
+  # 论坛服务
+  forum-service:
+    build:
+      context: ./services/forum-service
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres:5432/web3community
+      - REDIS_URL=redis://redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - postgres
+      - redis
+      - elasticsearch
+    networks:
+      - web3-community
+
+  # 代码分享服务
+  code-service:
+    build:
+      context: ./services/code-service
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres:5432/web3community
+      - REDIS_URL=redis://redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - postgres
+      - redis
+      - elasticsearch
+    networks:
+      - web3-community
+
+  # 项目协作服务
+  project-service:
+    build:
+      context: ./services/project-service
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres:5432/web3community
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - web3-community
+
+  # 学习服务
+  learning-service:
+    build:
+      context: ./services/learning-service
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8085"
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres:5432/web3community
+      - REDIS_URL=redis://redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - postgres
+      - redis
+      - elasticsearch
+    networks:
+      - web3-community
 
   # PostgreSQL数据库
   postgres:
-    image: postgres:13
+    image: postgres:15
     environment:
-      - POSTGRES_DB=community
+      - POSTGRES_DB=web3community
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     networks:
-      - community-network
+      - web3-community
 
   # Redis缓存
   redis:
-    image: redis:6-alpine
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
     networks:
-      - community-network
+      - web3-community
+
+  # Elasticsearch搜索引擎
+  elasticsearch:
+    image: elasticsearch:8.8.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - web3-community
+
+  # RabbitMQ消息队列
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=password
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - web3-community
+
+  # Nginx反向代理
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - frontend
+      - api
+    networks:
+      - web3-community
+
+volumes:
+  postgres_data:
+  redis_data:
+  elasticsearch_data:
+  rabbitmq_data:
 
 networks:
-  community-network:
+  web3-community:
     driver: bridge
+```
+
+## 监控指标
+
+### 1. 用户活跃度指标
+
+```typescript
+interface UserActivityMetrics {
+  // 用户注册
+  dailyRegistrations: number;
+  weeklyRegistrations: number;
+  monthlyRegistrations: number;
+  
+  // 用户活跃度
+  dailyActiveUsers: number;
+  weeklyActiveUsers: number;
+  monthlyActiveUsers: number;
+  
+  // 用户留存
+  day1Retention: number;
+  day7Retention: number;
+  day30Retention: number;
+  
+  // 用户参与度
+  averageSessionDuration: number;
+  postsPerUser: number;
+  commentsPerUser: number;
+  codeSnippetsPerUser: number;
+}
+```
+
+### 2. 内容质量指标
+
+```typescript
+interface ContentQualityMetrics {
+  // 论坛内容
+  totalPosts: number;
+  totalComments: number;
+  averagePostLength: number;
+  postsWithCode: number;
+  postsWithImages: number;
+  
+  // 代码质量
+  totalSnippets: number;
+  averageSnippetRating: number;
+  snippetsWithReviews: number;
+  averageReviewScore: number;
+  
+  // 项目协作
+  totalProjects: number;
+  activeProjects: number;
+  completedProjects: number;
+  averageProjectDuration: number;
+  
+  // 学习资源
+  totalCourses: number;
+  totalTutorials: number;
+  courseEnrollments: number;
+  averageCourseRating: number;
+}
+```
+
+### 3. 社区健康度指标
+
+```typescript
+interface CommunityHealthMetrics {
+  // 用户声誉分布
+  reputationDistribution: {
+    low: number;      // 0-100
+    medium: number;   // 101-500
+    high: number;     // 501-1000
+    expert: number;   // 1000+
+  };
+  
+  // 内容多样性
+  categoryDistribution: {
+    blockchain: number;
+    defi: number;
+    nft: number;
+    security: number;
+    tools: number;
+  };
+  
+  // 用户互动
+  userInteractions: {
+    likes: number;
+    shares: number;
+    follows: number;
+    mentions: number;
+  };
+  
+  // 问题解决
+  questionResolution: {
+    totalQuestions: number;
+    resolvedQuestions: number;
+    averageResolutionTime: number;
+    resolutionRate: number;
+  };
+}
 ```
 
 ## 总结
 
-开发者社区平台提供了完整的社区建设解决方案：
+开发者社区平台是一个综合性的Web3开发者生态系统，提供技术交流、代码分享、项目协作、学习资源和认证系统等核心功能。通过微服务架构和现代化的技术栈，平台能够支持大规模用户访问和高质量的内容管理。
 
-1. **技术论坛系统**: 支持分类讨论、搜索、用户互动
-2. **开发者文档系统**: 完整的文档管理和Markdown渲染
-3. **代码示例库**: 多语言代码示例管理和展示
-4. **完整部署**: Docker容器化部署方案
+平台的成功指标包括用户活跃度、内容质量、社区健康度等多个维度，通过全面的监控系统来跟踪和优化这些指标，确保平台的持续发展和用户满意度。
 
-该系统为Web3开发者提供了交流、学习和分享的平台，促进了开发者社区的活跃度和技术交流。
+## 参考文献
+
+1. Stack Overflow Developer Survey 2023
+2. GitHub State of the Octoverse 2023
+3. Dev.to Community Guidelines
+4. Discord Developer Community Best Practices

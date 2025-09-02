@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-09-02T09:02:05.123807",
+  "actions": {
+    "delete_files": [],
+    "rename_files": [
+      {
+        "old_name": "docs\\Analysis\\WEB3_THEORETICAL_FRAMEWORK_FINAL_REPORT.md",
+        "new_name": "web3_final_report",
+        "reason": "夸张文件名"
+      }
+    ]
+  },
+  "summary": {
+    "files_to_delete": 0,
+    "files_to_rename": 1,
+    "estimated_space_saved": 0
+  }
+}

@@ -1,0 +1,4 @@
+aiofiles>=23.0.0
+asyncio-mqtt>=0.16.1
+pathlib2>=2.3.7
+typing-extensions>=4.0.0

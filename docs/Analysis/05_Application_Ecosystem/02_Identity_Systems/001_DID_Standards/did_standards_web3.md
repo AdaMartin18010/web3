@@ -245,3 +245,71 @@ impl Credential {
 1. W3C. (2022). Decentralized Identifiers (DIDs) v1.0. W3C Recommendation.
 2. Sporny, M., et al. (2022). Verifiable Credentials Data Model v1.1. W3C Recommendation.
 3. Buchner, D., et al. (2022). Decentralized Identifier Resolution v1.0. W3C Working Draft.
+
+## 附录A 可验证凭证与撤销实现
+
+### A.1 VC 模型要点
+
+- 发行者、持有者、验证者三方模型
+- 选择性披露与ZK证明
+- 状态注册表与撤销列表
+
+### A.2 撤销机制设计
+
+- 基于累加器的可验证撤销（隐私友好）
+- 基于Merkle根的批量撤销（链上轻量）
+- 基于状态注册表的实时撤销（解析服务集成）
+
+### A.3 示例（伪代码）
+
+```typescript
+type RevocationRegistry = {
+  merkleRoot: string
+}
+
+function isRevoked(credentialId: string, proof: MerkleProof, registry: RevocationRegistry): boolean {
+  return verifyMerkleProof(credentialId, proof, registry.merkleRoot)
+}
+```
+
+## 8. 可验证凭证(VC)与撤销实现（新增）
+
+### 8.1 数据模型扩展
+
+- 证书状态：Active | Suspended | Revoked
+- 撤销登记：链上Merkle/bitmap登记，链下可缓存校验路径
+
+### 8.2 参考实现（伪代码）
+
+```rust
+pub struct RevocationRegistry {
+    pub merkle_root: [u8; 32],
+}
+
+pub struct VerifiableCredential {
+    pub id: String,
+    pub subject: String,
+    pub issuer: String,
+    pub status: String, // Active/Suspended/Revoked
+    pub revocation_proof: Option<Vec<u8>>, // Merkle proof
+}
+
+impl RevocationRegistry {
+    pub fn verify_status(&self, credential_id: &str, proof: &[u8]) -> bool {
+        // 验证credential_id未在撤销集合中（基于Merkle/bitmap）
+        true
+    }
+}
+
+impl VerifiableCredential {
+    pub fn is_valid(&self, reg: &RevocationRegistry) -> bool {
+        self.status == "Active" && self.revocation_proof.as_ref().map_or(true, |p| reg.verify_status(&self.id, p))
+    }
+}
+```
+
+### 8.3 最佳实践
+
+- 最小化可链接性：DID Rotation + 匿名凭证/ZK选择披露
+- 高可用：离线可验证包（VC+Proof+元数据），在线增量校验
+- 治理：撤销权限分离（Issuer/Registry/Arbiter），带延时与审计日志

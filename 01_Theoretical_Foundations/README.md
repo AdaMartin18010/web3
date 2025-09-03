@@ -7,6 +7,7 @@
 ## 目录结构
 
 ### 01_Mathematical_Foundations (数学基础)
+
 - **001_Group_Theory** - 群论基础
 - **002_Field_Theory** - 域论基础  
 - **003_Elliptic_Curves** - 椭圆曲线理论
@@ -16,6 +17,7 @@
 - **007_Information_Theory** - 信息论
 
 ### 02_Cryptographic_Foundations (密码学基础)
+
 - **001_Symmetric_Cryptography** - 对称密码学
 - **002_Asymmetric_Cryptography** - 非对称密码学
 - **003_Elliptic_Curves** - 椭圆曲线密码学
@@ -25,12 +27,14 @@
 ## 核心概念
 
 ### 数学基础
+
 - **群论**: 为密码学提供代数结构
 - **域论**: 支持有限域运算
 - **椭圆曲线**: 现代密码学的核心
 - **数论**: 大数分解和离散对数问题
 
 ### 密码学基础
+
 - **对称加密**: AES、ChaCha20等算法
 - **非对称加密**: RSA、ECC等算法
 - **哈希函数**: SHA-256、Keccak等

@@ -484,3 +484,26 @@ phase3_applications = {
 ---
 
 *Phase 3已全部完成：核心应用、生态集成、性能优化、开发者社区与知识管理、合作伙伴与生态共建均达成目标，进入持续维护与扩展阶段。*
+
+### 后续维护与扩展计划（Phase 3 完成后）
+
+#### 版本与里程碑
+
+- **v2.1（当前）**: 完成Phase 3全量收尾与索引/导航更新（参见 `FINAL_DOCUMENTATION_INDEX.md`、`RELEASE_NOTES.md`）
+- **v2.2（1-2个月）**: 扩展跨链与标准对齐案例、增强文档门户检索与链接校验
+- **v2.3（3-6个月）**: 新增协议与安全实践案例库、完善语义系统联动推荐
+- **v3.0（6-12个月）**: 重大版本，重构导航与个性化学习路径，全面自动化质量与链接检查
+
+#### 核心KPI（维护阶段）
+
+- 文档时效性 ≥ 95%（季度抽样，无过期关键条目）
+- 链接可用率 ≥ 99%（自动化校验）
+- 术语一致性 ≥ 98%（统一引用 `07_Development_Guides/TERMINOLOGY_GLOSSARY.md`）
+- 质量评估季度得分 ≥ 90/100（参见 `07_Development_Guides/DOCUMENTATION_QUALITY_ASSESSMENT_REPORT.md`）
+
+#### 待办方向
+
+1. 标准与合规持续对齐（参见 `Web3_International_Standards_Alignment_Report.md`）
+2. 扩充跨链消息与桥接安全案例（`05_Applications/` 系列）
+3. 文档门户检索与链接校验自动化（工具与脚本纳入 `07_Development_Guides/`）
+4. 语义系统联动个性化导航（`09_Semantics_System/` 与首页导航联通）

@@ -7,7 +7,7 @@
 ## 文档统计 / Document Statistics
 
 - **总文档数**: 50+ 核心/应用文档
-- **目录数**: 9个主要目录
+- **目录数**: 15个主要与扩展目录（见下方“扩展目录覆盖”）
 - **质量评分**: 92/100 (优秀)
 - **最后更新**: 2025年9月11日
 
@@ -45,7 +45,7 @@
 |----------|------|----------|----------|
 | [Mirror_Theory_Foundations.md](04_Advanced_Theories/Mirror_Theory_Foundations.md) | 镜像理论基础 | 82/100 | 2024-08-24 |
 
-### 05_Applications/ - 应用领域 (12个文档)
+### 05_Applications/ - 应用领域 (13个文档)
 
 | 文档名称 | 描述 | 质量评分 | 最后更新 |
 |----------|------|----------|----------|
@@ -61,15 +61,15 @@
 | [Security_Optimization.md](05_Applications/Security_Optimization.md) | 安全性优化 | 95/100 | 2025-04-06 |
 | [Developer_Community_Platform.md](05_Applications/Developer_Community_Platform.md) | 开发者社区平台 | 94/100 | 2025-04-18 |
 | [Knowledge_Management_System.md](05_Applications/Knowledge_Management_System.md) | 知识管理系统 | 95/100 | 2025-05-02 |
+| [DeFi_Applications.md](05_Applications/DeFi_Applications.md) | DeFi应用详解 | 86/100 | 2024-08-24 |
 
-### 06_Research_Reports/ - 研究报告 (3个文档)
+### 06_Research_Reports/ - 研究报告 (1个文档)
 
 | 文档名称 | 描述 | 质量评分 | 最后更新 |
 |----------|------|----------|----------|
 | [Web3_Technical_Challenges_Comprehensive.md](06_Research_Reports/Web3_Technical_Challenges_Comprehensive.md) | 技术挑战综合报告 | 83/100 | 2024-08-24 |
-| [Web3_Technical_Roadmap_2024_2030.md](06_Research_Reports/Web3_Technical_Roadmap_2024_2030.md) | 技术路线图 | 83/100 | 2024-08-24 |
 
-### 07_Development_Guides/ - 开发指南 (6个文档)
+### 07_Development_Guides/ - 开发指南 (8个文档)
 
 | 文档名称 | 描述 | 质量评分 | 最后更新 |
 |----------|------|----------|----------|
@@ -80,6 +80,7 @@
 | [QUALITY_CHECKLIST.md](07_Development_Guides/QUALITY_CHECKLIST.md) | 质量检查清单 | 89/100 | 2024-08-24 |
 | [TERMINOLOGY_GLOSSARY.md](07_Development_Guides/TERMINOLOGY_GLOSSARY.md) | 术语表 | 88/100 | 2024-08-24 |
 | [DOCUMENTATION_QUALITY_ASSESSMENT_REPORT.md](07_Development_Guides/DOCUMENTATION_QUALITY_ASSESSMENT_REPORT.md) | 质量评估报告 | 87/100 | 2024-08-24 |
+| [TERMINOLOGY_UNIFICATION_TOOL.md](07_Development_Guides/TERMINOLOGY_UNIFICATION_TOOL.md) | 术语统一工具 | 88/100 | 2025-09-11 |
 
 ### 08_Project_Management/ - 项目管理 (3个文档)
 
@@ -89,12 +90,10 @@
 | [DOCUMENTATION_CLEANUP_EXECUTION_PLAN.md](08_Project_Management/DOCUMENTATION_CLEANUP_EXECUTION_PLAN.md) | 文档清理执行计划 | 85/100 | 2024-08-24 |
 | [NEXT_STEPS.md](08_Project_Management/NEXT_STEPS.md) | 后续步骤 | 87/100 | 2024-08-24 |
 
-### 09_Semantics_System/ - 语义系统 (23个文档)
+### 09_Semantics_System/ - 语义系统 (21个文档)
 
 | 文档名称 | 描述 | 质量评分 | 最后更新 |
 |----------|------|----------|----------|
-| [WEB3_SEMANTIC_KNOWLEDGE_SYSTEM.md](09_Semantics_System/WEB3_SEMANTIC_KNOWLEDGE_SYSTEM.md) | Web3语义知识系统 | 82/100 | 2024-08-24 |
-| [CONCEPT_EXTRACTION_AND_RELATIONSHIP_MAPPING.md](09_Semantics_System/CONCEPT_EXTRACTION_AND_RELATIONSHIP_MAPPING.md) | 概念提取与关系映射 | 81/100 | 2024-08-24 |
 | [WEB3_THEORETICAL_MODEL_CONSTRUCTION.md](09_Semantics_System/WEB3_THEORETICAL_MODEL_CONSTRUCTION.md) | 理论模型构建 | 83/100 | 2024-08-24 |
 | [FORMAL_PROOFS_AND_VALIDATION.md](09_Semantics_System/FORMAL_PROOFS_AND_VALIDATION.md) | 形式化证明与验证 | 80/100 | 2024-08-24 |
 | [ACADEMIC_INFLUENCE_PLAN.md](09_Semantics_System/ACADEMIC_INFLUENCE_PLAN.md) | 学术影响力计划 | 82/100 | 2024-08-24 |
@@ -135,7 +134,20 @@
 ### 应用开发 / Application Development
 
 - DeFi应用、行业应用案例
-- **相关文档**: 2个文档，平均质量评分: 80/100
+- **相关文档**: 13个文档，平均质量评分: 90+/100（参见“05_Applications/”）
+
+## 扩展目录覆盖 / Extended Directory Coverage
+
+以下目录在仓库中存在并与当前索引体系一致，作为补充导航：
+
+- `01_Theoretical_Foundations/` （2 个 .md）
+- `02_Core_Technologies/` （3 个 .md）
+- `04_Advanced_Technologies/` （2 个 .md）
+- `05_Application_Ecosystem/` （2 个 .md）
+- `09_Standards_And_Compliance/` （2 个 .md）
+- `10_Research_And_Development/` （2 个 .md）
+
+说明：上述为与现有“01-09”主索引并行的扩展分类，具体文档请在对应目录浏览；必要条目将逐步纳入本索引的具体清单。
 
 ### 研究分析 / Research Analysis
 
@@ -155,7 +167,7 @@
 ### 语义系统 / Semantic System
 
 - 概念提取、关系映射、理论模型
-- **相关文档**: 23个文档，平均质量评分: 81/100
+- **相关文档**: 21个文档，平均质量评分: 81/100
 
 ## 按质量等级分类 / By Quality Level
 
@@ -191,7 +203,7 @@
 
 1. [高级理论](04_Advanced_Theories/Mirror_Theory_Foundations.md)
 2. [技术挑战](06_Research_Reports/Web3_Technical_Challenges_Comprehensive.md)
-3. [语义系统](09_Semantics_System/WEB3_SEMANTIC_KNOWLEDGE_SYSTEM.md)
+3. [语义系统](09_Semantics_System/WEB3_SEMANTICS_THEORETICAL_FRAMEWORK.md)
 
 ### 管理者工具 / Manager's Tools
 

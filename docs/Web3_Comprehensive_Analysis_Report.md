@@ -424,6 +424,13 @@ Web3文档系统将继续发展，致力于成为国际领先的Web3技术知识
 
 [完整的525个概念关系网络可视化]
 
+### D. 参考与术语 / References & Terminology
+
+- 统一术语表：`07_Development_Guides/TERMINOLOGY_GLOSSARY.md`
+- 质量评估报告：`07_Development_Guides/DOCUMENTATION_QUALITY_ASSESSMENT_REPORT.md`
+- 最终索引：`FINAL_DOCUMENTATION_INDEX.md`
+- 发布说明：`RELEASE_NOTES.md`
+
 ---
 
 *报告生成时间: 2024年12月*

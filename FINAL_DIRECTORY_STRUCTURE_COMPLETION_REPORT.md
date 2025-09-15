@@ -23,6 +23,26 @@
 
 ## 目录结构详情
 
+### docs 顶层目录校准（与当前仓库一致）
+
+- `docs/01_Project_Overview/`
+- `docs/01_Theoretical_Foundations/`
+- `docs/02_Core_Technologies/`
+- `docs/02_Theoretical_Foundations/`
+- `docs/03_Technical_Stacks/`
+- `docs/04_Advanced_Technologies/`
+- `docs/04_Advanced_Theories/`
+- `docs/05_Application_Ecosystem/`
+- `docs/05_Applications/`
+- `docs/06_Research_Reports/`
+- `docs/07_Development_Guides/`
+- `docs/08_Project_Management/`
+- `docs/09_Semantics_System/`
+- `docs/09_Standards_And_Compliance/`
+- `docs/10_Research_And_Development/`
+
+说明：上述为仓库当前有效的顶层目录。部分早期报告中的类别命名（如“03_架构设计 / 06_性能优化 / 07_安全验证 / 08_数学基础”）已被现有目录体系所覆盖或合并，建议以本小节为准进行索引与交叉引用。
+
 ### 01_理论基础 (Theoretical Foundations)
 
 - **数学基础**: 群论、域论、椭圆曲线、数论、线性代数、概率论、信息论
@@ -236,7 +256,14 @@
 
 ---
 
-**项目完成时间**: 2025年9月2日  
+## 参考与术语 / References & Terminology
+
+- 统一术语表：`docs/07_Development_Guides/TERMINOLOGY_GLOSSARY.md`
+- 质量评估报告：`docs/07_Development_Guides/DOCUMENTATION_QUALITY_ASSESSMENT_REPORT.md`
+- 最终索引：`docs/FINAL_DOCUMENTATION_INDEX.md`
+- 发布说明：`docs/RELEASE_NOTES.md`
+
+**项目完成时间**: 2025年9月11日  
 **总工作量**: 约200小时  
 **代码行数**: 约15,000行  
 **文档页数**: 约500页  

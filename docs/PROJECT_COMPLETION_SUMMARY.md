@@ -329,3 +329,10 @@ Web3文档系统项目成功完成了预定的所有目标，建立了清晰、�
 
 *项目完成日期: 2025年9月11日*
 *Project Completion Date: September 11, 2025*
+
+## 参考与术语 / References & Terminology
+
+- 统一术语表：`07_Development_Guides/TERMINOLOGY_GLOSSARY.md`
+- 质量评估报告：`07_Development_Guides/DOCUMENTATION_QUALITY_ASSESSMENT_REPORT.md`
+- 最终索引：`FINAL_DOCUMENTATION_INDEX.md`
+- 发布说明：`RELEASE_NOTES.md`

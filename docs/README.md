@@ -25,7 +25,9 @@ docs/
 ├── 06_Research_Reports/          # 研究报告
 ├── 07_Development_Guides/        # 开发指南
 ├── 08_Project_Management/        # 项目管理
-└── 09_Semantics_System/          # 语义系统
+├── 09_Semantics_System/          # 语义系统
+├── 09_Standards_And_Compliance/  # 标准与合规（扩展目录）
+└── 10_Research_And_Development/  # 研究与开发（扩展目录）
 ```
 
 ## 快速导航 / Quick Navigation
@@ -33,7 +35,7 @@ docs/
 ### 📋 系统导航 / System Navigation
 
 - [📖 最终文档索引](FINAL_DOCUMENTATION_INDEX.md) - 完整的文档分类和导航（已更新）
-- [📝 发布说明](RELEASE_NOTES.md) - v2.1版本发布详情
+- [📝 发布说明](RELEASE_NOTES.md) - v2.1版本发布详情（含扩展目录覆盖、术语与交叉引用）
 - [📊 质量评估报告](07_Development_Guides/DOCUMENTATION_QUALITY_ASSESSMENT_REPORT.md) - 文档质量评估
 
 ### 01_Project_Overview/ - 项目概览
@@ -73,6 +75,7 @@ docs/
 - [安全性优化](05_Applications/Security_Optimization.md)
 - [开发者社区平台](05_Applications/Developer_Community_Platform.md)
 - [知识管理系统](05_Applications/Knowledge_Management_System.md)
+- [DeFi 应用详解](05_Applications/DeFi_Applications.md)
 
 ### 06_Research_Reports/ - 研究报告
 
@@ -92,8 +95,6 @@ docs/
 
 ### 09_Semantics_System/ - 语义系统
 
-- [Web3语义知识系统](09_Semantics_System/WEB3_SEMANTIC_KNOWLEDGE_SYSTEM.md)
-- [概念提取与关系映射](09_Semantics_System/CONCEPT_EXTRACTION_AND_RELATIONSHIP_MAPPING.md)
 - [理论模型构建](09_Semantics_System/WEB3_THEORETICAL_MODEL_CONSTRUCTION.md)
 - [形式化证明与验证](09_Semantics_System/FORMAL_PROOFS_AND_VALIDATION.md)
 - [学术影响力计划](09_Semantics_System/ACADEMIC_INFLUENCE_PLAN.md)

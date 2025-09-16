@@ -9,7 +9,7 @@
 
 ## 发布概述 / Release Overview
 
-Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量提升：完成12个应用文档归档与导航集成、完成合作伙伴与生态共建总结、统一版本信息并刷新最终索引与首页导航。
+Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量提升：完成13个应用文档归档与导航集成、完成合作伙伴与生态共建总结、统一版本信息并刷新最终索引与首页导航。
 
 ## 主要改进 / Major Improvements
 
@@ -17,9 +17,10 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 
 #### 新增与调整 / Added & Updated
 
-- 扩充 `05_Applications/` 至 12 个应用条目（AA钱包、Layer2 DEX、ZKP投票、MEV机器人、DeFi集成、跨链桥接、开发者工具、性能监控、用户体验优化、安全优化、开发者社区、知识管理）
+- 扩充 `05_Applications/` 至 13 个应用条目（AA钱包、Layer2 DEX、ZKP投票、MEV机器人、DeFi集成、跨链桥接、开发者工具、性能监控、用户体验优化、安全优化、开发者社区、知识管理、DeFi应用详解）
 - 更新 `FINAL_DOCUMENTATION_INDEX.md`：刷新质量评分至 92/100，更新“最后更新”为 2025-09-11，完善应用目录
 - 更新 `docs/README.md`：版本提升至 v2.1，导航与“最后更新”同步
+- 同步统计：`06_Research_Reports`=1、`07_Development_Guides`=8、`09_Semantics_System`=21（按实际文件校准）
 
 #### 文件整理 / File Organization
 
@@ -226,17 +227,21 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 - 质量评分从84/100提升至92/100
 - 索引、首页与角色导航一致性
 - 文档结构校准：对齐 `docs/` 顶层目录（01-10与扩展目录），提升可发现性
+- 扩展目录计数：在“扩展目录覆盖”中展示各扩展目录的 Markdown 文件数量
+- 快速导航修正：将语义系统链接指向有效的 `WEB3_SEMANTICS_THEORETICAL_FRAMEWORK.md`
 
 #### 修复 / Fixed
 
 - 修正多处过时日期与版本标识（统一为 v2.1）
 - 修正 v2.0 小节标题命名不一致（Added/Improved/Fixed）
+- 移除不存在的链接：`Web3_Technical_Roadmap_2024_2030.md`、`WEB3_SEMANTIC_KNOWLEDGE_SYSTEM.md`、`CONCEPT_EXTRACTION_AND_RELATIONSHIP_MAPPING.md`
+- 同步新增链接：`TERMINOLOGY_UNIFICATION_TOOL.md`、`DeFi_Applications.md`
 
 ---
 
 ### v2.0 (2024-08-24)
 
-#### 新增 / Added
+#### 新增1 / Added
 
 - 完整的目录结构重组
 - 质量保证体系建立
@@ -244,14 +249,14 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 - 术语表创建
 - 最终文档索引
 
-#### 改进 / Improved
+#### 改进1 / Improved
 
 - 文档质量显著提升
 - 导航系统优化
 - 格式规范统一
 - 内容结构优化
 
-#### 修复 / Fixed
+#### 修复1 / Fixed
 
 - 重复文档清理
 - 链接问题修复

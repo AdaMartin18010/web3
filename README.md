@@ -6,10 +6,11 @@
 
 ## 快速入口
 
-- 文档首页: `docs/README.md`
-- 最终索引: `docs/FINAL_DOCUMENTATION_INDEX.md`
-- 发布说明: `docs/RELEASE_NOTES.md`
-- Phase 3 进度: `docs/PHASE3_PROGRESS_TRACKING.md`
+- 文档首页: [docs/README.md](docs/README.md)
+- 最终索引: [docs/FINAL_DOCUMENTATION_INDEX.md](docs/FINAL_DOCUMENTATION_INDEX.md)
+- 发布说明: [docs/RELEASE_NOTES.md](docs/RELEASE_NOTES.md)
+- 变更日志: [CHANGELOG.md](CHANGELOG.md)
+- Phase 3 进度: [docs/PHASE3_PROGRESS_TRACKING.md](docs/PHASE3_PROGRESS_TRACKING.md)
 
 ## 版本
 

@@ -150,6 +150,22 @@
 
 ## 一致性检查 / Consistency Check
 
+### 链接有效性 / Link Validity
+
+- [ ] 运行内部链接校验脚本
+
+```bash
+python scripts/check_links.py
+```
+
+- [ ] 或在 Windows 环境使用 PowerShell：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/check_links.ps1
+```
+
+- [ ] 期望输出 “No broken links detected.”；如有报错，依据提示修复
+
 ### 1. 术语一致性 / Terminology Consistency
 
 - [ ] **技术术语**

@@ -1,5 +1,22 @@
 # Web3 文档系统发布说明 / Web3 Documentation System Release Notes
 
+## 目录 / Table of Contents
+
+- 版本信息 / Version Information
+- 发布概述 / Release Overview
+- 主要改进 / Major Improvements
+- 新增内容 / New in v2.1
+- 项目管理框架 / Project Management Framework
+- 最终文档索引 / Final Documentation Index
+- 技术改进 / Technical Improvements
+- 性能优化 / Performance Optimization
+- 兼容性说明 / Compatibility Notes
+- 已知问题 / Known Issues
+- 后续计划 / Future Plans
+- 支持信息 / Support Information
+- 致谢 / Acknowledgments
+- 更新日志 / Changelog
+
 ## 版本信息 / Version Information
 
 - **版本号**: v2.1
@@ -18,8 +35,8 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 #### 新增与调整 / Added & Updated
 
 - 扩充 `05_Applications/` 至 13 个应用条目（AA钱包、Layer2 DEX、ZKP投票、MEV机器人、DeFi集成、跨链桥接、开发者工具、性能监控、用户体验优化、安全优化、开发者社区、知识管理、DeFi应用详解）
-- 更新 `FINAL_DOCUMENTATION_INDEX.md`：刷新质量评分至 92/100，更新“最后更新”为 2025-09-11，完善应用目录
-- 更新 `docs/README.md`：版本提升至 v2.1，导航与“最后更新”同步
+- 更新 [FINAL_DOCUMENTATION_INDEX.md](FINAL_DOCUMENTATION_INDEX.md)：刷新质量评分至 92/100，更新“最后更新”为 2025-09-11，完善应用目录
+- 更新 [docs/README.md](./README.md)：版本提升至 v2.1，导航与“最后更新”同步
 - 同步统计：`06_Research_Reports`=1、`07_Development_Guides`=8、`09_Semantics_System`=21（按实际文件校准）
 
 #### 文件整理 / File Organization
@@ -34,7 +51,7 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 #### 标准化体系 / Standardization System
 
 - **质量评分**: 综合质量分从 84/100 提升至 92/100
-- **Phase 3总结**: 在 `PHASE3_PROGRESS_TRACKING.md` 标注第6个月“合作伙伴与生态共建”已完成、总体完成度 100%
+- **Phase 3总结**: 在 [PHASE3_PROGRESS_TRACKING.md](PHASE3_PROGRESS_TRACKING.md) 标注第6个月“合作伙伴与生态共建”已完成、总体完成度 100%
 - **标准与合规**: 对齐 ERC-4337 最佳实践；OWASP/NIST 要点映射清单；参与跨链消息格式草案评审
 
 #### 质量评分 / Quality Score
@@ -47,8 +64,8 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 
 #### 主导航 / Main Navigation
 
-- **首页导航**: `docs/README.md` 衔接应用清单与角色导航
-- **最终索引**: `FINAL_DOCUMENTATION_INDEX.md` 扩展应用目录与评分
+- **首页导航**: [docs/README.md](./README.md) 衔接应用清单与角色导航
+- **最终索引**: [FINAL_DOCUMENTATION_INDEX.md](FINAL_DOCUMENTATION_INDEX.md) 扩展应用目录与评分
 - **角色导航**: 初学者/开发者/研究者/管理者路径保持一致
 
 #### 用户指南 / User Guides
@@ -64,25 +81,25 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 - Phase 3 合作伙伴与生态成果总结
 - 版本与评分体系更新（v2.1 / 92/100）
 
-### 2. 项目管理框架 / Project Management Framework
+## 项目管理框架 / Project Management Framework
 
-#### 执行计划 / Execution Plan
+### 执行计划 / Execution Plan
 
 - 四阶段执行计划
 - 详细的任务分解
 - 进度跟踪机制
 - 风险管理策略
 
-#### 质量评估报告 / Quality Assessment Report
+### 质量评估报告 / Quality Assessment Report
 
 - 全面的质量评估
 - 分类评分结果
 - 改进建议
 - 实施计划
 
-### 3. 最终文档索引 / Final Documentation Index
+## 最终文档索引 / Final Documentation Index
 
-#### 完整文档列表 / Complete Document List
+### 完整文档列表 / Complete Document List
 
 - 50个核心文档的详细列表
 - 质量评分和更新日期
@@ -108,7 +125,7 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 ### 3. 链接管理 / Link Management
 
 - **链接一致性**: 更新索引与首页中的应用链接与标题
-- **交叉引用**: 完成 Phase 3 相关文档的互链
+- **交叉引用**: 完成 Phase 3 相关文档的互链（参见 [FINAL_DOCUMENTATION_INDEX.md](FINAL_DOCUMENTATION_INDEX.md) 与 [docs/README.md](./README.md)）
 
 ## 性能优化 / Performance Optimization
 
@@ -213,16 +230,40 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 
 ## 更新日志 / Changelog
 
+### Unreleased
+
+#### 新增 / Added (Unreleased)
+
+- 在文首新增目录（ToC）以提升可发现性
+- 新增“发布与变更”入口于 `docs/FINAL_DOCUMENTATION_INDEX.md`
+- 新建根级 `CHANGELOG.md` 并指向本发布说明（单一事实来源）
+- 在根级 `README.md` 增加到 `RELEASE_NOTES`、`CHANGELOG`、`FINAL_DOCUMENTATION_INDEX` 的快捷入口
+- 新增内部链接自动校验脚本：`scripts/check_links.py`
+- 在 `07_Development_Guides/QUALITY_CHECKLIST.md` 增加“链接有效性”检查步骤
+
+#### 改进 / Improved (Unreleased)
+
+- 统一“Added/Improved/Fixed”子标题格式，消除重复标题冲突
+- 为关键引用添加相对路径交叉链接（如 `docs/README.md`、`PHASE3_PROGRESS_TRACKING.md`、`FINAL_DOCUMENTATION_INDEX.md`）
+- 对齐链接描述与命名，提高一致性
+- 修正语义系统导航：将 `WEB3_SEMANTIC_KNOWLEDGE_SYSTEM.md` 指向 `WEB3_SEMANTICS_THEORETICAL_FRAMEWORK.md`
+
+#### 修复 / Fixed (Unreleased)
+
+- 修复 `CHANGELOG.md` 中多余空行导致的 Lint 警告（MD012）
+- 修正 `docs/README.md` 中“最终文档索引”的相对路径
+- 替换失效的研究路线图引用：使用 `../Web3_Comprehensive_Analysis_Report.md` 代替 `Web3_Technical_Roadmap_2024_2030.md`
+
 ### v2.1 (2025-09-11)
 
-#### 新增 / Added
+#### 新增 / Added (v2.1)
 
 - 12个应用文档纳入最终索引与首页导航
 - Phase 3 第6个月成果沉淀（合作伙伴/开源/标准）
-- 扩展目录说明：在 `FINAL_DOCUMENTATION_INDEX.md` 新增“扩展目录覆盖”，并与 `FINAL_DIRECTORY_STRUCTURE_COMPLETION_REPORT.md` 对齐
-- 术语与交叉引用：核心报告新增“参考与术语”小节，统一指向 `07_Development_Guides/TERMINOLOGY_GLOSSARY.md`
+- 扩展目录说明：在 [FINAL_DOCUMENTATION_INDEX.md](FINAL_DOCUMENTATION_INDEX.md) 新增“扩展目录覆盖”，并与 [FINAL_DIRECTORY_STRUCTURE_COMPLETION_REPORT.md](../FINAL_DIRECTORY_STRUCTURE_COMPLETION_REPORT.md) 对齐
+- 术语与交叉引用：核心报告新增“参考与术语”小节，统一指向 [07_Development_Guides/TERMINOLOGY_GLOSSARY.md](./07_Development_Guides/TERMINOLOGY_GLOSSARY.md)
 
-#### 改进 / Improved
+#### 改进 / Improved (v2.1)
 
 - 质量评分从84/100提升至92/100
 - 索引、首页与角色导航一致性
@@ -230,7 +271,7 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 - 扩展目录计数：在“扩展目录覆盖”中展示各扩展目录的 Markdown 文件数量
 - 快速导航修正：将语义系统链接指向有效的 `WEB3_SEMANTICS_THEORETICAL_FRAMEWORK.md`
 
-#### 修复 / Fixed
+#### 修复 / Fixed (v2.1)
 
 - 修正多处过时日期与版本标识（统一为 v2.1）
 - 修正 v2.0 小节标题命名不一致（Added/Improved/Fixed）
@@ -241,7 +282,7 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 
 ### v2.0 (2024-08-24)
 
-#### 新增1 / Added
+#### 新增 / Added (v2.0)
 
 - 完整的目录结构重组
 - 质量保证体系建立
@@ -249,14 +290,14 @@ Web3文档系统 v2.1 聚焦 Phase 3 全量完成后的索引、导航与质量�
 - 术语表创建
 - 最终文档索引
 
-#### 改进1 / Improved
+#### 改进 / Improved (v2.0)
 
 - 文档质量显著提升
 - 导航系统优化
 - 格式规范统一
 - 内容结构优化
 
-#### 修复1 / Fixed
+#### 修复 / Fixed (v2.0)
 
 - 重复文档清理
 - 链接问题修复

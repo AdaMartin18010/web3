@@ -138,8 +138,8 @@ def analyze_data(data):
 
 ## 1参考资料 / References
 
-- [学术论文1](URL)
-- [技术文档2](URL)
+- 学术论文1: `URL`
+- 技术文档2: `URL`
 
 *最后更新: YYYY年MM月DD日*
 *Last Updated: YYYY-MM-DD*

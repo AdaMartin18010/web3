@@ -96,7 +96,7 @@ docs/
 ### 09_Semantics_System/ - 语义系统
 
 - [理论模型构建](09_Semantics_System/WEB3_THEORETICAL_MODEL_CONSTRUCTION.md)
-- [形式化证明与验证](09_Semantics_System/FORMAL_PROOFS_AND_VALIDATION.md)
+- [语义学理论框架](09_Semantics_System/WEB3_SEMANTICS_THEORETICAL_FRAMEWORK.md)
 - [学术影响力计划](09_Semantics_System/ACADEMIC_INFLUENCE_PLAN.md)
 - [应用推广计划](09_Semantics_System/APPLICATION_PROMOTION_PLAN.md)
 - [可持续发展计划](09_Semantics_System/SUSTAINABLE_DEVELOPMENT_PLAN.md)
@@ -119,7 +119,7 @@ docs/
 
 1. **高级理论**: [镜像理论基础](04_Advanced_Theories/Mirror_Theory_Foundations.md)
 2. **技术挑战**: [技术挑战报告](06_Research_Reports/Web3_Technical_Challenges_Comprehensive.md)
-3. **语义系统**: [语义知识系统](09_Semantics_System/WEB3_SEMANTIC_KNOWLEDGE_SYSTEM.md)
+3. **语义系统**: [语义学理论框架](09_Semantics_System/WEB3_SEMANTICS_THEORETICAL_FRAMEWORK.md)
 
 ### 👨‍💼 管理者工具 / Manager's Tools
 

@@ -49,7 +49,7 @@
 
 ## 相关链接
 
-- [数学基础文档](../01_Mathematical_Foundations/)
-- [密码学基础文档](../02_Cryptographic_Foundations/)
+- [数学基础文档](../02_Theoretical_Foundations/Mathematical_Foundations.md)
+- [密码学基础文档](../02_Theoretical_Foundations/Cryptographic_Foundations.md)
 - [高级技术文档](../04_Advanced_Technologies/)
 - [标准规范文档](../09_Standards_And_Compliance/)

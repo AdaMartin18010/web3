@@ -56,4 +56,4 @@
 - [理论基础文档](../01_Theoretical_Foundations/)
 - [高级技术文档](../04_Advanced_Technologies/)
 - [应用生态文档](../05_Application_Ecosystem/)
-- [安全验证文档](../12_Security_And_Verification/)
+- [标准与合规文档](../09_Standards_And_Compliance/README.md)

@@ -95,7 +95,7 @@
 | 文档名称 | 描述 | 质量评分 | 最后更新 |
 |----------|------|----------|----------|
 | [WEB3_THEORETICAL_MODEL_CONSTRUCTION.md](09_Semantics_System/WEB3_THEORETICAL_MODEL_CONSTRUCTION.md) | 理论模型构建 | 83/100 | 2024-08-24 |
-| [FORMAL_PROOFS_AND_VALIDATION.md](09_Semantics_System/FORMAL_PROOFS_AND_VALIDATION.md) | 形式化证明与验证 | 80/100 | 2024-08-24 |
+| [WEB3_VALIDATION_ALGORITHMS.md](09_Semantics_System/WEB3_VALIDATION_ALGORITHMS.md) | 形式化证明与验证 | 80/100 | 2024-08-24 |
 | [ACADEMIC_INFLUENCE_PLAN.md](09_Semantics_System/ACADEMIC_INFLUENCE_PLAN.md) | 学术影响力计划 | 82/100 | 2024-08-24 |
 | [APPLICATION_PROMOTION_PLAN.md](09_Semantics_System/APPLICATION_PROMOTION_PLAN.md) | 应用推广计划 | 81/100 | 2024-08-24 |
 | [SUSTAINABLE_DEVELOPMENT_PLAN.md](09_Semantics_System/SUSTAINABLE_DEVELOPMENT_PLAN.md) | 可持续发展计划 | 83/100 | 2024-08-24 |
@@ -212,6 +212,11 @@
 3. [质量检查](07_Development_Guides/QUALITY_CHECKLIST.md)
 
 ## 维护信息 / Maintenance Information
+
+### 发布与变更 / Releases & Changes
+
+- [发布说明 / Release Notes](./RELEASE_NOTES.md) — 版本详情、主要改进与已知问题
+- [CHANGELOG](../CHANGELOG.md) — 变更记录入口（指向发布说明作为单一事实来源）
 
 ### 更新频率 / Update Frequency
 

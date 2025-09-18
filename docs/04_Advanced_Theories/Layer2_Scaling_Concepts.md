@@ -827,7 +827,7 @@ interface ILayer2Bridge {
 - [零知识证明概念](Zero_Knowledge_Proofs_Concepts.md)
 - [MEV提取概念](MEV_Extraction_Concepts.md)
 - [账户抽象概念](Account_Abstraction_Concepts.md)
-- [区块链扩展技术](Blockchain_Scaling_Technologies.md)
+- [Layer2 实施指南](Layer2_Implementation_Guide.md)
 
 ---
 
